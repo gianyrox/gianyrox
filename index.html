@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Links Page</title>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background-color: #f4f4f4;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 20px;
+			background-color: white;
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			width: 80%;
+			max-width: 600px;
+		}
+
+		.link {
+			text-decoration: none;
+			color: #2a9d8f;
+			font-size: 18px;
+			margin: 10px 0;
+			transition: color 0.3s;
+		}
+
+		.link:hover {
+			color: #e76f51;
+		}
+
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+			color: #264653;
+		}
+
+		.subtitle {
+			font-size: 20px;
+			color: #2a9d8f;
+			margin-top: 10px;
+		}
+
+		.description {
+			font-size: 16px;
+			color: #6c757d;
+			margin-top: 20px;
+			text-align: center;
+			line-height: 1.5;
+		}
+
+		@media (max-width: 600px) {
+			.container {
+				padding: 10px;
+			}
+
+			.link {
+				font-size: 16px;
+			}
+
+			.title {
+				font-size: 20px;
+			}
+
+			.subtitle {
+				font-size: 18px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="title">Welcome to My Links Page</div>
+		<div class="subtitle">Explore these useful links:</div>
+		<div class="description">
+			Here's a collection of links you might find interesting.
+			If you'd like to learn more, here is an example of a LaTeX equation:
+			$$ E = mc^2 $$
+			This is the famous formula by Einstein relating energy and mass.
+		</div>
+
+		<!-- Links Section -->
+		<a href="#" class="link">Link 1</a>
+		<a href="#" class="link">Link 2</a>
+		<a href="#" class="link">Link 3</a>
+		<a href="#" class="link">Link 4</a>
+		<a href="#" class="link">Link 5</a>
+		<a href="#" class="link">Link 6</a>
+	</div>
+</body>
+
+</html>
