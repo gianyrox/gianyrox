@@ -1,8 +1,8 @@
 # I Wrote a Book About Stablecoins for My Dad
 
-*This is the prologue of* Your Money Is Broken *— a field report from
-inside the stablecoin economy. The full book is free at
-[gianyrox.com/book](https://www.gianyrox.com/book). The PDF is $9 on
+*This is the prologue of* **Your Money Is Broken: How Stablecoins
+Bridge Slow Money to Fast Money** *by Giany Rox. The full book is free
+at [gianyrox.com/book](https://www.gianyrox.com/book). The PDF is $9 on
 [Gumroad](https://agfarms.gumroad.com/l/your-money-is-broken).*
 
 ---
@@ -106,7 +106,7 @@ the same invisible infrastructure. Bogotá, Harare, Lagos, Buenos Aires
 
 ---
 
-*Gianangelo Dichio is the founder of AGFarms, a venture studio shipping
+*Giany Rox is the founder of AGFarms, a venture studio shipping
 products across 16 ventures including [derby.fish](https://derby.fish),
 [gauss.news](https://gauss.news), and [taskl.app](https://taskl.app).
 His writing on math, history, and the future of work has appeared on

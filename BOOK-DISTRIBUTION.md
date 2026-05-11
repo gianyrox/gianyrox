@@ -58,7 +58,7 @@ Time estimate if all assets are ready: **1 working day, maybe two split-mornings
 ### C. KDP listing fields
 
 - [ ] Title + subtitle
-- [ ] Author name (Gianangelo Dichio or Gian Dichio — choose canonical form)
+- [ ] Author name (Giany Rox or Gian Dichio — choose canonical form)
 - [ ] Series name (if part of a series)
 - [ ] Description — markdown allowed; first 200 chars matter for Amazon SERP
 - [ ] **2 KDP categories** — economics/cryptocurrency · economics/money

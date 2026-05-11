@@ -54,8 +54,8 @@ REPO = Path(__file__).resolve().parent.parent
 BOOK_DIR = Path.home() / "agfarms" / "papers" / "book"
 
 TITLE = "Your Money Is Broken"
-SUBTITLE = "A Field Report from the Stablecoin World"
-AUTHOR = "Gianangelo Dichio"
+SUBTITLE = "How Stablecoins Bridge Slow Money to Fast Money"
+AUTHOR = "Giany Rox"
 PUBLISHER = "AGFarms"
 YEAR = "2026"
 

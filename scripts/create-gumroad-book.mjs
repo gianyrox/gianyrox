@@ -22,7 +22,7 @@ const REPO = dirname(__dirname);
 const TOKEN = process.env.GUMROAD_ACCESS_TOKEN;
 if (!TOKEN) { console.error('GUMROAD_ACCESS_TOKEN not set'); process.exit(1); }
 
-const NAME = 'Your Money Is Broken — A Field Report from the Stablecoin World';
+const NAME = 'Your Money Is Broken — How Stablecoins Bridge Slow Money to Fast Money';
 const PRICE_CENTS = 900;            // $9
 const PERMALINK = 'your-money-is-broken';
 
@@ -52,7 +52,7 @@ side, the &ldquo;digital dollar that just works&rdquo; side.</p>
 <p><em>The same book is available to read free at
 <a href="https://www.gianyrox.com/book">gianyrox.com/book</a>. Buying here supports the work and gets you the PDF to keep.</em></p>
 
-<p><small>Cover design: AGFarms. Author: Gianangelo Dichio.</small></p>
+<p><small>Cover design: AGFarms. Author: Giany Rox.</small></p>
 `.trim();
 
 const TAGS = [

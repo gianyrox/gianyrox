@@ -19,25 +19,35 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__dirname, '..', 'public', 'cover');
 
-const PROMPT = `Book cover design for "Your Money Is Broken" — a field report from
-the stablecoin world. The cover should feel like a serious non-fiction
-business book that belongs on a bookstore shelf next to "Sapiens" or
-"The Bitcoin Standard". Not a crypto-bro aesthetic.
+const PROMPT = `Book cover design for a serious non-fiction business book. Belongs on
+a bookstore shelf next to "Sapiens" or "The Bitcoin Standard". Not a
+crypto-bro aesthetic. Penguin Press hardcover vibe.
 
-Visual concept: a torn US dollar bill that's been partly stitched back
-together with glowing teal-green digital threads, against a clean warm
-cream background. The torn edges reveal not paper fibers but flowing
-binary code or geometric particle traces in deep teal #2a9d8f and
-charcoal #264653. Minimalist, editorial, magazine-quality photography
-aesthetic. Subtle shadow under the bill.
+REQUIRED TEXT ELEMENTS (render cleanly, real typography, no garbled letters):
+- Top: title in large bold serif — "YOUR MONEY IS BROKEN"
+- Below the title: subtitle in smaller italic serif —
+  "How Stablecoins Bridge Slow Money to Fast Money"
+- Bottom: author byline in clean sans-serif uppercase — "GIANY ROX"
 
-Composition: 6×9 portrait book cover, centered subject, top third
-clean negative space for the title (rendered separately), generous
-margin on all sides. No text in the image — title will be overlaid in
-post.
+CENTRAL VISUAL: a single United States one-dollar bill, photographed
+from straight overhead, with REAL US dollar proportions (2.61:1 aspect
+ratio — wider than tall, like a real bill, not square). The bill is
+torn cleanly in half horizontally and held together across the gap by
+glowing teal-green digital threads / stitches. From the tear, geometric
+binary code particles flow downward like a quiet shadow. The dollar's
+green seal and serial numbers are accurate and readable.
 
-Mood: serious, hopeful, contemporary. Think Penguin Press hardcover.
-Soft natural light from upper-left.`;
+PALETTE: warm cream background #faf6eb, deep teal #2a9d8f for the
+digital stitches and code, charcoal #1a1a1a for the title typography,
+classic dollar-bill green for the bill itself.
+
+COMPOSITION: portrait book cover, 6×9 ratio. Title in top third,
+dollar bill centered slightly below the middle, author name in the
+bottom margin. Generous whitespace. Soft natural shadow under the bill.
+Studio lighting from upper-left.
+
+Mood: serious, hopeful, editorial. Magazine-quality flat-lay
+photography aesthetic.`;
 
 async function main() {
   const args = process.argv.slice(2);
