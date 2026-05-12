@@ -39,7 +39,9 @@ TEAL_MID = (42, 157, 143)
 CREAM_FAINT = (240, 232, 215)
 
 FONT_TITLE = FONTS_DIR / "Playfair-Black.ttf"
-FONT_ITALIC = FONTS_DIR / "Playfair-Italic.ttf"
+FONT_BODY = FONTS_DIR / "EBGaramond.ttf"         # roman body
+FONT_BODY_ITALIC = FONTS_DIR / "EBGaramond-Italic.ttf"   # italic for emphasis/quote
+FONT_ITALIC = FONTS_DIR / "Playfair-Italic.ttf"  # kept for pull quote only
 FONT_SANS = FONTS_DIR / "Inter.ttf"
 FONT_MONO = FONTS_DIR / "JetBrainsMono.ttf"
 
@@ -47,16 +49,17 @@ FONT_MONO = FONTS_DIR / "JetBrainsMono.ttf"
 PULL_QUOTE = "“A field report from inside the digital dollar economy.”"
 
 # Marketing blurb — clean paragraphs, every sentence properly punctuated.
+# Rewritten 2026-05-12 to flow as full sentences instead of fragment lists.
 BLURB_PARAGRAPHS = [
-    "Four cities. Four people. The same invisible infrastructure.",
-    "Bogotá. Harare. Lagos. A rooftop in Buenos Aires.",
+    "Four cities. Four people. The same invisible infrastructure — "
+    "from Bogotá to Harare to Lagos to a rooftop in Buenos Aires.",
     "When the old banking pipes break, the people who feel it first are "
-    "the ones moving money across borders.",
-    "Pablo in Bogotá sends his mother medicine money in ninety seconds "
-    "for under two dollars. Mercy in Harare protects a women’s savings "
-    "club from fifty-six percent inflation by parking the pot in a "
-    "digital dollar. Femi in Lagos closes a hundred-thousand-dollar "
-    "supplier deal from the back of a parked car.",
+    "the ones moving money across borders. Pablo in Bogotá sends his "
+    "mother medicine money in ninety seconds for under two dollars. "
+    "Mercy in Harare protects a women's savings club from fifty-six "
+    "percent inflation by parking the pot in a digital dollar. Femi in "
+    "Lagos closes a hundred-thousand-dollar supplier deal from the back "
+    "of a parked car.",
     "This is what happens when stablecoins quietly become the bridge "
     "from slow money to fast money. Not the speculation side of crypto. "
     "The side that just works.",
@@ -65,8 +68,7 @@ BLURB_PARAGRAPHS = [
 AUTHOR_BIO = (
     "GIANY ROX is the founder of AGFarms, a venture studio shipping "
     "more than sixteen products from a single terminal. His writing on "
-    "math, money, and the future of work has appeared on Medium for "
-    "years."
+    "math, money, and the future of work has appeared on Medium for years."
 )
 
 # Hash fragments for the gradient zone
@@ -98,40 +100,22 @@ def wrap_text(text, font, max_w, draw):
         lines.append(" ".join(cur))
     return lines
 
-def draw_justified_line(draw, text, font, x, y, line_width, color, is_last=False):
-    """Render a line of text justified to fit line_width (last line left-aligned)."""
-    words = text.split()
-    if len(words) == 1 or is_last:
-        draw.text((x, y), text, font=font, fill=color, anchor="lt")
-        return
-    # Calculate natural width
-    word_widths = []
-    for w in words:
-        bbox = draw.textbbox((0, 0), w, font=font, anchor="lt")
-        word_widths.append(bbox[2] - bbox[0])
-    natural_w = sum(word_widths)
-    space_count = len(words) - 1
-    target_space = (line_width - natural_w) / space_count
-    cur_x = x
-    for i, (w, ww) in enumerate(zip(words, word_widths)):
-        draw.text((cur_x, y), w, font=font, fill=color, anchor="lt")
-        cur_x += ww
-        if i < space_count:
-            cur_x += target_space
+def draw_paragraph(draw, text, font, x, y, max_w, color, line_spacing=1.32, justified=False):
+    """Render a paragraph wrapped + LEFT-ALIGNED. Returns the y position
+    after the last line.
 
-def draw_paragraph(draw, text, font, x, y, max_w, color, line_spacing=1.32, justified=True):
-    """Render a paragraph wrapped + optionally justified. Returns the y
-    position after the last line."""
+    Justification removed entirely — drawing per-word breaks OpenType
+    layout context (kerning, ligatures, contextual alternates) and was
+    causing certain words to render at the wrong weight/size. Pillow's
+    text engine renders the full line as one shaped run when given a
+    single string; we preserve that.
+    """
+    _ = justified  # accepted for backward compatibility; ignored
     lines = wrap_text(text, font, max_w, draw)
-    # Get one line's metric height
     sample_bbox = draw.textbbox((0, 0), "Mg", font=font, anchor="lt")
     line_h = (sample_bbox[3] - sample_bbox[1]) * line_spacing
-    for i, ln in enumerate(lines):
-        is_last = (i == len(lines) - 1)
-        if justified:
-            draw_justified_line(draw, ln, font, x, int(y), max_w, color, is_last)
-        else:
-            draw.text((x, int(y)), ln, font=font, fill=color, anchor="lt")
+    for ln in lines:
+        draw.text((x, int(y)), ln, font=font, fill=color, anchor="lt")
         y += line_h
     return y
 
@@ -216,20 +200,22 @@ def main():
     sep_y = pct(26)
     draw.line((MARGIN, sep_y, W - MARGIN, sep_y), fill=(200, 195, 180), width=2)
 
-    # 3. MARKETING BLURB (body serif, justified, paragraph spacing)
-    body_font = load_font(FONT_ITALIC, 28)  # Playfair italic at body size
+    # 3. MARKETING BLURB — EB Garamond roman, justified, paragraph spacing.
+    # Switched off Playfair Italic because its variable axis caused
+    # certain words to render at the wrong weight.
+    body_font = load_font(FONT_BODY, 30)
     body_color = CHARCOAL
     y_pos = pct(30)
-    paragraph_gap = 18
+    paragraph_gap = 22
     for paragraph in BLURB_PARAGRAPHS:
         y_pos = draw_paragraph(draw, paragraph, body_font, MARGIN, y_pos,
                                 CONTENT_W, body_color,
                                 line_spacing=1.40, justified=True)
         y_pos += paragraph_gap
 
-    # 4. AUTHOR BIO (italic, smaller)
-    bio_font = load_font(FONT_ITALIC, 22)
-    bio_y = pct(70)
+    # 4. AUTHOR BIO — italic EB Garamond, smaller
+    bio_font = load_font(FONT_BODY_ITALIC, 24)
+    bio_y = pct(74)
     draw_paragraph(draw, AUTHOR_BIO, bio_font, MARGIN, bio_y, CONTENT_W,
                    GREY_MID, line_spacing=1.40, justified=False)
 
