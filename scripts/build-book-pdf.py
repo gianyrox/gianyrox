@@ -58,13 +58,22 @@ SUBTITLE = "How Stablecoins Bridge Slow Money to Fast Money"
 AUTHOR = "Giany Rox"
 PUBLISHER = "AGFarms"
 YEAR = "2026"
+COVER_PATH = REPO / "public" / "cover" / "front-hd.png"
+COVER_URL = "file://" + str(COVER_PATH)
 
 # ─── CSS profiles ──────────────────────────────────────────────────────
 
 CSS_WEB = """
 @page { size: A4; margin: 2cm 2.2cm; }
+@page :first { margin: 0; }
 body { font-family: 'Merriweather', Georgia, serif; font-size: 11pt;
        line-height: 1.55; color: #2c2c2c; }
+.cover-image-page {
+  page-break-after: always; text-align: center;
+  display: flex; align-items: center; justify-content: center;
+  height: 297mm;
+}
+.cover-image-page img { max-width: 100%; max-height: 297mm; }
 .cover { text-align: center; page-break-after: always; padding-top: 4cm; }
 .cover .title { font-size: 28pt; font-weight: 900; margin-bottom: .4cm; color: #264653; }
 .cover .subtitle { font-size: 14pt; color: #6b6b6b; font-style: italic; }
@@ -170,6 +179,9 @@ def slurp(name):
 
 def web_front_matter():
     return f"""
+<div class="cover-image-page">
+  <img src="{COVER_URL}" alt="Cover">
+</div>
 <div class="cover">
   <div class="title">{TITLE}</div>
   <div class="subtitle">{SUBTITLE}</div>

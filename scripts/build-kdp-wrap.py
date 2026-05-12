@@ -68,25 +68,40 @@ def fit_panel(img_path, target_w, target_h):
     return img.resize((target_w, target_h), Image.LANCZOS)
 
 def draw_spine(target_w, target_h):
-    """Render the spine cleanly: cream→teal vertical gradient + title
-    and author name typeset horizontally on a tall canvas then rotated
-    90° clockwise. Title sits in the upper 60% (reads bottom-to-top on
-    the spine which is the standard for English books), author at the
-    bottom. No overlap because we lay them out with explicit absolute
-    coordinates on the tall canvas, then rotate the whole thing.
+    """Render the spine using a vertical slice of the empty template
+    (same gpt-image-1 stripped front cover used for the back panel) as
+    the canvas, so the spine's gradient + hash field is pixel-identical
+    to the front and back. Falls back to a programmatic gradient if
+    the template isn't found.
+
+    Title + subtitle + author are typeset horizontally on a tall canvas
+    then rotated 90° clockwise so they read bottom-to-top on the spine
+    (standard English book direction). Lay out with explicit absolute
+    coordinates so they never collide.
     """
-    img = Image.new("RGB", (target_w, target_h), CREAM)
-    px = img.load()
-    # Vertical cream→teal gradient at the bottom 30%, matching front
-    gradient_start = int(target_h * 0.70)
-    for y in range(gradient_start, target_h):
-        t = (y - gradient_start) / max(1, target_h - gradient_start - 1)
-        t = t ** 0.85
-        r = int(CREAM[0] * (1 - t) + TEAL_DEEP[0] * t)
-        g = int(CREAM[1] * (1 - t) + TEAL_DEEP[1] * t)
-        b = int(CREAM[2] * (1 - t) + TEAL_DEEP[2] * t)
-        for x in range(target_w):
-            px[x, y] = (r, g, b)
+    template_path = COVER_DIR / "_refs" / "empty-template.png"
+    if template_path.exists():
+        tpl = Image.open(template_path).convert("RGB")
+        # Take a vertical slice from the horizontal center of the template
+        # — width ~150px (so the gradient + scattered hashes are visible).
+        slice_w = 150
+        cx = tpl.size[0] // 2
+        slice_box = (cx - slice_w // 2, 0, cx + slice_w // 2, tpl.size[1])
+        slice_img = tpl.crop(slice_box)
+        # Resize that slice to the spine dimensions
+        img = slice_img.resize((target_w, target_h), Image.LANCZOS)
+    else:
+        img = Image.new("RGB", (target_w, target_h), CREAM)
+        px = img.load()
+        gradient_start = int(target_h * 0.70)
+        for y in range(gradient_start, target_h):
+            t = (y - gradient_start) / max(1, target_h - gradient_start - 1)
+            t = t ** 0.85
+            r = int(CREAM[0] * (1 - t) + TEAL_DEEP[0] * t)
+            g = int(CREAM[1] * (1 - t) + TEAL_DEEP[1] * t)
+            b = int(CREAM[2] * (1 - t) + TEAL_DEEP[2] * t)
+            for x in range(target_w):
+                px[x, y] = (r, g, b)
 
     # Build a tall horizontal canvas (target_h × target_w) — width and
     # height swapped — render the text horizontally, then rotate 90°
