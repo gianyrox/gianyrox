@@ -115,6 +115,32 @@
 			border-radius: 8px;
 			background: #fbfaf7;
 			text-align: left;
+			display: flex;
+			gap: 18px;
+			align-items: flex-start;
+		}
+
+		.book-card .book-cover {
+			flex: 0 0 130px;
+			width: 130px;
+			height: auto;
+			border-radius: 4px;
+			box-shadow: 0 4px 12px rgba(38, 70, 83, 0.18);
+			align-self: flex-start;
+		}
+
+		.book-card .book-body {
+			flex: 1;
+			min-width: 0;
+		}
+
+		@media (max-width: 480px) {
+			.book-card {
+				flex-direction: column;
+				align-items: center;
+			}
+			.book-card .book-cover { width: 160px; flex: none; }
+			.book-card .book-body { text-align: center; width: 100%; }
 		}
 
 		.book-card .book-title {
@@ -285,18 +311,21 @@
 		<!-- Books Section -->
 		<h2 class="section-header">Books</h2>
 		<div class="book-card">
-			<div class="book-title">Your Money Is Broken</div>
-			<div class="book-subtitle">How Stablecoins Bridge Slow Money to Fast Money — by Giany Rox</div>
-			<div class="book-blurb">
-				Four cities. Four people. The same invisible infrastructure. From Bogotá to Harare to Lagos to a
-				rooftop in Buenos Aires — what happens when money stops respecting borders. 18 chapters on the
-				psychology of trust, the bridge, the ledger, and the on/off-ramps that quietly became the new
-				institutions.
-			</div>
-			<div class="book-actions">
-				<a class="btn primary" href="book/">Read online (free)</a>
-				<a class="btn" href="public/your-money-is-broken.pdf">Download PDF</a>
-				<a class="btn" href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank">Get on Gumroad ($9)</a>
+			<a href="book/"><img class="book-cover" src="public/cover/front-hd.png" alt="Your Money Is Broken — cover" loading="lazy"></a>
+			<div class="book-body">
+				<div class="book-title">Your Money Is Broken</div>
+				<div class="book-subtitle">How Stablecoins Bridge Slow Money to Fast Money — by Giany Rox</div>
+				<div class="book-blurb">
+					Four cities. Four people. The same invisible infrastructure. From Bogotá to Harare to Lagos to a
+					rooftop in Buenos Aires — what happens when money stops respecting borders. 18 chapters on the
+					psychology of trust, the bridge, the ledger, and the on/off-ramps that quietly became the new
+					institutions.
+				</div>
+				<div class="book-actions">
+					<a class="btn primary" href="book/">Read online (free)</a>
+					<a class="btn" href="public/your-money-is-broken.pdf">Download PDF</a>
+					<a class="btn" href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank">Get on Gumroad ($9)</a>
+				</div>
 			</div>
 		</div>
 
