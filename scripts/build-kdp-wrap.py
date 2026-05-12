@@ -45,6 +45,7 @@ WRAP_H_PX = BLEED_PX * 2 + PANEL_H_PX
 
 CREAM = (250, 246, 235)
 CHARCOAL = (26, 26, 26)
+GREY_MID = (85, 85, 85)
 TEAL_DEEP = (29, 111, 99)
 
 def load_font(path, size):
@@ -67,11 +68,16 @@ def fit_panel(img_path, target_w, target_h):
     return img.resize((target_w, target_h), Image.LANCZOS)
 
 def draw_spine(target_w, target_h):
-    """Render the spine: cream → teal vertical gradient + title text
-    rotated 90°."""
+    """Render the spine cleanly: cream→teal vertical gradient + title
+    and author name typeset horizontally on a tall canvas then rotated
+    90° clockwise. Title sits in the upper 60% (reads bottom-to-top on
+    the spine which is the standard for English books), author at the
+    bottom. No overlap because we lay them out with explicit absolute
+    coordinates on the tall canvas, then rotate the whole thing.
+    """
     img = Image.new("RGB", (target_w, target_h), CREAM)
     px = img.load()
-    # Vertical gradient like the panels
+    # Vertical cream→teal gradient at the bottom 30%, matching front
     gradient_start = int(target_h * 0.70)
     for y in range(gradient_start, target_h):
         t = (y - gradient_start) / max(1, target_h - gradient_start - 1)
@@ -81,33 +87,66 @@ def draw_spine(target_w, target_h):
         b = int(CREAM[2] * (1 - t) + TEAL_DEEP[2] * t)
         for x in range(target_w):
             px[x, y] = (r, g, b)
-    # Title rotated 90° on the spine — small font since spine is narrow
-    title_font = load_font(FONTS_DIR / "Playfair-Black.ttf",
-                           int(target_w * 0.55))
-    author_font = load_font(FONTS_DIR / "Inter.ttf",
-                            int(target_w * 0.40))
-    # Render title text on a temporary tall canvas, then rotate
-    tmp = Image.new("RGB", (target_h, target_w), CREAM)
-    td = ImageDraw.Draw(tmp)
+
+    # Build a tall horizontal canvas (target_h × target_w) — width and
+    # height swapped — render the text horizontally, then rotate 90°
+    # clockwise to get the final spine.
+    tall = Image.new("RGB", (target_h, target_w), (0, 0, 0))
+    tall_alpha = Image.new("L", (target_h, target_w), 0)
+    td = ImageDraw.Draw(tall)
+    ta = ImageDraw.Draw(tall_alpha)
+
+    # Title font scaled to ~65% of spine width
+    title_size = max(18, int(target_w * 0.55))
+    title_font = load_font(FONTS_DIR / "Playfair-Black.ttf", title_size)
     title = "YOUR MONEY IS BROKEN"
-    td.text((tmp.size[0] // 2, tmp.size[1] // 2 - int(target_w * 0.15)),
-            title, font=title_font, fill=CHARCOAL, anchor="mm")
+    # Subtitle in italic, smaller — placed AFTER the title with a gap
+    subtitle_size = max(12, int(target_w * 0.28))
+    subtitle_font = load_font(FONTS_DIR / "Playfair-Italic.ttf", subtitle_size)
+    subtitle = "How Stablecoins Bridge Slow Money to Fast Money"
+    # Author smaller still
+    author_size = max(12, int(target_w * 0.32))
+    author_font = load_font(FONTS_DIR / "Inter.ttf", author_size)
     author = "GIANY ROX"
-    td.text((tmp.size[0] // 2, tmp.size[1] // 2 + int(target_w * 0.20)),
-            author, font=author_font, fill=CHARCOAL, anchor="mm")
-    rotated = tmp.rotate(90, expand=True)
-    # Composite the rotated text onto the gradient (with cream as transparent)
-    spine_with_text = img.copy()
-    rot_px = rotated.load()
-    for x in range(spine_with_text.size[0]):
-        for y in range(spine_with_text.size[1]):
-            if x < rotated.size[0] and y < rotated.size[1]:
-                r, g, b = rot_px[x, y]
-                if (abs(r - CREAM[0]) > 8 or
-                    abs(g - CREAM[1]) > 8 or
-                    abs(b - CREAM[2]) > 8):
-                    spine_with_text.putpixel((x, y), (r, g, b))
-    return spine_with_text
+
+    # Layout horizontally on the tall canvas:
+    #   left margin → TITLE → gap → SUBTITLE → big gap → AUTHOR → right margin
+    margin = int(target_h * 0.06)
+    cy = target_w // 2  # vertical center on the rotated spine (i.e. spine center horizontally)
+
+    # Measure pieces
+    def text_w(text, font):
+        bbox = td.textbbox((0, 0), text, font=font, anchor="lm")
+        return bbox[2] - bbox[0]
+
+    title_w = text_w(title, title_font)
+    subtitle_w = text_w(subtitle, subtitle_font)
+    author_w = text_w(author, author_font)
+
+    # Author sits to the RIGHT (bottom of spine when rotated)
+    author_x = target_h - margin
+    td.text((author_x, cy), author, font=author_font, fill=CHARCOAL, anchor="rm")
+    ta.text((author_x, cy), author, font=author_font, fill=255, anchor="rm")
+
+    # Title sits on the LEFT (top of spine when rotated)
+    title_x = margin
+    td.text((title_x, cy), title, font=title_font, fill=CHARCOAL, anchor="lm")
+    ta.text((title_x, cy), title, font=title_font, fill=255, anchor="lm")
+
+    # Subtitle sits IMMEDIATELY after title, smaller, italic
+    subtitle_x = title_x + title_w + int(target_h * 0.03)
+    td.text((subtitle_x, cy), subtitle, font=subtitle_font, fill=GREY_MID, anchor="lm")
+    ta.text((subtitle_x, cy), subtitle, font=subtitle_font, fill=255, anchor="lm")
+
+    # Rotate 90° clockwise to make the spine vertical
+    # In PIL, .rotate(90) is counter-clockwise. We want CLOCKWISE so
+    # title reads bottom-to-top (standard English book spine direction).
+    rotated_text = tall.rotate(-90, expand=True)
+    rotated_alpha = tall_alpha.rotate(-90, expand=True)
+
+    # Composite: paste rotated_text onto img using rotated_alpha as mask
+    img.paste(rotated_text, (0, 0), rotated_alpha)
+    return img
 
 def main():
     print(f"KDP wrap dims: {WRAP_W_PX}×{WRAP_H_PX} px at {DPI}dpi")
