@@ -184,7 +184,19 @@ def draw_isbn_placeholder(draw, x, y, w, h):
 
 def main():
     pct = lambda p: int(H * p / 100)
-    canvas = Image.new("RGB", (W, H), CREAM).convert("RGBA")
+
+    # Use the empty template (generated from front-hd by gpt-image-1) as
+    # the canvas so the back panel's gradient + hash field matches the
+    # front EXACTLY. Falls back to a cream blank if the template is
+    # missing (you can regenerate it with `node scripts/gen-empty-template.mjs`).
+    template_path = COVER_DIR / "_refs" / "empty-template.png"
+    if template_path.exists():
+        canvas = Image.open(template_path).convert("RGBA")
+        # Ensure template is the expected size; resample if not
+        if canvas.size != (W, H):
+            canvas = canvas.resize((W, H), Image.LANCZOS)
+    else:
+        canvas = Image.new("RGBA", (W, H), CREAM + (255,))
     draw = ImageDraw.Draw(canvas)
 
     MARGIN = 80  # left/right margin
@@ -200,9 +212,8 @@ def main():
     sep_y = pct(26)
     draw.line((MARGIN, sep_y, W - MARGIN, sep_y), fill=(200, 195, 180), width=2)
 
-    # 3. MARKETING BLURB — EB Garamond roman, justified, paragraph spacing.
-    # Switched off Playfair Italic because its variable axis caused
-    # certain words to render at the wrong weight.
+    # 3. MARKETING BLURB — EB Garamond roman, left-aligned to preserve
+    # OpenType layout context.
     body_font = load_font(FONT_BODY, 30)
     body_color = CHARCOAL
     y_pos = pct(30)
@@ -210,21 +221,26 @@ def main():
     for paragraph in BLURB_PARAGRAPHS:
         y_pos = draw_paragraph(draw, paragraph, body_font, MARGIN, y_pos,
                                 CONTENT_W, body_color,
-                                line_spacing=1.40, justified=True)
+                                line_spacing=1.40)
         y_pos += paragraph_gap
 
-    # 4. AUTHOR BIO — italic EB Garamond, smaller
-    bio_font = load_font(FONT_BODY_ITALIC, 24)
-    bio_y = pct(74)
-    draw_paragraph(draw, AUTHOR_BIO, bio_font, MARGIN, bio_y, CONTENT_W,
-                   GREY_MID, line_spacing=1.40, justified=False)
+    # 4. AUTHOR BIO — italic EB Garamond, positioned IN the teal zone
+    # near the bottom, rendered in cream/white for proper contrast.
+    # Editorial back-cover convention: bio sits over the dark backdrop
+    # just above the publisher mark + barcode.
+    bio_font = load_font(FONT_BODY_ITALIC, 22)
+    # Render bio bottom-anchored, just above the ISBN/AGFarms strip
+    bio_lines = wrap_text(AUTHOR_BIO, bio_font, CONTENT_W, draw)
+    sample_bbox = draw.textbbox((0, 0), "Mg", font=bio_font, anchor="lt")
+    bio_line_h = (sample_bbox[3] - sample_bbox[1]) * 1.40
+    bio_block_h = bio_line_h * len(bio_lines)
+    bio_y = H - 200 - bio_block_h  # 200px from bottom (above ISBN area)
+    for ln in bio_lines:
+        draw.text((MARGIN, int(bio_y)), ln, font=bio_font,
+                  fill=(248, 240, 220), anchor="lt")
+        bio_y += bio_line_h
 
-    # 5. Teal gradient zone — starts at 82% (lower than front to leave
-    # room for text above)
-    grad_start = pct(82)
-    render_teal_gradient(canvas, grad_start, H)
-
-    # 6. ISBN placeholder and Publisher mark in the teal zone
+    # 5. ISBN placeholder and Publisher mark in the teal zone of the template
     isbn_w, isbn_h = 220, 110
     isbn_x = W - MARGIN - isbn_w
     isbn_y = H - 130
@@ -235,10 +251,8 @@ def main():
     draw.text((MARGIN, H - 80), "A G F A R M S",
               font=publisher_font, fill=(255, 255, 255), anchor="lm")
 
-    # 7. Scatter hashes in the teal zone, avoiding the ISBN + publisher area
-    exclude = (isbn_x - 20, isbn_y - 10, isbn_x + isbn_w + 20, isbn_y + isbn_h + 10)
-    render_hashes(canvas, grad_start + 30, H - 30, rows=18,
-                  exclude_rect=exclude)
+    # NO additional hash rendering — the template already has the full
+    # hash field matching the front. We only added text on top.
 
     # Save
     out = COVER_DIR / "back-hd.png"
