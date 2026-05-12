@@ -44,7 +44,7 @@ const INTERIOR_PATH = resolve(join(REPO, 'public/your-money-is-broken-kdp.pdf'))
 const BOOK = {
   language: 'English',
   title: 'Your Money Is Broken',
-  subtitle: 'How Stablecoins Bridge Slow Money to Fast Money',
+  subtitle: 'How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money',
   edition: '1',
   author_first: 'Giany',
   author_last: 'Rox',

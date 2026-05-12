@@ -22,7 +22,7 @@ const REPO = dirname(__dirname);
 const TOKEN = process.env.GUMROAD_ACCESS_TOKEN;
 if (!TOKEN) { console.error('GUMROAD_ACCESS_TOKEN not set'); process.exit(1); }
 
-const NAME = 'Your Money Is Broken — How Stablecoins Bridge Slow Money to Fast Money';
+const NAME = 'Your Money Is Broken — How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money';
 const PRICE_CENTS = 900;            // $9
 const PERMALINK = 'your-money-is-broken';
 

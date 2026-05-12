@@ -1,3 +1,7 @@
 .DS_Store
 *.swp
 node_modules/
+
+# KDP bot scratch scripts — debugging artifacts, not committed
+scripts/_*.mjs
+scripts/_*.py

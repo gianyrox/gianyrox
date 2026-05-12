@@ -120,7 +120,7 @@ def draw_spine(target_w, target_h):
     # Subtitle in italic, smaller — placed AFTER the title with a gap
     subtitle_size = max(12, int(target_w * 0.28))
     subtitle_font = load_font(FONTS_DIR / "Playfair-Italic.ttf", subtitle_size)
-    subtitle = "How Stablecoins Bridge Slow Money to Fast Money"
+    subtitle = "How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money"
     # Author smaller still
     author_size = max(12, int(target_w * 0.32))
     author_font = load_font(FONTS_DIR / "Inter.ttf", author_size)

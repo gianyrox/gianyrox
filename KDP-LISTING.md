@@ -21,7 +21,7 @@ Files to upload:
 `Your Money Is Broken`
 
 ### Subtitle
-`How Stablecoins Bridge Slow Money to Fast Money`
+`How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money`
 
 ### Series
 *(leave blank — standalone)*
