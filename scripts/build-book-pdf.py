@@ -118,6 +118,28 @@ CSS_6x9 = """
 
 body { font-family: 'Merriweather', Georgia, serif; font-size: 10.5pt;
        line-height: 1.5; color: #1a1a1a; counter-reset: page 1; }
+/* CRITICAL: pre/code must wrap or KDP will flag pages with content outside
+ * the margin. Mermaid diagrams, long URLs, and code samples must break. */
+pre, code {
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  font-size: 8.5pt;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+pre {
+  background: #f5f3ee;
+  padding: 0.4em 0.6em;
+  border-left: 2px solid #2a9d8f;
+  margin: 0.6em 0;
+  line-height: 1.35;
+}
+.mermaid-note {
+  font-style: italic; color: #555; font-size: 9pt;
+  margin: 0.6em 0; padding: 0.4em 0.8em;
+  border-left: 2px solid #ccc; background: #fafafa;
+}
 .no-page-num { page: nopage; }
 @page nopage { @bottom-center { content: ""; } }
 
@@ -205,7 +227,7 @@ def kdp_front_matter():
     # Each <div class="page-break-after: always"> on a recto creates a
     # blank verso automatically since the next recto-only element forces
     # an odd page.
-    isbn_placeholder = "ISBN: 979-8-XXXXXXX-X-X (paperback)"
+    isbn_placeholder = "ISBN: 979-8-1966798-3-4 (paperback)"
     toc_lines = ''.join(f'<div class="toc-entry">{t}</div>' for _, t in CHAPTERS)
     return f"""
 <section class="no-page-num">
@@ -247,10 +269,20 @@ def build_html(profile):
         css = CSS_WEB
     pieces = [front]
     md = markdown.Markdown(extensions=['extra', 'footnotes', 'sane_lists'])
+    import re
+    mermaid_re = re.compile(r"```mermaid\n.*?\n```", re.DOTALL)
     for cid, _t in CHAPTERS:
         raw = slurp(cid)
         if not raw:
             continue
+        # Replace Mermaid blocks with a print-friendly note. Mermaid syntax
+        # rendered as raw code overflows the 6×9 trim and KDP flags margin
+        # errors. For the paperback, an italic placeholder reads better.
+        raw = mermaid_re.sub(
+            "*[Diagram: see the digital edition at gianyrox.com for an "
+            "interactive version of this figure.]*",
+            raw,
+        )
         pieces.append(md.convert(raw))
         md.reset()
     return (

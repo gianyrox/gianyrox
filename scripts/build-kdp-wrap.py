@@ -28,8 +28,10 @@ COVER_DIR = REPO / "public" / "cover"
 FONTS_DIR = COVER_DIR / "_fonts"
 
 # Dimensions in inches
-PAGE_COUNT = 117
-SPINE_INCHES = round(PAGE_COUNT * 0.002252, 4)        # 0.2635"
+# KDP spine formula: white paper = pages × 0.002252",  CREAM paper = pages × 0.0025"
+# We're on cream B&W. Actual interior PDF = 172 pages.
+PAGE_COUNT = 168
+SPINE_INCHES = round(PAGE_COUNT * 0.0025, 4)          # 0.4200"
 BLEED_INCHES = 0.125
 PANEL_W_INCHES = 6.0
 PANEL_H_INCHES = 9.0

@@ -117,7 +117,13 @@ async function connect() {
 
 async function ensureLoggedIn(page) {
   log('checking KDP login...');
-  await page.goto('https://kdp.amazon.com/en_US/bookshelf', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  // Don't nuke an active title-setup page — only navigate if we're not in the wizard
+  const cur = page.url();
+  if (/title-setup|bookshelf/.test(cur)) {
+    // already inside KDP, skip navigation
+  } else {
+    await page.goto('https://kdp.amazon.com/en_US/bookshelf', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  }
   await page.waitForTimeout(2500);
   const url = page.url();
   if (/signin|ap\/signin/.test(url)) {
@@ -158,15 +164,20 @@ async function fillStep1(page) {
   await fillFirst(page, 'input[id*="author-first-name"], input[name*="author_first_name"]', BOOK.author_first);
   await fillFirst(page, 'input[id*="author-last-name"], input[name*="author_last_name"]', BOOK.author_last);
 
-  // Description — typically a large textarea
-  const descSel = 'textarea[id*="description"], div[contenteditable="true"][aria-label*="Description"], [aria-label*="book description"] textarea';
-  const descEl = await page.locator(descSel).first();
-  if (await descEl.count() > 0) {
-    await descEl.click({ force: true });
-    await descEl.fill(BOOK.description);
-    log('  ✓ description filled');
-  } else {
-    log('  ⚠ description selector not found — fill manually');
+  // Description — KDP uses a CKEditor inside an iframe
+  try {
+    const ckFrame = page.frameLocator('iframe.cke_wysiwyg_frame').first();
+    const body = ckFrame.locator('body');
+    await body.click({ force: true, timeout: 5000 });
+    // Convert plain text → <p>-wrapped HTML preserving paragraphs
+    const html = BOOK.description
+      .split(/\n\n+/)
+      .map(p => `<p>${p.replace(/\n/g, '<br>').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</p>`)
+      .join('');
+    await ckFrame.locator('body').evaluate((el, h) => { el.innerHTML = h; el.dispatchEvent(new Event('input', { bubbles: true })); }, html);
+    log('  ✓ description filled (CKEditor)');
+  } catch (e) {
+    log(`  ⚠ description fill failed: ${e.message.split('\n')[0]} — fill manually`);
   }
 
   // Keywords — 7 input fields keywords[0]..keywords[6]
@@ -205,8 +216,19 @@ async function fillByName(page, name, value) {
 async function fillFirst(page, selector, value) {
   const el = page.locator(selector).first();
   if (await el.count() === 0) return false;
-  await el.click({ force: true });
-  await el.fill(value);
+  try { await el.scrollIntoViewIfNeeded({ timeout: 2000 }); } catch {}
+  try {
+    await el.fill(value, { force: true, timeout: 5000 });
+  } catch {
+    // Fallback: set via DOM directly + dispatch input/change so React/Adobe-DTM picks it up
+    await el.evaluate((node, v) => {
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+      setter.call(node, v);
+      node.dispatchEvent(new Event('input', { bubbles: true }));
+      node.dispatchEvent(new Event('change', { bubbles: true }));
+      node.dispatchEvent(new Event('blur', { bubbles: true }));
+    }, value);
+  }
   log(`  ✓ ${selector.split(',')[0]} filled`);
   return true;
 }

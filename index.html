@@ -4,11 +4,82 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Gianyrox Links</title>
-	<meta property="og:title" content="Gianyrox — Everywhere">
-	<meta property="og:description" content="Links, articles, shops, and the in-progress stablecoin book.">
-	<meta property="og:type" content="profile">
+	<title>Giany Rox — author of "Your Money Is Broken" — stablecoins, digital dollar, payments</title>
+	<meta name="description" content="Author Giany Rox: 'Your Money Is Broken — How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money.' A field report from inside the digital dollar economy. Paperback on Amazon · PDF on Gumroad · free online edition.">
+	<meta name="keywords" content="stablecoins, digital dollar, USDC, USDT, cross-border payments, remittances, GENIUS Act, fintech, future of money, cryptocurrency for beginners, Giany Rox, Your Money Is Broken">
+	<meta name="author" content="Giany Rox">
+	<link rel="canonical" href="https://www.gianyrox.com/">
 	<link rel="icon" type="image/png" href="public/gauss.png">
+
+	<!-- OpenGraph (Facebook, LinkedIn, Slack) -->
+	<meta property="og:type" content="book">
+	<meta property="og:title" content="Your Money Is Broken — by Giany Rox">
+	<meta property="og:description" content="Four cities. Four people. The same invisible infrastructure. A field report from inside the digital dollar economy.">
+	<meta property="og:url" content="https://www.gianyrox.com/">
+	<meta property="og:image" content="https://www.gianyrox.com/public/cover/front-hd.png">
+	<meta property="og:image:alt" content="Cover of 'Your Money Is Broken' by Giany Rox">
+	<meta property="og:site_name" content="Giany Rox">
+	<meta property="book:author" content="Giany Rox">
+	<meta property="book:isbn" content="9798196679834">
+	<meta property="book:release_date" content="2026-05-12">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Your Money Is Broken — by Giany Rox">
+	<meta name="twitter:description" content="A field report from inside the digital dollar economy. Bogotá. Harare. Lagos. A rooftop in Buenos Aires.">
+	<meta name="twitter:image" content="https://www.gianyrox.com/public/cover/front-hd.png">
+
+	<!-- Schema.org Book JSON-LD — gets the book into Google Books index -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Book",
+		"name": "Your Money Is Broken",
+		"alternateName": "Your Money Is Broken: How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money",
+		"author": {
+			"@type": "Person",
+			"name": "Giany Rox",
+			"url": "https://www.gianyrox.com/",
+			"sameAs": ["https://github.com/gianyrox"]
+		},
+		"isbn": "9798196679834",
+		"bookFormat": "https://schema.org/Paperback",
+		"numberOfPages": 168,
+		"datePublished": "2026-05-12",
+		"inLanguage": "en",
+		"publisher": {"@type": "Organization", "name": "AGFarms"},
+		"description": "Four cities. Four people. The same invisible infrastructure — from Bogotá to Harare to Lagos to a rooftop in Buenos Aires. A field report from inside the digital dollar economy, explaining how stablecoins quietly become the bridge from slow money to fast money.",
+		"image": "https://www.gianyrox.com/public/cover/front-hd.png",
+		"genre": ["Business & Economics", "Money & Monetary Policy", "Banks & Banking"],
+		"keywords": "stablecoins, digital dollar, USDC, USDT, cross-border payments, remittances, GENIUS Act, fintech",
+		"url": "https://www.gianyrox.com/book/your-money-is-broken/",
+		"workExample": [
+			{
+				"@type": "Book",
+				"isbn": "9798196679834",
+				"bookFormat": "https://schema.org/Paperback",
+				"potentialAction": {
+					"@type": "BuyAction",
+					"target": "https://www.amazon.com/dp/9798196679834",
+					"priceSpecification": {"@type": "PriceSpecification", "price": "13.99", "priceCurrency": "USD"}
+				}
+			}
+		]
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Person",
+		"name": "Giany Rox",
+		"url": "https://www.gianyrox.com/",
+		"image": "https://www.gianyrox.com/public/cover/front-hd.png",
+		"jobTitle": "Author, founder",
+		"worksFor": {"@type": "Organization", "name": "AGFarms"},
+		"description": "Author of 'Your Money Is Broken'. Writes on stablecoins, the digital dollar, and the rebuild of global payment rails from below.",
+		"sameAs": ["https://github.com/gianyrox"]
+	}
+	</script>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 	<style>
@@ -310,21 +381,25 @@
 
 		<!-- Books Section -->
 		<h2 class="section-header">Books</h2>
-		<div class="book-card">
-			<a href="book/"><img class="book-cover" src="public/cover/front-hd.png" alt="Your Money Is Broken — cover" loading="lazy"></a>
+		<div class="book-card" itemscope itemtype="https://schema.org/Book">
+			<a href="book/your-money-is-broken/"><img class="book-cover" src="public/cover/front-hd.png" alt="Your Money Is Broken — cover by Giany Rox" loading="lazy" itemprop="image"></a>
 			<div class="book-body">
-				<div class="book-title">Your Money Is Broken</div>
-				<div class="book-subtitle">How Stablecoins Bridge Slow Money to Fast Money — by Giany Rox</div>
-				<div class="book-blurb">
-					Four cities. Four people. The same invisible infrastructure. From Bogotá to Harare to Lagos to a
-					rooftop in Buenos Aires — what happens when money stops respecting borders. 18 chapters on the
-					psychology of trust, the bridge, the ledger, and the on/off-ramps that quietly became the new
-					institutions.
+				<div class="book-title" itemprop="name">Your Money Is Broken</div>
+				<div class="book-subtitle">How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money — by <span itemprop="author">Giany Rox</span></div>
+				<div class="book-blurb" itemprop="description">
+					Pablo in Bogotá sends his mother medicine money in ninety seconds for under two dollars. Mercy in Harare
+					protects a women's savings club from fifty-six percent inflation in a digital dollar. Femi in Lagos closes
+					a hundred-thousand-dollar supplier deal from the back of a parked car. None of them care about price charts.
+					They are using stablecoins because the alternatives have already failed them. <em>A field report from inside
+					the digital dollar economy.</em>
 				</div>
 				<div class="book-actions">
-					<a class="btn primary" href="book/">Read online (free)</a>
-					<a class="btn" href="public/your-money-is-broken.pdf">Download PDF</a>
-					<a class="btn" href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank">Get on Gumroad ($9)</a>
+					<a class="btn primary" href="https://www.amazon.com/dp/9798196679834" target="_blank" rel="noopener" data-cta="amazon">📕 Paperback on Amazon ($13.99)</a>
+					<a class="btn" href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank" rel="noopener" data-cta="gumroad">⬇ PDF on Gumroad</a>
+					<a class="btn" href="book/" data-cta="read-free">Read free online</a>
+				</div>
+				<div style="margin-top: 12px; font-size: 12px; color: #888;">
+					ISBN <span itemprop="isbn">979-8-1966798-3-4</span> · 168 pp · Paperback · English · Independently published
 				</div>
 			</div>
 		</div>

@@ -164,23 +164,19 @@ def render_hashes(canvas, top_y, bottom_y, rows=22, seed=137, exclude_rect=None)
                       fill=(max(0, r), max(0, g), max(0, b), local_alpha))
 
 def draw_isbn_placeholder(draw, x, y, w, h):
-    """White rectangle with 'ISBN' label — placeholder for the real barcode."""
-    # White background
-    draw.rectangle((x, y, x + w, y + h), fill=(255, 255, 255), outline=(200, 200, 200), width=2)
-    # Fake barcode lines
-    bar_y0 = y + 10
-    bar_y1 = y + int(h * 0.55)
-    bar_x = x + 10
-    random.seed(7)
-    while bar_x < x + w - 10:
-        bw = random.choice([1, 1, 2, 2, 3, 4])
-        if bar_x + bw < x + w - 10:
-            draw.rectangle((bar_x, bar_y0, bar_x + bw, bar_y1), fill=(0, 0, 0))
-        bar_x += bw + random.choice([1, 2, 2, 3])
-    # ISBN label
-    font_lbl = load_font(FONT_SANS, 13)
-    draw.text((x + w // 2, y + h - 18), "ISBN 979-8-XXXXXXX-X-X",
-              font=font_lbl, fill=(60, 60, 60), anchor="mm")
+    """Clean white rectangle reserved for KDP's auto-inserted EAN-13 barcode.
+    KDP places the real barcode for ISBN 9798196679834 in this area at print.
+    We leave it blank — no fake bars, no placeholder text — per KDP's cover
+    formatting guide (Section: "Barcode area"). Just a clean white rectangle
+    sized 2" × 1.2" at the proper position in the bottom-right of the back
+    cover, scaled here to the 1024×1536 source canvas (~340 × 195 px = ~33%
+    of width, which matches KDP's 2"/6" ratio after upscale to print)."""
+    draw.rectangle((x, y, x + w, y + h), fill=(255, 255, 255), outline=(220, 220, 220), width=1)
+    # Tiny human-readable ISBN under the barcode area, in light grey so it
+    # doesn't fight the auto-inserted barcode if KDP places its own digits.
+    font_lbl = load_font(FONT_SANS, 11)
+    draw.text((x + w // 2, y + h + 8), "ISBN 979-8-1966798-3-4",
+              font=font_lbl, fill=(170, 170, 170), anchor="mm")
 
 def main():
     pct = lambda p: int(H * p / 100)
@@ -234,18 +230,21 @@ def main():
     sample_bbox = draw.textbbox((0, 0), "Mg", font=bio_font, anchor="lt")
     bio_line_h = (sample_bbox[3] - sample_bbox[1]) * 1.40
     bio_block_h = bio_line_h * len(bio_lines)
-    bio_y = H - 200 - bio_block_h  # 200px from bottom (above ISBN area)
+    # Bio sits well ABOVE the KDP barcode region. The barcode reservation
+    # spans roughly y=H-250 to y=H-50 (200px tall + 80px text gap below the
+    # publisher mark). So bio must end above y=H-280 with comfortable margin.
+    bio_y = H - 320 - bio_block_h  # bio ends 320px from bottom (clear of barcode)
     for ln in bio_lines:
         draw.text((MARGIN, int(bio_y)), ln, font=bio_font,
                   fill=(248, 240, 220), anchor="lt")
         bio_y += bio_line_h
 
     # 5. ISBN placeholder and Publisher mark in the teal zone of the template
-    isbn_w, isbn_h = 220, 110
-    isbn_x = W - MARGIN - isbn_w
-    isbn_y = H - 130
+    # KDP auto-overlays the real EAN-13 barcode for ISBN 9798196679834 in
+    # the bottom-right of the back cover at print. We leave clean negative
+    # space there — no white box, no fake bars, no placeholder text. KDP
+    # places its own white background + barcode + digits at print time.
     draw = ImageDraw.Draw(canvas)
-    draw_isbn_placeholder(draw, isbn_x, isbn_y, isbn_w, isbn_h)
 
     publisher_font = load_font(FONT_SANS, 24)
     draw.text((MARGIN, H - 80), "A G F A R M S",
