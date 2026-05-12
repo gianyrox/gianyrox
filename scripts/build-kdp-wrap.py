@@ -138,9 +138,11 @@ def draw_spine(target_w, target_h):
     subtitle_w = text_w(subtitle, subtitle_font)
     author_w = text_w(author, author_font)
 
-    # Author sits to the RIGHT (bottom of spine when rotated)
+    # Author sits to the RIGHT (bottom of spine when rotated) — rendered
+    # in cream so it reads cleanly over the dark teal at the spine's
+    # bottom (where the template gradient is darkest).
     author_x = target_h - margin
-    td.text((author_x, cy), author, font=author_font, fill=CHARCOAL, anchor="rm")
+    td.text((author_x, cy), author, font=author_font, fill=CREAM, anchor="rm")
     ta.text((author_x, cy), author, font=author_font, fill=255, anchor="rm")
 
     # Title sits on the LEFT (top of spine when rotated)
