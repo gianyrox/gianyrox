@@ -74,6 +74,12 @@ header .dates { font-family: 'Source Sans 3'; font-weight: 700; font-size: 13px;
                     padding: 4px 10px; border-radius: 999px; text-decoration: none;
                     border: 1px solid var(--teal); color: var(--teal); }
 .product .links a:hover { background: var(--teal); color: white; }
+.product .buy { display: inline-block; margin-top: 14px; padding: 10px 20px;
+                font-family: 'Source Sans 3'; font-weight: 700; font-size: 14px;
+                background: var(--orange); color: white; text-decoration: none;
+                border-radius: 6px; letter-spacing: 0.02em; }
+.product .buy:hover { background: var(--teal-deep); }
+.product .buy.disabled { background: #aaa; cursor: not-allowed; pointer-events: none; }
 .badge { display: inline-block; background: var(--orange); color: white; font-size: 10px;
          font-family: 'Source Sans 3'; font-weight: 700; padding: 2px 8px;
          border-radius: 999px; margin-left: 4px; letter-spacing: 0.05em; vertical-align: 2px; }
@@ -117,6 +123,7 @@ footer a { color: var(--teal); text-decoration: none; }
         <div class="title">2026 Tournament Bracket Printable <span class="badge">NEW</span></div>
         <div class="meta">Digital download · 4 PDF variants · 48 teams · Letter + A3 wall poster</div>
         <div class="price">$4.99</div>
+        <a class="buy" href="/shop/wc2026/checkout?slug=wc2026-bracket-printable">Buy &amp; Download &rarr;</a>
         <div class="links">
           <a href="/public/wc2026/bracket-blank-letter.pdf" target="_blank">Preview Letter</a>
           <a href="/public/wc2026/bracket-blank-a3.pdf" target="_blank">Preview A3</a>
@@ -128,10 +135,10 @@ footer a { color: var(--teal); text-decoration: none; }
   </div>
 </div>
 
-<!-- ─── BOOKS (KDP PAPERBACK) ───────────────────────────────────── -->
+<!-- ─── BOOKS (digital PDF + KDP paperback) ─────────────────────── -->
 <div class="collection">
   <h2>Books</h2>
-  <p class="desc">Paperback fan journals — physical books fulfilled by Amazon KDP.</p>
+  <p class="desc">Fan journals and watch-party planners. Digital PDFs deliver instantly; paperback editions ship from Amazon KDP.</p>
   <div class="grid">
 
     <div class="product">
@@ -140,10 +147,12 @@ footer a { color: var(--teal); text-decoration: none; }
       </div>
       <div class="body">
         <div class="title">USA 2026 Fan Journal <span class="badge">NEW</span></div>
-        <div class="meta">Paperback · 100 pp · 6×9 · 80 match-log pages · 12 group sheets · 48 team rosters</div>
-        <div class="price">$12.99</div>
+        <div class="meta">100 pp · 6×9 · 80 match-log pages · 12 group sheets · 48 team rosters</div>
+        <div class="price"><span class="from">digital PDF</span>$7.99</div>
+        <a class="buy" href="/shop/wc2026/checkout?slug=wc2026-fan-journal-digital">Buy PDF &amp; Download &rarr;</a>
         <div class="links">
           <a href="/public/wc2026/fan-journal-web.pdf" target="_blank">Preview PDF</a>
+          <a href="https://www.amazon.com/dp/PAPERBACK_TBD" target="_blank" rel="noopener">Paperback · $12.99 →</a>
         </div>
       </div>
     </div>
@@ -154,10 +163,12 @@ footer a { color: var(--teal); text-decoration: none; }
       </div>
       <div class="body">
         <div class="title">World Cup Watch Party Planner <span class="badge">NEW</span></div>
-        <div class="meta">Paperback · 120 pp · 12 country recipes · 48 match trackers · drinking games · viewing setup</div>
-        <div class="price">$14.99</div>
+        <div class="meta">120 pp · 12 country recipes · 48 match trackers · drinking games · viewing setup</div>
+        <div class="price"><span class="from">digital PDF</span>$9.99</div>
+        <a class="buy" href="/shop/wc2026/checkout?slug=wc2026-watch-party-digital">Buy PDF &amp; Download &rarr;</a>
         <div class="links">
           <a href="/public/wc2026/watch-party-web.pdf" target="_blank">Preview PDF</a>
+          <a href="https://www.amazon.com/dp/PAPERBACK_TBD" target="_blank" rel="noopener">Paperback · $14.99 →</a>
         </div>
       </div>
     </div>

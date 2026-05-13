@@ -8,7 +8,24 @@
   "rewrites": [
     { "source": "/book", "destination": "/book/index.html" },
     { "source": "/shop", "destination": "/shop/index.html" },
-    { "source": "/shop/wc2026", "destination": "/shop/wc2026/index.html" }
+    { "source": "/shop/wc2026", "destination": "/shop/wc2026/index.html" },
+
+    {
+      "source": "/shop/wc2026/checkout",
+      "destination": "https://wc2026-storefront.vercel.app/shop/wc2026/checkout"
+    },
+    {
+      "source": "/shop/wc2026/success",
+      "destination": "https://wc2026-storefront.vercel.app/shop/wc2026/success"
+    },
+    {
+      "source": "/shop/wc2026/product/:slug",
+      "destination": "https://wc2026-storefront.vercel.app/shop/wc2026/product/:slug"
+    },
+    {
+      "source": "/shop/wc2026/api/:path*",
+      "destination": "https://wc2026-storefront.vercel.app/shop/wc2026/api/:path*"
+    }
   ],
   "redirects": [
     { "source": "/shops", "destination": "/shop/", "permanent": true },
