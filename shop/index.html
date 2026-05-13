@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Giany Rox · books, prints, printables, World Cup 2026</title>
+<meta name="description" content="Shop everything by Giany Rox. Your Money Is Broken (paperback + Kindle + free PDF), World Cup 2026 collection (brackets, fan journals, watch party kits, host city prints), generative wall art, and more. Direct via Stripe, also on Etsy + Gumroad + Amazon.">
+<meta name="keywords" content="Giany Rox shop, Your Money Is Broken, World Cup 2026 merch, stablecoin book, fan journal, watch party kit, soccer printables, generative wall art">
+<link rel="canonical" href="https://www.gianyrox.com/shop/">
+<link rel="icon" type="image/png" href="/public/gauss.png">
+
+<meta property="og:title" content="Shop — Giany Rox">
+<meta property="og:description" content="Books, prints, printables, World Cup 2026 collection. All in one place.">
+<meta property="og:url" content="https://www.gianyrox.com/shop/">
+<meta property="og:image" content="https://www.gianyrox.com/public/cover/front-hd.png">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shop — Giany Rox">
+<meta name="twitter:image" content="https://www.gianyrox.com/public/cover/front-hd.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Giany Rox Shop",
+  "url": "https://www.gianyrox.com/shop/",
+  "image": "https://www.gianyrox.com/public/cover/front-hd.png",
+  "description": "Books, printables, World Cup 2026 collection, and generative wall art.",
+  "sameAs": [
+    "https://www.etsy.com/shop/agfarms",
+    "https://agfarms.gumroad.com/",
+    "https://www.amazon.com/dp/9798196679834"
+  ]
+}
+</script>
+
+<style>
+:root {
+  --teal: #2a9d8f;
+  --teal-deep: #1d6f63;
+  --charcoal: #264653;
+  --cream: #faf6eb;
+  --orange: #e76f51;
+  --text: #1a1a1a;
+  --muted: #555;
+}
+* { box-sizing: border-box; }
+body { font-family: Georgia, 'EB Garamond', serif; margin: 0; color: var(--text);
+       line-height: 1.6; background: var(--cream); }
+.container { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+
+header { margin-bottom: 50px; text-align: center; }
+header h1 { font-family: 'Source Sans 3', Arial, sans-serif; font-weight: 900;
+            font-size: 48px; letter-spacing: -0.02em; margin: 0 0 12px;
+            color: var(--charcoal); line-height: 1.05; }
+header .sub { font-size: 17px; color: var(--muted); margin: 0; font-style: italic; }
+nav.crumbs { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+nav.crumbs a { color: var(--teal); text-decoration: none; }
+
+.collection { margin: 60px 0; }
+.collection h2 { font-family: 'Source Sans 3', Arial, sans-serif; font-size: 28px;
+                 letter-spacing: -0.01em; color: var(--charcoal); margin: 0 0 8px;
+                 border-bottom: 2px solid var(--teal); padding-bottom: 8px; }
+.collection .desc { font-size: 15px; color: var(--muted); margin: 0 0 24px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 24px; }
+.product { background: white; border: 1px solid #e2dccc; border-radius: 6px;
+           overflow: hidden; transition: transform 0.15s, box-shadow 0.15s;
+           text-decoration: none; color: inherit; display: block; }
+.product:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+.product .thumb { aspect-ratio: 4/5; background: var(--cream);
+                  display: flex; align-items: center; justify-content: center;
+                  border-bottom: 1px solid #e2dccc; overflow: hidden; }
+.product .thumb img { max-width: 100%; max-height: 100%; object-fit: cover; }
+.product .body { padding: 14px 16px 18px; }
+.product .title { font-family: 'Source Sans 3', Arial, sans-serif; font-weight: 700;
+                  font-size: 15px; color: var(--charcoal); margin: 0 0 6px;
+                  line-height: 1.25; letter-spacing: -0.005em; }
+.product .meta { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.product .price { font-family: 'Source Sans 3', Arial, sans-serif; font-weight: 700;
+                  color: var(--orange); font-size: 16px; }
+.product .price .from { font-weight: 400; color: var(--muted); font-size: 11px; margin-right: 4px; }
+.badge { display: inline-block; background: var(--teal); color: white; font-size: 10px;
+         font-family: 'Source Sans 3', Arial, sans-serif; font-weight: 700;
+         padding: 2px 8px; border-radius: 999px; margin-left: 4px; letter-spacing: 0.05em;
+         vertical-align: 2px; }
+.badge.soon { background: #aaa; }
+.badge.new { background: var(--orange); }
+
+.channels { background: white; padding: 24px; border-radius: 6px;
+            border: 1px solid #e2dccc; margin: 50px 0; }
+.channels h3 { margin: 0 0 12px; font-family: 'Source Sans 3'; color: var(--charcoal); }
+.channels p { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+.channels .links { display: flex; gap: 12px; flex-wrap: wrap; }
+.channels .links a { font-family: 'Source Sans 3'; font-size: 13px; font-weight: 600;
+                     padding: 8px 16px; border-radius: 999px;
+                     border: 1px solid var(--teal); color: var(--teal);
+                     text-decoration: none; }
+.channels .links a:hover { background: var(--teal); color: white; }
+
+footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #ddd;
+         font-size: 13px; color: var(--muted); text-align: center; }
+footer a { color: var(--teal); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav class="crumbs"><a href="/">Giany Rox</a> › <span>Shop</span></nav>
+
+<header>
+  <h1>Shop</h1>
+  <p class="sub">Books, prints, printables, World Cup 2026 — all in one place</p>
+</header>
+
+<!-- ─── BOOKS COLLECTION ────────────────────────────────────────── -->
+<div class="collection">
+  <h2>Books</h2>
+  <p class="desc">Narrative non-fiction by Giany Rox.</p>
+  <div class="grid">
+    <a class="product" href="/book/your-money-is-broken/">
+      <div class="thumb"><img src="/public/cover/front-hd.png" alt="Your Money Is Broken cover"></div>
+      <div class="body">
+        <div class="title">Your Money Is Broken <span class="badge new">NEW</span></div>
+        <div class="meta">Paperback · 168 pp · Kindle eBook</div>
+        <div class="price"><span class="from">from</span>$7.99</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ─── WC2026 COLLECTION ───────────────────────────────────────── -->
+<div class="collection">
+  <h2>World Cup 2026 Collection</h2>
+  <p class="desc">For the 6-week window June 11 – July 19, 2026. US/Canada/Mexico. 48 teams, 16 cities. Not affiliated with FIFA.</p>
+  <div class="grid">
+    <a class="product" href="/shop/wc2026/bracket/">
+      <div class="thumb" style="background:linear-gradient(135deg,#faf6eb,#e6dfca);font-family:'Source Sans 3';color:#264653;font-weight:900;font-size:14px;text-align:center;padding:20px;">2026 BRACKET<br><span style="font-size:11px;font-weight:400;color:#555;margin-top:6px;display:block">12 groups · 48 teams · fillable PDF</span></div>
+      <div class="body">
+        <div class="title">2026 Tournament Bracket Printable</div>
+        <div class="meta">Digital download · Letter + A3 · B&W + color</div>
+        <div class="price">$4.99</div>
+      </div>
+    </a>
+    <a class="product" href="/shop/wc2026/fan-journal/">
+      <div class="thumb" style="background:linear-gradient(180deg,#1d6f63 0%,#1d6f63 50%,#faf6eb 50%);color:#faf6eb;font-family:'Source Sans 3';font-weight:900;font-size:18px;text-align:center;padding:30px;">FAN<br>JOURNAL<br><span style="font-size:10px;font-weight:400;margin-top:8px;display:block;color:#264653">2026</span></div>
+      <div class="body">
+        <div class="title">USA 2026 Fan Journal</div>
+        <div class="meta">Paperback · 100 pp · 6×9</div>
+        <div class="price">$12.99</div>
+      </div>
+    </a>
+    <a class="product" href="/shop/wc2026/watch-party/">
+      <div class="thumb" style="background:linear-gradient(180deg,#e76f51,#faf6eb);font-family:'Source Sans 3';color:#264653;font-weight:900;font-size:16px;text-align:center;padding:24px;">WATCH<br>PARTY<br>PLANNER<br><span style="font-size:10px;font-weight:400;margin-top:8px;display:block">12 recipes · 48 trackers</span></div>
+      <div class="body">
+        <div class="title">World Cup Watch Party Planner</div>
+        <div class="meta">Paperback · 120 pp · 12 country recipes</div>
+        <div class="price">$14.99</div>
+      </div>
+    </a>
+    <a class="product" href="/shop/wc2026/">
+      <div class="thumb" style="background:#264653;color:#faf6eb;font-family:'Source Sans 3';font-weight:700;font-size:14px;text-align:center;padding:24px;">16 HOST CITIES<br>POSTER SERIES<br><span style="font-size:10px;font-weight:400;margin-top:8px;display:block;opacity:0.7">coming May 22</span></div>
+      <div class="body">
+        <div class="title">Host City Poster Series <span class="badge soon">SOON</span></div>
+        <div class="meta">16 cities × 10 styles · digital + POD</div>
+        <div class="price"><span class="from">from</span>$8.99</div>
+      </div>
+    </a>
+    <a class="product" href="/shop/wc2026/">
+      <div class="thumb" style="background:#faf6eb;color:#1d6f63;font-family:'Source Sans 3';font-weight:900;font-size:14px;text-align:center;padding:24px;">COUNTRY PRIDE<br>TEES + HATS + MUGS<br><span style="font-size:10px;font-weight:400;margin-top:8px;display:block;color:#555">48 teams · POD</span></div>
+      <div class="body">
+        <div class="title">Country Pride POD Merch <span class="badge soon">SOON</span></div>
+        <div class="meta">Shirts · hats · mugs · totes — 48 countries</div>
+        <div class="price"><span class="from">from</span>$22.99</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ─── OFFICIAL CHANNELS ───────────────────────────────────────── -->
+<div class="channels">
+  <h3>Also available on</h3>
+  <p>Direct purchases on this site go through Stripe and ship within 2–5 business days from US Printify partners. Same products are also available on these marketplaces — pick whichever you prefer.</p>
+  <div class="links">
+    <a href="https://www.amazon.com/dp/9798196679834" target="_blank" rel="noopener">📕 Amazon (book)</a>
+    <a href="https://www.etsy.com/shop/agfarms" target="_blank" rel="noopener">🎨 Etsy</a>
+    <a href="https://agfarms.gumroad.com/" target="_blank" rel="noopener">⬇ Gumroad</a>
+  </div>
+</div>
+
+<footer>
+  © 2026 Giany Rox · Independently published via AGFarms · <a href="/">Home</a> · <a href="/book/your-money-is-broken/">Book</a>
+</footer>
+
+</div>
+</body>
+</html>

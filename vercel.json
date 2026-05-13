@@ -6,7 +6,14 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/book", "destination": "/book/index.html" }
+    { "source": "/book", "destination": "/book/index.html" },
+    { "source": "/shop", "destination": "/shop/index.html" },
+    { "source": "/shop/wc2026", "destination": "/shop/wc2026/index.html" }
+  ],
+  "redirects": [
+    { "source": "/shops", "destination": "/shop/", "permanent": true },
+    { "source": "/store", "destination": "/shop/", "permanent": true },
+    { "source": "/store/(.*)", "destination": "/shop/$1", "permanent": true }
   ],
   "headers": [
     {
