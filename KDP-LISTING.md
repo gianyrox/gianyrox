@@ -121,12 +121,16 @@ This is not a Bitcoin book. Not a crypto-hype book. Not a technology manual. It 
 ### Territories
 - `All territories (worldwide rights)`
 
-### Pricing
+### Pricing (final — post velocity-optimization 2026-05-12)
 - **Primary Marketplace**: `Amazon.com`
-- **List Price (USD)**: `$14.99`
-  - KDP printing cost (6×9 B&W cream, 117 pp): ~$3.30
-  - Royalty (60% paperback expanded): ($14.99 × 0.60) - $3.30 = **$5.69 per copy**
-- Other marketplaces: let KDP auto-convert (or set EUR €12.99, GBP £11.99)
+- **List Price (USD)**: `$13.99` *(dropped from initial $14.99 → $13.99 to sit below the $14 psych barrier for debut velocity)*
+  - KDP printing cost (6×9 B&W cream, 168 pp): ~$3.02
+  - Royalty (60% paperback): ($13.99 × 0.60) − $3.02 = **$5.38 per copy**
+  - Expanded Distribution (40%): ($13.99 × 0.40) − $3.02 = **$2.58 per copy**
+- Other marketplaces (post-optimization):
+  - 🇬🇧 UK £10.99 · 🇨🇦 CA $18.99 · 🇦🇺 AU $19.99 · 🇯🇵 JP ¥1899
+  - 🇪🇺 EU €12.99 (×7) · 🇵🇱 PL PLN 50.35 · 🇸🇪 SE SEK 129.02
+- See `BOOK-METADATA.md` for the canonical multi-currency table
 
 ### Expanded Distribution
 - **ON** — gets the book into Barnes & Noble, Waterstones, libraries, indie bookshops
