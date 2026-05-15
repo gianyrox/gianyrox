@@ -106,10 +106,12 @@ This is not a Bitcoin book. Not a crypto-hype book. Not a technology manual. It 
 | Images | One or a few AI-generated images, with extensive editing (cover) | GPT-Image-1 (DALL-E 3) |
 | Translations | None | — |
 
-## Public URLs (will activate post-publish)
+## Public URLs
 
-- Amazon paperback: `https://www.amazon.com/dp/9798196679834`
-- Amazon Kindle: TBD (Kindle ASIN assigned post-publish)
+- **Amazon paperback (LIVE 2026-05-14):** `https://www.amazon.com/dp/B0H1T2DDG3`
+  - ASIN: `B0H1T2DDG3`
+  - ISBN-13: `9798196679834` (also resolves at `https://www.amazon.com/dp/9798196679834` → redirects to ASIN)
+- Amazon Kindle: TBD (Kindle still in Draft on KDP bookshelf — pending publish click)
 - gianyrox.com book page: `https://www.gianyrox.com/book/your-money-is-broken/`
 - Free PDF (web edition): `https://www.gianyrox.com/public/your-money-is-broken.pdf`
 - KDP interior PDF (for reference): `~/agfarms/gianyrox/public/your-money-is-broken-kdp.pdf`

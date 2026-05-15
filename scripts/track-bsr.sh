@@ -9,7 +9,7 @@
 #   review_count, avg_rating, list_price, marketplace
 set -euo pipefail
 
-ASIN="${ASIN:-9798196679834}"  # placeholder until KDP issues the real ASIN
+ASIN="${ASIN:-B0H1T2DDG3}"  # live ASIN assigned by KDP on 2026-05-14
 URL="https://www.amazon.com/dp/${ASIN}"
 OUT="$(dirname "$0")/../public/bsr-history.csv"
 TS="$(date -Iseconds)"
