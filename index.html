@@ -85,8 +85,6 @@
 		"sameAs": ["https://github.com/gianyrox"]
 	}
 	</script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -109,7 +107,7 @@
 			border-radius: 8px;
 			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 			width: 80%;
-			max-width: 600px;
+			max-width: 640px;
 			margin: 20px auto;
 			position: relative;
 		}
@@ -276,44 +274,6 @@
 			border-color: #2a9d8f;
 		}
 
-		/* Selected Work: link + one-line description, same palette */
-		.work-link {
-			display: block;
-			text-align: center;
-			margin: 12px 0;
-			text-decoration: none;
-		}
-
-		.work-link .name {
-			color: #2a9d8f;
-			font-size: 18px;
-			transition: color 0.3s;
-		}
-
-		.work-link:hover .name {
-			color: #e76f51;
-		}
-
-		.work-link .sub {
-			display: block;
-			font-size: 13px;
-			color: #6c757d;
-			margin-top: 2px;
-			line-height: 1.4;
-		}
-
-		.work-group {
-			color: #264653;
-			font-size: 13px;
-			font-weight: bold;
-			letter-spacing: 0.5px;
-			text-transform: uppercase;
-			margin: 22px 0 4px;
-			width: 100%;
-			text-align: center;
-			opacity: 0.7;
-		}
-
 		/* Shop links: same style as profile links, single column */
 		.shop-link {
 			text-decoration: none;
@@ -335,6 +295,176 @@
 			color: #6c757d;
 			margin-top: 2px;
 		}
+
+		/* Hero */
+		.hero-mark {
+			width: 110px;
+			height: 110px;
+			display: block;
+			margin: 0 auto 14px;
+			border-radius: 12px;
+			box-shadow: 0 6px 18px rgba(38, 70, 83, 0.22);
+		}
+
+		.tagline {
+			font-size: 15px;
+			color: #6c757d;
+			margin: 6px 0 4px;
+			text-align: center;
+			line-height: 1.5;
+			max-width: 420px;
+		}
+
+		/* Profiles: horizontal icon row */
+		.icon-row {
+			display: flex;
+			justify-content: center;
+			gap: 14px;
+			flex-wrap: wrap;
+			margin: 4px 0 6px;
+		}
+
+		.icon-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 42px;
+			height: 42px;
+			border-radius: 999px;
+			border: 1px solid rgba(38, 70, 83, 0.18);
+			color: #264653;
+			background: #fbfaf7;
+			transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+		}
+
+		.icon-link svg { width: 20px; height: 20px; fill: currentColor; }
+
+		.icon-link:hover {
+			background: #2a9d8f;
+			border-color: #2a9d8f;
+			color: white;
+			transform: translateY(-2px);
+		}
+
+		/* Companies: compact chips */
+		.chip-row {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			flex-wrap: wrap;
+			margin: 4px 0;
+		}
+
+		.chip {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 8px 14px;
+			border-radius: 999px;
+			border: 1px solid rgba(42, 157, 143, 0.4);
+			background: #fbfaf7;
+			color: #264653;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: bold;
+			transition: background 0.2s, color 0.2s, border-color 0.2s;
+		}
+
+		.chip:hover { background: #2a9d8f; border-color: #2a9d8f; color: white; }
+
+		.chip .dot {
+			width: 9px;
+			height: 9px;
+			border-radius: 50%;
+			background: #e76f51;
+			flex: 0 0 auto;
+		}
+
+		/* Selected Work: responsive thumbnail grid */
+		.work-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 14px;
+			width: 100%;
+			margin-top: 4px;
+		}
+
+		.tile {
+			display: flex;
+			flex-direction: column;
+			border-radius: 8px;
+			overflow: hidden;
+			border: 1px solid rgba(38, 70, 83, 0.12);
+			background: #fbfaf7;
+			text-decoration: none;
+			transition: transform 0.2s, box-shadow 0.2s;
+		}
+
+		.tile:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 8px 20px rgba(38, 70, 83, 0.18);
+		}
+
+		.tile .thumb {
+			width: 100%;
+			aspect-ratio: 16 / 9;
+			object-fit: cover;
+			display: block;
+			background: #f4f4f4;
+		}
+
+		/* Branded fallback tile (no image) */
+		.tile .thumb-fallback {
+			width: 100%;
+			aspect-ratio: 16 / 9;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding: 10px;
+			background: linear-gradient(135deg, #264653 0%, #2a9d8f 100%);
+			color: white;
+			font-size: 18px;
+			font-weight: bold;
+			letter-spacing: 0.3px;
+		}
+
+		.tile .tile-body {
+			padding: 10px 12px 12px;
+		}
+
+		.tile .tile-name {
+			color: #264653;
+			font-size: 15px;
+			font-weight: bold;
+			transition: color 0.2s;
+		}
+
+		.tile:hover .tile-name { color: #e76f51; }
+
+		.tile .tile-tag {
+			display: block;
+			font-size: 12px;
+			color: #6c757d;
+			margin-top: 2px;
+		}
+
+		/* Writing: compact list */
+		.writing-list {
+			width: 100%;
+			text-align: center;
+		}
+
+		.writing-list a {
+			display: block;
+			color: #2a9d8f;
+			text-decoration: none;
+			font-size: 15px;
+			margin: 7px 0;
+			transition: color 0.2s;
+		}
+
+		.writing-list a:hover { color: #e76f51; }
 
 		@media (max-width: 600px) {
 			body {
@@ -362,13 +492,21 @@
 				font-size: 11px;
 				padding: 5px 10px;
 			}
+
+			.work-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.hero-mark { width: 96px; height: 96px; }
 		}
 
 		@media print {
 			body { background: white; padding: 0; }
 			.container { box-shadow: none; max-width: 100%; width: 100%; }
 			.print-btn { display: none; }
-			.book-card, .shop-link { break-inside: avoid; }
+			.book-card, .shop-link, .tile { break-inside: avoid; }
+			.work-grid { gap: 8px; }
+			.icon-link { border-color: #6c757d; }
 			a::after { content: " (" attr(href) ")"; font-size: 11px; color: #6c757d; }
 		}
 	</style>
@@ -378,119 +516,71 @@
 	<div class="container">
 		<button class="print-btn" onclick="window.print()" aria-label="Download this page as PDF">⬇ Download PDF</button>
 
-		<img src="/public/brand/logo.png" alt="Gianyrox" class="brand-mark"
-		     style="width:90px;height:90px;display:block;margin:0 auto 14px;
-		            border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.18)">
+		<!-- Hero -->
+		<img src="/public/brand/logo.png" alt="Gianyrox" class="hero-mark" width="110" height="110">
 		<div class="title">Gianyrox</div>
 		<div class="subtitle">Gianyrox Everywhere.</div>
-		<p style="font-size:15px; color:#6c757d; margin-top:8px; text-align:center;">Mathematician &amp; data scientist who builds production AI — and an author.</p>
+		<p class="tagline">Mathematician &amp; data scientist who builds production AI — and an author.</p>
 
-		<div class="description">
-			<p><strong>Euler's Formula:</strong><br>
-				$$ e^{ix} = \cos x + i \sin x $$
-			</p>
-
-			<img src="https://www.nouvir.com/images/7_photon_figure_300_DPI_grayscale.jpg" alt="Photon moving through space"
-				style="width: 100%; max-width: 400px; display: block; margin-top: 20px;">
+		<!-- Profiles: icon row -->
+		<div class="icon-row" aria-label="Profiles">
+			<a href="https://github.com/Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="GitHub — @Gianyrox" title="GitHub">
+				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+			</a>
+			<a href="https://x.com/Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="X — @Gianyrox" title="X">
+				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+			</a>
+			<a href="https://medium.com/@Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="Medium — @Gianyrox" title="Medium">
+				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42S20.96 8.46 20.96 12zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+			</a>
+			<a href="https://linkedin.com/in/gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="LinkedIn — @gianyrox" title="LinkedIn">
+				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 0 1-2.07-2.07c0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+			</a>
 		</div>
 
-		<!-- About Section -->
-		<h2 class="section-header">About</h2>
-		<p class="description" style="margin-top:0;">
-			Born in Rome, raised in Denville, New Jersey. I hold an MS in Data Science and a BS in
-			Pure &amp; Applied Mathematics from Stevens Institute of Technology, and I hold both US and
-			Italian (EU) citizenship. I build production AI systems — agents, platforms, data pipelines —
-			and I write.
-		</p>
-
-		<!-- Work With Me Section -->
-		<h2 class="section-header">Work With Me</h2>
-		<p class="coming-soon" style="text-align:center; font-style:normal; color:#264653;">Available now — remote contracts, 1:1 tutoring, and AI consulting.</p>
-		<a href="mailto:gianyrox@gmail.com?subject=1:1%20Tutoring" class="link">1:1 Tutoring — math, data science, programming &amp; AI</a>
-		<a href="mailto:gianyrox@gmail.com?subject=AI%20%2F%20Dev%20Contract" class="link">AI &amp; Full-Stack Development — agents, MVPs, automation</a>
-		<a href="mailto:gianyrox@gmail.com?subject=AI%20Consulting" class="link">AI Consulting — workflows, prompt engineering, data</a>
-		<a href="https://promptmaxxers.com" class="link" target="_blank">PromptMaxxers — AI coaching &amp; Claude-cert prep</a>
-		<div style="margin-top:10px; text-align:center;">
-			<a class="btn primary" href="mailto:gianyrox@gmail.com?subject=Let%27s%20work%20together" data-cta="hire">✉ Get in touch</a>
-		</div>
-
-		<!-- Profiles Section -->
-		<h2 class="section-header">Profiles</h2>
-		<a href="https://github.com/Gianyrox" class="link" target="_blank">GitHub - @Gianyrox</a>
-		<a href="https://x.com/Gianyrox" class="link" target="_blank">X - @Gianyrox</a>
-		<a href="https://medium.com/@Gianyrox" class="link" target="_blank">Medium - @Gianyrox</a>
-		<a href="https://linkedin.com/in/gianyrox" class="link" target="_blank">LinkedIn - @gianyrox</a>
-
-		<!-- Companies Section -->
+		<!-- Companies: chips -->
 		<h2 class="section-header">Companies</h2>
-		<a href="https://bucket.foundation" class="link" target="_blank">Bucket Foundation</a>
-		<a href="https://agfarms.dev" class="link" target="_blank">AGFarms Developers</a>
+		<div class="chip-row">
+			<a href="https://bucket.foundation" class="chip" target="_blank" rel="noopener"><span class="dot"></span>Bucket Foundation</a>
+			<a href="https://agfarms.dev" class="chip" target="_blank" rel="noopener"><span class="dot"></span>AGFarms Developers</a>
+		</div>
 
-		<!-- Selected Work Section -->
+		<!-- Selected Work: thumbnail grid -->
 		<h2 class="section-header">Selected Work</h2>
-
-		<div class="work-group">AI systems</div>
-		<a href="https://agfarms.dev" class="work-link" target="_blank">
-			<span class="name">Nucleus</span>
-			<span class="sub">7-pillar autonomous AI enterprise — a Claude-orchestration platform that runs a portfolio of ventures.</span>
-		</a>
-		<a href="https://promptmaxxers.com" class="work-link" target="_blank">
-			<span class="name">PromptMaxxers</span>
-			<span class="sub">1:1 AI coaching and Claude-certification prep — teaching people to actually work with models.</span>
-		</a>
-
-		<div class="work-group">Products</div>
-		<a href="https://derby.fish" class="work-link" target="_blank">
-			<span class="name">DerbyFish</span>
-			<span class="sub">Sport-fishing competition platform — tournaments, catch verification, and a fish index.</span>
-		</a>
-		<a href="https://openscriva.vercel.app" class="work-link" target="_blank">
-			<span class="name">OpenScriva</span>
-			<span class="sub">Open-source, AI-native book writing — fork it into your own GitHub and it becomes your private writing room.</span>
-		</a>
-		<a href="https://gauss.news" class="work-link" target="_blank">
-			<span class="name">gauss.news</span>
-			<span class="sub">AI-curated news, served as much through MCP as through a browser.</span>
-		</a>
-		<a href="https://taskl.app" class="work-link" target="_blank">
-			<span class="name">TaskLapp</span>
-			<span class="sub">Fast, focused task management.</span>
-		</a>
-		<a href="https://github.com/AGFarms/longtail" class="work-link" target="_blank">
-			<span class="name">Longtail</span>
-			<span class="sub">AI-native paid-artifact factory across Etsy, Roblox UGC, Unity Asset Store, and Amazon KDP.</span>
-		</a>
-
-		<div class="work-group">Research &amp; open knowledge</div>
-		<a href="https://bucket.foundation" class="work-link" target="_blank">
-			<span class="name">Bucket Foundation</span>
-			<span class="sub">Make primary research paid-for-once and citeable-forever — plus a data globe of the canon at /earth.</span>
-		</a>
-		<a href="https://github.com/gianyrox/feed402" class="work-link" target="_blank">
-			<span class="name">feed402</span>
-			<span class="sub">Paid data endpoints for AI agents over x402 — protocol spec plus a reference implementation.</span>
-		</a>
-		<a href="https://github.com/gianyrox/x402-research-gateway" class="work-link" target="_blank">
-			<span class="name">x402-research-gateway</span>
-			<span class="sub">x402-protected research API — PubMed, Semantic Scholar, OpenAlex, ClinicalTrials, PubChem.</span>
-		</a>
-		<a href="https://github.com/gianyrox/Academic-Paper-Ranking-and-Recommendation-System" class="work-link" target="_blank">
-			<span class="name">Academic Paper Ranking</span>
-			<span class="sub">Ranking and recommending across 1.7M+ STEM papers with PageRank, TF-IDF, and NMF.</span>
-		</a>
-
-		<!-- Articles Section -->
-		<h2 class="section-header">Highlighted Articles</h2>
-		<a href="https://medium.com/@gianyrox/the-biblical-flood-that-began-history-meltwater-pulse-1a-f70633c8f2c2"
-		   class="link" target="_blank">The Biblical Flood That Began History: Meltwater Pulse 1A</a>
-		<a href="https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9"
-		   class="link" target="_blank">Math: The Path to Polymath</a>
-		<a href="https://medium.com/@gianyrox/the-magical-one-shot-app-builders-guide-to-bringing-ideas-to-life-a96e1b93bc2a"
-		   class="link" target="_blank">The Magical One-Shot App Builder's Guide to Bringing Ideas to Life</a>
-		<a href="https://medium.com/@gianyrox/how-chatgpt-will-ruin-the-world-57ea88b203fe"
-		   class="link" target="_blank">How ChatGPT Will Ruin the World</a>
-		<a href="https://github.com/gianyrox/US-States-Obesity-Analysis/blob/main/US_State_Analysis.ipynb"
-		   class="link" target="_blank">US States Obesity Analysis</a>
+		<div class="work-grid">
+			<a href="https://agfarms.dev" class="tile" target="_blank" rel="noopener">
+				<div class="thumb-fallback">Nucleus</div>
+				<div class="tile-body"><span class="tile-name">Nucleus</span><span class="tile-tag">Autonomous AI enterprise</span></div>
+			</a>
+			<a href="https://promptmaxxers.com" class="tile" target="_blank" rel="noopener">
+				<img class="thumb" src="/public/work/promptmaxxers.svg" alt="PromptMaxxers" loading="lazy" width="800" height="450">
+				<div class="tile-body"><span class="tile-name">PromptMaxxers</span><span class="tile-tag">AI coaching &amp; cert prep</span></div>
+			</a>
+			<a href="https://derby.fish" class="tile" target="_blank" rel="noopener">
+				<img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish" loading="lazy" width="800" height="420">
+				<div class="tile-body"><span class="tile-name">DerbyFish</span><span class="tile-tag">Sport-fishing platform</span></div>
+			</a>
+			<a href="https://openscriva.vercel.app" class="tile" target="_blank" rel="noopener">
+				<img class="thumb" src="/public/work/openscriva.png" alt="OpenScriva" loading="lazy" width="800" height="533">
+				<div class="tile-body"><span class="tile-name">OpenScriva</span><span class="tile-tag">AI-native book writing</span></div>
+			</a>
+			<a href="https://bucket.foundation" class="tile" target="_blank" rel="noopener">
+				<img class="thumb" src="/public/work/bucket.png" alt="Bucket Foundation" loading="lazy" width="800" height="420">
+				<div class="tile-body"><span class="tile-name">Bucket Foundation</span><span class="tile-tag">Citeable primary research</span></div>
+			</a>
+			<a href="https://gauss.news" class="tile" target="_blank" rel="noopener">
+				<img class="thumb" src="/public/work/gauss.png" alt="gauss.news" loading="lazy" width="400" height="400">
+				<div class="tile-body"><span class="tile-name">gauss.news</span><span class="tile-tag">AI-curated news</span></div>
+			</a>
+			<a href="https://github.com/gianyrox/feed402" class="tile" target="_blank" rel="noopener">
+				<div class="thumb-fallback">feed402</div>
+				<div class="tile-body"><span class="tile-name">feed402</span><span class="tile-tag">Paid data over x402</span></div>
+			</a>
+			<a href="https://github.com/gianyrox/Academic-Paper-Ranking-and-Recommendation-System" class="tile" target="_blank" rel="noopener">
+				<div class="thumb-fallback">1.7M-Paper Ranker</div>
+				<div class="tile-body"><span class="tile-name">Academic Paper Ranking</span><span class="tile-tag">PageRank · TF-IDF · NMF</span></div>
+			</a>
+		</div>
 
 		<!-- Books Section -->
 		<h2 class="section-header">Books</h2>
@@ -533,6 +623,29 @@
 			<a href="https://agfarms.gumroad.com/" target="_blank" style="color:#2a9d8f">Gumroad</a> ·
 			<a href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" style="color:#2a9d8f">Amazon</a>
 		</div>
+
+		<!-- Work With Me (compact) -->
+		<h2 class="section-header">Work With Me</h2>
+		<p class="tagline" style="margin-top:0;">Available now — remote contracts, 1:1 tutoring, and AI consulting.</p>
+		<div class="chip-row" style="margin-bottom:6px;">
+			<a href="mailto:gianyrox@gmail.com?subject=1:1%20Tutoring" class="chip"><span class="dot"></span>Tutoring</a>
+			<a href="mailto:gianyrox@gmail.com?subject=AI%20%2F%20Dev%20Contract" class="chip"><span class="dot"></span>AI &amp; Dev</a>
+			<a href="mailto:gianyrox@gmail.com?subject=AI%20Consulting" class="chip"><span class="dot"></span>Consulting</a>
+			<a href="https://promptmaxxers.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>PromptMaxxers</a>
+		</div>
+		<div style="text-align:center;">
+			<a class="btn primary" href="mailto:gianyrox@gmail.com?subject=Let%27s%20work%20together" data-cta="hire">✉ Get in touch</a>
+		</div>
+
+		<!-- Writing (compact) -->
+		<h2 class="section-header">Writing</h2>
+		<nav class="writing-list" aria-label="Highlighted articles">
+			<a href="https://medium.com/@gianyrox/the-biblical-flood-that-began-history-meltwater-pulse-1a-f70633c8f2c2" target="_blank" rel="noopener">The Biblical Flood That Began History: Meltwater Pulse 1A</a>
+			<a href="https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9" target="_blank" rel="noopener">Math: The Path to Polymath</a>
+			<a href="https://medium.com/@gianyrox/the-magical-one-shot-app-builders-guide-to-bringing-ideas-to-life-a96e1b93bc2a" target="_blank" rel="noopener">The Magical One-Shot App Builder's Guide</a>
+			<a href="https://medium.com/@gianyrox/how-chatgpt-will-ruin-the-world-57ea88b203fe" target="_blank" rel="noopener">How ChatGPT Will Ruin the World</a>
+			<a href="https://github.com/gianyrox/US-States-Obesity-Analysis/blob/main/US_State_Analysis.ipynb" target="_blank" rel="noopener">US States Obesity Analysis</a>
+		</nav>
 	</div>
 </body>
 
