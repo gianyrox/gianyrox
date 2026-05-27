@@ -14,6 +14,12 @@
 	<link rel="icon" type="image/png" sizes="192x192" href="/public/brand/favicon-192.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="/public/brand/apple-touch-icon.png">
 
+	<!-- One web font: Inter (preconnect + display=swap) -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+	<meta name="theme-color" content="#264653">
+
 	<!-- OpenGraph (Facebook, LinkedIn, Slack) -->
 	<meta property="og:type" content="book">
 	<meta property="og:title" content="Your Money Is Broken — by Giany Rox">
@@ -86,267 +92,203 @@
 	}
 	</script>
 	<style>
+		/* ---- Design tokens (brand-true) ---- */
+		:root {
+			--teal-deep: #264653;
+			--teal: #2a9d8f;
+			--coral: #e76f51;
+			--ink: #233139;
+			--muted: #5f7079;
+			--faint: #8a99a0;
+			--paper: #ffffff;
+			--canvas: #f3f1ec;
+			--surface: #fbfaf7;
+			--line: rgba(38, 70, 83, 0.10);
+			--line-strong: rgba(38, 70, 83, 0.16);
+			--radius: 14px;
+			--radius-sm: 10px;
+			--radius-pill: 999px;
+			--shadow-sm: 0 1px 2px rgba(38, 70, 83, 0.06), 0 2px 6px rgba(38, 70, 83, 0.05);
+			--shadow-md: 0 6px 18px rgba(38, 70, 83, 0.10), 0 2px 6px rgba(38, 70, 83, 0.06);
+			--shadow-lg: 0 18px 40px rgba(38, 70, 83, 0.16), 0 6px 14px rgba(38, 70, 83, 0.08);
+			--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+			--maxw: 820px;
+		}
+
+		* { box-sizing: border-box; }
+
+		html { -webkit-text-size-adjust: 100%; }
+
 		body {
-			font-family: Arial, sans-serif;
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 			margin: 0;
-			padding: 20px;
-			display: flex;
-			justify-content: center;
-			align-items: flex-start;
+			padding: 28px 20px 56px;
 			min-height: 100vh;
-			background-color: #f4f4f4;
-			overflow-y: auto;
+			color: var(--ink);
+			line-height: 1.6;
+			letter-spacing: -0.003em;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			background:
+				radial-gradient(1100px 540px at 50% -160px, rgba(42, 157, 143, 0.10), transparent 60%),
+				radial-gradient(820px 420px at 88% 8%, rgba(231, 111, 81, 0.06), transparent 55%),
+				var(--canvas);
 		}
 
 		.container {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			padding: 40px 20px;
-			background-color: white;
-			border-radius: 8px;
-			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			width: 80%;
-			max-width: 640px;
-			margin: 20px auto;
+			padding: 56px 52px 48px;
+			background: var(--paper);
+			border: 1px solid var(--line);
+			border-radius: 22px;
+			box-shadow: var(--shadow-md);
+			width: 100%;
+			max-width: var(--maxw);
+			margin: 0 auto;
 			position: relative;
 		}
 
 		.print-btn {
 			position: absolute;
-			top: 16px;
-			right: 16px;
-			padding: 6px 12px;
-			background: transparent;
-			color: #2a9d8f;
-			border: 1px solid #2a9d8f;
-			border-radius: 999px;
+			top: 18px;
+			right: 18px;
+			padding: 7px 14px;
+			background: rgba(42, 157, 143, 0.06);
+			color: var(--teal);
+			border: 1px solid rgba(42, 157, 143, 0.35);
+			border-radius: var(--radius-pill);
 			font-size: 12px;
-			font-family: Arial, sans-serif;
+			font-weight: 600;
+			font-family: inherit;
+			letter-spacing: 0.01em;
 			cursor: pointer;
 			text-decoration: none;
-			transition: background 0.2s, color 0.2s;
+			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
 		}
 
 		.print-btn:hover {
-			background: #2a9d8f;
-			color: white;
+			background: var(--teal);
+			border-color: var(--teal);
+			color: #fff;
 		}
 
-		.link {
-			text-decoration: none;
-			color: #2a9d8f;
-			font-size: 18px;
-			margin: 10px 0;
-			transition: color 0.3s;
+		/* ---- Section headers: small-caps + accent rule ---- */
+		.section-header {
+			color: var(--teal-deep);
+			font-size: 13px;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			margin: 52px 0 22px;
+			width: 100%;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 14px;
 		}
 
-		.link:hover {
-			color: #e76f51;
+		.section-header::before,
+		.section-header::after {
+			content: "";
+			height: 1px;
+			flex: 1 1 auto;
+			max-width: 96px;
+			background: linear-gradient(90deg, transparent, var(--line-strong));
+		}
+
+		.section-header::after {
+			background: linear-gradient(90deg, var(--line-strong), transparent);
+		}
+
+		/* ---- Hero ---- */
+		.hero-mark {
+			width: 128px;
+			height: 128px;
+			display: block;
+			margin: 8px auto 22px;
+			border-radius: 26px;
+			box-shadow: var(--shadow-lg);
 		}
 
 		.title {
-			font-size: 24px;
-			font-weight: bold;
-			color: #264653;
+			font-size: clamp(36px, 7vw, 52px);
+			font-weight: 800;
+			letter-spacing: -0.035em;
+			line-height: 1.02;
+			color: var(--teal-deep);
+			text-align: center;
+			margin: 0;
 		}
 
 		.subtitle {
-			font-size: 20px;
-			color: #2a9d8f;
-			margin-top: 10px;
+			font-size: 16px;
+			font-weight: 600;
+			letter-spacing: 0.02em;
+			color: var(--teal);
+			margin: 12px 0 0;
+			text-align: center;
+		}
+
+		.tagline {
+			font-size: 17px;
+			color: var(--muted);
+			margin: 16px auto 6px;
+			text-align: center;
+			line-height: 1.6;
+			max-width: 460px;
 		}
 
 		.description {
 			font-size: 16px;
-			color: #6c757d;
+			color: var(--muted);
 			margin-top: 20px;
 			text-align: center;
-			line-height: 1.5;
-		}
-
-		.section-header {
-			color: #264653;
-			font-size: 20px;
-			margin-top: 30px;
-			margin-bottom: 15px;
-			width: 100%;
-			text-align: center;
+			line-height: 1.6;
 		}
 
 		.coming-soon {
-			color: #6c757d;
+			color: var(--muted);
 			font-style: italic;
 			margin: 10px 0;
 		}
 
-		/* Book card — same color palette, lightly framed */
-		.book-card {
-			width: 100%;
-			margin: 8px 0 4px;
-			padding: 18px 20px;
-			border: 1px solid rgba(38, 70, 83, 0.12);
-			border-radius: 8px;
-			background: #fbfaf7;
-			text-align: left;
-			display: flex;
-			gap: 18px;
-			align-items: flex-start;
-		}
-
-		.book-card .book-cover {
-			flex: 0 0 130px;
-			width: 130px;
-			height: auto;
-			border-radius: 4px;
-			box-shadow: 0 4px 12px rgba(38, 70, 83, 0.18);
-			align-self: flex-start;
-		}
-
-		.book-card .book-body {
-			flex: 1;
-			min-width: 0;
-		}
-
-		@media (max-width: 480px) {
-			.book-card {
-				flex-direction: column;
-				align-items: center;
-			}
-			.book-card .book-cover { width: 160px; flex: none; }
-			.book-card .book-body { text-align: center; width: 100%; }
-		}
-
-		.book-card .book-title {
-			font-size: 19px;
-			font-weight: bold;
-			color: #264653;
-		}
-
-		.book-card .book-subtitle {
-			margin-top: 4px;
-			font-size: 14px;
-			color: #6c757d;
-			font-style: italic;
-		}
-
-		.book-card .book-blurb {
-			margin-top: 12px;
-			font-size: 15px;
-			line-height: 1.5;
-			color: #264653;
-		}
-
-		.book-actions {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px;
-			margin-top: 14px;
-		}
-
-		.btn {
-			display: inline-block;
-			padding: 7px 14px;
-			border-radius: 6px;
-			text-decoration: none;
-			font-size: 14px;
-			font-weight: bold;
-			border: 1px solid #2a9d8f;
-			color: #2a9d8f;
-			background: white;
-			cursor: pointer;
-			transition: background 0.2s, color 0.2s;
-		}
-
-		.btn:hover {
-			background: #2a9d8f;
-			color: white;
-		}
-
-		.btn.primary {
-			background: #264653;
-			border-color: #264653;
-			color: white;
-		}
-
-		.btn.primary:hover {
-			background: #2a9d8f;
-			border-color: #2a9d8f;
-		}
-
-		/* Shop links: same style as profile links, single column */
-		.shop-link {
-			text-decoration: none;
-			color: #2a9d8f;
-			font-size: 18px;
-			margin: 10px 0;
-			transition: color 0.3s;
-			display: block;
-			text-align: center;
-		}
-
-		.shop-link:hover {
-			color: #e76f51;
-		}
-
-		.shop-link .sub {
-			display: block;
-			font-size: 13px;
-			color: #6c757d;
-			margin-top: 2px;
-		}
-
-		/* Hero */
-		.hero-mark {
-			width: 110px;
-			height: 110px;
-			display: block;
-			margin: 0 auto 14px;
-			border-radius: 12px;
-			box-shadow: 0 6px 18px rgba(38, 70, 83, 0.22);
-		}
-
-		.tagline {
-			font-size: 15px;
-			color: #6c757d;
-			margin: 6px 0 4px;
-			text-align: center;
-			line-height: 1.5;
-			max-width: 420px;
-		}
-
-		/* Profiles: horizontal icon row */
+		/* ---- Profiles: icon row ---- */
 		.icon-row {
 			display: flex;
 			justify-content: center;
-			gap: 14px;
+			gap: 12px;
 			flex-wrap: wrap;
-			margin: 4px 0 6px;
+			margin: 24px 0 4px;
 		}
 
 		.icon-link {
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			width: 42px;
-			height: 42px;
-			border-radius: 999px;
-			border: 1px solid rgba(38, 70, 83, 0.18);
-			color: #264653;
-			background: #fbfaf7;
-			transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+			width: 44px;
+			height: 44px;
+			border-radius: var(--radius-pill);
+			border: 1px solid var(--line-strong);
+			color: var(--teal-deep);
+			background: var(--surface);
+			box-shadow: var(--shadow-sm);
+			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 		}
 
 		.icon-link svg { width: 20px; height: 20px; fill: currentColor; }
 
 		.icon-link:hover {
-			background: #2a9d8f;
-			border-color: #2a9d8f;
-			color: white;
-			transform: translateY(-2px);
+			background: var(--teal);
+			border-color: var(--teal);
+			color: #fff;
+			transform: translateY(-3px);
+			box-shadow: var(--shadow-md);
 		}
 
-		/* Companies: compact chips */
+		/* ---- Companies / Work-with-me: chips ---- */
 		.chip-row {
 			display: flex;
 			justify-content: center;
@@ -358,33 +300,43 @@
 		.chip {
 			display: inline-flex;
 			align-items: center;
-			gap: 8px;
-			padding: 8px 14px;
-			border-radius: 999px;
-			border: 1px solid rgba(42, 157, 143, 0.4);
-			background: #fbfaf7;
-			color: #264653;
+			gap: 9px;
+			padding: 9px 16px;
+			border-radius: var(--radius-pill);
+			border: 1px solid var(--line-strong);
+			background: var(--surface);
+			color: var(--teal-deep);
 			text-decoration: none;
 			font-size: 14px;
-			font-weight: bold;
-			transition: background 0.2s, color 0.2s, border-color 0.2s;
+			font-weight: 600;
+			box-shadow: var(--shadow-sm);
+			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 		}
 
-		.chip:hover { background: #2a9d8f; border-color: #2a9d8f; color: white; }
+		.chip:hover {
+			background: var(--teal);
+			border-color: var(--teal);
+			color: #fff;
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.chip:hover .dot { background: #fff; }
 
 		.chip .dot {
-			width: 9px;
-			height: 9px;
+			width: 8px;
+			height: 8px;
 			border-radius: 50%;
-			background: #e76f51;
+			background: var(--coral);
 			flex: 0 0 auto;
+			transition: background 0.2s var(--ease);
 		}
 
-		/* Selected Work: responsive thumbnail grid */
+		/* ---- Selected Work: card grid (the centerpiece) ---- */
 		.work-grid {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			gap: 14px;
+			gap: 20px;
 			width: 100%;
 			margin-top: 4px;
 		}
@@ -392,122 +344,281 @@
 		.tile {
 			display: flex;
 			flex-direction: column;
-			border-radius: 8px;
+			border-radius: var(--radius);
 			overflow: hidden;
-			border: 1px solid rgba(38, 70, 83, 0.12);
-			background: #fbfaf7;
+			border: 1px solid var(--line);
+			background: var(--paper);
 			text-decoration: none;
-			transition: transform 0.2s, box-shadow 0.2s;
+			box-shadow: var(--shadow-sm);
+			transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease);
 		}
 
-		.tile:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 8px 20px rgba(38, 70, 83, 0.18);
+		.tile .thumb-wrap {
+			position: relative;
+			width: 100%;
+			aspect-ratio: 16 / 10;
+			overflow: hidden;
+			background: var(--surface);
 		}
 
 		.tile .thumb {
 			width: 100%;
-			aspect-ratio: 16 / 9;
+			height: 100%;
 			object-fit: cover;
 			display: block;
-			background: #f4f4f4;
+			transition: transform 0.5s var(--ease);
 		}
+
+		.tile:hover {
+			transform: translateY(-6px);
+			box-shadow: var(--shadow-lg);
+			border-color: var(--line-strong);
+		}
+
+		.tile:hover .thumb { transform: scale(1.06); }
 
 		/* Branded fallback tile (no image) */
 		.tile .thumb-fallback {
 			width: 100%;
-			aspect-ratio: 16 / 9;
+			height: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			text-align: center;
-			padding: 10px;
-			background: linear-gradient(135deg, #264653 0%, #2a9d8f 100%);
-			color: white;
-			font-size: 18px;
-			font-weight: bold;
-			letter-spacing: 0.3px;
+			padding: 12px;
+			background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
+			color: #fff;
+			font-size: 19px;
+			font-weight: 700;
+			letter-spacing: 0.01em;
+			transition: transform 0.5s var(--ease);
 		}
 
+		.tile:hover .thumb-fallback { transform: scale(1.06); }
+
 		.tile .tile-body {
-			padding: 10px 12px 12px;
+			padding: 14px 16px 16px;
+			border-top: 1px solid var(--line);
 		}
 
 		.tile .tile-name {
-			color: #264653;
+			color: var(--teal-deep);
 			font-size: 15px;
-			font-weight: bold;
-			transition: color 0.2s;
+			font-weight: 700;
+			letter-spacing: -0.01em;
+			transition: color 0.2s var(--ease);
 		}
 
-		.tile:hover .tile-name { color: #e76f51; }
+		.tile:hover .tile-name { color: var(--coral); }
 
 		.tile .tile-tag {
 			display: block;
-			font-size: 12px;
-			color: #6c757d;
-			margin-top: 2px;
+			font-size: 12.5px;
+			color: var(--muted);
+			margin-top: 3px;
 		}
 
-		/* Writing: compact list */
+		/* ---- Book card ---- */
+		.book-card {
+			width: 100%;
+			margin: 4px 0;
+			padding: 24px;
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			background: var(--surface);
+			box-shadow: var(--shadow-sm);
+			text-align: left;
+			display: flex;
+			gap: 24px;
+			align-items: flex-start;
+		}
+
+		.book-card .book-cover {
+			flex: 0 0 140px;
+			width: 140px;
+			height: auto;
+			border-radius: var(--radius-sm);
+			box-shadow: var(--shadow-md);
+			align-self: flex-start;
+		}
+
+		.book-card .book-body {
+			flex: 1;
+			min-width: 0;
+		}
+
+		.book-card .book-title {
+			font-size: 22px;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+			color: var(--teal-deep);
+		}
+
+		.book-card .book-subtitle {
+			margin-top: 6px;
+			font-size: 14px;
+			color: var(--muted);
+			font-style: italic;
+			line-height: 1.5;
+		}
+
+		.book-card .book-blurb {
+			margin-top: 14px;
+			font-size: 15px;
+			line-height: 1.65;
+			color: var(--ink);
+		}
+
+		.book-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		/* ---- Buttons ---- */
+		.btn {
+			display: inline-block;
+			padding: 9px 16px;
+			border-radius: var(--radius-pill);
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: 600;
+			border: 1px solid rgba(42, 157, 143, 0.45);
+			color: var(--teal);
+			background: var(--paper);
+			cursor: pointer;
+			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+		}
+
+		.btn:hover {
+			background: var(--teal);
+			border-color: var(--teal);
+			color: #fff;
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.btn.primary {
+			background: var(--teal-deep);
+			border-color: var(--teal-deep);
+			color: #fff;
+		}
+
+		.btn.primary:hover {
+			background: var(--teal);
+			border-color: var(--teal);
+		}
+
+		/* ---- Shop links ---- */
+		.shop-link {
+			text-decoration: none;
+			color: var(--teal-deep);
+			font-size: 16px;
+			font-weight: 600;
+			margin: 0 0 12px;
+			padding: 16px 20px;
+			width: 100%;
+			display: block;
+			text-align: center;
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			background: var(--surface);
+			box-shadow: var(--shadow-sm);
+			transition: color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+		}
+
+		.shop-link:hover {
+			color: var(--coral);
+			border-color: var(--line-strong);
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-md);
+		}
+
+		.shop-link .sub {
+			display: block;
+			font-size: 13px;
+			font-weight: 400;
+			color: var(--muted);
+			margin-top: 4px;
+		}
+
+		.note {
+			font-size: 12.5px;
+			color: var(--faint);
+		}
+
+		.note a { color: var(--teal); text-decoration: none; }
+		.note a:hover { color: var(--coral); }
+
+		/* ---- Writing list ---- */
 		.writing-list {
 			width: 100%;
-			text-align: center;
+			max-width: 560px;
 		}
 
 		.writing-list a {
 			display: block;
-			color: #2a9d8f;
+			color: var(--ink);
 			text-decoration: none;
 			font-size: 15px;
-			margin: 7px 0;
-			transition: color 0.2s;
+			font-weight: 500;
+			padding: 12px 16px;
+			border-radius: var(--radius-sm);
+			transition: color 0.2s var(--ease), background 0.2s var(--ease);
 		}
 
-		.writing-list a:hover { color: #e76f51; }
+		.writing-list a:hover {
+			color: var(--coral);
+			background: var(--surface);
+		}
 
-		@media (max-width: 600px) {
-			body {
-				padding: 10px;
-			}
+		/* ---- Responsive ---- */
+		@media (max-width: 680px) {
+			body { padding: 16px 12px 40px; }
 
 			.container {
-				padding: 20px 15px;
-				width: 90%;
-			}
-
-			.link {
-				font-size: 16px;
-			}
-
-			.title {
-				font-size: 20px;
-			}
-
-			.subtitle {
-				font-size: 18px;
-			}
-
-			.print-btn {
-				font-size: 11px;
-				padding: 5px 10px;
+				padding: 36px 22px 36px;
+				border-radius: 18px;
 			}
 
 			.work-grid {
 				grid-template-columns: 1fr;
+				gap: 16px;
 			}
 
-			.hero-mark { width: 96px; height: 96px; }
+			.hero-mark { width: 104px; height: 104px; border-radius: 22px; }
+
+			.section-header { margin: 42px 0 18px; }
+
+			.book-card {
+				flex-direction: column;
+				align-items: center;
+				gap: 18px;
+				padding: 22px 18px;
+			}
+
+			.book-card .book-cover { width: 168px; flex: none; }
+			.book-card .book-body { text-align: center; width: 100%; }
+			.book-card .book-actions { justify-content: center; }
+
+			.print-btn { font-size: 11px; padding: 6px 11px; top: 14px; right: 14px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			* { transition: none !important; }
+			.tile:hover { transform: none; }
+			.tile:hover .thumb, .tile:hover .thumb-fallback { transform: none; }
 		}
 
 		@media print {
-			body { background: white; padding: 0; }
-			.container { box-shadow: none; max-width: 100%; width: 100%; }
+			body { background: #fff; padding: 0; }
+			.container { box-shadow: none; border: none; max-width: 100%; width: 100%; }
 			.print-btn { display: none; }
-			.book-card, .shop-link, .tile { break-inside: avoid; }
-			.work-grid { gap: 8px; }
-			.icon-link { border-color: #6c757d; }
-			a::after { content: " (" attr(href) ")"; font-size: 11px; color: #6c757d; }
+			.book-card, .shop-link, .tile { break-inside: avoid; box-shadow: none; }
+			.work-grid { gap: 10px; }
+			.icon-link { border-color: var(--muted); box-shadow: none; }
+			a::after { content: " (" attr(href) ")"; font-size: 11px; color: var(--muted); }
 		}
 	</style>
 </head>
@@ -549,35 +660,35 @@
 		<h2 class="section-header">Selected Work</h2>
 		<div class="work-grid">
 			<a href="https://agfarms.dev" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-fallback">Nucleus</div>
+				<div class="thumb-wrap"><div class="thumb-fallback">Nucleus</div></div>
 				<div class="tile-body"><span class="tile-name">Nucleus</span><span class="tile-tag">Autonomous AI enterprise</span></div>
 			</a>
 			<a href="https://promptmaxxers.com" class="tile" target="_blank" rel="noopener">
-				<img class="thumb" src="/public/work/promptmaxxers.svg" alt="PromptMaxxers" loading="lazy" width="800" height="450">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/promptmaxxers.svg" alt="PromptMaxxers" loading="lazy" width="800" height="450"></div>
 				<div class="tile-body"><span class="tile-name">PromptMaxxers</span><span class="tile-tag">AI coaching &amp; cert prep</span></div>
 			</a>
 			<a href="https://derby.fish" class="tile" target="_blank" rel="noopener">
-				<img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish" loading="lazy" width="800" height="420">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish" loading="lazy" width="800" height="420"></div>
 				<div class="tile-body"><span class="tile-name">DerbyFish</span><span class="tile-tag">Sport-fishing platform</span></div>
 			</a>
 			<a href="https://openscriva.vercel.app" class="tile" target="_blank" rel="noopener">
-				<img class="thumb" src="/public/work/openscriva.png" alt="OpenScriva" loading="lazy" width="800" height="533">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/openscriva.png" alt="OpenScriva" loading="lazy" width="800" height="533"></div>
 				<div class="tile-body"><span class="tile-name">OpenScriva</span><span class="tile-tag">AI-native book writing</span></div>
 			</a>
 			<a href="https://bucket.foundation" class="tile" target="_blank" rel="noopener">
-				<img class="thumb" src="/public/work/bucket.png" alt="Bucket Foundation" loading="lazy" width="800" height="420">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/bucket.png" alt="Bucket Foundation" loading="lazy" width="800" height="420"></div>
 				<div class="tile-body"><span class="tile-name">Bucket Foundation</span><span class="tile-tag">Citeable primary research</span></div>
 			</a>
 			<a href="https://gauss.news" class="tile" target="_blank" rel="noopener">
-				<img class="thumb" src="/public/work/gauss.png" alt="gauss.news" loading="lazy" width="400" height="400">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/gauss.png" alt="gauss.news" loading="lazy" width="400" height="400"></div>
 				<div class="tile-body"><span class="tile-name">gauss.news</span><span class="tile-tag">AI-curated news</span></div>
 			</a>
 			<a href="https://github.com/gianyrox/feed402" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-fallback">feed402</div>
+				<div class="thumb-wrap"><div class="thumb-fallback">feed402</div></div>
 				<div class="tile-body"><span class="tile-name">feed402</span><span class="tile-tag">Paid data over x402</span></div>
 			</a>
 			<a href="https://github.com/gianyrox/Academic-Paper-Ranking-and-Recommendation-System" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-fallback">1.7M-Paper Ranker</div>
+				<div class="thumb-wrap"><div class="thumb-fallback">1.7M-Paper Ranker</div></div>
 				<div class="tile-body"><span class="tile-name">Academic Paper Ranking</span><span class="tile-tag">PageRank · TF-IDF · NMF</span></div>
 			</a>
 		</div>
@@ -601,7 +712,7 @@
 					<a class="btn" href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank" rel="noopener" data-cta="gumroad">⬇ PDF on Gumroad</a>
 					<a class="btn" href="book/" data-cta="read-free">Read free online</a>
 				</div>
-				<div style="margin-top: 12px; font-size: 12px; color: #888;">
+				<div class="note" style="margin-top: 14px;">
 					ISBN <span itemprop="isbn">979-8-1966798-3-4</span> · 168 pp · Paperback · English · Independently published
 				</div>
 			</div>
@@ -617,11 +728,11 @@
 			World Cup 2026 Collection
 			<span class="sub">Brackets, fan journals, watch party kits, host city prints. June 11 – July 19.</span>
 		</a>
-		<div style="font-size: 12px; color: #888; margin-top: 10px; padding: 0 10px;">
+		<div class="note" style="margin-top: 6px; padding: 0 10px; text-align: center;">
 			Also available on
-			<a href="https://www.etsy.com/shop/agfarms" target="_blank" style="color:#2a9d8f">Etsy</a> ·
-			<a href="https://agfarms.gumroad.com/" target="_blank" style="color:#2a9d8f">Gumroad</a> ·
-			<a href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" style="color:#2a9d8f">Amazon</a>
+			<a href="https://www.etsy.com/shop/agfarms" target="_blank" rel="noopener">Etsy</a> ·
+			<a href="https://agfarms.gumroad.com/" target="_blank" rel="noopener">Gumroad</a> ·
+			<a href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener">Amazon</a>
 		</div>
 
 		<!-- Work With Me (compact) -->
