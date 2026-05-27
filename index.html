@@ -77,9 +77,11 @@
 		"name": "Giany Rox",
 		"url": "https://www.gianyrox.com/",
 		"image": "https://www.gianyrox.com/public/cover/front-hd.png",
-		"jobTitle": "Author, founder",
+		"jobTitle": "Mathematician, data scientist, founder, author",
 		"worksFor": {"@type": "Organization", "name": "AGFarms"},
-		"description": "Author of 'Your Money Is Broken'. Writes on stablecoins, the digital dollar, and the rebuild of global payment rails from below.",
+		"alumniOf": {"@type": "CollegeOrUniversity", "name": "Stevens Institute of Technology"},
+		"nationality": ["American", "Italian"],
+		"description": "Mathematician and data scientist who builds production AI systems, and author of 'Your Money Is Broken'. Writes on stablecoins, the digital dollar, and the rebuild of global payment rails from below.",
 		"sameAs": ["https://github.com/gianyrox"]
 	}
 	</script>
@@ -274,6 +276,44 @@
 			border-color: #2a9d8f;
 		}
 
+		/* Selected Work: link + one-line description, same palette */
+		.work-link {
+			display: block;
+			text-align: center;
+			margin: 12px 0;
+			text-decoration: none;
+		}
+
+		.work-link .name {
+			color: #2a9d8f;
+			font-size: 18px;
+			transition: color 0.3s;
+		}
+
+		.work-link:hover .name {
+			color: #e76f51;
+		}
+
+		.work-link .sub {
+			display: block;
+			font-size: 13px;
+			color: #6c757d;
+			margin-top: 2px;
+			line-height: 1.4;
+		}
+
+		.work-group {
+			color: #264653;
+			font-size: 13px;
+			font-weight: bold;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+			margin: 22px 0 4px;
+			width: 100%;
+			text-align: center;
+			opacity: 0.7;
+		}
+
 		/* Shop links: same style as profile links, single column */
 		.shop-link {
 			text-decoration: none;
@@ -343,6 +383,7 @@
 		            border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.18)">
 		<div class="title">Gianyrox</div>
 		<div class="subtitle">Gianyrox Everywhere.</div>
+		<p style="font-size:15px; color:#6c757d; margin-top:8px; text-align:center;">Mathematician &amp; data scientist who builds production AI — and an author.</p>
 
 		<div class="description">
 			<p><strong>Euler's Formula:</strong><br>
@@ -352,6 +393,15 @@
 			<img src="https://www.nouvir.com/images/7_photon_figure_300_DPI_grayscale.jpg" alt="Photon moving through space"
 				style="width: 100%; max-width: 400px; display: block; margin-top: 20px;">
 		</div>
+
+		<!-- About Section -->
+		<h2 class="section-header">About</h2>
+		<p class="description" style="margin-top:0;">
+			Born in Rome, raised in Denville, New Jersey. I hold an MS in Data Science and a BS in
+			Pure &amp; Applied Mathematics from Stevens Institute of Technology, and I hold both US and
+			Italian (EU) citizenship. I build production AI systems — agents, platforms, data pipelines —
+			and I write.
+		</p>
 
 		<!-- Work With Me Section -->
 		<h2 class="section-header">Work With Me</h2>
@@ -376,12 +426,58 @@
 		<a href="https://bucket.foundation" class="link" target="_blank">Bucket Foundation</a>
 		<a href="https://agfarms.dev" class="link" target="_blank">AGFarms Developers</a>
 
-		<!-- Projects Section -->
-		<h2 class="section-header">Projects</h2>
-		<a href="https://derby.fish" class="link" target="_blank">derby.fish</a>
-		<a href="https://gauss.news" class="link" target="_blank">gauss.news</a>
-		<a href="https://taskl.app" class="link" target="_blank">taskl.app</a>
-		<a href="https://longtail.agfarms.dev" class="link" target="_blank">longtail.agfarms.dev</a>
+		<!-- Selected Work Section -->
+		<h2 class="section-header">Selected Work</h2>
+
+		<div class="work-group">AI systems</div>
+		<a href="https://agfarms.dev" class="work-link" target="_blank">
+			<span class="name">Nucleus</span>
+			<span class="sub">7-pillar autonomous AI enterprise — a Claude-orchestration platform that runs a portfolio of ventures.</span>
+		</a>
+		<a href="https://promptmaxxers.com" class="work-link" target="_blank">
+			<span class="name">PromptMaxxers</span>
+			<span class="sub">1:1 AI coaching and Claude-certification prep — teaching people to actually work with models.</span>
+		</a>
+
+		<div class="work-group">Products</div>
+		<a href="https://derby.fish" class="work-link" target="_blank">
+			<span class="name">DerbyFish</span>
+			<span class="sub">Sport-fishing competition platform — tournaments, catch verification, and a fish index.</span>
+		</a>
+		<a href="https://openscriva.vercel.app" class="work-link" target="_blank">
+			<span class="name">OpenScriva</span>
+			<span class="sub">Open-source, AI-native book writing — fork it into your own GitHub and it becomes your private writing room.</span>
+		</a>
+		<a href="https://gauss.news" class="work-link" target="_blank">
+			<span class="name">gauss.news</span>
+			<span class="sub">AI-curated news, served as much through MCP as through a browser.</span>
+		</a>
+		<a href="https://taskl.app" class="work-link" target="_blank">
+			<span class="name">TaskLapp</span>
+			<span class="sub">Fast, focused task management.</span>
+		</a>
+		<a href="https://github.com/AGFarms/longtail" class="work-link" target="_blank">
+			<span class="name">Longtail</span>
+			<span class="sub">AI-native paid-artifact factory across Etsy, Roblox UGC, Unity Asset Store, and Amazon KDP.</span>
+		</a>
+
+		<div class="work-group">Research &amp; open knowledge</div>
+		<a href="https://bucket.foundation" class="work-link" target="_blank">
+			<span class="name">Bucket Foundation</span>
+			<span class="sub">Make primary research paid-for-once and citeable-forever — plus a data globe of the canon at /earth.</span>
+		</a>
+		<a href="https://github.com/gianyrox/feed402" class="work-link" target="_blank">
+			<span class="name">feed402</span>
+			<span class="sub">Paid data endpoints for AI agents over x402 — protocol spec plus a reference implementation.</span>
+		</a>
+		<a href="https://github.com/gianyrox/x402-research-gateway" class="work-link" target="_blank">
+			<span class="name">x402-research-gateway</span>
+			<span class="sub">x402-protected research API — PubMed, Semantic Scholar, OpenAlex, ClinicalTrials, PubChem.</span>
+		</a>
+		<a href="https://github.com/gianyrox/Academic-Paper-Ranking-and-Recommendation-System" class="work-link" target="_blank">
+			<span class="name">Academic Paper Ranking</span>
+			<span class="sub">Ranking and recommending across 1.7M+ STEM papers with PageRank, TF-IDF, and NMF.</span>
+		</a>
 
 		<!-- Articles Section -->
 		<h2 class="section-header">Highlighted Articles</h2>
