@@ -3,17 +3,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CryoTriage report</title>
 <style>
- body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 0;
+ body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin:0;
         background:#0d1117; color:#e6edf3; }
- header { padding: 22px 28px; border-bottom:1px solid #21262d; }
+ header { padding:22px 28px; border-bottom:1px solid #21262d; }
  h1 { margin:0 0 4px; font-size:22px; }
  .sub { color:#8b949e; font-size:13px; }
- .wrap { padding: 18px 28px 60px; }
+ .wrap { padding:18px 28px 60px; }
  .summary { display:flex; gap:14px; flex-wrap:wrap; margin:14px 0 22px; }
  .card { background:#161b22; border:1px solid #21262d; border-radius:10px;
           padding:14px 18px; min-width:120px; }
  .card .big { font-size:28px; font-weight:700; }
  .pass{color:#3fb950} .flag{color:#d29922} .reject{color:#f85149}
+ .controls { margin:6px 0 14px; font-size:13px; color:#8b949e; }
+ .controls button { background:#21262d; color:#e6edf3; border:1px solid #30363d;
+   border-radius:6px; padding:5px 11px; margin-right:6px; cursor:pointer; font-size:12px; }
+ .controls button:hover { background:#30363d; }
  table { border-collapse:collapse; width:100%; font-size:12px; }
  th, td { border-bottom:1px solid #21262d; padding:8px; vertical-align:top; text-align:left; }
  th { color:#8b949e; font-weight:600; position:sticky; top:0; background:#0d1117; }
@@ -23,7 +27,7 @@
  .score { color:#8b949e; font-size:11px; }
  .name { font-size:11px; max-width:130px; word-break:break-all; }
  .dim { color:#8b949e; }
- .metrics { font-size:11px; line-height:1.55; min-width:230px; }
+ .metrics { font-size:11px; line-height:1.55; min-width:240px; }
  .reasons { font-size:11px; color:#c9d1d9; max-width:220px; }
  .rank { color:#8b949e; font-weight:700; }
  .llm { background:#161b22; border:1px solid #30363d; border-radius:10px;
@@ -35,149 +39,237 @@
 <body>
 <header>
   <h1>CryoTriage &mdash; cryo-EM micrograph QC report</h1>
-  <div class="sub">Automated quality-control triage &middot; data source: EMPIAR-10025 (T20S proteasome, real) + synthetic degradation cases
-   &middot; pixel size: 0.66 A/px</div>
+  <div class="sub">Automated quality-control triage &middot; source: EMPIAR-10025 (T20S) + EMPIAR-10061 (beta-gal) + synthetic failure modes
+   &middot; from header / unknown &middot; 300 kV &middot; Cs 2.7 mm</div>
 </header>
 <div class="wrap">
   <div class="summary">
-    <div class="card"><div class="big">6</div>micrographs</div>
-    <div class="card"><div class="big pass">3</div>PASS</div>
-    <div class="card"><div class="big flag">2</div>FLAG</div>
+    <div class="card"><div class="big">8</div>micrographs</div>
+    <div class="card"><div class="big pass">4</div>PASS</div>
+    <div class="card"><div class="big flag">3</div>FLAG</div>
     <div class="card"><div class="big reject">1</div>REJECT</div>
     <div class="card"><div class="big">50%</div>pass rate</div>
+    <div class="card"><div class="big">1.5</div>median defocus um<br><span class="dim">0.79&ndash;2.098</span></div><div class="card"><div class="big">3.089</div>best fit-res A<br><span class="dim">median 3.774</span></div><div class="card"><div class="big">0.704</div>median fit CC</div>
   </div>
+  <div class="card" style="margin-bottom:18px"><b>Session distributions</b><br><img src="assets/histograms.png" style="max-width:100%;margin-top:8px"></div>
   <div class="card" style="margin-bottom:18px">
-    <b>Common failure modes</b><ul class="modes"><li>ice / contamination &mdash; 3 micrograph(s)</li><li>drift / blur &mdash; 2 micrograph(s)</li></ul>
+    <b>Common failure modes</b><ul class="modes"><li>ice / contamination &mdash; 4 micrograph(s)</li><li>weak CTF / astigmatism &mdash; 3 micrograph(s)</li><li>drift / blur &mdash; 2 micrograph(s)</li></ul>
   </div>
-  <div class="llm"><h3>Triage summary (Claude)</h3>
-        <p>Of 6 micrographs collected, 3 passed (50%), 2 were flagged, and 1 was rejected. Ice/contamination affected 3 micrographs, evidenced by bright outlier pixels (2.2%) and non-uniform texture (CV values 6.4-8.2). Drift/blur impacted 2 micrographs, with one showing severe drift (hf_power=0.0). The passing micrographs achieved good resolution (2.0-3.3Å) with clean backgrounds and strong Thon rings. **Recommendation**: Re-blot the grid to reduce ice contamination, as this is the primary failure mode affecting half the session and causing both bright outliers and texture non-uniformity.</p></div>
-  <table>
+  <div class="llm"><h3>Triage summary (Claude)</h3><p>From 8 micrographs collected, 4 passed QC (50% pass rate), 3 were flagged, and 1 was rejected. The dominant failure mode is ice/contamination (4 instances), followed by weak CTF/astigmatism (3 instances) and drift/blur (2 instances). The defocus range spans 0.79-2.10 μm (median 1.5 μm), with resolution averaging 3.55 Å where measurable. CTF fit quality is highly variable (fit_cc: 0.049-0.851, median 0.704). One micrograph shows severe drift with undetectable CTF signal, while another has significant astigmatism (0.61 μm). **Recommendation: Improve specimen preparation to reduce ice contamination and check column alignment to minimize astigmatism.**</p></div>
+  <div class="controls">sort by:
+    <button onclick="sortBy('score',-1)">score</button>
+    <button onclick="sortBy('defocus',1)">defocus</button>
+    <button onclick="sortBy('res',1)">resolution</button>
+    <button onclick="sortBy('cc',-1)">fit CC</button>
+    <button onclick="sortBy('name',1,true)">name</button>
+  </div>
+  <table id="mics">
     <thead><tr>
       <th>#</th><th>micrograph</th><th>power spectrum</th><th>radial profile</th>
       <th>name</th><th>verdict</th><th>metrics</th><th>reasons</th>
     </tr></thead>
     <tbody>
-        <tr>
+        <tr data-score="0.9970" data-defocus="2.0979"
+            data-res="3.7869" data-cc="0.7245"
+            data-verdict="PASS" data-name="empiar10025_T20S_02.mrc">
           <td class="rank">1</td>
-          <td><img src="assets/synth_good_01_thumb.png" class="mic"></td>
-          <td><img src="assets/synth_good_01_ps.png" class="ps"></td>
-          <td><img src="assets/synth_good_01_rad.png" class="rad"></td>
+          <td><img src="assets/empiar10025_T20S_02_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/empiar10025_T20S_02_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/empiar10025_T20S_02_rad.png" class="rad" loading="lazy"></td>
+          <td class="name">empiar10025_T20S_02.mrc<br><span class="dim">7676x7420</span></td>
+          <td><span class="verdict" style="background:#1a7f37">PASS</span><br>
+              <span class="score">score 1.00</span></td>
+          <td class="metrics">
+            <b>CTF:</b> df=2.10 um, astig=0.00@0<br>
+            <b>fit:</b> cc=0.72, res=3.8 A, rings=28,
+              extent=0.69 Nyq<br>
+            <b>Drift:</b> hf=0.831, aniso=0.00,
+              tenengrad=22.21<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
+          </td>
+          <td class="reasons">good Thon rings, sharp, clean background</td>
+        </tr>
+        <tr data-score="0.9970" data-defocus="1.2342"
+            data-res="3.7869" data-cc="0.6828"
+            data-verdict="PASS" data-name="empiar10025_T20S_01.mrc">
+          <td class="rank">2</td>
+          <td><img src="assets/empiar10025_T20S_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/empiar10025_T20S_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/empiar10025_T20S_01_rad.png" class="rad" loading="lazy"></td>
+          <td class="name">empiar10025_T20S_01.mrc<br><span class="dim">7676x7420</span></td>
+          <td><span class="verdict" style="background:#1a7f37">PASS</span><br>
+              <span class="score">score 1.00</span></td>
+          <td class="metrics">
+            <b>CTF:</b> df=1.23 um, astig=0.00@0<br>
+            <b>fit:</b> cc=0.68, res=3.8 A, rings=16,
+              extent=0.69 Nyq<br>
+            <b>Drift:</b> hf=0.836, aniso=0.00,
+              tenengrad=23.20<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
+          </td>
+          <td class="reasons">good Thon rings, sharp, clean background</td>
+        </tr>
+        <tr data-score="0.9736" data-defocus="1.4996"
+            data-res="3.0888" data-cc="0.8513"
+            data-verdict="PASS" data-name="synth_good_01.mrc">
+          <td class="rank">3</td>
+          <td><img src="assets/synth_good_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/synth_good_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/synth_good_01_rad.png" class="rad" loading="lazy"></td>
           <td class="name">synth_good_01.mrc<br><span class="dim">1024x1024</span></td>
           <td><span class="verdict" style="background:#1a7f37">PASS</span><br>
               <span class="score">score 0.97</span></td>
           <td class="metrics">
-            <b>CTF:</b> rings=28, extent=0.67 Nyq,
-              contrast=0.34<br>
-            <b>est. max res:</b> 2.0 A &nbsp; <b>est. defocus:</b> 0.71 um<br>
-            <b>Drift:</b> hf_power=0.554, tenengrad=27.142<br>
-            <b>Contam:</b> bright_outliers=0.00%,
-              localvar_CV=0.12<br>
-            <b>Intensity:</b> mean=100.0, std=1.9
+            <b>CTF:</b> df=1.50 um, astig=0.00@0<br>
+            <b>fit:</b> cc=0.85, res=3.1 A, rings=29,
+              extent=0.65 Nyq<br>
+            <b>Drift:</b> hf=0.729, aniso=0.00,
+              tenengrad=27.14<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
           </td>
           <td class="reasons">good Thon rings, sharp, clean background</td>
         </tr>
-        <tr>
-          <td class="rank">2</td>
-          <td><img src="assets/empiar10025_real_01_thumb.png" class="mic"></td>
-          <td><img src="assets/empiar10025_real_01_ps.png" class="ps"></td>
-          <td><img src="assets/empiar10025_real_01_rad.png" class="rad"></td>
-          <td class="name">empiar10025_real_01.mrc<br><span class="dim">7676x7420</span></td>
-          <td><span class="verdict" style="background:#1a7f37">PASS</span><br>
-              <span class="score">score 0.96</span></td>
-          <td class="metrics">
-            <b>CTF:</b> rings=23, extent=0.83 Nyq,
-              contrast=0.28<br>
-            <b>est. max res:</b> 3.2 A &nbsp; <b>est. defocus:</b> 1.27 um<br>
-            <b>Drift:</b> hf_power=0.824, tenengrad=23.202<br>
-            <b>Contam:</b> bright_outliers=0.00%,
-              localvar_CV=0.18<br>
-            <b>Intensity:</b> mean=16.1, std=0.9
-          </td>
-          <td class="reasons">good Thon rings, sharp, clean background</td>
-        </tr>
-        <tr>
-          <td class="rank">3</td>
-          <td><img src="assets/empiar10025_real_02_thumb.png" class="mic"></td>
-          <td><img src="assets/empiar10025_real_02_ps.png" class="ps"></td>
-          <td><img src="assets/empiar10025_real_02_rad.png" class="rad"></td>
-          <td class="name">empiar10025_real_02.mrc<br><span class="dim">7676x7420</span></td>
-          <td><span class="verdict" style="background:#1a7f37">PASS</span><br>
-              <span class="score">score 0.90</span></td>
-          <td class="metrics">
-            <b>CTF:</b> rings=23, extent=0.80 Nyq,
-              contrast=0.20<br>
-            <b>est. max res:</b> 3.3 A &nbsp; <b>est. defocus:</b> 1.34 um<br>
-            <b>Drift:</b> hf_power=0.828, tenengrad=23.207<br>
-            <b>Contam:</b> bright_outliers=0.00%,
-              localvar_CV=0.16<br>
-            <b>Intensity:</b> mean=15.9, std=0.9
-          </td>
-          <td class="reasons">good Thon rings, sharp, clean background</td>
-        </tr>
-        <tr>
+        <tr data-score="0.9155" data-defocus="1.9971"
+            data-res="3.7736" data-cc="0.8035"
+            data-verdict="FLAG" data-name="synth_astig_01.mrc">
           <td class="rank">4</td>
-          <td><img src="assets/synth_carbon_01_thumb.png" class="mic"></td>
-          <td><img src="assets/synth_carbon_01_ps.png" class="ps"></td>
-          <td><img src="assets/synth_carbon_01_rad.png" class="rad"></td>
+          <td><img src="assets/synth_astig_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/synth_astig_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/synth_astig_01_rad.png" class="rad" loading="lazy"></td>
+          <td class="name">synth_astig_01.mrc<br><span class="dim">1024x1024</span></td>
+          <td><span class="verdict" style="background:#bf8700">FLAG</span><br>
+              <span class="score">score 0.92</span></td>
+          <td class="metrics">
+            <b>CTF:</b> df=2.00 um, astig=0.61@33<br>
+            <b>fit:</b> cc=0.80, res=3.8 A, rings=27,
+              extent=0.53 Nyq<br>
+            <b>Drift:</b> hf=0.728, aniso=0.00,
+              tenengrad=27.10<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
+          </td>
+          <td class="reasons">high astigmatism (0.61 um @ 33 deg)</td>
+        </tr>
+        <tr data-score="0.8459" data-defocus="0.7897"
+            data-res="3.2751" data-cc="0.4312"
+            data-verdict="PASS" data-name="empiar10061_bgal_01.mrc">
+          <td class="rank">5</td>
+          <td><img src="assets/empiar10061_bgal_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/empiar10061_bgal_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/empiar10061_bgal_01_rad.png" class="rad" loading="lazy"></td>
+          <td class="name">empiar10061_bgal_01.mrc<br><span class="dim">7420x7676</span></td>
+          <td><span class="verdict" style="background:#1a7f37">PASS</span><br>
+              <span class="score">score 0.85</span></td>
+          <td class="metrics">
+            <b>CTF:</b> df=0.79 um, astig=0.00@160<br>
+            <b>fit:</b> cc=0.43, res=3.3 A, rings=13,
+              extent=0.39 Nyq<br>
+            <b>Drift:</b> hf=0.837, aniso=0.00,
+              tenengrad=24.02<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
+          </td>
+          <td class="reasons">good Thon rings, sharp, clean background</td>
+        </tr>
+        <tr data-score="0.8268" data-defocus="1.5013"
+            data-res="3.2051" data-cc="0.7777"
+            data-verdict="FLAG" data-name="synth_carbon_01.mrc">
+          <td class="rank">6</td>
+          <td><img src="assets/synth_carbon_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/synth_carbon_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/synth_carbon_01_rad.png" class="rad" loading="lazy"></td>
           <td class="name">synth_carbon_01.mrc<br><span class="dim">1024x1024</span></td>
           <td><span class="verdict" style="background:#bf8700">FLAG</span><br>
-              <span class="score">score 0.78</span></td>
+              <span class="score">score 0.83</span></td>
           <td class="metrics">
-            <b>CTF:</b> rings=44, extent=0.94 Nyq,
-              contrast=0.33<br>
-            <b>est. max res:</b> 1.4 A &nbsp; <b>est. defocus:</b> 0.71 um<br>
-            <b>Drift:</b> hf_power=0.526, tenengrad=0.233<br>
-            <b>Contam:</b> bright_outliers=0.00%,
-              localvar_CV=6.44<br>
-            <b>Intensity:</b> mean=130.0, std=30.1
+            <b>CTF:</b> df=1.50 um, astig=0.00@0<br>
+            <b>fit:</b> cc=0.78, res=3.2 A, rings=27,
+              extent=0.62 Nyq<br>
+            <b>Drift:</b> hf=0.723, aniso=0.01,
+              tenengrad=0.23<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
           </td>
           <td class="reasons">non-uniform texture (local-var CV=6.4) -&gt; carbon/contam</td>
         </tr>
-        <tr>
-          <td class="rank">5</td>
-          <td><img src="assets/synth_ice_01_thumb.png" class="mic"></td>
-          <td><img src="assets/synth_ice_01_ps.png" class="ps"></td>
-          <td><img src="assets/synth_ice_01_rad.png" class="rad"></td>
+        <tr data-score="0.6166" data-defocus="1.6089"
+            data-res="3.9487" data-cc="0.2010"
+            data-verdict="FLAG" data-name="synth_ice_01.mrc">
+          <td class="rank">7</td>
+          <td><img src="assets/synth_ice_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/synth_ice_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/synth_ice_01_rad.png" class="rad" loading="lazy"></td>
           <td class="name">synth_ice_01.mrc<br><span class="dim">1024x1024</span></td>
           <td><span class="verdict" style="background:#bf8700">FLAG</span><br>
-              <span class="score">score 0.65</span></td>
+              <span class="score">score 0.62</span></td>
           <td class="metrics">
-            <b>CTF:</b> rings=21, extent=0.99 Nyq,
-              contrast=0.29<br>
-            <b>est. max res:</b> 1.3 A &nbsp; <b>est. defocus:</b> 0.49 um<br>
-            <b>Drift:</b> hf_power=0.051, tenengrad=1.987<br>
-            <b>Contam:</b> bright_outliers=2.16%,
-              localvar_CV=8.17<br>
-            <b>Intensity:</b> mean=106.2, std=43.1
+            <b>CTF:</b> df=1.61 um, astig=0.00@0<br>
+            <b>fit:</b> cc=0.20, res=3.9 A, rings=19,
+              extent=0.51 Nyq<br>
+            <b>Drift:</b> hf=0.593, aniso=0.01,
+              tenengrad=2.05<br>
+            <b>Contam:</b> bright=2.13%,
+              blobs=8 (2.13%),
+              ice~0.63
           </td>
-          <td class="reasons">bright outlier pixels 2.2% -&gt; ice/contamination; non-uniform texture (local-var CV=8.2) -&gt; carbon/contam</td>
+          <td class="reasons">bright outlier pixels 2.1% -&gt; ice/contamination; 8 contamination blobs (2.1% area); non-uniform texture (local-var CV=7.9) -&gt; carbon/contam</td>
         </tr>
-        <tr>
-          <td class="rank">6</td>
-          <td><img src="assets/synth_drift_01_thumb.png" class="mic"></td>
-          <td><img src="assets/synth_drift_01_ps.png" class="ps"></td>
-          <td><img src="assets/synth_drift_01_rad.png" class="rad"></td>
+        <tr data-score="0.3742" data-defocus="1.4990"
+            data-res="" data-cc="0.0494"
+            data-verdict="REJECT" data-name="synth_drift_01.mrc">
+          <td class="rank">8</td>
+          <td><img src="assets/synth_drift_01_thumb.png" class="mic" loading="lazy"></td>
+          <td><img src="assets/synth_drift_01_ps.png" class="ps" loading="lazy"></td>
+          <td><img src="assets/synth_drift_01_rad.png" class="rad" loading="lazy"></td>
           <td class="name">synth_drift_01.mrc<br><span class="dim">1024x1024</span></td>
           <td><span class="verdict" style="background:#cf222e">REJECT</span><br>
-              <span class="score">score 0.56</span></td>
+              <span class="score">score 0.37</span></td>
           <td class="metrics">
-            <b>CTF:</b> rings=9, extent=0.37 Nyq,
-              contrast=0.18<br>
-            <b>est. max res:</b> 3.6 A &nbsp; <b>est. defocus:</b> 0.69 um<br>
-            <b>Drift:</b> hf_power=0.000, tenengrad=5.504<br>
-            <b>Contam:</b> bright_outliers=0.00%,
-              localvar_CV=0.69<br>
-            <b>Intensity:</b> mean=100.0, std=0.4
+            <b>CTF:</b> df=1.50 um, astig=0.00@0<br>
+            <b>fit:</b> cc=0.05, res=n/a A, rings=0,
+              extent=0.00 Nyq<br>
+            <b>Drift:</b> hf=0.002, aniso=0.27,
+              tenengrad=5.50<br>
+            <b>Contam:</b> bright=0.00%,
+              blobs=0 (0.00%),
+              ice~0.63
           </td>
-          <td class="reasons">low high-frequency power (hf_frac=0.000) -&gt; drift/blur; HARD REJECT: severe drift/blur</td>
+          <td class="reasons">weak/limited Thon rings (extent=0.00 Nyq, fit_cc=0.05); low high-frequency power (hf_frac=0.002) -&gt; drift/blur; HARD REJECT: no detectable CTF signal; HARD REJECT: severe drift/blur</td>
         </tr></tbody>
   </table>
   <p class="sub" style="margin-top:22px">
-   Metrics: <code>CTF</code> Thon-ring detection from the rotationally-averaged
-   power spectrum (extent toward Nyquist &rarr; estimated max resolution; first-ring
-   spacing &rarr; rough defocus). <code>Drift</code> high-frequency power fraction +
-   Tenengrad gradient energy (low &rarr; drift/blur). <code>Contam</code> robust
-   bright-outlier fraction + local-variance uniformity (ice / carbon / ethane).
-   Verdict combines weighted sub-scores with hard gates.</p>
+   <b>Methods.</b> CTF estimated by a 2D fit (defocus, astigmatism) of the
+   tiled, background-subtracted amplitude spectrum against the theoretical
+   CTF<sup>2</sup>, following Rohou &amp; Grigorieff (2015), <i>CTFFIND4</i>,
+   J. Struct. Biol. 192:216. The peak normalised cross-correlation is the fit
+   confidence; the highest frequency with model&ndash;data agreement is the
+   CTF-fit resolution. <b>Drift</b> = high-frequency power fraction + Tenengrad
+   gradient energy + power-spectrum azimuthal anisotropy (directional drift).
+   <b>Contamination</b> = robust bright-outlier fraction + connected-component
+   blob detection (scikit-image) + local-variance uniformity; <b>ice</b> proxy
+   from per-image contrast. Verdict combines weighted sub-scores with documented
+   hard gates (see <code>score.py</code> THRESHOLDS).</p>
 </div>
+<script>
+function sortBy(key, dir, str) {
+  const tb = document.querySelector('#mics tbody');
+  const rows = Array.from(tb.querySelectorAll('tr'));
+  rows.sort((a,b) => {
+    let av = a.dataset[key], bv = b.dataset[key];
+    if (!str) { av = parseFloat(av); bv = parseFloat(bv);
+      if (isNaN(av)) av = 1e9*dir*-1; if (isNaN(bv)) bv = 1e9*dir*-1; }
+    if (av < bv) return -1*dir; if (av > bv) return 1*dir; return 0;
+  });
+  rows.forEach((r,i) => { r.querySelector('.rank').textContent = i+1; tb.appendChild(r); });
+}
+</script>
 </body></html>
