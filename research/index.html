@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biophysics Research Software — Gianangelo Dichio</title>
+<meta name="description" content="AI/ML software tools for biophysics labs, built by a mathematician/data-scientist entering a biophysics PhD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<meta name="theme-color" content="#264653">
+<style>
+:root{--bg:#f7f9fa;--ink:#1d2b2f;--mut:#5a6b70;--teal:#264653;--acc:#2a9d8f;--line:#e1e7e9;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:48px 22px 80px}
+.eyebrow{color:var(--acc);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:34px;margin:6px 0 8px;font-weight:800;letter-spacing:-.02em;color:var(--teal)}
+.lede{font-size:17px;color:var(--mut);max-width:680px}
+.lede b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:34px 0}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column}
+.card h3{margin:0 0 2px;font-size:18px;color:var(--teal)}
+.card .tag{font-size:12px;color:var(--acc);font-weight:600;margin-bottom:8px}
+.card p{margin:0 0 14px;font-size:14.5px;color:var(--mut);flex:1}
+.card .links{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:8px 14px;border-radius:9px;font-size:13.5px;font-weight:600;text-decoration:none}
+.btn.p{background:var(--teal);color:#fff}.btn.s{background:#eef3f3;color:var(--teal);border:1px solid var(--line)}
+.btn.dim{color:var(--mut);background:#f2f5f5}
+.soon{opacity:.72}
+.section{margin-top:40px}.section h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);border-bottom:1px solid var(--line);padding-bottom:6px}
+.foot{margin-top:48px;color:var(--mut);font-size:13.5px}
+a{color:var(--acc)}
+.pillrow{margin:18px 0 0}.pill{display:inline-block;background:#eef3f3;border:1px solid var(--line);border-radius:20px;padding:3px 12px;margin:3px 4px 3px 0;font-size:12.5px;color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Gianangelo Dichio · Research Software</div>
+  <h1>AI tools for biophysics labs</h1>
+  <p class="lede">I'm a <b>mathematician &amp; data-scientist</b> (MS Data Science, BS Pure &amp; Applied Math) moving into a
+  biophysics PhD. Most of the field now has powerful open AI models but no production tooling around them —
+  so I build the layer that makes them usable: <b>RAG over a lab's literature, ML on its data, and pipelines
+  that turn raw experiments into answers.</b> Below are working tools, not slides.</p>
+  <div class="pillrow">
+    <span class="pill">LLM / RAG agents</span><span class="pill">ML force fields &amp; MD analysis</span>
+    <span class="pill">cheminformatics / ADMET</span><span class="pill">full-stack + GPU serving</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="tag">LIVE · RAG / LLM</div>
+      <h3>LabBrain</h3>
+      <p>Point it at any PI → it reads their papers (OpenAlex), builds a semantic index, and generates
+      <b>three grounded open questions in their own work</b>. GPU embeddings + Claude reasoning.</p>
+      <div class="links">
+        <a class="btn p" href="/research/labbrain/">Open demo</a>
+        <a class="btn s" href="https://github.com/gianyrox/labbrain">Code</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">LIVE · MD / ML</div>
+      <h3>TrajMine</h3>
+      <p>Turns a molecular-dynamics trajectory into a <b>1-page mechanism report</b>: flexibility profile,
+      conformational landscape (PCA), macrostate clustering, dominant motion. Validated on ubiquitin.</p>
+      <div class="links">
+        <a class="btn p" href="/research/trajmine/">Open report</a>
+        <a class="btn s" href="https://github.com/gianyrox/trajmine">Code</a>
+      </div>
+    </div>
+    <div class="card soon">
+      <div class="tag">SHIPPING · CHEMINFORMATICS</div>
+      <h3>ScreenServer</h3>
+      <p>ADMET / molecular-property prediction + virtual screening. RDKit descriptors with models trained on
+      real public datasets — rank a ligand library, get a triaged report.</p>
+      <div class="links">
+        <a class="btn dim" href="/research/screenserver/">Demo (soon)</a>
+        <a class="btn s" href="https://github.com/gianyrox/screenserver">Code</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">ANALYSIS</div>
+      <h3>The State of Biophysics</h3>
+      <p>Before applying I mapped the whole field as a data scientist: 1,353 institutions, ~3,900 advisors,
+      funding flows, research gaps, and <b>107 fundable software opportunities</b>.</p>
+      <div class="links">
+        <a class="btn p" href="/research/opportunities.html">Opportunity map</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>The thesis</h2>
+    <p class="lede" style="margin-top:12px">Every subfield has a great open model — Boltz-2, AlphaFold3, RFdiffusion,
+    MACE, Cellpose — but almost no lab has a serving layer, agent orchestration, or RAG over its own data.
+    That gap, <b>model → usable lab product</b>, is exactly what a mathematician who ships software can close.</p>
+  </div>
+
+  <div class="foot">
+    Gianangelo Dichio · <a href="https://github.com/gianyrox">github.com/gianyrox</a> · gianyrox@gmail.com
+  </div>
+</div>
+</body>
+</html>
