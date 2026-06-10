@@ -1,0 +1,108 @@
+<!doctype html><html lang=en><head>
+<meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Gerhard Hummer</title>
+<style>
+:root{--bg:#0b0d12;--card:#141925;--line:#242b3d;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a;--cit:#7ea2ff}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:820px;
+margin:0 auto;padding:34px 20px 80px;background:var(--bg);color:var(--fg);line-height:1.62;
+font-size:15.5px}
+h1{font-size:clamp(21px,4.5vw,28px);margin:0 0 4px;line-height:1.2}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 8px}
+.sub b{color:var(--fg)}
+.badges{margin:14px 0 26px}
+.badge{display:inline-block;background:#121a2c;border:1px solid var(--line);
+border-radius:8px;padding:5px 11px;margin:4px 6px 0 0;font-size:12.5px;color:#cfe0ff}
+.badge b{color:var(--good)}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);
+margin:40px 0 10px;border-bottom:1px solid var(--line);padding-bottom:7px}
+h3{font-size:15px;color:var(--good);margin:18px 0 4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:13px;
+padding:18px 22px;margin:14px 0}
+.qa{margin:16px 0 26px}
+.q{font-size:16.5px;font-weight:600;margin:0 0 10px;color:#fff}
+.cmd{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#1b2740;
+color:var(--accent);border:1px solid #2b3a5c;border-radius:6px;padding:2px 7px;margin-right:8px}
+.answer{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.answer p{margin:9px 0}
+.answer p.li{margin:7px 0 7px 4px}
+.cit{color:var(--cit);font-weight:600}
+details.srcwrap{margin-top:10px}
+details.srcwrap summary{cursor:pointer;color:var(--mut);font-size:13px;padding:8px 0}
+ol.sources{margin:6px 0 0;padding:0;list-style:none}
+ol.sources li{margin:12px 0;padding-left:0;font-size:13.5px}
+.n{color:var(--accent);font-weight:700}
+.src-cite{color:#cdd6e6}
+.tag{display:inline-block;background:#1b2233;border:1px solid var(--line);border-radius:5px;
+padding:1px 7px;font-size:11px;color:var(--mut);margin:0 4px}
+.snip{color:var(--mut);font-size:12.5px;margin:4px 0 0;font-style:italic;
+border-left:2px solid var(--line);padding-left:10px}
+ul{padding-left:20px} li{margin:7px 0}
+.mut{color:var(--mut)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.foot{color:var(--mut);font-size:13px;margin-top:40px;border-top:1px solid var(--line);
+padding-top:18px}
+.foot b{color:var(--fg)}
+</style></head><body>
+
+<h1>LabBrain — a grounded assistant over <span>Gerhard Hummer's</span> corpus</h1>
+<p class="sub"><b>Gerhard Hummer</b> · Goethe University Frankfurt · h-index 111</p>
+<div class="badges">
+<span class="badge"><b>200</b> papers ingested</span>
+<span class="badge"><b>5067</b> retrieval passages</span>
+<span class="badge"><b>4524</b> from open-access <b>full text</b></span>
+<span class="badge">hybrid dense + BM25 + RRF + LLM rerank</span>
+</div>
+
+<h2>summarize — the lab's research program</h2>
+<div class="card"><h3>Gerhard Hummer Research Program Summary</h3>
+<h3>Research program</h3>
+<p>Hummer&#x27;s group develops and applies computational methods to understand biomolecular structure, dynamics, and function across multiple scales. The program spans from fundamental biophysics—including water transport through carbon nanotubes <span class="cit">[1,2,3]</span> and molecular dynamics simulations with periodic boundary conditions <span class="cit">[4]</span>—to biomedically relevant systems like SARS-CoV-2 viral proteins <span class="cit">[10]</span>. Recent work emphasizes integrating computational modeling with experimental data to characterize intrinsically disordered proteins and protein assemblies <span class="cit">[7,9]</span>. The group also investigates cellular processes including ubiquitination-regulated ER-phagy and membrane remodeling <span class="cit">[11,12]</span>, and inflammatory signaling pathways <span class="cit">[1]</span>.</p>
+<h3>Methods</h3>
+<p>The group specializes in molecular dynamics simulations and free energy calculations, particularly developing methods to extract thermodynamic and kinetic information from non-equilibrium single-molecule pulling experiments <span class="cit">[1,2]</span>. A key methodological focus is Bayesian ensemble refinement by reweighting, which efficiently combines computational ensembles with experimental data (SAXS, FRET, NMR) by optimizing log-weights rather than forces—achieving ~20-fold speedup for large ensembles (N=10^6) <span class="cit">[5,6,8]</span>. The group also performs coarse-grained molecular dynamics to access nanosecond timescales from sub-picosecond simulations <span class="cit">[13]</span> and atomistic simulations of membrane systems including pore formation <span class="cit">[14]</span>.</p>
+<h3>Key findings</h3>
+<p>Hummer&#x27;s early work demonstrated single-file water conduction through hydrophobic carbon nanotube channels <span class="cit">[1,2]</span> and osmotic water transport through carbon nanotube membranes <span class="cit">[3]</span>. His group developed optimized force fields for peptide helix-coil transitions <span class="cit">[5]</span> and methods to extract intrinsic rates and activation free energies from single-molecule experiments <span class="cit">[2]</span>. Recent structural biology contributions include revealing flexibility in SARS-CoV-2 spike protein mediated by three hinges <span class="cit">[8]</span> and demonstrating how the papain-like protease regulates viral spread and innate immunity <span class="cit">[10]</span>. Work on intrinsically disordered proteins showed that tau&#x27;s global structure emerges from local structure <span class="cit">[7]</span> and that disease-linked TDP-43 hyperphosphorylation suppresses condensation <span class="cit">[9]</span>.</p>
+<h3>Where it&#x27;s heading</h3>
+<p>The program is advancing integrative structural biology approaches that combine multiple experimental techniques with computational ensemble refinement <span class="cit">[5,6,7]</span>. There is continued emphasis on understanding cellular mechanisms, particularly ubiquitin-regulated processes in ER remodeling and selective autophagy <span class="cit">[11,12,15]</span>. The group is also exploring membrane-associated phenomena including gasdermin-D pore formation in atomistic detail <span class="cit">[14]</span> and lipid regulation mechanisms <span class="cit">[3]</span>. The methodological trajectory points toward increasingly efficient algorithms for large-scale ensemble optimization that enable exploring different subensembles and experimental datasets with varying confidence levels <span class="cit">[5]</span>.</p></div>
+
+<h2>ask — grounded answers with citations</h2>
+
+    <div class="qa">
+      <div class="q"><span class="cmd">ask</span> How is free energy reconstructed from single-molecule pulling experiments, and what role does the Jarzynski equality play?</div>
+      <div class="answer"><p>Free energy reconstruction from single-molecule pulling experiments relies fundamentally on the Jarzynski equality, but requires important extensions to handle the specific challenges of force spectroscopy.</p>
+<p>The core difficulty is that while &quot;Jarzynski&#x27;s remarkable identity&quot; provides a connection between nonequilibrium work and free energy differences, &quot;it relates the nonequilibrium work to free energy differences at different times, not positions&quot; <span class="cit">[2]</span>. This is problematic because pulling experiments naturally measure forces and extensions (positions), not time-dependent free energies.</p>
+<p>Hummer and colleagues overcame this challenge by developing methods to extract equilibrium free energy profiles as a function of molecular extension. Their approach shows that &quot;equilibrium free energy profiles can be extracted rigorously from repeated nonequilibrium force measurements on the basis of an extension of Jarzynski&#x27;s remarkable identity&quot; <span class="cit">[3]</span>. Specifically, &quot;by surmounting this difficulty,&quot; they &quot;were able to express the free energy profile in terms of the integral of the force with respect to extension&quot; <span class="cit">[2]</span>.</p>
+<p>A more refined method uses an inverse Weierstrass transform approach, where &quot;an inverse Weierstrass transform is used to relate the system free energy obtained from the Jarzynski equality directly to the underlying molecular free energy surface&quot; <span class="cit">[1]</span>. This avoids the need for &quot;work-weighted position histograms&quot; and provides &quot;an accurate approximation for the free energy surface...by using the method of steepest descent to evaluate the inverse transform&quot; <span class="cit">[1]</span>.</p>
+<p>The key innovation is thus the mathematical framework that bridges Jarzynski&#x27;s time-based equality to position-based free energy profiles relevant to force spectroscopy experiments.</p></div>
+      <details class="srcwrap"><summary>6 grounded sources (title · year · DOI · exact passage)</summary>
+      <ol class='sources'><li><span class="n">[1]</span> <span class="src-cite">Free energy profiles from single-molecule pulling experiments (2010)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1073/pnas.1015661107" target="_blank">doi:10.1073/pnas.1015661107</a><div class="snip">“Free energy profiles from single-molecule pulling experiments. Nonequilibrium pulling experiments provide detailed information about the thermodynamic and kinetic properties of molecules. We show that unperturbed free energy profiles as a f…”</div></li><li><span class="n">[2]</span> <span class="src-cite">Free Energy Surfaces from Single-Molecule Force Spectroscopy (2005)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1021/ar040148d" target="_blank">doi:10.1021/ar040148d</a><div class="snip">“Can one obtain the equilibrium free energy of the molecular system along the pulling coordinate from such nonequilibrium force measurements? Jarzynski&#x27;s remarkable identity does not immediately solve this problem because it relates the none…”</div></li><li><span class="n">[3]</span> <span class="src-cite">Free energy reconstruction from nonequilibrium single-molecule pulling experiments (2001)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1073/pnas.071034098" target="_blank">doi:10.1073/pnas.071034098</a><div class="snip">“Free energy reconstruction from nonequilibrium single-molecule pulling experiments. Laser tweezers and atomic force microscopes are increasingly used to probe the interactions and mechanical properties of individual molecules. Unfortunately…”</div></li><li><span class="n">[4]</span> <span class="src-cite">Atomic Force Microscopy-Based Force Spectroscopy and Multiparametric Imaging of Biomolecular and Cellular Systems (2020) §Full text (PDF)</span> <span class="tag">Full text (PDF)</span> <a href="https://doi.org/10.1021/acs.chemrev.0c00617" target="_blank">doi:10.1021/acs.chemrev.0c00617</a><div class="snip">“Nat. Methods 2015, 12, 845−851.
+( 1 9 2 )J a r z y n s k i ,C .N o n e q u i l i b r i u mE q u a l i t yf o rF r e eE n e r g y
+Differences. Phys. Rev. Lett. 1997, 78, 2690−2693.
+(193) Crooks, G. E. Entropy production fluctuation theorem a…”</div></li><li><span class="n">[5]</span> <span class="src-cite">Intrinsic Rates and Activation Free Energies from Single-Molecule Pulling Experiments (2006)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1103/physrevlett.96.108101" target="_blank">doi:10.1103/physrevlett.96.108101</a><div class="snip">“Intrinsic Rates and Activation Free Energies from Single-Molecule Pulling Experiments. We present a unified framework for extracting kinetic information from single-molecule pulling experiments at constant force or constant pulling speed. O…”</div></li><li><span class="n">[6]</span> <span class="src-cite">Free Energy Surfaces from Single-Molecule Force Spectroscopy (2005)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1021/ar040148d" target="_blank">doi:10.1021/ar040148d</a><div class="snip">“Free Energy Surfaces from Single-Molecule Force Spectroscopy. Single-molecule force spectroscopy has the potential to provide unprecedented insights into the mechanical properties of individual molecules. The unfolding of proteins and nucle…”</div></li></ol></details>
+    </div>
+    <div class="qa">
+      <div class="q"><span class="cmd">ask</span> What does Hummer&#x27;s work show about water transport through carbon nanotubes?</div>
+      <div class="answer"><p>Based on the provided passages, Hummer&#x27;s work shows several key findings about water transport through carbon nanotubes:</p>
+<p class="li"><b>1.</b> <strong>Burst-like conduction with collective motion</strong>: Water conduction through carbon nanotube channels occurs in bursts with collective water motion rather than as independent molecular events <span class="cit">[2]</span>.</p>
+<p class="li"><b>2.</b> <strong>Single-file arrangement</strong>: Water molecules are confined in a single-file arrangement within the nanotube channel, and transport involves concerted movement of these molecules <span class="cit">[2]</span>.</p>
+<p class="li"><b>3.</b> <strong>Sequential filling/emptying mechanism</strong>: The kinetics of water filling and emptying occur predominantly by sequential addition or removal of water molecules to/from a single-file chain inside the nanotube <span class="cit">[3]</span>.</p>
+<p class="li"><b>4.</b> <strong>Orientational ordering</strong>: Both advancing and receding water chains are orientationally ordered. This ordering prevents simultaneous filling from both tube ends and forces chain rupturing to occur at the tube end where a water molecule donates a hydrogen bond to the bulk fluid <span class="cit">[3]</span>.</p>
+<p class="li"><b>5.</b> <strong>Hydrogen-bonded molecular wires</strong>: Water confined in narrow carbon nanotube channels forms collectively oriented molecular wires held together by tight hydrogen bonds <span class="cit">[4]</span>.</p>
+<p>The work demonstrates that water transport through carbon nanotubes exhibits highly correlated, collective behavior that can be described by continuous-time random-walk models for single-file transport <span class="cit">[2]</span>.</p></div>
+      <details class="srcwrap"><summary>5 grounded sources (title · year · DOI · exact passage)</summary>
+      <ol class='sources'><li><span class="n">[1]</span> <span class="src-cite">Water conduction through the hydrophobic channel of a carbon nanotube (2001)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1038/35102535" target="_blank">doi:10.1038/35102535</a><div class="snip">“Water conduction through the hydrophobic channel of a carbon nanotube.…”</div></li><li><span class="n">[2]</span> <span class="src-cite">Single-File Transport of Water Molecules through a Carbon Nanotube (2002)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1103/physrevlett.89.064503" target="_blank">doi:10.1103/physrevlett.89.064503</a><div class="snip">“Single-File Transport of Water Molecules through a Carbon Nanotube. Recent molecular dynamics simulations of water transport through the interior channel of a carbon nanotube in contact with an aqueous reservoir showed that conduction occur…”</div></li><li><span class="n">[3]</span> <span class="src-cite">Filling and emptying kinetics of carbon nanotubes in water (2002)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1063/1.1519861" target="_blank">doi:10.1063/1.1519861</a><div class="snip">“Filling and emptying kinetics of carbon nanotubes in water. The kinetics of water filling and emptying the interior channel of carbon nanotubes is studied by molecular dynamics simulations. Filling and emptying occur predominantly by sequen…”</div></li><li><span class="n">[4]</span> <span class="src-cite">Macroscopically ordered water in nanopores (2008)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1073/pnas.0801448105" target="_blank">doi:10.1073/pnas.0801448105</a><div class="snip">“Macroscopically ordered water in nanopores. Water confined into the interior channels of narrow carbon nanotubes or transmembrane proteins forms collectively oriented molecular wires held together by tight hydrogen bonds. Here, we explore t…”</div></li><li><span class="n">[5]</span> <span class="src-cite">Single-file water in nanopores (2011)</span> <span class="tag">abstract</span> <a href="https://doi.org/10.1039/c1cp21086f" target="_blank">doi:10.1039/c1cp21086f</a><div class="snip">“Single-file water in nanopores. Water molecules confined to pores with sub-nanometre diameters form single-file hydrogen-bonded chains. In such nanoscale confinement, water has unusual physical properties that are exploited in biology and h…”</div></li></ol></details>
+    </div>
+
+<h2>most-cited anchors read</h2>
+<div class="card"><ul><li>Water conduction through the hydrophobic channel of a carbon nanotube <span class="mut">(2001 · 3515 cites)</span> · <a href="https://doi.org/10.1038/35102535" target="_blank">doi</a></li><li>System-Size Dependence of Diffusion Coefficients and Viscosities from Molecular Dynamics Simulations with Periodic Boundary Conditions <span class="mut">(2004 · 1486 cites)</span> · <a href="https://doi.org/10.1021/jp0477147" target="_blank">doi</a></li><li>Papain-like protease regulates SARS-CoV-2 viral spread and innate immunity <span class="mut">(2020 · 1232 cites)</span> · <a href="https://doi.org/10.1038/s41586-020-2601-5" target="_blank">doi</a></li><li>Free energy reconstruction from nonequilibrium single-molecule pulling experiments <span class="mut">(2001 · 990 cites)</span> · <a href="https://doi.org/10.1073/pnas.071034098" target="_blank">doi</a></li><li>Optimized Molecular Dynamics Force Fields Applied to the Helix−Coil Transition of Polypeptides <span class="mut">(2009 · 911 cites)</span> · <a href="https://doi.org/10.1021/jp901540t" target="_blank">doi</a></li><li>Osmotic water transport through carbon nanotube membranes <span class="mut">(2003 · 898 cites)</span> · <a href="https://doi.org/10.1073/pnas.1633354100" target="_blank">doi</a></li></ul></div>
+
+<p class="foot">Generated by <b>LabBrain</b> — a research-literature assistant I built:
+it resolves a PI on OpenAlex, ingests their open-access <b>full text</b> (Europe PMC
+structured XML → PDF → abstract), builds a <b>hybrid dense + BM25</b> retrieval index
+with reciprocal-rank fusion and LLM reranking, and answers questions grounded in the
+corpus with title · year · DOI · exact-passage citations. Embedding runs on CPU
+(ROCm-safe); every model call is timeout-guarded.<br><br>
+— <b>Gianangelo Dichio</b> · MS Data Science + BS Mathematics</p>
+</body></html>
