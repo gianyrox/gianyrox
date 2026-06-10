@@ -27,14 +27,14 @@
  &middot; structural features: yes</div>
 
 <div class="grid">
- <div class="metric"><div class="v">0.431</div>
+ <div class="metric"><div class="v">0.330</div>
    <div class="l">Held-out Pearson r (FireProtDB test)</div></div>
- <div class="metric"><div class="v">2.06</div>
+ <div class="metric"><div class="v">2.19</div>
    <div class="l">Held-out RMSE (kcal/mol)</div></div>
- <div class="metric"><div class="v">0.420</div>
-   <div class="l">S669 Pearson r (independent)</div></div>
- <div class="metric"><div class="v">3056</div>
-   <div class="l">Training mutations</div></div>
+ <div class="metric"><div class="v">0.369</div>
+   <div class="l">S669 Pearson r (full, independent)</div></div>
+ <div class="metric"><div class="v">+0.88</div>
+   <div class="l">Ssym antisymmetry bias (0 = ideal)</div></div>
 </div>
 
 <div class="card"><h2>Saturation-mutagenesis heatmap</h2>
@@ -45,22 +45,25 @@
 
 <div class="card"><h2>Top suggested stabilizing mutations</h2>
  <table><tr><th>Mutation</th><th>Predicted &Delta;&Delta;G (kcal/mol)</th><th>Call</th></tr>
- <tr><td><b>E5I</b></td><td class='stab'>-1.836</td><td>STABILIZING</td></tr><tr><td><b>E5V</b></td><td class='stab'>-1.649</td><td>STABILIZING</td></tr><tr><td><b>E5L</b></td><td class='stab'>-1.399</td><td>STABILIZING</td></tr><tr><td><b>E5Y</b></td><td class='stab'>-1.067</td><td>STABILIZING</td></tr><tr><td><b>E5M</b></td><td class='stab'>-1.035</td><td>STABILIZING</td></tr><tr><td><b>N163I</b></td><td class='stab'>-1.012</td><td>STABILIZING</td></tr><tr><td><b>K162I</b></td><td class='stab'>-0.994</td><td>STABILIZING</td></tr><tr><td><b>E22I</b></td><td class='stab'>-0.968</td><td>STABILIZING</td></tr><tr><td><b>E5T</b></td><td class='stab'>-0.903</td><td>STABILIZING</td></tr><tr><td><b>N2I</b></td><td class='stab'>-0.891</td><td>STABILIZING</td></tr><tr><td><b>K162L</b></td><td class='stab'>-0.883</td><td>STABILIZING</td></tr><tr><td><b>M1R</b></td><td class='stab'>-0.842</td><td>STABILIZING</td></tr><tr><td><b>K162R</b></td><td class='stab'>-0.816</td><td>STABILIZING</td></tr><tr><td><b>E5C</b></td><td class='stab'>-0.802</td><td>STABILIZING</td></tr><tr><td><b>E5F</b></td><td class='stab'>-0.789</td><td>STABILIZING</td></tr></table></div>
+ <tr><td><b>D10L</b></td><td class='stab'>-1.797</td><td>STABILIZING</td></tr><tr><td><b>A49Y</b></td><td class='stab'>-1.758</td><td>STABILIZING</td></tr><tr><td><b>A82Y</b></td><td class='stab'>-1.752</td><td>STABILIZING</td></tr><tr><td><b>D70L</b></td><td class='stab'>-1.705</td><td>STABILIZING</td></tr><tr><td><b>D10I</b></td><td class='stab'>-1.657</td><td>STABILIZING</td></tr><tr><td><b>A134Y</b></td><td class='stab'>-1.649</td><td>STABILIZING</td></tr><tr><td><b>S36Y</b></td><td class='stab'>-1.645</td><td>STABILIZING</td></tr><tr><td><b>G12Y</b></td><td class='stab'>-1.629</td><td>STABILIZING</td></tr><tr><td><b>G156Y</b></td><td class='stab'>-1.624</td><td>STABILIZING</td></tr><tr><td><b>E11L</b></td><td class='stab'>-1.603</td><td>STABILIZING</td></tr><tr><td><b>A112I</b></td><td class='stab'>-1.592</td><td>STABILIZING</td></tr><tr><td><b>D70I</b></td><td class='stab'>-1.586</td><td>STABILIZING</td></tr><tr><td><b>S117I</b></td><td class='stab'>-1.555</td><td>STABILIZING</td></tr><tr><td><b>A49I</b></td><td class='stab'>-1.550</td><td>STABILIZING</td></tr><tr><td><b>A41Y</b></td><td class='stab'>-1.547</td><td>STABILIZING</td></tr></table></div>
 
-<div class='card'><h2>AI interpretation (Claude)</h2><p>These mutations share a clear pattern: charged or polar surface-type residues (glutamate, lysine, asparagine) are being replaced by large hydrophobic residues (isoleucine, valine, leucine, methionine) or aromatics (tyrosine), which the predictor interprets as net stabilizing. The dominance of substitutions to bulky apolar side chains suggests the model is favoring cavity filling and improved hydrophobic packing, and possibly the removal of unfavorable buried charge or desolvation penalties if these positions are partially buried. Position 5 (E5) is especially enriched, with multiple aliphatic substitutions ranked highest, which could indicate a poorly accommodated native glutamate—perhaps an exposed or strained charge—though I cannot confirm its environment from sequence alone. Two of the candidates (N163I, K162I) lie near the C-terminus, where terminal flexibility and frustrated electrostatics sometimes make hydrophobic substitutions look favorable, but such positions can also be functionally or solubility-relevant.
 
-Honest caveats: these predictions appear to be sequence/identity-driven and lack explicit structural context, so the ddG magnitudes (all modest, under </p></div>
 
 <div class="card"><h2>Model &amp; data</h2>
- <p>Gradient-boosting regressor over interpretable biophysical features
-  (hydrophobicity, volume, charge, flexibility, polarity, helix/sheet propensity,
-  BLOSUM62, position context, and &mdash; when a PDB is supplied &mdash; relative
-  solvent accessibility, secondary structure, and CA neighbor count).</p>
+ <p>A RF regressor (chosen by grouped,
+  protein-disjoint cross-validation) over 68 interpretable
+  biophysical features: amino-acid property deltas (hydrophobicity, volume, charge,
+  flexibility, polarity, helix/sheet propensity, side-chain H-bond capacity), BLOSUM62
+  and Grantham distance, substitution-type flags, local-window composition, and &mdash;
+  when a PDB is supplied &mdash; relative solvent accessibility, secondary structure,
+  C&beta;/C&alpha; contact number, burial depth, backbone H-bond count, plus engineered
+  structure&times;chemistry interactions (e.g. cavity creation in the buried core).</p>
  <p>Trained on <b>FireProtDB</b> curated experimental &Delta;&Delta;G values
-  (protein-disjoint train/val/test splits as redistributed by the ThermoMPNN
-  benchmark), evaluated additionally on the independent <b>S669</b> benchmark.</p>
- <h2 style="margin-top:16px">Top feature importances</h2>
- <table><tr><th>Feature</th><th>Importance</th></tr><tr><td>rel_sasa</td><td>0.276</td></tr><tr><td>d_polarity</td><td>0.148</td></tr><tr><td>pos_frac</td><td>0.127</td></tr><tr><td>d_flex</td><td>0.052</td></tr><tr><td>wt_volume</td><td>0.046</td></tr><tr><td>win_helix_mean</td><td>0.046</td></tr><tr><td>win_hydro_mean</td><td>0.044</td></tr><tr><td>d_sheet_prop</td><td>0.038</td></tr><tr><td>d_volume</td><td>0.037</td></tr><tr><td>blosum62</td><td>0.030</td></tr></table></div>
+  (protein-disjoint train/val/test splits via the ThermoMPNN benchmark), with light
+  antisymmetric reverse-mutation augmentation. Evaluated on the full independent
+  <b>S669</b> benchmark and on <b>Ssym</b> for forward/reverse antisymmetry.</p>
+ <h2 style="margin-top:16px">Top feature importances (permutation, held-out)</h2>
+ <table><tr><th>Feature</th><th>Importance</th></tr><tr><td>rel_sasa</td><td>0.107</td></tr><tr><td>pos_frac</td><td>0.077</td></tr><tr><td>d_sheet_prop</td><td>0.070</td></tr><tr><td>buried_x_d_volume</td><td>0.066</td></tr><tr><td>win_hydro_mean</td><td>0.063</td></tr><tr><td>win_helix_mean</td><td>0.056</td></tr><tr><td>d_polarity</td><td>0.040</td></tr><tr><td>d_flex</td><td>0.039</td></tr><tr><td>buried_x_abs_d_hydro</td><td>0.036</td></tr><tr><td>d_volume</td><td>0.030</td></tr></table></div>
 
 <div class="card"><h2>Query sequence</h2><code>MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNCNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL</code></div>
 
@@ -69,6 +72,7 @@ Honest caveats: these predictions appear to be sequence/identity-driven and lack
  &Delta;&Delta;G predictions are computational estimates; experimental validation
  (e.g. thermal/chemical denaturation) is required before drawing conclusions.
  Data: FireProtDB (Stourac et al. 2021, NAR), S669 (Pancotti et al. 2022,
- Brief. Bioinform.), splits via ThermoMPNN (Dieckhaus et al. 2024, PNAS).
+ Brief. Bioinform.), Ssym (Pucci et al. 2018, Bioinformatics), splits via
+ ThermoMPNN (Dieckhaus et al. 2024, PNAS).
 </div>
 </div></body></html>
