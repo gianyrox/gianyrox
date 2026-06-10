@@ -1,0 +1,60 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Frank Noé</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
+<h1>I read your lab's work — <span>3 open questions</span></h1>
+<p class="sub"><b>Frank Noé</b> · Microsoft (United States) (DE) ·
+h-index 71 · 398 papers ingested ·
+2602 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your recent BioEmu paper showing how generative deep learning can emulate protein equilibrium ensembles at GPU-scale speeds—moving from the 'simulation revolution' to what might be called the 'emulation revolution' in structural biology.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Machine Learning in Materials Science</span><span class="pill">Advanced Thermodynamics and Statistical Mechanics</span><span class="pill">Erythrocyte Function and Pathophysiology</span><span class="pill">Lattice Boltzmann Simulation Studies</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>Your BioEmu system (2025) generates thousands of statistically independent protein structures per hour, but how can we systematically identify which generated conformations are most functionally relevant for specific biological processes, particularly when experimental validation is sparse? Could transformer-based models trained on sequence-structure-function relationships guide prioritization of BioEmu's ensemble outputs for experimental testing?</li><li>In your Boltzmann generators work (2019), you achieve 'one-shot' equilibrium sampling, but the approach still requires careful design of the target distribution and training data. Can large language models pre-trained on molecular dynamics trajectories learn to propose better latent space representations or training strategies that generalize across diverse molecular systems without system-specific tuning?</li><li>Your recent work on active learning for coronavirus inhibitor identification (2025) combines MD simulations with iterative screening, but the acquisition function and simulation protocol choices remain system-dependent. Could meta-learning approaches across multiple protein-ligand systems learn transferable strategies for when to trust coarse-grained versus all-atom simulations, and how to optimally balance exploration versus exploitation in the chemical space?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Markov models of molecular kinetics: Generation and validation <span class="mut">(2011 · 1340 cites)</span></li><li>PyEMMA 2: A Software Package for Estimation, Validation, and Analysis of Markov Models <span class="mut">(2015 · 1296 cites)</span></li><li>Major Histocompatibility Complex (MHC) Class I and MHC Class II Proteins: Conformational Plasticity in Antigen Presentation <span class="mut">(2017 · 1008 cites)</span></li><li>Constructing the equilibrium ensemble of folding pathways from short off-equilibrium simulations <span class="mut">(2009 · 851 cites)</span></li><li>Markov state models of biomolecular conformational dynamics <span class="mut">(2014 · 834 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – generative models for protein ensemble prioritization
+
+Dear Prof. Noé,
+
+I was captivated by your BioEmu work demonstrating how generative deep learning can emulate protein equilibrium ensembles at remarkable speed—effectively launching an "emulation revolution" in structural biology beyond classical simulation.
+
+One question I find particularly compelling: BioEmu generates thousands of statistically independent conformations hourly, but systematically identifying which are functionally relevant for specific biological processes remains challenging, especially with sparse experimental data. Could transformer-based models trained on sequence-structure-function relationships guide prioritization of these ensemble outputs for experimental validation?
+
+I'm a mathematician and data scientist pursuing a career change into computational biology. My background includes an MS in Data Science, BS in Mathematics, and production experience building AI/ML systems. Recently, I developed LabBrain—a RAG system that ingests researchers' full publication corpora, embeds them locally on GPU, and enables semantic reasoning over their work (this research brief was generated using it).
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

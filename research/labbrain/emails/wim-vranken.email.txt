@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for intrinsically disordered protein ensembles
+
+Dear Prof. Vranken,
+
+I was struck by your 2025 initiative building a unified framework for conformational ensembles of disordered proteins, particularly the challenge of integrating heterogeneous experimental data to represent probability distributions rather than static structures.
+
+I'm wondering: could modern generative models—diffusion or flow matching architectures—trained directly on experimental NMR chemical shifts and ensemble data better capture IDP conformational distributions than traditional MD approaches, and potentially accelerate the integration framework you're developing?
+
+I'm a mathematician and data scientist transitioning into computational structural biology. I hold an MS in Data Science and BS in Mathematics, and I build production AI systems—this outreach was informed by LabBrain, a RAG tool I developed that ingests a researcher's full OpenAlex corpus, embeds it locally on GPU, and enables semantic reasoning over their work.
+
+Are you taking PhD students for the 2026/27 cycle, and is funding available? I'd welcome the chance to discuss how my technical background could contribute to your lab.
+
+Best regards,
+Gianangelo Dichio

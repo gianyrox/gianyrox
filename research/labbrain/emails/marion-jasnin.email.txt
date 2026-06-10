@@ -1,0 +1,14 @@
+Subject: PhD application — ML for cryo-ET structural analysis
+
+Dear Prof. Jasnin,
+
+I was captivated by your trajectory from using neutron scattering to resolve ångström-scale water dynamics in extreme halophiles to now developing Vision Transformer architectures for segmenting cryo-tomography data capturing cytoskeletal structures in situ.
+
+I'm particularly interested in your recent work on Vision Transformer-based semantic segmentation for sparse biomedical targets. Could hybrid architectures or systematic attention mechanism modifications via neural architecture search be optimized to better capture the ångström-scale structural features you observe in cryo-ET studies of cytoskeletal assemblies like FtsZ rings, addressing the local inductive bias limitations you've identified?
+
+My background bridges mathematics (BS) and data science (MS). I build production AI/ML systems—including LabBrain, the RAG tool that generated this email's research context by embedding and reasoning over your full OpenAlex corpus locally on GPU.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available for this research direction?
+
+Best regards,
+Gianangelo Dichio

@@ -1,0 +1,60 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Konrad Meister</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
+<h1>I read your lab's work — <span>3 open questions</span></h1>
+<p class="sub"><b>Konrad Meister</b> · Boise State University (DE) ·
+h-index 32 · 130 papers ingested ·
+896 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your 2022 finding that AlphaFold2 can capture protein dynamics from sequence alone, especially given your decade of work revealing how protein-water dynamics at ice-binding surfaces determine antifreeze activity.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">nanoparticles nucleation surface interactions</span><span class="pill">Atmospheric aerosols and clouds</span><span class="pill">Polar Research and Ecology</span><span class="pill">Freezing and Crystallization Processes</span><span class="pill">Atmospheric chemistry and aerosols</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>Your AlphaFold2 work showed that sequence determines both structure and dynamics, even for IDPs. Could large language models trained on protein sequences predict ice-binding affinity or AFP hyperactivity directly from sequence, potentially identifying new hyperactive AFP candidates without requiring structure prediction as an intermediate step?</li><li>You've identified ice-like water layers at AFP surfaces above freezing and characterized nonbasal plane adsorption mechanisms. Could machine learning models trained on molecular dynamics trajectories predict which protein surface residues will nucleate these ice-like layers, enabling rational design of synthetic antifreeze polypeptides beyond the Ala-Glu systems you've already developed?</li><li>Your recent work revealed fungal ice-nucleating proteins with bacterial ancestry and β-solenoid folds that multimerize for high efficiency. Could phylogenetic language models or ancestral sequence reconstruction algorithms help trace the evolutionary pathway of INpro transfer across kingdoms and predict intermediate structures that might explain the gain-of-function in Mortierellaceae fungi?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Long-range protein–water dynamics in hyperactive insect antifreeze proteins <span class="mut">(2012 · 253 cites)</span></li><li>AlphaFold2 models indicate that protein sequence determines both structure and dynamics <span class="mut">(2022 · 234 cites)</span></li><li>MATSim-T <span class="mut">(2009 · 218 cites)</span></li><li>The adsorption of sulfur on the (100) and (111) faces of platinum; A LEED and AES study <span class="mut">(1975 · 198 cites)</span></li><li>Blocking rapid ice crystal growth through nonbasal plane adsorption of antifreeze proteins <span class="mut">(2016 · 190 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – ML for protein-ice dynamics (2026/27)
+
+Dear Prof. Meister,
+
+I was captivated by your 2022 work demonstrating that AlphaFold2 captures protein dynamics from sequence alone, particularly given your decade of research into how protein-water interactions at ice-binding surfaces govern antifreeze activity.
+
+I'm especially interested in this question from your recent directions: could machine learning models trained on molecular dynamics trajectories predict which surface residues nucleate ice-like water layers? This could enable rational design of synthetic antifreeze polypeptides beyond the Ala-Glu systems you've developed.
+
+My background positions me well for this: MS Data Science, BS Mathematics, and three years building production ML systems. I developed LabBrain, a RAG tool that embeds full research corpora locally on GPU and reasons over them—the system I used to analyze your work for this email. I'm seeking to transition from industry into research at the intersection of structural biophysics and machine learning.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available for this position?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

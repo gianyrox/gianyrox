@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Ilpo Vattulainen</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Ilpo Vattulainen</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Ilpo Vattulainen · University of Helsinki · h-index 83 · 400 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was fascinated by your discovery that pharmacologically diverse compounds from fluoxetine to psychedelics converge on direct TrkB binding—a unifying mechanism that challenges conventional understanding of how antidepressants work.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Cellular transport and secretion</span><span class="pill">Neonatal Respiratory Health Research</span><span class="pill">Cellular Mechanics and Interactions</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>Your 2023 work shows LSD and psilocin directly bind to TrkB, and your 2021 paper demonstrates TrkB's cholesterol-sensing function in its transmembrane domain—could machine learning models trained on binding affinity data predict which other psychoactive compounds might engage TrkB through similar cholesterol-dependent mechanisms, potentially accelerating the discovery of novel fast-acting antidepressants?</li><li>Across your membrane simulation work (2019, 2007) and recent findings on lipid raft dynamics with GM1-galectin interactions (2025), could generative models or LLMs trained on molecular dynamics trajectories help predict which specific lipid compositions and transient domain formations are most likely to modulate receptor conformations, addressing the computational challenge of exploring the vast compositional space of biological membranes?</li><li>Your 2026 work on IL-7R shows that oncogenic transmembrane mutations cause aberrant signaling, and you mention these are 'generally not targetable'—could deep learning approaches trained on your structural data of TMD mutations across TrkB, IL-7R, and JAK2 identify common mechanistic patterns that enable rational design of membrane-penetrating therapeutics or allosteric modulators to reverse pathogenic rewiring?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>Martini 3: a general purpose force field for coarse-grained molecular dynamics <span class="mut">(2021, 1539 cites)</span></li><li>Molecular lipidomics of exosomes released by PC-3 prostate cancer cells <span class="mut">(2013, 752 cites)</span></li><li>Antidepressant drugs act by directly binding to TRKB neurotrophin receptors <span class="mut">(2021, 659 cites)</span></li><li>Ordering effects of cholesterol and its analogues <span class="mut">(2008, 603 cites)</span></li><li>Psychedelics promote plasticity by directly binding to BDNF receptor TrkB <span class="mut">(2023, 427 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Ilpo Vattulainen</b> · University of Helsinki (FI) ·
+h-index 83 · 400 papers ingested ·
+2736 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your discovery that pharmacologically diverse drugs—from fluoxetine to ketamine to LSD—converge on directly binding TRKB's transmembrane domain, challenging decades of assumptions about antidepressant mechanisms.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Cellular transport and secretion</span><span class="pill">Neonatal Respiratory Health Research</span><span class="pill">Cellular Mechanics and Interactions</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>Your 2021 and 2023 work revealed that antidepressants and psychedelics like LSD directly bind to TRKB's transmembrane domain, bypassing traditional targets. Could transformer-based protein language models fine-tuned on transmembrane domain binding data predict which other small molecules might bind TRKB's cholesterol-sensing TMD region, potentially expanding the therapeutic landscape beyond known psychoactives?</li><li>Your 2026 study on nanodiscs showed that A2A receptor conformation becomes active-like in smaller nanodiscs but stabilizes around 19nm diameter. Could machine learning on your multiscale membrane simulation data (referencing your 2019 review) predict the size-dependent conformational distributions for other class-A GPCRs, accelerating the design of optimally-sized nanodisc systems for structural studies?</li><li>Across your recent papers (IL-7R, JAK2, EpoR), transmembrane mutations drive pathogenic signaling, yet you note these buried mutations are generally not targetable. Could generative models trained on your structural data design compensatory mutations or membrane-permeable peptides that reverse the aberrant TMD dimerization you characterized, as you achieved rationally for IL-7R?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Martini 3: a general purpose force field for coarse-grained molecular dynamics <span class="mut">(2021 · 1539 cites)</span></li><li>Molecular lipidomics of exosomes released by PC-3 prostate cancer cells <span class="mut">(2013 · 752 cites)</span></li><li>Antidepressant drugs act by directly binding to TRKB neurotrophin receptors <span class="mut">(2021 · 659 cites)</span></li><li>Ordering effects of cholesterol and its analogues <span class="mut">(2008 · 603 cites)</span></li><li>Psychedelics promote plasticity by directly binding to BDNF receptor TrkB <span class="mut">(2023 · 427 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry: ML for transmembrane drug discovery (TRKB binding prediction)
+
+Dear Prof. Vattulainen,
+
+Your discovery that pharmacologically diverse compounds—fluoxetine, ketamine, LSD—directly bind TRKB's transmembrane domain rather than conventional targets fundamentally reframes antidepressant mechanisms. This convergence fascinates me.
+
+I'm particularly interested in whether transformer-based protein language models, fine-tuned on transmembrane binding data from your 2021 and 2023 studies, could predict which other small molecules might bind TRKB's cholesterol-sensing TMD region. Such an approach could systematically expand the therapeutic landscape beyond known psychoactives.
+
+My background: MS Data Science, BS Mathematics, with production experience building AI/ML systems. I developed LabBrain, a RAG system that ingests full research corpora, embeds them locally on GPU, and enables semantic reasoning—the tool that surfaced your TRKB work for this inquiry.
+
+Are you accepting PhD students for the 2026/27 cycle? Is funding available for a project at this intersection of machine learning and transmembrane biophysics?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

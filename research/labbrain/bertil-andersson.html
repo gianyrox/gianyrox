@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Bertil Andersson</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Bertil Andersson</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Bertil Andersson · None · h-index 73 · 259 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was fascinated by your discovery that plastoquinol at the quinol oxidation site mediates the signal between light and protein phosphorylation through single-turnover flash kinetics—a mechanism that could potentially be decoded further through modern computational approaches.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Signaling Pathways in Disease</span><span class="pill">Higher Education Governance and Development</span><span class="pill">Science, Research, and Medicine</span><span class="pill">Microbial Community Ecology and Physiology</span><span class="pill">Cardiac Arrest and Resuscitation</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>In your 2000 work on FtsH protease-mediated D1 protein degradation, could machine learning models trained on structural features and reactive oxygen species exposure patterns predict which D1 protein sites are most vulnerable to photodamage, potentially identifying intervention points to extend photosystem II lifespan?</li><li>Your 1997 studies revealed plastoquinol-mediated signal transduction controlling kinase activation, but the complete molecular mechanism remained unclear. Could large language models trained on protein interaction databases combined with molecular dynamics simulations help predict the full signaling cascade from plastoquinone redox state to specific threonine phosphorylation sites on LHCII and PSII core proteins?</li><li>Given your findings that PSII core proteins and LHCII show different irradiance-dependent phosphorylation regulation, could computational models integrate your immunological phosphothreonine data with light intensity measurements to predict optimal photosynthetic efficiency under varying environmental conditions, useful for crop engineering applications?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>Photoinhibition of Photosystem II. Inactivation, protein damage and turnover <span class="mut">(1993, 2347 cites)</span></li><li>Too much of a good thing: light can be bad for photosynthesis <span class="mut">(1992, 1015 cites)</span></li><li>Lateral heterogeneity in the distribution of chlorophyll-protein complexes of the thylakoid membranes of spinach chloroplasts <span class="mut">(1980, 685 cites)</span></li><li>The Thylakoid FtsH Protease Plays a Role in the Light-Induced Turnover of the Photosystem II D1 Protein <span class="mut">(2000, 395 cites)</span></li><li>Plastoquinol at the quinol oxidation site of reduced cytochrome <i>bf</i> mediates signal transduction between light and protein phosphorylation: Thylakoid protein kinase deactivation by a single-turnover flash <span class="mut">(1997, 330 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Bertil Andersson</b> · Stockholm University (SE) ·
+h-index 73 · 259 papers ingested ·
+1228 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your discovery that plastoquinol at the quinol oxidation site mediates signal transduction to control thylakoid protein phosphorylation—the single-turnover flash experiments elegantly demonstrated kinase deactivation kinetics that still leave open questions about the intermediate molecular mechanisms.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Signaling Pathways in Disease</span><span class="pill">Higher Education Governance and Development</span><span class="pill">Science, Research, and Medicine</span><span class="pill">Microbial Community Ecology and Physiology</span><span class="pill">Cardiac Arrest and Resuscitation</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>In your 2000 work on FtsH protease involvement in D1 protein degradation, could machine learning models trained on protein structural features and reactive oxygen species damage patterns predict which D1 residues are most susceptible to photodamage, potentially revealing protease recognition sites that have remained experimentally elusive?</li><li>Your 1997 studies identified redox-controlled phosphorylation mechanisms via plastoquinol signaling, but the precise kinase activation dynamics remain unclear—could temporal modeling using recurrent neural networks on flash-induced phosphorylation time-course data reveal hidden intermediate states in the signal transduction pathway between the plastoquinone pool and kinase activation?</li><li>Given your demonstration that PSII core proteins and LHCII show different irradiance-dependent phosphorylation patterns, could a computational approach integrating phosphoproteomics data with light intensity measurements build predictive models to identify the regulatory logic distinguishing these two phosphorylation systems under variable environmental conditions?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Photoinhibition of Photosystem II. Inactivation, protein damage and turnover <span class="mut">(1993 · 2347 cites)</span></li><li>Too much of a good thing: light can be bad for photosynthesis <span class="mut">(1992 · 1015 cites)</span></li><li>Lateral heterogeneity in the distribution of chlorophyll-protein complexes of the thylakoid membranes of spinach chloroplasts <span class="mut">(1980 · 685 cites)</span></li><li>The Thylakoid FtsH Protease Plays a Role in the Light-Induced Turnover of the Photosystem II D1 Protein <span class="mut">(2000 · 395 cites)</span></li><li>Plastoquinol at the quinol oxidation site of reduced cytochrome &lt;i&gt;bf&lt;/i&gt; mediates signal transduction between light and protein phosphorylation: Thylakoid protein kinase deactivation by a single-turnover flash <span class="mut">(1997 · 330 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry: ML approaches to photosystem II redox signaling mechanisms
+
+Dear Prof. Andersson,
+
+I was captivated by your discovery that plastoquinol mediates signal transduction at the quinol oxidation site to regulate thylakoid protein phosphorylation. The single-turnover flash experiments elegantly revealed kinase deactivation kinetics, yet intermediate molecular mechanisms remain unclear.
+
+Your 1997 studies identified redox-controlled phosphorylation through plastoquinol signaling, but precise kinase activation dynamics are unresolved. Could temporal modeling with recurrent neural networks applied to flash-induced phosphorylation time-courses reveal hidden intermediate states in the transduction pathway between the plastoquinone pool and kinase activation?
+
+I'm a mathematician and data scientist transitioning into computational biology (MS Data Science, BS Mathematics). I build production ML systems—this research brief was generated by LabBrain, a RAG tool I developed that ingests full publication corpora and reasons over them locally. I'm drawn to applying these methods to unresolved questions in photosynthesis regulation.
+
+Are you accepting PhD students for 2026/27, and is funding available?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

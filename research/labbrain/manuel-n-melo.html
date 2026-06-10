@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Manuel N. Melo</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Manuel N. Melo</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Manuel N. Melo · Instituto de Tecnología Química · h-index 37 · 112 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was particularly struck by your 2018 finding that lipid-protein interactions serve as unique fingerprints for membrane proteins—it suggests a wealth of pattern recognition opportunities that computational approaches beyond traditional MD analysis might exploit.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Mitochondrial Function and Pathology</span><span class="pill">SARS-CoV-2 and COVID-19 Research</span><span class="pill">ATP Synthase and ATPases Research</span><span class="pill">Clostridium difficile and Clostridium perfringens research</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>In your 2018 work on lipid-protein interaction fingerprints and the recent 2025 Martini 3 Lipidome expansion, could machine learning models trained on MD simulation data predict unique lipid binding signatures for orphan membrane proteins, potentially accelerating the identification of functional lipid-protein interactions without exhaustive simulation of all 63+ lipid species?</li><li>Your Dry Martini and GōMartini 3 models balance computational efficiency with accuracy, but parameterization remains labor-intensive (as seen in your steroid hormone work). Could large language models trained on chemical structure-property relationships assist in automated coarse-grained bead assignment and initial parameter estimation for novel lipid classes or small molecules?</li><li>MDAnalysis has been instrumental for trajectory analysis since 2016, but identifying rare conformational events (like the ceramide-VDAC2 binding you characterized in 2019) in long simulations remains challenging. Could unsupervised ML clustering or anomaly detection methods automatically flag biologically relevant rare events in multi-microsecond Martini trajectories?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>MDAnalysis: A Python Package for the Rapid Analysis of Molecular Dynamics Simulations <span class="mut">(2016, 2106 cites)</span></li><li>Lipid Organization of the Plasma Membrane <span class="mut">(2014, 966 cites)</span></li><li>Antimicrobial peptides: linking partition, activity and high membrane-bound concentrations <span class="mut">(2009, 703 cites)</span></li><li>Cell-penetrating peptides and antimicrobial peptides: how different are they? <span class="mut">(2006, 407 cites)</span></li><li>Lipid–Protein Interactions Are Unique Fingerprints for Membrane Proteins <span class="mut">(2018, 391 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Manuel N. Melo</b> · Instituto de Tecnología Química (NL) ·
+h-index 37 · 112 papers ingested ·
+784 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>Your progression from developing MDAnalysis for trajectory analysis to building the Martini 3 lipidome with 63+ lipid species and now tackling complex systems like VDAC-ceramide interactions represents exactly the kind of multi-scale membrane biophysics challenge where I believe modern ML approaches could amplify discovery.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Mitochondrial Function and Pathology</span><span class="pill">SARS-CoV-2 and COVID-19 Research</span><span class="pill">ATP Synthase and ATPases Research</span><span class="pill">Clostridium difficile and Clostridium perfringens research</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>In your 2018 work on lipid-protein interaction fingerprints and the recent 2025 Martini 3 lipidome expansion, could machine learning models trained on MD simulation trajectories predict lipid binding preferences for novel membrane proteins without running full simulations, potentially accelerating the characterization of the hundreds of lipid species in asymmetric cellular membranes?</li><li>Given MDAnalysis's role in temporal analysis of MD trajectories and your work on large conformational changes in GōMartini 3, could transformer-based models learn to predict protein conformational transitions directly from coarse-grained representations, bypassing computationally expensive sampling of intermediate states?</li><li>Your Dry Martini implicit solvent model and recent Martini 3 refinements required extensive reparameterization of interaction matrices—could active learning approaches guide the parameterization process for new molecule types (like the steroid hormones in your 2026 work) by intelligently selecting which all-atom reference simulations are most informative for CG model optimization?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>MDAnalysis: A Python Package for the Rapid Analysis of Molecular Dynamics Simulations <span class="mut">(2016 · 2106 cites)</span></li><li>Lipid Organization of the Plasma Membrane <span class="mut">(2014 · 966 cites)</span></li><li>Antimicrobial peptides: linking partition, activity and high membrane-bound concentrations <span class="mut">(2009 · 703 cites)</span></li><li>Cell-penetrating peptides and antimicrobial peptides: how different are they? <span class="mut">(2006 · 407 cites)</span></li><li>Lipid–Protein Interactions Are Unique Fingerprints for Membrane Proteins <span class="mut">(2018 · 391 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – ML for coarse-grained MD parameterization (2026/27 cycle)
+
+Dear Prof. Melo,
+
+Your trajectory from developing MDAnalysis to building the Martini 3 lipidome with 63+ lipid species and now tackling systems like VDAC-ceramide interactions represents precisely the multi-scale membrane biophysics challenge where I believe modern ML could amplify discovery.
+
+I'm particularly interested in your Dry Martini and Martini 3 refinement work: could active learning guide parameterization for new molecule types by intelligently selecting which all-atom reference simulations most inform CG model optimization? This could streamline the process you followed for steroid hormones and future expansions.
+
+My background: MS Data Science, BS Mathematics, currently building production ML systems. I developed LabBrain, a RAG system that ingests full research corpora and reasons over them locally—the analysis informing this email came from that pipeline. I'm seeking to redirect these skills toward computational biophysics problems where data-driven methods can meaningfully accelerate simulation workflows.
+
+Are you taking PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for bioenergetics (Complex I allostery)
+
+Dear Prof. Kaila,
+
+Your 2026 discovery that quinones act as proton-collecting antennas rather than passive shuttles fundamentally reframes how we understand proton motive force generation in bioenergetic membranes.
+
+I'm particularly intrigued by the challenge of mapping the complete allosteric network in Complex I. Your work describes redox-triggered coupling across >200 Å, but identifying the full pathway of conformational propagation remains difficult. Could transformer architectures trained on your QM/MM trajectories and mutagenesis datasets learn to predict which residue perturbations drive E-channel conformational changes, potentially surfacing cryptic coupling residues invisible to conventional analysis?
+
+I'm a mathematician and data scientist transitioning into computational biophysics. I hold an MS in Data Science and BS in Mathematics, and build production ML systems—including LabBrain, the RAG tool that generated this research brief by embedding and reasoning over your full OpenAlex corpus locally.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio

@@ -1,0 +1,14 @@
+Subject: PhD inquiry: ML for transmembrane drug discovery (TRKB binding prediction)
+
+Dear Prof. Vattulainen,
+
+Your discovery that pharmacologically diverse compounds—fluoxetine, ketamine, LSD—directly bind TRKB's transmembrane domain rather than conventional targets fundamentally reframes antidepressant mechanisms. This convergence fascinates me.
+
+I'm particularly interested in whether transformer-based protein language models, fine-tuned on transmembrane binding data from your 2021 and 2023 studies, could predict which other small molecules might bind TRKB's cholesterol-sensing TMD region. Such an approach could systematically expand the therapeutic landscape beyond known psychoactives.
+
+My background: MS Data Science, BS Mathematics, with production experience building AI/ML systems. I developed LabBrain, a RAG system that ingests full research corpora, embeds them locally on GPU, and enables semantic reasoning—the tool that surfaced your TRKB work for this inquiry.
+
+Are you accepting PhD students for the 2026/27 cycle? Is funding available for a project at this intersection of machine learning and transmembrane biophysics?
+
+Best regards,
+Gianangelo Dichio

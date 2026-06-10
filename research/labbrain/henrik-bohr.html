@@ -1,0 +1,58 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Henrik Bohr</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
+<h1>I read your lab's work — <span>3 open questions</span></h1>
+<p class="sub"><b>Henrik Bohr</b> · Technical University of Denmark (DK) ·
+h-index 32 · 205 papers ingested ·
+754 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was struck by your 2024 finding that nitrite reductase shows voltammetry only when NO₂⁻ triggers major conformational expansion—a 'protein quake' rationalized through 740-atom quantum calculations.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">High-pressure geophysics and materials</span><span class="pill">Photosynthetic Processes and Mechanisms</span><span class="pill">Pulsars and Gravitational Waves Research</span><span class="pill">DNA and Nucleic Acid Chemistry</span><span class="pill">High-Energy Particle Collisions Research</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>Your 2000 work achieved 77-80% accuracy in protein secondary structure prediction using neural network ensembles with output expansion and balloting. Could modern transformer-based protein language models (ESM-2, ProteinBERT) trained on vastly larger datasets push past this ceiling, or do fundamental ambiguities in sequence-to-structure mapping create a theoretical accuracy limit that persists regardless of architecture?</li><li>In your 2021 antisense oligonucleotide paper, you predicted in vivo liver/kidney uptake using ab initio quantum mechanical calculations on stereo-defined LNA structures. Could a hybrid ML approach—using your quantum calculations as training labels—learn transferable uptake rules across chemical space faster than pure quantum methods, especially for screening thousands of phosphorothioate stereoisomers?</li><li>Your recent protein quake work (2024) on CuNIR shows that substrate binding triggers dramatic conformational changes and STM conductivity based on 740-atom quantum chemical models. Could generative models or molecular dynamics with ML force fields predict which substrate-binding events will trigger 'quake-like' expansions versus local rearrangements, potentially screening redox enzymes for electrochemical applications?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Prediction of O-glycosylation of mammalian proteins: specificity patterns of UDP-GalNAc:polypeptide &lt;i&gt;N&lt;/i&gt;-acetylgalactosaminyltransferase <span class="mut">(1995 · 241 cites)</span></li><li>Microwave-enhanced folding and denaturation of globular proteins <span class="mut">(2000 · 188 cites)</span></li><li>Protein secondary structure and homology by neural networks The α‐helices in rhodopsin <span class="mut">(1988 · 176 cites)</span></li><li>Protein distance constraints predicted by neural networks and probability density functions <span class="mut">(1997 · 159 cites)</span></li><li>A novel approach to prediction of the 3‐dimensional structures of protein backbones by neural networks <span class="mut">(1990 · 133 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – ML × quantum biophysics (2026/27)
+
+Dear Prof. Bohr,
+
+I was fascinated by your 2024 discovery that nitrite reductase exhibits voltammetric activity only when substrate binding induces a massive conformational expansion—a "protein quake" you rationalized with 740-atom quantum calculations. This raises an intriguing question: could generative models or ML force fields predict which substrate-binding events trigger quake-like expansions versus localized shifts? Such a screening tool might accelerate discovery of redox enzymes suited for electrochemical applications, complementing the quantum insight your group brings.
+
+I'm a mathematician and data scientist transitioning into computational biophysics. I hold an MS in Data Science and BS in Mathematics, and I build production ML systems—including LabBrain, the RAG tool that generated this research brief by embedding and reasoning over your OpenAlex corpus locally.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I'd welcome the chance to discuss how machine learning might extend your quantum and experimental work.
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

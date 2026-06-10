@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for ultrafast spectroscopy (2026/27 cycle)
+
+Dear Prof. Huse,
+
+I was captivated by your recent RIXS work revealing how orbital symmetry alignment drives C–H activation in metal-alkane σ-complexes, especially given how their fleeting lifetimes hinder direct experimental characterization.
+
+Your 2026 study demonstrates that these σ-complex intermediates remain weakly bound and short-lived despite enabling bond activation. I'm curious whether machine learning models trained on RIXS spectral signatures could predict which metal-ligand configurations optimize orbital alignment for activation, potentially informing photocatalyst design.
+
+My background is unconventional: I hold an MS in Data Science and BS in Mathematics, and I've spent recent years building production AI systems. Most relevant here, I developed LabBrain—a RAG pipeline that ingests full publication corpora, embeds them locally on GPU, and enables semantic reasoning over research trajectories. I'm seeking to redirect this technical foundation toward physical chemistry.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I would welcome the opportunity to discuss how ML approaches might complement your ultrafast spectroscopy program.
+
+Best regards,
+Gianangelo Dichio

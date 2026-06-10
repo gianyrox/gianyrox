@@ -1,0 +1,14 @@
+Subject: PhD inquiry – generative models for protein ensemble prioritization
+
+Dear Prof. Noé,
+
+I was captivated by your BioEmu work demonstrating how generative deep learning can emulate protein equilibrium ensembles at remarkable speed—effectively launching an "emulation revolution" in structural biology beyond classical simulation.
+
+One question I find particularly compelling: BioEmu generates thousands of statistically independent conformations hourly, but systematically identifying which are functionally relevant for specific biological processes remains challenging, especially with sparse experimental data. Could transformer-based models trained on sequence-structure-function relationships guide prioritization of these ensemble outputs for experimental validation?
+
+I'm a mathematician and data scientist pursuing a career change into computational biology. My background includes an MS in Data Science, BS in Mathematics, and production experience building AI/ML systems. Recently, I developed LabBrain—a RAG system that ingests researchers' full publication corpora, embeds them locally on GPU, and enables semantic reasoning over their work (this research brief was generated using it).
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio

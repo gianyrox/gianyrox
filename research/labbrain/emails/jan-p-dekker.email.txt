@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for mucus-microbiota interactions (2026/27)
+
+Dear Prof. Dekker,
+
+I was captivated by your research arc from early mucin glycoprotein characterization to your current work mapping how age and diet remodel the mucus-microbiota-immunity axis. I believe machine learning could help decode the complex interaction networks emerging from your transcriptomic studies.
+
+Your 2019 work revealed profound microbiota and gene expression shifts tied to age-related mucus barrier impairment. Could graph neural networks modeling the mucus-microbiota-immunity axis uncover non-linear interaction patterns explaining why certain microbial community structures resist age-associated barrier degradation?
+
+I'm a career-changing mathematician and data scientist (MS Data Science, BS Mathematics) who builds production AI/ML systems. This inquiry was informed by LabBrain, a RAG system I developed that ingests a researcher's full publication corpus and reasons over it using local GPU embedding.
+
+Are you taking PhD students for the 2026/27 cycle, and is funding available? I'd welcome the opportunity to discuss how computational approaches could advance your group's work.
+
+Best regards,
+Gianangelo Dichio

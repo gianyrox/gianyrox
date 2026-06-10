@@ -1,0 +1,14 @@
+Subject: PhD inquiry: ML for ultrafast photosynthesis spectroscopy (2026/27)
+
+Dear Prof. van Grondelle,
+
+I was fascinated by your 2020 demonstration that noise-canceling network principles reproduce photosynthetic spectra—suggesting discoverable computational rules behind the near-unity quantum efficiency you've traced from femtosecond dynamics to functional architecture over decades.
+
+Given the kaleidoscope of antenna diversity you described in 2022 and your extensive spectroscopic datasets across purple bacterial, plant, and artificial systems, could large-scale comparative machine learning across these structure-dynamics data reveal quantitative relationships that predict excitation energy transfer pathways directly from pigment arrangements and protein scaffolds?
+
+I'm a mathematician and data scientist (MS Data Science, BS Mathematics) transitioning into biophysics research. I build production AI/ML systems—including LabBrain, the RAG tool that analyzed your OpenAlex corpus to generate this research brief, running locally on GPU with semantic reasoning over your full publication record.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I'd welcome the opportunity to discuss how computational approaches might complement your ultrafast spectroscopy work.
+
+Best regards,
+Gianangelo Dichio

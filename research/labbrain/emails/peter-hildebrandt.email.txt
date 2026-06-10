@@ -1,0 +1,14 @@
+Subject: PhD inquiry: ML for phytochrome electric field mapping (2026/27)
+
+Dear Prof. Hildebrandt,
+
+Your 2025 serial-femtosecond crystallography study on Agp2-PAiRFP2 phytochrome—revealing how chromophore photoisomerization couples to protein structural changes—struck me as a compelling opportunity to apply machine learning at the frontier of biophysical spectroscopy.
+
+I'm particularly interested in your ongoing work mapping electric field propagation through conformational transitions. Could machine learning models trained on your extensive SERR spectroscopic data combined with your crystallographic structures predict field gradients across the protein domain and identify coupling residues beyond those accessible to mutational scanning?
+
+I'm a mathematician and data scientist (MS Data Science, BS Mathematics) transitioning into biophysics research. I build production ML systems—including LabBrain, the RAG tool that analyzed your OpenAlex corpus to generate this inquiry. I'm drawn to problems where interpretable models can extract physical insight from complex spectroscopic datasets.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available for this position?
+
+Best regards,
+Gianangelo Dichio

@@ -1,0 +1,14 @@
+Subject: PhD Inquiry (2026/27) – ML for Biochemical Dynamics | Gianangelo Dichio
+
+Dear Prof. Olsen,
+
+Your forty-year trajectory from discovering chaos in biological systems with dripping faucets to calculating enzymatic energy profiles on quantum computers represents a remarkable bridge between foundational nonlinear dynamics and modern computational biophysics.
+
+I am particularly intrigued by your 2023-2024 peroxidase-oxidase work revealing complex bifurcations, mixed-mode oscillations, and chaotic dynamics. Could neural network surrogate models accelerate exploration of these high-dimensional parameter spaces, potentially uncovering novel dynamic regimes computationally prohibitive through traditional numerical continuation?
+
+I am a mathematician and data scientist transitioning into research (MS Data Science, BS Mathematics). I build production AI/ML systems—this inquiry was prepared using LabBrain, a RAG tool I developed that ingests researchers' full publication corpora, embeds them locally on GPU, and enables semantic reasoning over scientific work.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I would welcome the opportunity to discuss how machine learning could advance your group's exploration of biochemical dynamics.
+
+Best regards,
+Gianangelo Dichio

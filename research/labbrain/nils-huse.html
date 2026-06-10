@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Nils Huse</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Nils Huse</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Nils Huse · Universität Hamburg · h-index 34 · 145 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was fascinated by how your 2026 RIXS work directly observes orbital symmetry alignment during C–H activation in σ-complexes—finally catching these elusive intermediates in the act.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Photochemistry and Electron Transfer Studies</span><span class="pill">Crystallography and Radiation Phenomena</span><span class="pill">Organometallic Complex Synthesis and Catalysis</span><span class="pill">Porphyrin Metabolism and Disorders</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>In your 2026 RIXS studies of C–H activation intermediates and diazines, you simulate wavepacket propagation and quantum dynamics to interpret core-excited state spectra. Could machine learning models trained on your combined experimental-theoretical datasets accelerate the inverse problem—predicting transient orbital configurations and metal-ligand covalency directly from experimental RIXS maps without full ab initio simulations for each system?</li><li>Your 2007-2008 work on spectral diffusion in liquid water showed structural correlations lost on 50-fs timescales, with energy transfer faster than hydrogen bond lifetimes. Could deep learning on 2DIR spectra help disentangle the contributions of different ultrafast mechanisms (resonant energy transfer vs structural rearrangement) and predict temperature-dependent spectral evolution from limited experimental sampling?</li><li>Across your 2026 time-resolved X-ray and IR studies of transition metal complexes (Mo(CO)₆, iridium C–H activators, cyanocobalamin), you correlate metal 4d orbital energies with ligand vibrational shifts. Could a multimodal neural network learn these metal-ligand electronic structure relationships to predict complementary observables across spectroscopic techniques, enabling real-time experiment optimization or identification of transient intermediates?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>Ultrafast memory loss and energy redistribution in the hydrogen bond network of liquid H2O <span class="mut">(2005, 749 cites)</span></li><li>Temperature dependence of the two-dimensional infrared spectrum of liquid H<sub>2</sub>O <span class="mut">(2008, 262 cites)</span></li><li>Ultrafast Structural Dynamics of Water Induced by Dissipation of Vibrational Energy <span class="mut">(2007, 230 cites)</span></li><li>Femtosecond Soft X-ray Spectroscopy of Solvated Transition-Metal Complexes: Deciphering the Interplay of Electronic and Structural Dynamics <span class="mut">(2011, 187 cites)</span></li><li>Vibrational couplings and ultrafast relaxation of the O–H bending mode in liquid H2O <span class="mut">(2006, 148 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Nils Huse</b> · Universität Hamburg (DE) ·
+h-index 34 · 145 papers ingested ·
+663 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your recent RIXS studies showing how orbital symmetry alignment drives C–H activation in metal-alkane σ-complexes, particularly given how their short lifetimes limit direct experimental characterization.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Photochemistry and Electron Transfer Studies</span><span class="pill">Crystallography and Radiation Phenomena</span><span class="pill">Organometallic Complex Synthesis and Catalysis</span><span class="pill">Porphyrin Metabolism and Disorders</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>Your 2026 work on C–H activation demonstrates how orbital symmetry alignment enables σ-complex formation, but these intermediates remain weakly bound and short-lived. Could machine learning models trained on RIXS spectral features predict which metal-ligand configurations are most likely to achieve the optimal orbital alignment for bond activation, potentially guiding the design of more efficient photocatalysts?</li><li>Across your studies from liquid water (2007-2008) to transition metal complexes (2011-2026), spectral diffusion and energy transfer occur on femtosecond timescales that challenge direct experimental observation of all intermediate states. Could neural network approaches help reconstruct the complete structural dynamics trajectory by learning mappings between partial experimental observables (IR, X-ray absorption, RIXS) and underlying molecular configurations?</li><li>Your 2026 work on cyanocobalamin shows that ligand-centered excitations energetically overlap with charge-transfer and metal-centered states, complicating state assignment from UV/visible spectra alone. Could transformer-based models trained on your multi-modal spectroscopy data (combining IR, L-edge XAS, and RIXS) learn to deconvolve overlapping electronic transitions and predict excited state character for new cobalamin derivatives?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Ultrafast memory loss and energy redistribution in the hydrogen bond network of liquid H2O <span class="mut">(2005 · 749 cites)</span></li><li>Temperature dependence of the two-dimensional infrared spectrum of liquid H&lt;sub&gt;2&lt;/sub&gt;O <span class="mut">(2008 · 262 cites)</span></li><li>Ultrafast Structural Dynamics of Water Induced by Dissipation of Vibrational Energy <span class="mut">(2007 · 230 cites)</span></li><li>Femtosecond Soft X-ray Spectroscopy of Solvated Transition-Metal Complexes: Deciphering the Interplay of Electronic and Structural Dynamics <span class="mut">(2011 · 187 cites)</span></li><li>Vibrational couplings and ultrafast relaxation of the O–H bending mode in liquid H2O <span class="mut">(2006 · 148 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – ML for ultrafast spectroscopy (2026/27 cycle)
+
+Dear Prof. Huse,
+
+I was captivated by your recent RIXS work revealing how orbital symmetry alignment drives C–H activation in metal-alkane σ-complexes, especially given how their fleeting lifetimes hinder direct experimental characterization.
+
+Your 2026 study demonstrates that these σ-complex intermediates remain weakly bound and short-lived despite enabling bond activation. I'm curious whether machine learning models trained on RIXS spectral signatures could predict which metal-ligand configurations optimize orbital alignment for activation, potentially informing photocatalyst design.
+
+My background is unconventional: I hold an MS in Data Science and BS in Mathematics, and I've spent recent years building production AI systems. Most relevant here, I developed LabBrain—a RAG pipeline that ingests full publication corpora, embeds them locally on GPU, and enables semantic reasoning over research trajectories. I'm seeking to redirect this technical foundation toward physical chemistry.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I would welcome the opportunity to discuss how ML approaches might complement your ultrafast spectroscopy program.
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

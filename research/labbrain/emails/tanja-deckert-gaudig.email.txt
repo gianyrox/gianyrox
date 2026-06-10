@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for TERS spectral analysis (2026/27)
+
+Dear Prof. Deckert-Gaudig,
+
+I was captivated by your demonstration that TERS can resolve hemozoin crystals at sub-20nm resolution within sectioned malaria-infected cells—accessing intracellular targets at this scale represents a significant technical leap beyond surface-confined measurements.
+
+I'm particularly interested in your 2013 findings on amide I suppression in protein TERS spectra. Could machine learning models trained across diverse protein specimens predict suppression magnitude from experimental parameters, enabling automated correction algorithms for structural characterization? My background positions me to explore this: I hold an MS in Data Science and BS in Mathematics, and I build production AI systems—including LabBrain, a RAG pipeline that ingests full research corpora and reasons over them using local GPU embeddings.
+
+I'm seeking to transition from applied ML into research where computational methods directly advance experimental nanoscopy. Are you accepting PhD students for the 2026/27 cycle, and is funding available for this position?
+
+I would welcome the opportunity to discuss how machine learning could complement your group's work.
+
+Best regards,
+Gianangelo Dichio

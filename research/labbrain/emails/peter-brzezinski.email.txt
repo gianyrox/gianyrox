@@ -1,0 +1,14 @@
+Subject: PhD inquiry – computational prediction of metabolic-respiratory complexes
+
+Dear Prof. Brzezinski,
+
+Your recent cryo-EM work revealing that Mqo physically couples the Krebs cycle to respiration through association with the mycobacterial III-IV supercomplex caught my attention. I believe computational methods could systematically predict similar metabolic-respiratory interactions across species.
+
+I'm particularly interested in whether large language models trained on protein interaction databases and structural data could identify overlooked metabolic enzyme-respiratory chain associations that conventional homology searches miss. Your Mqo discovery suggests these direct metabolic-respiratory linkages may be more widespread than currently appreciated, and ML approaches could accelerate their identification.
+
+I'm a mathematician and data scientist transitioning into computational biology. I hold an MS in Data Science and BS in Mathematics, and I build production AI systems—including LabBrain, the RAG tool that analyzed your OpenAlex corpus to prepare this email. I'm drawn to applying these methods to bioenergetics problems.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio

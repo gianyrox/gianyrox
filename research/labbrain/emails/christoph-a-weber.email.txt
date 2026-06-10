@@ -1,0 +1,14 @@
+Subject: PhD inquiry – phase separation theory meets machine learning
+
+Dear Prof. Weber,
+
+I was fascinated by your 2026 paper demonstrating how phase separation can drive sequence selection in oligomerization—the idea that condensed phases themselves could bias the emergence of functional sequences offers a compelling framework for understanding prebiotic chemistry.
+
+I'm particularly interested in whether machine learning models trained on thermodynamic features could predict which oligonucleotide sequences are most likely enriched in condensed phases, potentially accelerating the discovery of catalytically active sequences without exhaustive simulation.
+
+My background is in mathematics and data science (MS Data Science, BS Mathematics), and I've spent the last several years building production AI/ML systems. Most recently, I developed LabBrain, a RAG system that ingests full research corpora, embeds them locally on GPU, and enables semantic reasoning over scientific literature. I'm now seeking to redirect these skills toward fundamental questions in statistical physics and self-organization.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio

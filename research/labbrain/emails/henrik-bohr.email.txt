@@ -1,0 +1,12 @@
+Subject: PhD inquiry – ML × quantum biophysics (2026/27)
+
+Dear Prof. Bohr,
+
+I was fascinated by your 2024 discovery that nitrite reductase exhibits voltammetric activity only when substrate binding induces a massive conformational expansion—a "protein quake" you rationalized with 740-atom quantum calculations. This raises an intriguing question: could generative models or ML force fields predict which substrate-binding events trigger quake-like expansions versus localized shifts? Such a screening tool might accelerate discovery of redox enzymes suited for electrochemical applications, complementing the quantum insight your group brings.
+
+I'm a mathematician and data scientist transitioning into computational biophysics. I hold an MS in Data Science and BS in Mathematics, and I build production ML systems—including LabBrain, the RAG tool that generated this research brief by embedding and reasoning over your OpenAlex corpus locally.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I'd welcome the chance to discuss how machine learning might extend your quantum and experimental work.
+
+Best regards,
+Gianangelo Dichio

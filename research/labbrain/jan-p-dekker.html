@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Jan P. Dekker</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Jan P. Dekker</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Jan P. Dekker · Utrecht University · h-index 85 · 363 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was fascinated by your 2019 finding that aged mice show dramatically thinned colonic mucus layers alongside coordinated shifts in microbiota and immune gene expression—a systems-level barrier failure that seems ripe for computational dissection.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Gut microbiota and health</span><span class="pill">Barrier Structure and Function Studies</span><span class="pill">Gastrointestinal motility and disorders</span><span class="pill">Inflammatory Bowel Disease</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>In your 2019 study on age-associated mucus barrier impairment, you observed profound changes in both microbiota composition and host gene expression in aged mice. Could machine learning models trained on multi-omics data (transcriptomics + microbiota profiles) predict mucus layer thickness or identify early biomarkers of barrier dysfunction before histological changes become apparent?</li><li>Your 2016 work on Muc2 mice identified commensal species positively correlated with early stress responses to a compromised mucus barrier. Could natural language processing of large-scale microbiome literature combined with your transcriptomics data reveal novel bacteria-host gene regulatory networks that explain protective versus pathogenic colonization patterns in barrier-compromised states?</li><li>Across your studies on heme-induced hyperproliferation (2015), L. plantarum's barrier-protective effects (2010), and age-related mucus changes (2017, 2019), you've generated rich datasets linking microbial interventions to barrier outcomes. Could a computational model integrate these heterogeneous datasets to predict which microbial metabolites or strains would optimally restore barrier function in specific compromise scenarios (dietary, age-related, or genetic)?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>Muc2-Deficient Mice Spontaneously Develop Colitis, Indicating That MUC2 Is Critical for Colonic Protection <span class="mut">(2006, 1627 cites)</span></li><li>Energy transfer and trapping in photosynthesis <span class="mut">(1994, 1039 cites)</span></li><li>Mucin-Type Glycoproteins <span class="mut">(1992, 916 cites)</span></li><li>Supramolecular organization of thylakoid membrane proteins in green plants <span class="mut">(2004, 874 cites)</span></li><li>Regulation of human epithelial tight junction proteins by Lactobacillus plantarum in vivo and protective effects on the epithelial barrier <span class="mut">(2010, 660 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Jan P. Dekker</b> · Utrecht University (NL) ·
+h-index 85 · 363 papers ingested ·
+2072 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your trajectory from characterizing mucin glycoproteins in the early 90s to now uncovering how age and diet reshape the mucus-microbiota-immunity axis—and I believe machine learning could help decode the complex interaction networks your transcriptomic studies have revealed.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Gut microbiota and health</span><span class="pill">Barrier Structure and Function Studies</span><span class="pill">Gastrointestinal motility and disorders</span><span class="pill">Inflammatory Bowel Disease</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>In your 2016 work identifying commensal species correlated with stress responses to a compromised mucus barrier in Muc2 mice, could transformer-based models trained on paired transcriptomics-microbiota data predict early barrier dysfunction signatures before histological colitis appears, potentially identifying preventive intervention windows?</li><li>Your 2019 study revealed profound microbiota and gene expression changes associated with age-related mucus barrier impairment—could graph neural networks modeling the mucus-microbiota-immunity axis uncover non-linear interaction patterns that explain why certain microbial community structures confer resilience against age-associated barrier degradation?</li><li>Given your 2015 findings that gut microbiota facilitates heme-induced epithelial hyperproliferation by opening the mucus barrier, could large language models trained on nutritional science and microbiome literature generate mechanistic hypotheses linking specific bacterial metabolic pathways to mucin degradation patterns, accelerating the identification of dietary intervention targets?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Muc2-Deficient Mice Spontaneously Develop Colitis, Indicating That MUC2 Is Critical for Colonic Protection <span class="mut">(2006 · 1627 cites)</span></li><li>Energy transfer and trapping in photosynthesis <span class="mut">(1994 · 1039 cites)</span></li><li>Mucin-Type Glycoproteins <span class="mut">(1992 · 916 cites)</span></li><li>Supramolecular organization of thylakoid membrane proteins in green plants <span class="mut">(2004 · 874 cites)</span></li><li>Regulation of human epithelial tight junction proteins by Lactobacillus plantarum in vivo and protective effects on the epithelial barrier <span class="mut">(2010 · 660 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – ML for mucus-microbiota interactions (2026/27)
+
+Dear Prof. Dekker,
+
+I was captivated by your research arc from early mucin glycoprotein characterization to your current work mapping how age and diet remodel the mucus-microbiota-immunity axis. I believe machine learning could help decode the complex interaction networks emerging from your transcriptomic studies.
+
+Your 2019 work revealed profound microbiota and gene expression shifts tied to age-related mucus barrier impairment. Could graph neural networks modeling the mucus-microbiota-immunity axis uncover non-linear interaction patterns explaining why certain microbial community structures resist age-associated barrier degradation?
+
+I'm a career-changing mathematician and data scientist (MS Data Science, BS Mathematics) who builds production AI/ML systems. This inquiry was informed by LabBrain, a RAG system I developed that ingests a researcher's full publication corpus and reasons over it using local GPU embedding.
+
+Are you taking PhD students for the 2026/27 cycle, and is funding available? I'd welcome the opportunity to discuss how computational approaches could advance your group's work.
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

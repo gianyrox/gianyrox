@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for FTIR biosensor denoising (2026/27)
+
+Dear Prof. Gerwert,
+
+I was captivated by your recent work showing that the immuno-infrared sensor detects preclinical Alzheimer's and Parkinson's via protein misfolding—an elegant clinical application of the proton transfer mechanisms you've studied in bacteriorhodopsin since the 1980s.
+
+Your 2026 ATR-FTIR biosensor work notes that baseline drifts and artifacts remain orders of magnitude smaller than total absorbance, limiting sensitivity. Could machine learning trained on your extensive bacteriorhodopsin difference spectra library help denoise signals and predict artifact patterns in real-time, improving single-residue resolution for the immuno-infrared sensor?
+
+I'm a mathematician and data scientist (MS Data Science, BS Mathematics) transitioning to research. I build production AI systems—this inquiry was prepared using LabBrain, a RAG tool I developed that ingests and reasons over full academic corpora locally. I'm drawn to applying ML where physical insight meets real clinical impact.
+
+Are you accepting PhD students for 2026/27, and is funding available?
+
+Best regards,
+Gianangelo Dichio

@@ -1,0 +1,60 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Frank Löhr</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
+<h1>I read your lab's work — <span>3 open questions</span></h1>
+<p class="sub"><b>Frank Löhr</b> · Goethe University Frankfurt (DE) ·
+h-index 47 · 224 papers ingested ·
+1303 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was particularly intrigued by your 2024 work on LC3/GABARAP ligandability assessment for ATTEC development, especially the challenges in finding selective small molecule binders for autophagosomal degrader applications.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Cancer-related Molecular Pathways</span><span class="pill">SARS-CoV-2 and COVID-19 Research</span><span class="pill">Autophagy in Disease and Therapy</span><span class="pill">Ubiquitin and proteasome pathways</span><span class="pill">Cancer-related gene regulation</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>Your 2023 study on p63 DBD mutations showed varying mechanisms and degrees of DNA binding impairment. Could machine learning models trained on the extensive p53 mutation database predict the functional impact and classify mechanism-of-action for rare or uncharacterized p63 variants, given the high structural similarity between these paralogs?</li><li>In your 2024 NMR fragment screening work on SARS-CoV-2 Mpro, you identified time-dependent binders like Z604 from multiple libraries. Could deep learning approaches trained on chemical structure and NMR binding data help prioritize fragments with optimal growth vectors before synthesis, potentially accelerating the hit-to-lead optimization process?</li><li>Your 2017 analysis of 30 LIR motifs revealed selectivity patterns between LC3 and GABARAP families, yet predicting selectivity for novel adaptor sequences remains challenging. Could transformer-based protein language models fine-tuned on your experimental binding data decode the sequence determinants that distinguish LC3- versus GABARAP-preferring interactions beyond the canonical [W/F/Y]-X1-X2-[I/L/V] motif?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Nix is a selective autophagy receptor for mitochondrial clearance <span class="mut">(2009 · 1265 cites)</span></li><li>High level cell‐free expression and specific labeling of integral membrane proteins <span class="mut">(2004 · 250 cites)</span></li><li>Ubiquitin binding mediates the NF-κB inhibitory potential of ABIN proteins <span class="mut">(2008 · 222 cites)</span></li><li>Secondary structure determination of conserved SARS-CoV-2 RNA elements by NMR spectroscopy <span class="mut">(2020 · 190 cites)</span></li><li>Solution NMR Structure of Proteorhodopsin <span class="mut">(2011 · 173 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD Inquiry – ML for Structural Biology (2026/27)
+
+Dear Prof. Löhr,
+
+I was fascinated by your recent work characterizing LC3 and GABARAP protein families as potential degrader targets, particularly the difficulty of identifying selective small molecules that could enable autophagosomal targeting chimeras.
+
+Your 2017 analysis of thirty LIR motifs revealed clear selectivity patterns, yet predicting binding preferences for novel sequences remains difficult. Could transformer-based protein language models, fine-tuned on your experimental datasets, help decode the sequence determinants that drive LC3- versus GABARAP-preferring interactions beyond the canonical motif?
+
+I am a mathematician and data scientist seeking to transition into structural biology research. I hold an MS in Data Science and BS in Mathematics, and I build production AI/ML systems professionally. This inquiry itself was prepared using LabBrain, a RAG pipeline I developed that ingests full publication corpora, embeds them locally on GPU, and enables semantic reasoning over research outputs.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available for this position?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

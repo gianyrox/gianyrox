@@ -1,0 +1,12 @@
+Subject: PhD inquiry – ML for geothermal system optimization (2026/27)
+
+Dear Prof. Luo,
+
+I came across your work on geothermal energy systems and was particularly drawn to your focus on heat transfer optimization in ground-source heat pump configurations. I'm curious: as you refine models for thermal performance under variable geological conditions, what's the next mechanistic question you're pursuing—and could data-driven methods help navigate the high-dimensional parameter space more efficiently?
+
+I'm Gianangelo Dichio, a mathematician and data scientist transitioning into research. I hold an MS in Data Science and a BS in Mathematics, and I build production ML systems—including LabBrain, the RAG tool that analyzed your OpenAlex corpus to help me write this email. I'm drawn to problems where mathematical rigor meets real-world engineering constraints.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funded support available? I'd welcome the chance to discuss how my technical background might contribute to your group's work.
+
+Best regards,
+Gianangelo Dichio

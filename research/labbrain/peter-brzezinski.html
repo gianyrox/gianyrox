@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Peter Brzezinski</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Peter Brzezinski</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Peter Brzezinski · Stockholm University · h-index 55 · 293 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was fascinated by your 2024 discovery that the mycobacterial III₂IV₂ supercomplex exhibits obligate long-range charge transfer—it suggests that computational modeling of these electrostatic networks could reveal design principles for respiratory efficiency.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Mitochondrial Function and Pathology</span><span class="pill">Tuberculosis Research and Epidemiology</span><span class="pill">Biochemical and Molecular Research</span><span class="pill">RNA and protein synthesis mechanisms</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>In your 2024 work on the III₂IV₂ mycobacterial supercomplex, you resolved functional dynamics of long-range charge transfer, but the electrostatic interaction networks governing electron flow between the CIII₂ dimer and CIV remain complex. Could machine learning models trained on your cryo-EM structures and kinetic data predict how mutations or different lipid environments alter electron transfer rates and coupling efficiency?</li><li>Your QCM studies (1997-1998) measured energy dissipation kinetics during protein adsorption, revealing viscoelastic changes that suggest structural rearrangements at interfaces. Could large language models trained on protein sequences and structural databases predict which proteins will undergo conformational changes upon surface adsorption, and correlate these predictions with your experimentally measured D-factor time series?</li><li>Across your 2023-2025 papers on mycobacterial respiratory complexes, you've identified multiple supercomplex assemblies (III₂IV₂, Mqo-associated structures) whose stoichiometry and stability vary. Could computational approaches integrate your cryo-EM data with gene expression profiles and growth conditions to predict which respiratory chain configurations form under different metabolic states or drug pressures?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>Quartz crystal microbalance setup for frequency and <i>Q</i>-factor measurements in gaseous and liquid environments <span class="mut">(1995, 1265 cites)</span></li><li>Simultaneous frequency and dissipation factor QCM measurements of biomolecular adsorption and cell adhesion <span class="mut">(1997, 681 cites)</span></li><li>Energy Dissipation Kinetics for Protein and Antibody−Antigen Adsorption under Shear Oscillation on a Quartz Crystal Microbalance <span class="mut">(1998, 648 cites)</span></li><li>The X-ray Crystal Structures of Wild-type and EQ(I-286) Mutant Cytochrome c Oxidases from Rhodobacter sphaeroides <span class="mut">(2002, 549 cites)</span></li><li>Structural changes in hemoglobin during adsorption to solid surfaces: Effects of pH, ionic strength, and ligand binding <span class="mut">(1998, 478 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Peter Brzezinski</b> · Stockholm University (SE) ·
+h-index 55 · 293 papers ingested ·
+1449 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your 2025 cryo-EM work showing that Mqo physically associates with the mycobacterial III-IV supercomplex—directly coupling the Krebs cycle to respiration in native membranes—and I believe computational approaches could help predict similar metabolic-respiratory interactions across species.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Mitochondrial Function and Pathology</span><span class="pill">Tuberculosis Research and Epidemiology</span><span class="pill">Biochemical and Molecular Research</span><span class="pill">RNA and protein synthesis mechanisms</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>In your 2024 work on the III2IV2 mycobacterial supercomplex's long-range charge transfer mechanism, could machine learning models trained on molecular dynamics trajectories predict the electrostatic steering paths of electron carriers between complex III and IV subunits, potentially revealing why this obligate supercomplex architecture is functionally advantageous over separated complexes?</li><li>Your QCM studies (1997-1998) measured dissipation factors during protein adsorption, revealing viscoelastic changes in hemoglobin structure upon surface binding. Could transformer-based models trained on your time-resolved frequency and D-factor measurements learn to predict structural rearrangements of membrane proteins during adsorption, potentially accelerating the screening of conditions that preserve native conformations?</li><li>Given your 2025 cryo-EM discovery that malate:quinone oxidoreductase (Mqo) physically associates with the III-IV supercomplex, linking the Krebs cycle directly to respiration, could large language models trained on protein interaction databases and structural data predict similar metabolic enzyme-respiratory chain associations in other organisms that might have been missed by conventional homology approaches?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Quartz crystal microbalance setup for frequency and &lt;i&gt;Q&lt;/i&gt;-factor measurements in gaseous and liquid environments <span class="mut">(1995 · 1265 cites)</span></li><li>Simultaneous frequency and dissipation factor QCM measurements of biomolecular adsorption and cell adhesion <span class="mut">(1997 · 681 cites)</span></li><li>Energy Dissipation Kinetics for Protein and Antibody−Antigen Adsorption under Shear Oscillation on a Quartz Crystal Microbalance <span class="mut">(1998 · 648 cites)</span></li><li>The X-ray Crystal Structures of Wild-type and EQ(I-286) Mutant Cytochrome c Oxidases from Rhodobacter sphaeroides <span class="mut">(2002 · 549 cites)</span></li><li>Structural changes in hemoglobin during adsorption to solid surfaces: Effects of pH, ionic strength, and ligand binding <span class="mut">(1998 · 478 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD inquiry – computational prediction of metabolic-respiratory complexes
+
+Dear Prof. Brzezinski,
+
+Your recent cryo-EM work revealing that Mqo physically couples the Krebs cycle to respiration through association with the mycobacterial III-IV supercomplex caught my attention. I believe computational methods could systematically predict similar metabolic-respiratory interactions across species.
+
+I'm particularly interested in whether large language models trained on protein interaction databases and structural data could identify overlooked metabolic enzyme-respiratory chain associations that conventional homology searches miss. Your Mqo discovery suggests these direct metabolic-respiratory linkages may be more widespread than currently appreciated, and ML approaches could accelerate their identification.
+
+I'm a mathematician and data scientist transitioning into computational biology. I hold an MS in Data Science and BS in Mathematics, and I build production AI systems—including LabBrain, the RAG tool that analyzed your OpenAlex corpus to prepare this email. I'm drawn to applying these methods to bioenergetics problems.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

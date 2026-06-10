@@ -1,0 +1,12 @@
+Subject: PhD Position 2026/27 — ML for Membrane Transport Thermodynamics
+
+Dear Prof. Läuger,
+
+I was captivated by your work connecting irreversible thermodynamics to membrane transport and electrogenic systems like the Na,K-pump, especially how your 1969 theoretical foundations enabled rational treatment of coupling phenomena in these systems.
+
+I'm exploring whether machine learning models trained on experimental data could predict coupling coefficients in complex membrane transport more efficiently than classical irreversible thermodynamics, particularly for systems with multiple simultaneous processes as you described in 1969. Coming from a mathematics and data science background (MS Data Science, BS Mathematics), I build production AI/ML systems—including LabBrain, a RAG tool that ingests scientific corpora for research reasoning. I'm seeking to apply these skills to biophysical problems where computational approaches might complement theoretical frameworks.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I'd welcome the opportunity to discuss how modern computational methods might advance understanding of membrane transport phenomena.
+
+Best regards,
+Gianangelo Dichio

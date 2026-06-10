@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for protein-ice dynamics (2026/27)
+
+Dear Prof. Meister,
+
+I was captivated by your 2022 work demonstrating that AlphaFold2 captures protein dynamics from sequence alone, particularly given your decade of research into how protein-water interactions at ice-binding surfaces govern antifreeze activity.
+
+I'm especially interested in this question from your recent directions: could machine learning models trained on molecular dynamics trajectories predict which surface residues nucleate ice-like water layers? This could enable rational design of synthetic antifreeze polypeptides beyond the Ala-Glu systems you've developed.
+
+My background positions me well for this: MS Data Science, BS Mathematics, and three years building production ML systems. I developed LabBrain, a RAG tool that embeds full research corpora locally on GPU and reasons over them—the system I used to analyze your work for this email. I'm seeking to transition from industry into research at the intersection of structural biophysics and machine learning.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available for this position?
+
+Best regards,
+Gianangelo Dichio

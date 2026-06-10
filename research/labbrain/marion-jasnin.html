@@ -1,15 +1,60 @@
-<!doctype html><meta charset=utf-8><title>LabBrain — Marion Jasnin</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;
-background:#0d0f14;color:#e9ecf2;line-height:1.55}h1{font-size:22px}h1 span{color:#5b8cff}
-.mut{color:#8b93a5}.pill{display:inline-block;background:#1c2230;border:1px solid #262c3b;
-border-radius:6px;padding:2px 9px;margin:3px;font-size:12px;color:#cfe0ff}
-li{margin:9px 0}.card{background:#161b27;border:1px solid #262c3b;border-radius:11px;padding:16px 20px;margin:16px 0}
-strong{color:#46d39a}</style>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>LabBrain — Marion Jasnin</title>
+<style>
+:root{--bg:#0d0f14;--card:#161b27;--line:#262c3b;--fg:#e9ecf2;--mut:#8b93a5;
+--accent:#5b8cff;--good:#46d39a}
+*{box-sizing:border-box}
+body{font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;max-width:740px;
+margin:0 auto;padding:32px 18px 64px;background:var(--bg);color:var(--fg);line-height:1.55}
+h1{font-size:clamp(20px,5vw,26px);margin:0 0 6px;line-height:1.25}
+h1 span{color:var(--accent)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+.sub b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;margin:14px 0}
+.card>b{font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+.hook p{margin:8px 0 0;font-size:16px}
+.pill{display:inline-block;background:#1c2230;border:1px solid var(--line);
+border-radius:20px;padding:3px 11px;margin:4px 4px 0 0;font-size:12px;color:#cfe0ff}
+ol,ul{margin:10px 0 0;padding-left:20px}
+li{margin:9px 0}
+.mut{color:var(--mut)}
+details.email{padding:0}
+details.email summary{cursor:pointer;list-style:none;padding:16px 18px;font-size:13px;
+text-transform:uppercase;letter-spacing:.02em;color:var(--mut)}
+details.email summary b{color:var(--good)}
+details.email[open] summary{border-bottom:1px solid var(--line)}
+details.email pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;
+font-size:13px;line-height:1.6;margin:0;padding:16px 18px;color:#cfe0ff}
+.foot{color:var(--mut);font-size:13px;margin-top:26px;border-top:1px solid var(--line);
+padding-top:16px}
+a{color:var(--accent)}
+</style></head><body>
 <h1>I read your lab's work — <span>3 open questions</span></h1>
-<p class="mut">Marion Jasnin · None · h-index 17 · 56 papers ingested by LabBrain (RAG over OpenAlex abstracts).</p>
-<div class="card"><b>Email hook:</b> I was fascinated by your recent work using Vision Transformers for biomedical semantic segmentation alongside your cryo-ET studies of cytoskeletal structures, and I'm curious about how modern ML approaches could further accelerate structural biophysics research.</div>
-<div class="card"><b>Where your work is trending lately:</b><br><span class="pill">Modular Robots and Swarm Intelligence</span><span class="pill">Bacteriophages and microbial interactions</span><span class="pill">Domain Adaptation and Few-Shot Learning</span><span class="pill">Bacterial Genetics and Biotechnology</span><span class="pill">Lipid Membrane Structure and Behavior</span></div>
-<div class="card"><b>Questions your own abstracts raise:</b><ol><li>In your cryo-electron tomography studies of sarcomere contraction and Listeria comet tails, could transformer-based architectures trained on volumetric data learn to automatically segment and track individual actin filaments across time-resolved tomograms, potentially revealing dynamic remodeling patterns that are difficult to quantify manually?</li><li>Given your neutron scattering work revealing cell-type-specific water dynamics in E. coli, red blood cells, and Haloarcula marismortui, could machine learning models trained on molecular dynamics simulations predict intracellular water diffusion constants from cytoplasmic composition alone, enabling high-throughput screening of how different cellular environments affect hydration dynamics?</li><li>Your recent Vision Transformer work addresses challenges with sparse, fine-structured targets in biomedical imaging—could similar domain-adaptive segmentation approaches be applied to automatically identify and quantify FtsZ toroidal structures or Z-ring architectures in your bacterial division studies, especially when imaging conditions vary across experimental batches?</li></ol></div>
-<div class="card"><b>Most-cited anchors I read:</b><ul><li>Neutron scattering reveals extremely slow cell water in a Dead Sea organism <span class="mut">(2007, 107 cites)</span></li><li>Three-dimensional architecture of actin filaments in <i>Listeria monocytogenes</i> comet tails <span class="mut">(2013, 95 cites)</span></li><li>Down to atomic‐scale intracellular water dynamics <span class="mut">(2008, 93 cites)</span></li><li>From shell to cell: neutron scattering studies of biological water dynamics and coupling to activity <span class="mut">(2008, 89 cites)</span></li><li>The Architecture of Traveling Actin Waves Revealed by Cryo-Electron Tomography <span class="mut">(2019, 74 cites)</span></li></ul></div>
-<p class="mut">Generated by LabBrain — a tool I built that ingests a lab's corpus and reasons over it.
-I'd love to bring this kind of ML/LLM tooling to your group. — Gianangelo Dichio</p>
+<p class="sub"><b>Marion Jasnin</b> · Max Planck Institute of Biochemistry (DE) ·
+h-index 17 · 56 papers ingested ·
+305 RAG passages</p>
+<div class="card hook"><b>Hook</b><p>I was fascinated by your progression from revealing ångström-scale water dynamics in extreme halophiles using neutron scattering to now developing Vision Transformer architectures for segmenting the very cryo-tomography data that captures cytoskeletal structures in situ.</p></div>
+<div class="card"><b>Where the work is trending lately</b><br><span class="pill">Modular Robots and Swarm Intelligence</span><span class="pill">Bacteriophages and microbial interactions</span><span class="pill">Domain Adaptation and Few-Shot Learning</span><span class="pill">Bacterial Genetics and Biotechnology</span><span class="pill">Lipid Membrane Structure and Behavior</span></div>
+<div class="card"><b>Open questions your abstracts raise</b><ol><li>In your cryo-electron tomography studies of sarcomere contraction and actin filament architecture (Listeria comet tails, cardiomyocytes), could machine learning models trained on large tomogram datasets automatically segment and track individual filament orientations across contractile states, potentially revealing subtle geometric rearrangements that manual quantitative analysis might miss?</li><li>Your recent work on Vision Transformer-based semantic segmentation for sparse, fine-structured biomedical targets suggests challenges with local inductive bias—could hybrid architectures or attention mechanism modifications be systematically optimized using neural architecture search to better capture the ångström-scale structural features you observe in your cryo-ET studies of cytoskeletal assemblies like FtsZ rings?</li><li>Given your neutron scattering measurements of cell-type-specific water dynamics in E. coli, red blood cells, and halophiles, could molecular dynamics simulations combined with ML-based force field optimization help predict how specific cytoplasmic compositions (salt concentrations, macromolecular crowding) modulate the translational diffusion constants you observe experimentally?</li></ol></div>
+<div class="card"><b>Most-cited anchors I read</b><ul><li>Neutron scattering reveals extremely slow cell water in a Dead Sea organism <span class="mut">(2007 · 107 cites)</span></li><li>Three-dimensional architecture of actin filaments in &lt;i&gt;Listeria monocytogenes&lt;/i&gt; comet tails <span class="mut">(2013 · 95 cites)</span></li><li>Down to atomic‐scale intracellular water dynamics <span class="mut">(2008 · 93 cites)</span></li><li>From shell to cell: neutron scattering studies of biological water dynamics and coupling to activity <span class="mut">(2008 · 89 cites)</span></li><li>The Architecture of Traveling Actin Waves Revealed by Cryo-Electron Tomography <span class="mut">(2019 · 74 cites)</span></li></ul></div>
+<details class="card email"><summary><b>Draft cold email</b> <span class="mut">(click to expand)</span></summary><pre>Subject: PhD application — ML for cryo-ET structural analysis
+
+Dear Prof. Jasnin,
+
+I was captivated by your trajectory from using neutron scattering to resolve ångström-scale water dynamics in extreme halophiles to now developing Vision Transformer architectures for segmenting cryo-tomography data capturing cytoskeletal structures in situ.
+
+I'm particularly interested in your recent work on Vision Transformer-based semantic segmentation for sparse biomedical targets. Could hybrid architectures or systematic attention mechanism modifications via neural architecture search be optimized to better capture the ångström-scale structural features you observe in cryo-ET studies of cytoskeletal assemblies like FtsZ rings, addressing the local inductive bias limitations you've identified?
+
+My background bridges mathematics (BS) and data science (MS). I build production AI/ML systems—including LabBrain, the RAG tool that generated this email's research context by embedding and reasoning over your full OpenAlex corpus locally on GPU.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available for this research direction?
+
+Best regards,
+Gianangelo Dichio</pre></details>
+<p class="foot">Generated by <b>LabBrain</b> — a RAG tool I built that ingests a lab's
+full OpenAlex corpus, embeds it locally on GPU, and reasons over it with Claude.
+I'd love to bring this kind of ML/LLM tooling to your group.<br>— Gianangelo Dichio
+· MS Data Science + BS Mathematics</p>
+</body></html>

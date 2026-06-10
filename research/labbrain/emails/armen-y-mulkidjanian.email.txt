@@ -1,0 +1,14 @@
+Subject: PhD inquiry – ML for ancestral enzyme reconstruction (2026/27)
+
+Dear Prof. Mulkidjanian,
+
+I was captivated by your 2022 structural work revealing that a single conserved hydrogen bond between Walker A Ser/Thr and Walker B Glu/Asp drives catalysis across 3,136 P-loop NTPase structures—a unifying mechanism across one of life's oldest enzyme families.
+
+I'm interested in whether transformer-based protein language models could predict which non-canonical Walker motif substitutions preserve this critical H-bond network, potentially exposing the evolutionary constraints you mapped across this family.
+
+My background: MS Data Science, BS Mathematics, now building production ML systems. This inquiry was prepared using LabBrain, a RAG tool I developed that embeds and reasons over full research corpora locally. I'm drawn to applying modern ML to deep questions in molecular evolution.
+
+Are you accepting PhD students for the 2026/27 cycle, and is funding available? I'd value the chance to discuss how computational approaches might complement your structural and evolutionary work.
+
+Best regards,
+Gianangelo Dichio
