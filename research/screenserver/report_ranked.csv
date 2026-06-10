@@ -1,0 +1,16 @@
+rank,name,smiles,developability_score,Aqueous Solubility (logS),Lipophilicity (logD 7.4),BBB Penetration,hERG Cardiotox (blocker),Lipinski_violations,Lipinski_pass,Veber_pass,QED
+1,Paracetamol,CC(=O)NC1=CC=C(O)C=C1,87.7,-1.0631,0.6079,0.9961,0.0053,0,True,True,0.595
+2,Penicillin_G,CC1(C)SC2C(NC(=O)CC3=CC=CC=C3)C(=O)N2C1C(=O)O,84.9,-2.6131,0.9702,0.0288,0.022,0,True,True,0.798
+3,Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,84.2,-0.8017,-0.0049,0.9979,0.0115,0,True,True,0.538
+4,Caffeic_acid,OC(=O)/C=C/C1=CC=C(O)C(O)=C1,82.2,-1.854,0.5366,0.8481,0.0017,0,True,True,0.472
+5,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,81.0,-1.9283,0.146,0.0321,0.0128,0,True,True,0.55
+6,Metformin,CN(C)C(=N)N=C(N)N,79.5,-0.4453,-0.301,0.7978,0.0052,0,True,True,0.282
+7,Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,76.1,-3.2661,0.6569,0.0284,0.2156,0,True,True,0.822
+8,Diazepam,CN1C(=O)CN=C(C2=CC=CC=C2)C2=CC=C(Cl)C=C12,71.3,-3.732,2.8398,0.9999,0.3984,0,True,True,0.792
+9,Morphine,CN1CCC23C4OC5=C(O)C=CC(=C45)CC2C1CC=C3O,66.3,-3.1352,1.7245,0.9997,0.7931,0,True,True,0.769
+10,Warfarin,CC(=O)CC(C1=CC=CC=C1)C1=C(O)C2=CC=CC=C2OC1=O,57.9,-3.9614,1.3042,0.1574,0.8966,0,True,True,0.748
+11,Sildenafil,CCCC1=NN(C)C2=C1N=C(N(CC)C2=O)C1=CC(=CC=C1OCC)S(=O)(=O)N1CCN(C)CC1,51.8,-3.7038,2.1245,0.9583,0.9914,1,True,True,0.465
+12,Fluoxetine,CNCCC(OC1=CC=C(C(F)(F)F)C=C1)C1=CC=CC=C1,51.1,-5.7139,1.7528,0.996,0.9992,0,True,True,0.852
+13,Loratadine,CCOC(=O)N1CCC(=C2C3=CC=CC=C3CCC3=CC(Cl)=CC=C23)CC1,37.0,-6.2239,3.704,0.9841,0.9979,1,True,True,0.653
+14,Astemizole,COC1=CC=C(CCN2CCC(NC3=NC4=CC=CC=C4N3CC3=CC=C(F)C=C3)CC2)C=C1,34.2,-6.4267,3.4926,0.9863,0.9997,1,True,True,0.386
+15,Atorvastatin,CC(C)C1=C(C(=O)NC2=CC=CC=C2)C(C2=CC=CC=C2)=C(C2=CC=C(F)C=C2)N1CCC(O)CC(O)CC(=O)O,28.5,-5.8916,2.4643,0.415,0.9978,2,False,False,0.163
