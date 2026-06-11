@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LabBrain — ask a lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--good:#46d39a}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.55}
+.wrap{max-width:820px;margin:0 auto;padding:22px}
+a{color:var(--acc)} .crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
+h1{font-size:24px;margin:0 0 2px} h1 span{color:var(--teal)}
+.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
+input[type=text]{background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px}
+#author{width:240px} #q{width:100%;margin-top:8px}
+.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
+.tag{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:14px;padding:2px 9px;margin:2px 3px;font-size:11.5px;cursor:pointer}
+.ans{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;white-space:pre-wrap;display:none;font-size:13.5px}
+.status{color:var(--mut);font-size:12.5px;margin:8px 0;min-height:16px}
+.offline{background:#2c2510;border:1px solid #5a4a1f;color:#ffce6b;border-radius:10px;padding:10px 13px;font-size:12.5px;display:none;margin-top:10px}
+.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #2a9d8f;border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="crumb"><a href="/research">← research</a> · <a href="/research/labbrain/">email drafts</a> · <a href="demo.html">example output</a></div>
+<h1>Lab<span>Brain</span> · ask a lab</h1>
+<div class="sub">Names a PI → LabBrain reads their papers (full text where open) and answers your question, grounded with citations.
+<span id="be" style="color:#8b93a5">checking backend…</span></div>
+
+<div><input type="text" id="author" placeholder="PI name, e.g. Gerhard Hummer" value="Gerhard Hummer"></div>
+<input type="text" id="q" placeholder="Ask something about their research…" value="How does this lab reconstruct free energy from pulling experiments?">
+<div style="margin-top:10px"><button class="btn" onclick="ask()">▶ Ask</button></div>
+<div style="margin-top:8px">
+  <span class="tag" onclick="setEx('Manuel N. Melo','What lipid-protein interactions does this lab model?')">Melo · lipids</span>
+  <span class="tag" onclick="setEx('Frank Noé','How does this lab use machine learning for molecular dynamics?')">Noé · ML+MD</span>
+  <span class="tag" onclick="setEx('Ben Schuler','What does single-molecule FRET reveal about disordered proteins here?')">Schuler · smFRET</span>
+</div>
+<div class="status" id="status"></div>
+<div class="ans" id="ans"></div>
+<div class="offline" id="offlineMsg">⚠ The live LabBrain server is not active right now. See the <a href="demo.html">example Q&amp;A output</a>,
+the <a href="/research/labbrain/">38 cold-email drafts</a>, or run it yourself:
+<code>python labbrain.py build "&lt;PI&gt;" &amp;&amp; python labbrain.py ask "&lt;question&gt;"</code> (<a href="https://github.com/gianyrox/labbrain">code</a>).</div>
+
+<div class="note">Building a PI's corpus on first ask takes ~30–60 s (full-text ingestion + hybrid retrieval + LLM answer);
+cached after that. The full tool also does <b>summarize</b> and <b>compare</b> (co-advisor finder).
+<a href="https://github.com/gianyrox/labbrain">github.com/gianyrox/labbrain</a></div>
+</div>
+<script>
+let API=null, ONLINE=false;
+function goOffline(){document.getElementById('be').textContent='server not active';document.getElementById('be').style.color='#ffce6b';document.getElementById('offlineMsg').style.display='block';}
+fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{API=j.url;return fetch(API+"/health");})
+  .then(r=>{if(!r.ok)throw 0;return r.json();})
+  .then(()=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';})
+  .catch(()=>goOffline());
+function setEx(a,q){document.getElementById('author').value=a;document.getElementById('q').value=q;}
+function st(m,sp){document.getElementById('status').innerHTML=(sp?'<span class="spin"></span>':'')+(m||'');}
+async function ask(){
+  if(!ONLINE){document.getElementById('offlineMsg').style.display='block';return;}
+  const author=document.getElementById('author').value.trim(), q=document.getElementById('q').value.trim();
+  if(!author||q.length<5){st('enter a PI and a question');return;}
+  document.getElementById('ans').style.display='none';
+  st('reading '+author+'’s papers and answering… (first ask ~30–60s)',true);
+  try{
+    const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(),240000);
+    const r=await fetch(API+"/labbrain/ask",{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({author,question:q}),signal:ctrl.signal});
+    clearTimeout(to);
+    const j=await r.json();
+    if(!r.ok){st('✗ '+(j.detail||'error'));return;}
+    st('');
+    document.getElementById('ans').style.display='block';
+    document.getElementById('ans').textContent=j.answer;
+  }catch(e){st('✗ request failed or timed out');document.getElementById('offlineMsg').style.display='block';}
+}
+</script></body></html>

@@ -60,12 +60,14 @@ with SOTA antisymmetry (Ssym bias ≈0); structural features (via <code>--pdb</c
 <a href="https://github.com/gianyrox/stabilitydesigner">github.com/gianyrox/stabilitydesigner</a></div>
 </div>
 <script>
-const API="https://beaches-launch-strip-told.trycloudflare.com";
+let API=null, ONLINE=false;
 const T4="MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNTNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL";
 const BARNASE="AQVINTFDGVADYLQTYHKLPDNYITKSEAQALGWVASKGNLADVAPGKSIGGDIFSNREGKLPGKSGRTWREADINYTSGFRNSDRILYSSDWLIYKTTDHYQTFTKIR";
-let ONLINE=false;
-fetch(API+"/health").then(r=>r.json()).then(j=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';})
-  .catch(()=>{document.getElementById('be').textContent='backend offline';document.getElementById('be').style.color='#ffce6b';document.getElementById('offlineMsg').style.display='block';});
+function goOffline(){document.getElementById('be').textContent='server not active';document.getElementById('be').style.color='#ffce6b';document.getElementById('offlineMsg').style.display='block';}
+fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{API=j.url;return fetch(API+"/health");})
+  .then(r=>{if(!r.ok)throw 0;return r.json();})
+  .then(()=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';})
+  .catch(()=>goOffline());
 function st(m){document.getElementById('status').textContent=m||'';}
 function seq(){return document.getElementById('seq').value.trim();}
 async function predict(){
