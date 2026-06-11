@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TrajMine — live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:22px}a{color:var(--acc)}.crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
+h1{font-size:24px;margin:0 0 2px}h1 span{color:var(--teal)}.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
+.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.status{color:var(--mut);font-size:12.5px;margin:8px 0;min-height:16px}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #2a9d8f;border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;vertical-align:middle;margin-right:6px}@keyframes s{to{transform:rotate(360deg)}}
+iframe{width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;background:#fff;display:none;margin-top:12px}
+.offline{background:#2c2510;border:1px solid #5a4a1f;color:#ffce6b;border-radius:10px;padding:10px 13px;font-size:12.5px;display:none;margin-top:10px}
+.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+</style></head><body><div class="wrap">
+<div class="crumb"><a href="/research">← research</a></div>
+<h1>Traj<span>Mine</span> · live</h1>
+<div class="sub">Run the full MD-mechanism pipeline — tICA + Markov State Model (implied timescales, PCCA+ macrostates, MFPT),
+native-contacts, DSSP timeline — live on the alanine-dipeptide benchmark trajectory.
+<span id="be" style="color:#8b93a5">checking backend…</span></div>
+
+<div class="row">
+  <button class="btn" onclick="go()">▶ Run MSM analysis (alanine dipeptide, 250 ns)</button>
+</div>
+<div class="status" id="status"></div>
+<iframe id="frame"></iframe>
+<div class="offline" id="off">⚠ The live server is not active right now. See the static <a href="index.html">report</a>,
+or run on your own trajectory locally: <code>python trajmine.py analyze traj.xtc --top top.pdb</code> (<a href="https://github.com/gianyrox/trajmine">code</a>).</div>
+<div class="note">Your own trajectories (often multi-GB) are best run via the CLI — <code>analyze traj.xtc --top top.pdb</code> handles
+<code>.xtc/.trr/.dcd/.nc/.h5</code> with chunked IO. <a href="https://github.com/gianyrox/trajmine">github.com/gianyrox/trajmine</a></div>
+</div>
+<script>
+let API=null,ONLINE=false;
+function off(){document.getElementById('be').textContent='server not active';document.getElementById('be').style.color='#ffce6b';document.getElementById('off').style.display='block';}
+fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{API=j.url;return fetch(API+'/health');}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(()=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';}).catch(off);
+function st(m,sp){document.getElementById('status').innerHTML=(sp?'<span class=spin></span>':'')+(m||'');}
+async function go(){
+  if(!ONLINE){off();return;}
+  st('building the Markov State Model… (~1–3 min)',true);document.getElementById('frame').style.display='none';
+  try{
+    const fd=new FormData();fd.append('demo','md');
+    const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),480000);
+    const r=await fetch(API+'/trajmine/run',{method:'POST',body:fd,signal:ctrl.signal});clearTimeout(to);
+    const j=await r.json(); if(!r.ok){st('✗ '+(j.detail||'error'));return;}
+    st(''); const fr=document.getElementById('frame'); fr.srcdoc=j.report_html; fr.style.display='block';
+  }catch(e){st('✗ failed or timed out');off();}
+}
+</script></body></html>

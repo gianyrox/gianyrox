@@ -42,7 +42,8 @@ h3{font-size:13px;margin:14px 4px 4px;color:#cfe}
 
 <input type="text" id="smi" placeholder="SMILES…  e.g. aspirin  CC(=O)Oc1ccccc1C(=O)O" value="CC(=O)Oc1ccccc1C(=O)O">
 <div class="row">
-  <button class="btn" onclick="run()">▶ Analyze</button>
+  <button class="btn" onclick="run()">▶ Analyze (instant)</button>
+  <button class="btn" id="mlbtn" style="background:#5b8cff;color:#04122e" onclick="fullML()">▶ Full ML ADMET <span id="be" style="font-weight:400;opacity:.8">·…</span></button>
   <span class="tag" onclick="ex('CC(=O)Oc1ccccc1C(=O)O','aspirin')">aspirin</span>
   <span class="tag" onclick="ex('CN1C=NC2=C1C(=O)N(C(=O)N2C)C','caffeine')">caffeine</span>
   <span class="tag" onclick="ex('CC(C)Cc1ccc(cc1)C(C)C(=O)O','ibuprofen')">ibuprofen</span>
@@ -59,9 +60,31 @@ h3{font-size:13px;margin:14px 4px 4px;color:#cfe}
   </div>
 </div>
 
-<div class="note">Descriptors + rules run entirely in your browser (RDKit-WASM). The full tool adds <b>13 trained ADMET endpoints</b>
-(solubility, hERG, CYPs, Ames, Caco-2, DILI…) with scaffold-split metrics, PAINS/Brenk alerts, applicability domain &amp; confidence, and library screening:
-<a href="https://github.com/gianyrox/screenserver">github.com/gianyrox/screenserver</a> · <a href="report.html">see the 15-drug screen report →</a></div>
+<div id="mlstatus" style="color:#8b93a5;font-size:12.5px;margin-top:10px;min-height:16px"></div>
+<iframe id="mlframe" style="width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;background:#fff;display:none;margin-top:10px"></iframe>
+
+<div class="note"><b>Instant</b> = RDKit descriptors + drug-likeness in your browser. <b>Full ML ADMET</b> runs the real
+<b>13 trained endpoints</b> on the server (solubility, hERG, CYPs, Ames, Caco-2, DILI…) with PAINS/Brenk alerts, applicability
+domain &amp; confidence. Paste several SMILES (one per line) to screen a small library.
+<a href="https://github.com/gianyrox/screenserver">github.com/gianyrox/screenserver</a> · <a href="report.html">example report →</a></div>
+<script>
+let SS_API=null;
+fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{SS_API=j.url;return fetch(j.url+'/health');}).then(r=>{if(!r.ok)throw 0;document.getElementById('be').textContent='· server live';}).catch(()=>{document.getElementById('be').textContent='· server off';});
+async function fullML(){
+  const smiles=document.getElementById('smi').value.trim();
+  if(!smiles){document.getElementById('mlstatus').textContent='enter at least one SMILES';return;}
+  if(!SS_API){document.getElementById('mlstatus').textContent='server not active — instant analysis works above; or run the CLI.';return;}
+  document.getElementById('mlstatus').innerHTML='<span style="display:inline-block;width:11px;height:11px;border:2px solid #5b8cff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px"></span>running 13 ADMET models on server…';
+  document.getElementById('mlframe').style.display='none';
+  try{
+    const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),200000);
+    const r=await fetch(SS_API+'/screenserver/screen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({smiles}),signal:ctrl.signal});clearTimeout(to);
+    const j=await r.json(); if(!r.ok){document.getElementById('mlstatus').textContent='✗ '+(j.detail||'error');return;}
+    document.getElementById('mlstatus').textContent='';const fr=document.getElementById('mlframe');fr.srcdoc=j.report_html;fr.style.display='block';
+  }catch(e){document.getElementById('mlstatus').textContent='✗ failed or timed out';}
+}
+const _s=document.createElement('style');_s.textContent='@keyframes spin{to{transform:rotate(360deg)}}';document.head.appendChild(_s);
+</script>
 </div>
 <script>
 let RD=null;
