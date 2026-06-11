@@ -1,58 +1,276 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PatchSeqML — live</title>
+<title>PatchSeqML — automated patch-clamp ephys analysis</title>
+<meta name="description" content="Drop in a raw current-clamp recording, get the full eFEL/Allen intrinsic-electrophysiology feature set, QC, and firing-type classification back as a report — in seconds, no SDK.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
-.wrap{max-width:1000px;margin:0 auto;padding:22px}a{color:var(--acc)}.crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
-h1{font-size:24px;margin:0 0 2px}h1 span{color:var(--teal)}.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
-.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
-.btn.s{background:#1c2230;color:#e9ecf2;border:1px solid var(--line)}
-.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
-input[type=file]{color:var(--mut);font-size:12.5px}
-.status{color:var(--mut);font-size:12.5px;margin:8px 0;min-height:16px}
-.spin{display:inline-block;width:12px;height:12px;border:2px solid #2a9d8f;border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;vertical-align:middle;margin-right:6px}@keyframes s{to{transform:rotate(360deg)}}
-iframe{width:100%;height:78vh;border:1px solid var(--line);border-radius:12px;background:#fff;display:none;margin-top:12px}
-.offline{background:#2c2510;border:1px solid #5a4a1f;color:#ffce6b;border-radius:10px;padding:10px 13px;font-size:12.5px;display:none;margin-top:10px}
-.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
-</style></head><body><div class="wrap">
-<div class="crumb"><a href="/research">← research</a> · <a href="index.html">example report</a></div>
-<h1>Patch<span>SeqML</span> · live</h1>
-<div class="sub">Upload a current-clamp recording (<b>.abf</b> / .nwb) → full intrinsic-ephys feature extraction (spikes, AP shape, F-I,
-rheobase, input resistance, sag), firing-type classification, and QC — the same pipeline cross-validated 100% against eFEL.
-<span id="be" style="color:#8b93a5">checking backend…</span></div>
+:root{
+  --bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;
+  --mut:#8b93a5;--ink:#e9ecf2;--rad:12px;--ok:#46d39a;--warn:#ffce6b;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);
+  color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 22px 60px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.crumb{color:var(--mut);font-size:12.5px;margin-bottom:14px}
+.crumb a{color:var(--mut)}
 
-<div class="row">
-  <input type="file" id="file" accept=".abf,.nwb">
-  <button class="btn" onclick="go(false)">▶ Analyze my recording</button>
-  <button class="btn s" onclick="go(true)">try the HH-sim demo</button>
+/* header */
+.head{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px;justify-content:space-between}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.3px}h1 span{color:var(--teal)}
+.tag{font-size:14.5px;color:var(--ink);margin:0 0 2px;max-width:680px}
+.tag b{color:#fff;font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:7px;background:#11151f;
+  border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;
+  color:var(--mut);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mut);flex:none}
+.dot.live{background:var(--ok);box-shadow:0 0 0 3px rgba(70,211,154,.18)}
+.dot.down{background:var(--warn)}
+
+/* card */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);
+  padding:20px;margin-top:18px}
+.card h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);
+  margin:0 0 12px;font-weight:700}
+
+/* analyze panel */
+.drop{border:1.5px dashed var(--line);border-radius:10px;padding:18px;text-align:center;
+  transition:border-color .15s,background .15s;cursor:pointer}
+.drop.over{border-color:var(--teal);background:rgba(42,157,143,.07)}
+.drop .big{font-size:14px;color:var(--ink)}
+.drop .small{font-size:12px;color:var(--mut);margin-top:4px}
+.drop .fname{color:var(--teal);font-weight:600}
+input[type=file]{display:none}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{padding:10px 18px;background:var(--teal);color:#06231f;border:none;border-radius:8px;
+  font-weight:700;cursor:pointer;font-size:13.5px;font-family:inherit}
+.btn:hover{filter:brightness(1.06)}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn.s{background:#1c2230;color:var(--ink);border:1px solid var(--line)}
+
+/* status / loading */
+.status{font-size:13px;margin:14px 0 0;min-height:18px;color:var(--mut)}
+.status.err{color:var(--warn)}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--teal);
+  border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;
+  vertical-align:-2px;margin-right:7px}
+@keyframes s{to{transform:rotate(360deg)}}
+.steps{font-size:12px;color:var(--mut);margin-top:6px}
+
+/* result iframe */
+iframe{width:100%;height:80vh;border:1px solid var(--line);border-radius:var(--rad);
+  background:#fff;display:none;margin-top:16px}
+
+/* offline */
+.offline{background:#221d0e;border:1px solid #5a4a1f;color:var(--warn);
+  border-radius:10px;padding:14px 16px;font-size:13px;display:none;margin-top:16px}
+.offline a{color:var(--warn);font-weight:600}
+.offline .opts{margin-top:8px;color:#d8c79a}
+
+/* who-its-for + valueprop grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.mini h2{margin-top:0}
+.vp{list-style:none;padding:0;margin:0}
+.vp li{padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+.vp li:last-child{border-bottom:none}
+.vp b{color:#fff}
+.who{font-size:13px;color:#cdd3df}.who li{margin:5px 0}
+
+/* feature pills */
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.pill{font-size:11.5px;background:#11151f;border:1px solid var(--line);
+  border-radius:999px;padding:4px 10px;color:#b9c0cf}
+
+.note{color:var(--mut);font-size:12px;margin-top:22px;border-top:1px solid var(--line);
+  padding-top:12px}
+.note b{color:#cdd3df}
+</style></head>
+
+<body><div class="wrap">
+
+<div class="crumb"><a href="/research">← research</a> &nbsp;/&nbsp; PatchSeqML</div>
+
+<div class="head">
+  <div>
+    <h1>Patch<span>SeqML</span></h1>
+    <p class="tag">Drop in a raw current-clamp recording and get the <b>full
+    intrinsic-electrophysiology feature set</b> — AP shape, F–I curve, rheobase,
+    input resistance, sag, adaptation — plus QC and an <b>RS / FS / IB
+    firing-type</b> call, as a report. eFEL-grade, in seconds, no SDK.</p>
+  </div>
+  <div class="chip" id="chip"><span class="dot" id="dot"></span><span id="be">checking backend…</span></div>
 </div>
-<div class="status" id="status"></div>
-<iframe id="frame"></iframe>
-<div class="offline" id="off">⚠ The live server is not active right now. See the <a href="index.html">example report</a>,
-or run locally: <code>python patchseqml.py analyze yourcell.abf</code> (<a href="https://github.com/gianyrox/patchseqml">code</a>).</div>
-<div class="note">Real eFEL/Allen feature set; validated on Allen human neurons. Large files process server-side; nothing is stored.
-<a href="https://github.com/gianyrox/patchseqml">github.com/gianyrox/patchseqml</a></div>
+
+<!-- ANALYZE -->
+<div class="card">
+  <h2>Analyze a recording</h2>
+
+  <label class="drop" id="drop" for="file">
+    <div class="big" id="dropbig">Choose or drop a current-clamp file</div>
+    <div class="small" id="dropsmall">Axon <b>.abf</b> or <b>.nwb</b> (v1 / v2) · processed server-side, nothing is stored</div>
+  </label>
+  <input type="file" id="file" accept=".abf,.nwb">
+
+  <div class="btns">
+    <button class="btn" id="goReal" onclick="go(false)">Analyze my recording</button>
+    <button class="btn s" id="goSim" onclick="go(true)">Try the HH-sim demo</button>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div class="steps" id="steps"></div>
+
+  <iframe id="frame" title="PatchSeqML report"></iframe>
+
+  <div class="offline" id="off">
+    The live analysis server is not active right now.
+    <div class="opts">
+      You can still: &nbsp;·&nbsp; <a href="index.html">view an example report</a>
+      &nbsp;·&nbsp; <a href="https://github.com/gianyrox/patchseqml">get the source on GitHub</a>
+      &nbsp;·&nbsp; run it locally: <code>python patchseqml.py analyze yourcell.abf</code>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE PROP + WHO -->
+<div class="grid2">
+  <div class="card mini">
+    <h2>Why it's different</h2>
+    <ul class="vp">
+      <li><b>Turnkey.</b> File-in → report-out. Stimulus protocol auto-detected — no manual epoch tagging.</li>
+      <li><b>Complete.</b> The full intrinsic set in one pass, a superset of Allen IPFX's AP-only scope.</li>
+      <li><b>Validated.</b> Every feature cross-checked sweep-by-sweep against <b>eFEL</b> (100% agreement) + QC + sanity checks. Tested on Allen human neurons.</li>
+      <li><b>Frictionless.</b> Pure CPU numpy/scipy — no GPU, no Allen SDK, no license.</li>
+    </ul>
+    <div class="pills">
+      <span class="pill">AP threshold / peak / amplitude</span>
+      <span class="pill">half-width</span>
+      <span class="pill">up/downstroke</span>
+      <span class="pill">phase-plane</span>
+      <span class="pill">F–I gain</span>
+      <span class="pill">rheobase</span>
+      <span class="pill">input resistance</span>
+      <span class="pill">membrane τ</span>
+      <span class="pill">sag ratio/τ</span>
+      <span class="pill">fast/slow AHP</span>
+      <span class="pill">ISI CV</span>
+      <span class="pill">adaptation</span>
+      <span class="pill">rebound</span>
+    </div>
+  </div>
+
+  <div class="card mini">
+    <h2>Who it's for</h2>
+    <ul class="who">
+      <li><b>Ion-channel &amp; neurophysiology labs</b> running step current-clamp protocols.</li>
+      <li><b>Patch-seq researchers</b> needing fast, reproducible ephys feature vectors to pair with scRNA-seq / morphology.</li>
+      <li><b>Channelopathy &amp; drug-screening groups</b> comparing intrinsic excitability across genotypes or compounds.</li>
+      <li><b>Trainees</b> who need reference-correct features without learning a feature-extraction SDK first.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="note">
+  Positioned as the <b>turnkey, validated</b> layer between raw recordings and
+  reference libraries (eFEL, Allen IPFX) — and a free, scriptable alternative to
+  GUI suites (pCLAMP/Clampfit, AxoGraph). Recordings are processed server-side
+  and <b>nothing is stored</b>.
+  &nbsp;·&nbsp; <a href="https://github.com/gianyrox/patchseqml">github.com/gianyrox/patchseqml</a>
+  &nbsp;·&nbsp; <a href="index.html">example report</a>
+</div>
+
 </div>
 <script>
-let API=null,ONLINE=false;
-function off(){document.getElementById('be').textContent='server not active';document.getElementById('be').style.color='#ffce6b';document.getElementById('off').style.display='block';}
-fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{API=j.url;return fetch(API+'/health');}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(()=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';}).catch(off);
-function st(m,sp){document.getElementById('status').innerHTML=(sp?'<span class=spin></span>':'')+(m||'');}
+let API=null,ONLINE=false,BUSY=false;
+const $=id=>document.getElementById(id);
+
+function setOffline(){
+  ONLINE=false;
+  $('dot').className='dot down';
+  $('be').textContent='server not active';
+  $('off').style.display='block';
+}
+function setLive(){
+  ONLINE=true;
+  $('dot').className='dot live';
+  $('be').textContent='backend live';
+  $('off').style.display='none';
+}
+
+// backend discovery
+fetch('/research/api.json',{cache:'no-store'})
+  .then(r=>r.json())
+  .then(j=>{API=j.url;return fetch(API+'/health');})
+  .then(r=>{if(!r.ok)throw 0;return r.json();})
+  .then(setLive)
+  .catch(setOffline);
+
+// file picker UX
+const drop=$('drop'),fileInput=$('file');
+fileInput.addEventListener('change',()=>{
+  const f=fileInput.files[0];
+  if(f){
+    $('dropbig').innerHTML='Selected: <span class="fname">'+f.name+'</span>';
+    $('dropsmall').textContent=(f.size/1048576).toFixed(1)+' MB — ready to analyze';
+  }
+});
+['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop',ev=>{
+  const f=ev.dataTransfer.files[0];
+  if(f){fileInput.files=ev.dataTransfer.files;fileInput.dispatchEvent(new Event('change'));}
+});
+
+// loading-step cycle for a sense of progress
+let stepTimer=null;
+const STEPS=['loading sweeps…','detecting action potentials…','extracting intrinsic features…',
+  'building F–I curve…','running QC + firing-type classifier…','rendering report…'];
+function startSteps(){
+  let i=0;$('steps').textContent=STEPS[0];
+  stepTimer=setInterval(()=>{i=Math.min(i+1,STEPS.length-1);$('steps').textContent=STEPS[i];},2600);
+}
+function stopSteps(){clearInterval(stepTimer);$('steps').textContent='';}
+
+function status(msg,spin,err){
+  $('status').className='status'+(err?' err':'');
+  $('status').innerHTML=(spin?'<span class="spin"></span>':'')+(msg||'');
+}
+function setBusy(b){
+  BUSY=b;$('goReal').disabled=b;$('goSim').disabled=b;
+}
+
 async function go(demo){
-  if(!ONLINE){off();return;}
-  const fd=new FormData(); const f=document.getElementById('file').files[0];
-  if(demo||!f){fd.append('mode','sim');st('running HH-simulation demo…',true);}
-  else{fd.append('file',f);st('analyzing '+f.name+'…',true);}
-  document.getElementById('frame').style.display='none';
+  if(BUSY)return;
+  if(!ONLINE){setOffline();status('Live server unavailable — see options below.',false,true);return;}
+  const fd=new FormData();
+  const f=fileInput.files[0];
+  if(demo||!f){
+    fd.append('mode','sim');
+    status('Running the Hodgkin–Huxley simulation demo…',true);
+  }else{
+    fd.append('file',f);
+    status('Analyzing '+f.name+'…',true);
+  }
+  $('frame').style.display='none';
+  setBusy(true);startSteps();
   try{
     const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),280000);
-    const r=await fetch(API+'/patchseqml/run',{method:'POST',body:fd,signal:ctrl.signal});clearTimeout(to);
-    const j=await r.json(); if(!r.ok){st('✗ '+(j.detail||'error'));return;}
-    st(''); const fr=document.getElementById('frame'); fr.srcdoc=j.report_html; fr.style.display='block';
-  }catch(e){st('✗ failed or timed out');off();}
+    const r=await fetch(API+'/patchseqml/run',{method:'POST',body:fd,signal:ctrl.signal});
+    clearTimeout(to);
+    let j;try{j=await r.json();}catch(_){j={};}
+    if(!r.ok){status('Analysis failed: '+(j.detail||('HTTP '+r.status)),false,true);return;}
+    status('Done.',false);
+    const fr=$('frame');fr.srcdoc=j.report_html;fr.style.display='block';
+    fr.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){
+    status('Request failed or timed out. The server may have gone offline.',false,true);
+    setOffline();
+  }finally{
+    setBusy(false);stopSteps();
+  }
 }
 </script></body></html>

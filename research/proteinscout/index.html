@@ -3,63 +3,131 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ProteinScout — live</title>
-<meta name="description" content="Per-residue protein biophysics in your browser: hydropathy/TM, aggregation, disorder, charge.">
+<title>ProteinScout — per-residue protein biophysics</title>
+<meta name="description" content="Paste a protein sequence or UniProt accession and get every per-residue biophysical track in one run — transmembrane, aggregation, disorder, charge/pI, signal peptide, coiled-coil — with an ML layer that beats the raw scales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--good:#46d39a;--bad:#ff7a7a}
+:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--good:#46d39a;--bad:#ff7a7a;--r:12px}
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
-.wrap{max-width:1000px;margin:0 auto;padding:22px}
-a{color:var(--acc)} .crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
-h1{font-size:24px;margin:0 0 2px} h1 span{color:var(--teal)}
-.sub{color:var(--mut);font-size:13px;margin-bottom:16px}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 22px 60px}
+a{color:var(--acc);text-decoration:none} a:hover{text-decoration:underline}
+.crumb{color:var(--mut);font-size:12.5px;margin-bottom:8px}
+.head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.3px} h1 span{color:var(--teal)}
+.vp{font-size:15px;color:#dfe4ee;max-width:680px;margin:2px 0 0;font-weight:500}
+.sub{color:var(--mut);font-size:12.5px;margin:8px 0 0;max-width:720px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:6px 13px;font-size:12.5px;color:var(--mut);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#5a6172;display:inline-block}
+.dot.on{background:var(--good);box-shadow:0 0 7px var(--good)} .dot.off{background:#ffce6b}
+
+.who{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin:18px 0 4px}
+@media(max-width:720px){.who{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.card h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--teal)}
+.card ul{margin:0;padding-left:18px;color:#cdd3df;font-size:13px} .card li{margin:3px 0}
+.card.who-for ul{padding-left:16px}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin:18px 0}
+.panel .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);margin-bottom:6px}
 textarea{width:100%;min-height:78px;background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:10px;padding:11px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;resize:vertical}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
-input[type=text]{background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:13px;width:180px}
-.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:11px 0 0}
+input[type=text]{background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13px;width:180px}
+.btn{padding:10px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
+.btn:hover{filter:brightness(1.08)}
 .btn.s{background:#1c2230;color:#e9ecf2;border:1px solid var(--line)}
+.btn.ml{background:var(--acc);color:#04122e}
 label{font-size:12.5px;color:var(--mut)}
 input[type=range]{accent-color:var(--teal);vertical-align:middle}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.exrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:11px}
+.exlbl{font-size:11.5px;color:var(--mut);margin-right:2px}
+.tag{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:14px;padding:3px 10px;font-size:11.5px;cursor:pointer;color:#dfe4ee}
+.tag:hover{border-color:var(--teal)}
+#err{color:var(--bad);font-size:12.5px;margin-top:8px;min-height:16px}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
 @media(max-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
-.kv{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.kv b{display:block;font-size:20px;color:var(--teal)} .kv span{font-size:11.5px;color:var(--mut)}
+.kv{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.kv b{display:block;font-size:21px;color:var(--teal)} .kv span{font-size:11.5px;color:var(--mut)}
 .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:8px 12px 12px;margin:12px 0}
 .chartbox h3{font-size:13px;margin:6px 4px 2px} .chartbox h3 small{color:var(--mut);font-weight:400}
 .tables{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
 @media(max-width:760px){.tables{grid-template-columns:1fr}}
-.tbl{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.tbl{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12.5px}
 .tbl h4{margin:0 0 6px;font-size:12.5px} .tbl .reg{color:#cfe;font-family:ui-monospace,monospace} .tbl .mut{color:var(--mut)}
-.tag{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:14px;padding:2px 9px;margin:2px 3px 2px 0;font-size:11.5px;cursor:pointer}
-.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
-#err{color:var(--bad);font-size:12.5px;margin-top:6px;min-height:16px}
+
+.mlhead{display:flex;align-items:center;gap:8px;margin-top:8px}
+#mlstatus{color:var(--mut);font-size:12.5px;min-height:16px}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid var(--acc);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+#mlframe{width:100%;height:80vh;border:1px solid var(--line);border-radius:var(--r);background:#fff;display:none;margin-top:10px}
+
+.offline{background:#2c2510;border:1px solid #5a4a1f;color:#ffce6b;border-radius:var(--r);padding:13px 15px;font-size:12.5px;display:none;margin-top:12px;line-height:1.6}
+.offline code{background:#1a160a;padding:1px 6px;border-radius:4px;color:#ffe199;font-family:ui-monospace,monospace}
+.note{color:var(--mut);font-size:12px;margin-top:22px;border-top:1px solid var(--line);padding-top:12px;line-height:1.7}
 </style>
 </head>
 <body><div class="wrap">
-<div class="crumb"><a href="/research">← research</a></div>
-<h1>Protein<span>Scout</span> · live</h1>
-<div class="sub">Paste a protein sequence (or a UniProt accession) → per-residue biophysics, computed in your browser from published scales.
-Hydropathy/TM (Kyte–Doolittle), aggregation (AGGRESCAN a3v), disorder (TOP-IDP), charge &amp; pI.</div>
 
-<textarea id="seq" placeholder="Paste sequence or FASTA…  e.g. amyloid-β42: DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA"></textarea>
-<div class="row">
-  <input type="text" id="acc" placeholder="UniProt acc e.g. P37840">
-  <button class="btn s" onclick="fetchUniprot()">fetch UniProt</button>
-  <button class="btn" onclick="run()">▶ Analyze (instant)</button>
-  <button class="btn" id="mlbtn" style="background:#5b8cff;color:#04122e" onclick="fullML()">▶ Full ML analysis <span id="be" style="font-weight:400;opacity:.8">·…</span></button>
-  <label>window <b id="winv" style="color:#2a9d8f">19</b> <input type="range" id="win" min="5" max="25" step="2" value="19" oninput="document.getElementById('winv').textContent=this.value;if(LAST)run()"></label>
+<div class="crumb"><a href="/research">← research</a></div>
+
+<div class="head">
+  <div>
+    <h1>Protein<span>Scout</span></h1>
+    <p class="vp">Every per-residue biophysical track in one run — and an ML layer that beats the raw scales.</p>
+    <p class="sub">Paste a protein sequence or a UniProt accession to map transmembrane helices, aggregation-prone regions,
+    disorder, charge / pI, signal peptide and coiled-coils on a single axis. Published scales run instantly in your browser;
+    the full server pipeline adds WALTZ-DB / DisProt / UniProt-trained ML models with honest held-out benchmarks.</p>
+  </div>
+  <div class="chip"><span class="dot" id="dot"></span><span id="be">checking backend…</span></div>
 </div>
-<div class="row" style="gap:6px">
-  <span class="tag" onclick="ex('DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA')">Aβ42</span>
-  <span class="tag" onclick="accEx('P37840')">α-synuclein</span>
-  <span class="tag" onclick="accEx('P02945')">bacteriorhodopsin</span>
-  <span class="tag" onclick="accEx('P04637')">p53</span>
-  <span class="tag" onclick="accEx('P01308')">insulin</span>
+
+<div class="who">
+  <div class="card">
+    <h4>What it does</h4>
+    <ul>
+      <li><b>Transmembrane</b> helices + in/out topology (positive-inside rule)</li>
+      <li><b>Aggregation</b>-prone regions (AGGRESCAN scale + WALTZ-DB amyloid ML)</li>
+      <li><b>Disorder</b>, charge-hydropathy (Uversky), NCPR / FCR, MoRF hints</li>
+      <li><b>Signal peptide</b>, <b>coiled-coil</b>, low-complexity, pI &amp; net charge</li>
+      <li>Self-contained HTML report + an honest <b>ML-vs-scale benchmark</b> table</li>
+    </ul>
+  </div>
+  <div class="card who-for">
+    <h4>Who it's for</h4>
+    <ul>
+      <li>Protein engineers triaging aggregation</li>
+      <li>Structural / membrane biologists</li>
+      <li>Neurodegeneration &amp; amyloid labs</li>
+      <li>Intrinsic-disorder (IDP) researchers</li>
+    </ul>
+  </div>
 </div>
-<div id="err"></div>
+
+<div class="panel">
+  <div class="lbl">Sequence (raw / FASTA) or UniProt accession</div>
+  <textarea id="seq" placeholder="Paste sequence or FASTA…  e.g. amyloid-β42: DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA"></textarea>
+  <div class="row">
+    <input type="text" id="acc" placeholder="UniProt acc e.g. P37840">
+    <button class="btn s" onclick="fetchUniprot()">fetch UniProt</button>
+    <button class="btn" onclick="run()">▶ Analyze (instant)</button>
+    <button class="btn ml" id="mlbtn" onclick="fullML()">▶ Full ML analysis</button>
+    <label>window <b id="winv" style="color:var(--teal)">19</b>
+      <input type="range" id="win" min="5" max="25" step="2" value="19"
+        oninput="document.getElementById('winv').textContent=this.value;if(LAST)run()"></label>
+  </div>
+  <div class="exrow">
+    <span class="exlbl">examples:</span>
+    <span class="tag" onclick="ex('DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA')">Aβ42 (amyloid)</span>
+    <span class="tag" onclick="accEx('P37840')">α-synuclein · P37840</span>
+    <span class="tag" onclick="accEx('P02945')">bacteriorhodopsin · P02945</span>
+    <span class="tag" onclick="accEx('P04637')">p53 · P04637</span>
+    <span class="tag" onclick="accEx('P01308')">insulin · P01308</span>
+  </div>
+  <div id="err"></div>
+</div>
 
 <div id="out" style="display:none">
   <div class="cards" id="kv"></div>
@@ -74,32 +142,49 @@ Hydropathy/TM (Kyte–Doolittle), aggregation (AGGRESCAN a3v), disorder (TOP-IDP
   </div>
 </div>
 
-<div id="mlstatus" style="color:#8b93a5;font-size:12.5px;margin-top:10px;min-height:16px"></div>
-<iframe id="mlframe" style="width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;background:#fff;display:none;margin-top:10px"></iframe>
+<div class="mlhead"><div id="mlstatus"></div></div>
+<iframe id="mlframe" title="Full ML report"></iframe>
 
-<div class="note"><b>Instant</b> = published scales in your browser. <b>Full ML analysis</b> runs the real pipeline on the server —
-the ML layer that <b>beats</b> the scales (WALTZ-DB/DisProt/UniProt-trained), UniProt-annotation overlay, signal-peptide &amp;
-coiled-coil prediction. <a href="https://github.com/gianyrox/proteinscout">github.com/gianyrox/proteinscout</a> · <a href="report.html">example report →</a></div>
+<div class="offline" id="offlineMsg">⚠ The live ML backend is not active right now. The <b>instant</b> in-browser
+analysis above still works. You can also see the <a href="report.html">validated example report</a>,
+grab the <a href="https://github.com/gianyrox/proteinscout">code on GitHub</a>, and run it locally:
+<br><code>python proteinscout.py analyze "DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA"</code></div>
+
+<div class="note"><b>Instant</b> = published scales computed in your browser for fast feedback.
+<b>Full ML analysis</b> runs the real CPU-only pipeline on the server — the ML layer that <b>beats</b> the single-scale
+baselines (WALTZ-DB / DisProt / UniProt-trained, with held-out ROC-AUC), UniProt-annotation overlay, signal-peptide &amp;
+coiled-coil prediction. No GPU, no model download, no alignment database.
+<a href="https://github.com/gianyrox/proteinscout">github.com/gianyrox/proteinscout</a> · <a href="report.html">example report →</a></div>
+
 <script>
-let PS_API=null;
-fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{PS_API=j.url;return fetch(j.url+'/health');}).then(r=>{if(!r.ok)throw 0;document.getElementById('be').textContent='· server live';}).catch(()=>{document.getElementById('be').textContent='· server off';});
+// ---- backend discovery + health ----
+let PS_API=null, ONLINE=false;
+function goOffline(){PS_API=null;ONLINE=false;document.getElementById('be').textContent='server not active';
+  document.getElementById('dot').className='dot off';document.getElementById('offlineMsg').style.display='block';}
+fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{PS_API=j.url;return fetch(j.url+'/health');})
+  .then(r=>{if(!r.ok)throw 0;ONLINE=true;document.getElementById('be').textContent='backend live';
+    document.getElementById('dot').className='dot on';}).catch(()=>goOffline());
+
 async function fullML(){
   const acc=document.getElementById('acc').value.trim();
   const inp = acc || document.getElementById('seq').value;
-  if(!PS_API){document.getElementById('mlstatus').textContent='server not active — instant analysis still works above; or run the CLI.';return;}
-  document.getElementById('mlstatus').innerHTML='<span style="display:inline-block;width:11px;height:11px;border:2px solid #5b8cff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px"></span>running full ML pipeline on server…';
+  if(!inp.trim()){document.getElementById('mlstatus').textContent='enter a sequence or UniProt accession first.';return;}
+  if(!ONLINE){document.getElementById('offlineMsg').style.display='block';
+    document.getElementById('mlstatus').textContent='server not active — see the offline options below.';return;}
+  document.getElementById('mlstatus').innerHTML='<span class="spin"></span> running full ML pipeline on server…';
   document.getElementById('mlframe').style.display='none';
   try{
     const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),200000);
-    const r=await fetch(PS_API+'/proteinscout/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input:inp}),signal:ctrl.signal});clearTimeout(to);
-    const j=await r.json(); if(!r.ok){document.getElementById('mlstatus').textContent='✗ '+(j.detail||'error');return;}
-    document.getElementById('mlstatus').textContent='';const fr=document.getElementById('mlframe');fr.srcdoc=j.report_html;fr.style.display='block';
-  }catch(e){document.getElementById('mlstatus').textContent='✗ failed or timed out';}
+    const r=await fetch(PS_API+'/proteinscout/analyze',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({input:inp}),signal:ctrl.signal});clearTimeout(to);
+    const j=await r.json();
+    if(!r.ok){document.getElementById('mlstatus').textContent='✗ '+(j.detail||'error');return;}
+    document.getElementById('mlstatus').textContent='✓ full report ready';
+    const fr=document.getElementById('mlframe');fr.srcdoc=j.report_html;fr.style.display='block';
+  }catch(e){document.getElementById('mlstatus').textContent='✗ request failed or timed out';}
 }
-const _s=document.createElement('style');_s.textContent='@keyframes spin{to{transform:rotate(360deg)}}';document.head.appendChild(_s);
-</script>
-</div>
-<script>
+
+// ---- instant in-browser scales ----
 const KD={I:4.5,V:4.2,L:3.8,F:2.8,C:2.5,M:1.9,A:1.8,G:-0.4,T:-0.7,S:-0.8,W:-0.9,Y:-1.3,P:-1.6,H:-3.2,E:-3.5,Q:-3.5,D:-3.5,N:-3.5,K:-3.9,R:-4.5};
 const AGG={I:1.822,F:1.754,V:1.594,L:1.380,Y:1.159,W:1.037,M:0.910,C:0.604,A:-0.036,T:-0.159,S:-0.294,P:-0.334,G:-0.535,K:-0.931,H:-1.033,Q:-1.231,R:-1.240,N:-1.302,E:-1.412,D:-1.836};
 const TOP={A:0.06,R:0.180,N:0.007,D:0.192,C:0.02,Q:0.318,E:0.736,G:0.166,H:0.303,I:-0.486,L:-0.326,K:0.586,M:-0.397,F:-0.697,P:0.987,S:0.341,T:0.059,W:-0.884,Y:-0.510,V:-0.121};
@@ -138,7 +223,7 @@ function regions(mask,minLen){
   }
   return out;
 }
-function ex(s){document.getElementById('seq').value=s;run();}
+function ex(s){document.getElementById('acc').value='';document.getElementById('seq').value=s;run();}
 function accEx(a){document.getElementById('acc').value=a;fetchUniprot();}
 async function fetchUniprot(){
   const a=document.getElementById('acc').value.trim();if(!a)return;
@@ -148,7 +233,7 @@ async function fetchUniprot(){
     if(!r.ok)throw new Error('not found');
     const fa=await r.text();
     document.getElementById('seq').value=fa;err('');run();
-  }catch(e){err('UniProt fetch failed: '+e.message);}
+  }catch(e){err('UniProt fetch failed: '+e.message+' — paste the sequence directly.');}
 }
 function err(m){document.getElementById('err').textContent=m||'';}
 function mkChart(id,labels,data,color,fill){
@@ -191,4 +276,5 @@ function run(){
   document.getElementById('tAPR').innerHTML='<h4>Aggregation-prone regions ('+apr.length+')</h4>'+fmt(apr);
   document.getElementById('tIDR').innerHTML='<h4>Disordered regions ('+idr.length+')</h4>'+fmt(idr);
 }
-</script></body></html>
+</script>
+</div></body></html>
