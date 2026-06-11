@@ -1,57 +1,195 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CryoTriage — live</title>
+<title>CryoTriage — automated cryo-EM micrograph QC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
-.wrap{max-width:1000px;margin:0 auto;padding:22px}a{color:var(--acc)}.crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
-h1{font-size:24px;margin:0 0 2px}h1 span{color:var(--teal)}.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
-.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
-.btn.s{background:#1c2230;color:#e9ecf2;border:1px solid var(--line)}
-.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}input[type=file]{color:var(--mut);font-size:12.5px}
-.status{color:var(--mut);font-size:12.5px;margin:8px 0;min-height:16px}
-.spin{display:inline-block;width:12px;height:12px;border:2px solid #2a9d8f;border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;vertical-align:middle;margin-right:6px}@keyframes s{to{transform:rotate(360deg)}}
-iframe{width:100%;height:78vh;border:1px solid var(--line);border-radius:12px;background:#fff;display:none;margin-top:12px}
-.offline{background:#2c2510;border:1px solid #5a4a1f;color:#ffce6b;border-radius:10px;padding:10px 13px;font-size:12.5px;display:none;margin-top:10px}
-.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
-</style></head><body><div class="wrap">
-<div class="crumb"><a href="/research">← research</a> · <a href="index.html">example report</a></div>
-<h1>Cryo<span>Triage</span> · live</h1>
-<div class="sub">Upload a cryo-EM micrograph (<b>.mrc</b> / .tif / .png) → 2D astigmatic CTF fit (defocus, astigmatism, resolution),
-ice/drift detection, PASS/FLAG/REJECT verdict. Known-defocus recovery mean error 5.1 Å.
-<span id="be" style="color:#8b93a5">checking backend…</span></div>
+:root{
+  --bg:#0d0f14;--panel:#161b27;--panel2:#1b2130;--line:#262c3b;
+  --teal:#2a9d8f;--teal-d:#06231f;--acc:#5b8cff;
+  --txt:#e9ecf2;--mut:#8b93a5;--warn:#ffce6b;--ok:#46d39a
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 22px 56px}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+code{background:#11151f;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px;color:#cdd5e3}
 
-<div class="row">
-  <input type="file" id="file" accept=".mrc,.tif,.tiff,.png,.jpg">
-  <button class="btn" onclick="go(false)">▶ Triage my micrograph</button>
-  <button class="btn s" onclick="go(true)">try the synthetic demo</button>
+/* header */
+.crumb{color:var(--mut);font-size:12.5px;margin-bottom:10px}
+.topline{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+h1{font-size:26px;margin:0 0 3px;letter-spacing:-.3px}h1 span{color:var(--teal)}
+.vp{color:var(--mut);font-size:14px;max-width:640px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12.5px;color:var(--mut);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#5a6273;flex:none}
+.dot.ok{background:var(--ok);box-shadow:0 0 0 3px rgba(70,211,154,.18)}
+.dot.bad{background:var(--warn);box-shadow:0 0 0 3px rgba(255,206,107,.16)}
+
+/* value strip */
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 8px}
+.who .c{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.who .c h3{margin:0 0 5px;font-size:13px;color:var(--teal);font-weight:700;letter-spacing:.2px}
+.who .c p{margin:0;font-size:12.8px;color:var(--mut)}
+
+/* main panel */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:20px}
+.drop{border:1.5px dashed #313a4f;border-radius:12px;background:var(--panel2);padding:30px 20px;text-align:center;transition:.15s;cursor:pointer}
+.drop:hover{border-color:var(--teal);background:#1d2533}
+.drop.over{border-color:var(--teal);background:#15302b;border-style:solid}
+.drop .big{font-size:15px;font-weight:600;margin-bottom:4px}
+.drop .sm{font-size:12.5px;color:var(--mut)}
+.drop .ic{font-size:26px;margin-bottom:8px;opacity:.85}
+.filechip{display:none;align-items:center;gap:9px;margin:12px auto 0;max-width:max-content;background:#11151f;border:1px solid var(--line);border-radius:9px;padding:7px 12px;font-size:13px}
+.filechip b{color:var(--txt);font-weight:600}.filechip .x{color:var(--mut);cursor:pointer;font-weight:700;padding:0 2px}.filechip .x:hover{color:var(--warn)}
+
+.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.btn{padding:11px 18px;background:var(--teal);color:var(--teal-d);border:none;border-radius:9px;font-weight:700;cursor:pointer;font-size:13.5px;font-family:inherit;transition:.12s}
+.btn:hover{filter:brightness(1.07)}
+.btn:disabled{opacity:.5;cursor:not-allowed;filter:none}
+.btn.s{background:#1c2230;color:var(--txt);border:1px solid var(--line)}
+.btn.s:hover{background:#232b3c;filter:none}
+
+.status{font-size:13px;margin:14px 2px 0;min-height:18px;color:var(--mut)}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--teal);border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes s{to{transform:rotate(360deg)}}
+.bar{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:12px;display:none}
+.bar i{display:block;height:100%;width:35%;background:linear-gradient(90deg,var(--teal),var(--acc));border-radius:3px;animation:slide 1.4s ease-in-out infinite}
+@keyframes slide{0%{margin-left:-35%}100%{margin-left:100%}}
+
+iframe{width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;background:#0d1117;display:none;margin-top:18px}
+
+.offline{background:#241d0c;border:1px solid #5a4a1f;color:var(--warn);border-radius:11px;padding:13px 15px;font-size:13px;display:none;margin-top:16px;line-height:1.6}
+.offline a{color:var(--warn);text-decoration:underline}
+.offline b{color:#ffe0a0}
+
+.note{color:var(--mut);font-size:12px;margin-top:22px;border-top:1px solid var(--line);padding-top:13px;line-height:1.7}
+.note .privacy{color:#9aa7bd}
+
+@media(max-width:720px){
+  .who{grid-template-columns:1fr}
+  iframe{height:70vh}
+  h1{font-size:23px}
+}
+</style></head>
+<body><div class="wrap">
+
+<div class="crumb"><a href="/research">← research</a> · <a href="index.html">example report</a> · <a href="https://github.com/gianyrox/cryotriage">code</a></div>
+
+<div class="topline">
+  <div>
+    <h1>Cryo<span>Triage</span></h1>
+    <div class="vp">Automated cryo-EM micrograph quality control. 2D astigmatic CTF fit
+      (defocus, astigmatism, resolution), ice &amp; drift detection, and a
+      <b>PASS / FLAG / REJECT</b> verdict — first-principles, CPU-only, no RELION or cryoSPARC required.</div>
+  </div>
+  <div class="chip"><span class="dot" id="dot"></span><span id="be">checking backend…</span></div>
 </div>
-<div class="status" id="status"></div>
-<iframe id="frame"></iframe>
-<div class="offline" id="off">⚠ The live server is not active right now. See the <a href="index.html">example report</a>,
-or run locally: <code>python cryotriage.py triage your_micrographs/</code> (<a href="https://github.com/gianyrox/cryotriage">code</a>).</div>
-<div class="note">First-principles CTF estimation (no CTFFIND/RELION dependency); validated on EMPIAR-10025 &amp; 10061.
-Large .mrc are downsampled for QC; nothing is stored. <a href="https://github.com/gianyrox/cryotriage">github.com/gianyrox/cryotriage</a></div>
+
+<div class="who">
+  <div class="c"><h3>Who it's for</h3><p>Cryo-EM facility staff, microscope operators screening grids live, and labs curating micrographs before reconstruction.</p></div>
+  <div class="c"><h3>Why it helps</h3><p>Catch bad micrographs — thick ice, drift, off-target defocus, contamination — before they waste GPU hours on a reconstruction.</p></div>
+  <div class="c"><h3>How it's different</h3><p>Transparent, first-principles CTF fit (CTFFIND4-comparable). No GPU, no model weights, every threshold inspectable. Validated to <b>5.1 Å</b> mean defocus error on EMPIAR data.</p></div>
+</div>
+
+<div class="panel">
+  <div class="drop" id="drop">
+    <div class="ic">◎</div>
+    <div class="big">Drop a micrograph here, or click to choose</div>
+    <div class="sm">.mrc &middot; .tif/.tiff &middot; .png/.jpg &nbsp;—&nbsp; a motion-corrected micrograph or single frame</div>
+    <input type="file" id="file" accept=".mrc,.tif,.tiff,.png,.jpg" hidden>
+  </div>
+  <div class="filechip" id="filechip"><span>📄 <b id="fname"></b></span><span class="x" id="clearf" title="remove">✕</span></div>
+
+  <div class="actions">
+    <button class="btn" id="run" onclick="go(false)">Triage my micrograph</button>
+    <button class="btn s" onclick="go(true)">Try the synthetic demo</button>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div class="bar" id="bar"><i></i></div>
+
+  <iframe id="frame" title="CryoTriage report"></iframe>
+
+  <div class="offline" id="off">
+    ⚠ <b>The live server is not active right now.</b><br>
+    See the <a href="index.html">example report</a>, browse the
+    <a href="https://github.com/gianyrox/cryotriage">source on GitHub</a>, or run it locally:
+    <code>python cryotriage.py triage your_micrographs/</code>
+  </div>
+</div>
+
+<div class="note">
+  First-principles CTF estimation following Rohou &amp; Grigorieff (2015), no CTFFIND/RELION binary required.
+  Validated on synthetic known-defocus data (5.1 Å mean error) and real EMPIAR-10025 / 10061 micrographs.
+  Large <code>.mrc</code> files are downsampled for QC.
+  <span class="privacy">Your micrograph is processed in-memory to produce the report and is <b>not stored or uploaded permanently</b>.</span><br>
+  <a href="https://github.com/gianyrox/cryotriage">github.com/gianyrox/cryotriage</a>
+</div>
+
 </div>
 <script>
-let API=null,ONLINE=false;
-function off(){document.getElementById('be').textContent='server not active';document.getElementById('be').style.color='#ffce6b';document.getElementById('off').style.display='block';}
-fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{API=j.url;return fetch(API+'/health');}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(()=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';}).catch(off);
+let API=null,ONLINE=false,FILE=null;
+
+function setOffline(){
+  document.getElementById('be').textContent='server not active';
+  document.getElementById('dot').className='dot bad';
+  document.getElementById('off').style.display='block';
+}
+function setOnline(){
+  ONLINE=true;
+  document.getElementById('be').textContent='backend live';
+  document.getElementById('dot').className='dot ok';
+}
+
+// backend discovery: /research/api.json -> {url}; then {url}/health
+fetch('/research/api.json',{cache:'no-store'})
+  .then(r=>r.json()).then(j=>{API=j.url;return fetch(API+'/health');})
+  .then(r=>{if(!r.ok)throw 0;return r.json();})
+  .then(setOnline).catch(setOffline);
+
+// file picker + drag/drop
+const drop=document.getElementById('drop'), input=document.getElementById('file');
+const filechip=document.getElementById('filechip'), fname=document.getElementById('fname');
+function setFile(f){
+  FILE=f||null;
+  if(FILE){fname.textContent=FILE.name;filechip.style.display='flex';
+    document.getElementById('run').textContent='Triage '+FILE.name;}
+  else{filechip.style.display='none';document.getElementById('run').textContent='Triage my micrograph';}
+}
+drop.onclick=()=>input.click();
+input.onchange=()=>setFile(input.files[0]);
+document.getElementById('clearf').onclick=(e)=>{e.stopPropagation();input.value='';setFile(null);};
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f){input.files=e.dataTransfer.files;setFile(f);}});
+
 function st(m,sp){document.getElementById('status').innerHTML=(sp?'<span class=spin></span>':'')+(m||'');}
+function busy(on){
+  document.getElementById('bar').style.display=on?'block':'none';
+  document.getElementById('run').disabled=on;
+}
+
 async function go(demo){
-  if(!ONLINE){off();return;}
-  const fd=new FormData(); const f=document.getElementById('file').files[0];
-  if(!demo && f){fd.append('file',f);st('triaging '+f.name+'… (CTF fit ~20s)',true);}
-  else{st('generating + triaging synthetic micrographs…',true);}
+  if(!ONLINE){setOffline();st('');return;}
+  const fd=new FormData();
+  if(!demo && FILE){fd.append('file',FILE);st('Estimating CTF for '+FILE.name+'… ~20s',true);}
+  else if(!demo && !FILE){st('Choose a micrograph above, or run the synthetic demo.');return;}
+  else{st('Generating &amp; triaging synthetic micrographs… ~20s',true);}
+  busy(true);
   document.getElementById('frame').style.display='none';
   try{
     const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),380000);
-    const r=await fetch(API+'/cryotriage/run',{method:'POST',body:fd,signal:ctrl.signal});clearTimeout(to);
-    const j=await r.json(); if(!r.ok){st('✗ '+(j.detail||'error'));return;}
-    st(''); const fr=document.getElementById('frame'); fr.srcdoc=j.report_html; fr.style.display='block';
-  }catch(e){st('✗ failed or timed out');off();}
+    const r=await fetch(API+'/cryotriage/run',{method:'POST',body:fd,signal:ctrl.signal});
+    clearTimeout(to);
+    const j=await r.json();
+    if(!r.ok){st('✗ '+(j.detail||'error from server'));busy(false);return;}
+    st('');busy(false);
+    const fr=document.getElementById('frame');
+    fr.srcdoc=j.report_html;fr.style.display='block';
+    fr.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){st('✗ Request failed or timed out.');busy(false);setOffline();}
 }
 </script></body></html>

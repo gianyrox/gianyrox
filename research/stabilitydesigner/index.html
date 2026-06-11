@@ -3,107 +3,305 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>StabilityDesigner — live</title>
+<title>StabilityDesigner — predict & design protein stabilizing mutations (ΔΔG)</title>
+<meta name="description" content="Predict how a point mutation changes protein folding stability (ΔΔG) and design stabilizing mutations by saturation scan. Sequence-only, CPU, open source. Benchmarked on S669 with SOTA antisymmetry.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--good:#46d39a;--bad:#ff7a7a}
+:root{
+  --bg:#0d0f14;--panel:#161b27;--panel2:#11141d;--line:#262c3b;
+  --teal:#2a9d8f;--blue:#5b8cff;--mut:#8b93a5;--ink:#e9ecf2;
+  --good:#46d39a;--bad:#ff7a7a;--warn:#ffce6b;--r:12px;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
-.wrap{max-width:920px;margin:0 auto;padding:22px}
-a{color:var(--acc)} .crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
-h1{font-size:24px;margin:0 0 2px} h1 span{color:var(--teal)}
-.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
-textarea{width:100%;min-height:64px;background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:10px;padding:11px;font-family:ui-monospace,Menlo,monospace;font-size:12px;resize:vertical}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
-input[type=text],input[type=number]{background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:13px}
-input[type=text]{width:120px} input[type=number]{width:90px}
-.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
-.btn.s{background:#1c2230;color:#e9ecf2;border:1px solid var(--line)}
-.tag{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:14px;padding:2px 9px;margin:2px 3px;font-size:11.5px;cursor:pointer}
-.res{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;display:none}
-.big{font-size:30px;font-weight:800} .ddg-pos{color:var(--bad)} .ddg-neg{color:var(--good)}
-.barwrap{margin:10px 0}
-.bar{display:flex;align-items:center;gap:8px;font-size:12px;margin:2px 0}
-.bar .nm{width:54px;font-family:ui-monospace,monospace;color:#cfe} .bar .tk{height:11px;border-radius:3px}
-.bar .vv{width:54px;text-align:right;color:var(--mut)}
-.status{font-size:12px;margin:6px 0;min-height:16px}
-.offline{background:#2c2510;border:1px solid #5a4a1f;color:#ffce6b;border-radius:10px;padding:10px 13px;font-size:12.5px;display:none;margin-top:10px}
-.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:24px 22px 64px}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.crumb{color:var(--mut);font-size:12.5px;margin-bottom:14px}
+
+/* hero */
+.hero{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+h1{font-size:27px;margin:0 0 4px;letter-spacing:-.4px}
+h1 span{color:var(--teal)}
+.tag-prop{color:var(--ink);font-size:15px;font-weight:600;margin:2px 0 6px}
+.sub{color:var(--mut);font-size:13.5px;max-width:680px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mut)}
+.dot.live{background:var(--good);box-shadow:0 0 0 3px rgba(70,211,154,.18)}
+.dot.off{background:var(--warn)}
+
+/* who-for strip */
+.audience{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+.pill{font-size:11.5px;color:var(--mut);border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:4px 11px}
+.pill b{color:var(--ink);font-weight:600}
+
+/* cards / grid */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin:16px 0}
+.card h2{font-size:15px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.card h2 .ico{width:22px;height:22px;border-radius:7px;display:inline-grid;place-items:center;font-size:13px;font-weight:800}
+.card .hint{color:var(--mut);font-size:12.5px;margin:0 0 14px}
+
+label{display:block;font-size:12px;color:var(--mut);margin:0 0 5px;font-weight:600}
+textarea{width:100%;min-height:70px;background:#0a0c10;color:#cfe4ff;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-family:ui-monospace,Menlo,monospace;font-size:12px;resize:vertical;line-height:1.6}
+textarea:focus,input:focus{outline:none;border-color:var(--blue)}
+.presets{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0 2px;align-items:center}
+.presets .lbl{font-size:11.5px;color:var(--mut)}
+.tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-size:11.5px;cursor:pointer;color:var(--ink);transition:.12s}
+.tag:hover{border-color:var(--teal);color:var(--teal)}
+
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media(max-width:640px){.actions{grid-template-columns:1fr}}
+.act{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+.act .arow{display:flex;gap:9px;align-items:flex-end;flex-wrap:wrap}
+input[type=text],input[type=number]{background:#0a0c10;color:#cfe4ff;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:13px;font-family:ui-monospace,monospace}
+input[type=text]{width:96px}input[type=number]{width:84px}
+.btn{padding:10px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px;transition:.12s;white-space:nowrap}
+.btn:hover{filter:brightness(1.07)}
+.btn.b{background:var(--blue);color:#06122e}
+.btn:disabled{opacity:.5;cursor:not-allowed;filter:none}
+.fieldnote{font-size:11px;color:var(--mut);margin-top:7px}
+
+/* status + spinner */
+.status{font-size:12.5px;margin:14px 0 0;min-height:18px;display:flex;align-items:center;gap:8px;color:var(--mut)}
+.spin{width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* result panels */
+.res{display:none;margin-top:16px}
+.ddgcard{border-radius:var(--r);padding:22px 24px;border:1px solid var(--line);position:relative;overflow:hidden}
+.ddgcard.stab{background:linear-gradient(135deg,rgba(70,211,154,.13),rgba(70,211,154,.02));border-color:rgba(70,211,154,.4)}
+.ddgcard.destab{background:linear-gradient(135deg,rgba(255,122,122,.13),rgba(255,122,122,.02));border-color:rgba(255,122,122,.4)}
+.ddgcard.neutral{background:linear-gradient(135deg,rgba(139,147,165,.12),rgba(139,147,165,.02));border-color:var(--line)}
+.ddgcard .mut{font-family:ui-monospace,monospace;font-size:13px;color:var(--mut);letter-spacing:.5px}
+.ddgcard .big{font-size:46px;font-weight:800;line-height:1.05;margin:4px 0 2px;letter-spacing:-1px}
+.ddgcard .unit{font-size:16px;font-weight:600;color:var(--mut)}
+.ddgcard.stab .big{color:var(--good)}.ddgcard.destab .big{color:var(--bad)}.ddgcard.neutral .big{color:var(--ink)}
+.calltag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;margin-top:6px}
+.calltag.stab{background:rgba(70,211,154,.16);color:var(--good)}
+.calltag.destab{background:rgba(255,122,122,.16);color:var(--bad)}
+.calltag.neutral{background:rgba(139,147,165,.16);color:var(--mut)}
+.confline{color:var(--mut);font-size:12.5px;margin-top:10px}
+.confbar{height:6px;border-radius:3px;background:var(--line);margin-top:6px;max-width:240px;overflow:hidden}
+.confbar i{display:block;height:100%;border-radius:3px;background:var(--teal)}
+
+/* scan chart */
+.scanhead{font-size:13px;color:var(--ink);font-weight:600;margin-bottom:2px}
+.scansub{font-size:12px;color:var(--mut);margin-bottom:14px}
+.bar{display:grid;grid-template-columns:46px 1fr 58px;align-items:center;gap:10px;font-size:12px;margin:3px 0}
+.bar .nm{font-family:ui-monospace,monospace;color:#cfe4ff}
+.bar .track{height:14px;position:relative;background:var(--panel2);border-radius:4px}
+.bar .track i{position:absolute;top:0;height:100%;border-radius:4px}
+.bar .mid{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--line);left:50%}
+.bar .vv{text-align:right;font-family:ui-monospace,monospace}
+.bar .vv.g{color:var(--good)}.bar .vv.r{color:var(--bad)}.bar .vv.n{color:var(--mut)}
+.scanlegend{display:flex;gap:16px;font-size:11.5px;color:var(--mut);margin-top:12px;flex-wrap:wrap}
+.scanlegend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+/* offline */
+.offline{background:#2c2510;border:1px solid #5a4a1f;color:var(--warn);border-radius:var(--r);padding:14px 16px;font-size:13px;display:none;margin-top:16px}
+.offline b{color:#ffe0a0}
+.offline .links{margin-top:8px;display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px}
+
+/* footer / context */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){.cols{grid-template-columns:1fr}}
+.mini h3{font-size:12.5px;margin:0 0 6px;color:var(--ink);text-transform:uppercase;letter-spacing:.6px}
+.mini ul{margin:0;padding-left:16px;color:var(--mut);font-size:12.5px}
+.mini li{margin:3px 0}
+.note{color:var(--mut);font-size:12px;margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.note code{background:var(--panel2);border:1px solid var(--line);padding:2px 6px;border-radius:5px;font-size:11.5px}
+.kbd{font-family:ui-monospace,monospace}
 </style>
 </head>
 <body><div class="wrap">
+
 <div class="crumb"><a href="/research">← research</a></div>
-<h1>Stability<span>Designer</span> · live</h1>
-<div class="sub">Predict how a point mutation changes protein folding stability (ΔΔG), or scan a position for stabilizing substitutions.
-Sequence-only model (no structure needed). <span id="be" style="color:#8b93a5">checking backend…</span></div>
 
-<textarea id="seq" placeholder="Paste protein sequence…">MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNTNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL</textarea>
-<div class="row">
-  <span style="color:#8b93a5;font-size:12px">Predict one:</span>
-  <input type="text" id="mut" placeholder="L15A" value="L15A">
-  <button class="btn" onclick="predict()">▶ Predict ΔΔG</button>
-  <span style="color:#8b93a5;font-size:12px;margin-left:14px">Scan position:</span>
-  <input type="number" id="pos" placeholder="15" value="15">
-  <button class="btn s" onclick="scan()">⤢ Scan all 19</button>
+<div class="hero">
+  <div>
+    <h1>Stability<span>Designer</span></h1>
+    <div class="tag-prop">Find the stabilizing mutations worth testing — in seconds, from sequence alone.</div>
+    <div class="sub">Predict how a point mutation changes protein folding stability (ΔΔG), or scan a position
+    for stabilizing substitutions. Sequence-only model — no crystal structure required. Trained on FireProtDB,
+    benchmarked on S669 with state-of-the-art antisymmetry.</div>
+  </div>
+  <div class="chip"><span class="dot" id="dot"></span><span id="be">checking backend…</span></div>
 </div>
-<div class="row"><span class="tag" onclick="document.getElementById('seq').value=T4">T4 lysozyme</span><span class="tag" onclick="document.getElementById('seq').value=BARNASE">barnase</span></div>
-<div class="status" id="status"></div>
 
-<div class="res" id="res"></div>
-<div class="offline" id="offlineMsg">⚠ The live prediction backend is offline right now. You can still see the
-<a href="report.html">validated example report</a>, grab the <a href="https://github.com/gianyrox/stabilitydesigner">code</a>,
-and run <code>python stabilitydesigner.py predict &lt;seq&gt; &lt;mut&gt;</code> locally.</div>
+<div class="audience">
+  <span class="pill"><b>For:</b> protein & enzyme engineers</span>
+  <span class="pill">antibody / biologics developers</span>
+  <span class="pill">biosensor & synthetic-biology labs</span>
+</div>
 
-<div class="note">ΔΔG&gt;0 = destabilizing, ΔΔG&lt;0 = stabilizing. The model is benchmarked on the full S669 set vs FoldX/DDGun/ThermoMPNN
-with SOTA antisymmetry (Ssym bias ≈0); structural features (via <code>--pdb</code> in the CLI) push accuracy higher.
-<a href="https://github.com/gianyrox/stabilitydesigner">github.com/gianyrox/stabilitydesigner</a></div>
+<!-- INPUT -->
+<div class="card">
+  <label for="seq">Protein sequence</label>
+  <textarea id="seq" placeholder="Paste a one-letter amino-acid sequence…">MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNTNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL</textarea>
+  <div class="presets">
+    <span class="lbl">Examples:</span>
+    <span class="tag" data-seq="T4">T4 lysozyme (164 aa)</span>
+    <span class="tag" data-seq="BARNASE">barnase (110 aa)</span>
+  </div>
+
+  <div class="actions">
+    <div class="act">
+      <label>Predict one mutation</label>
+      <div class="arow">
+        <div><div class="fieldnote" style="margin:0 0 4px">mutation</div>
+          <input type="text" id="mut" placeholder="L15A" value="L15A"></div>
+        <button class="btn" id="bPred">▶ Predict ΔΔG</button>
+      </div>
+      <div class="fieldnote">Format: wild-type, position, new residue — e.g. <span class="kbd">L15A</span>.</div>
+    </div>
+    <div class="act">
+      <label>Scan a position (all 19)</label>
+      <div class="arow">
+        <div><div class="fieldnote" style="margin:0 0 4px">position</div>
+          <input type="number" id="pos" placeholder="15" value="15"></div>
+        <button class="btn b" id="bScan">⤢ Saturation scan</button>
+      </div>
+      <div class="fieldnote">Scores every substitution at one residue and ranks them. ~20 s.</div>
+    </div>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div class="res" id="res"></div>
+
+  <div class="offline" id="offlineMsg">
+    <b>⚠ The live prediction server isn't active right now.</b>
+    <div>You can still explore a validated saturation-scan report, read the code, and run the model locally on CPU.</div>
+    <div class="links">
+      <a href="report.html">→ Example report</a>
+      <a href="https://github.com/gianyrox/stabilitydesigner">→ Source &amp; benchmarks</a>
+      <a href="https://github.com/gianyrox/stabilitydesigner#quickstart">→ Run the CLI</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<div class="cols">
+  <div class="card mini">
+    <h3>What you can do with it</h3>
+    <ul>
+      <li><b style="color:#e9ecf2">Triage thermostability:</b> shortlist stabilizing mutations for a biocatalyst before wet-lab testing.</li>
+      <li><b style="color:#e9ecf2">Harden a biologic:</b> find stabilizing substitutions to improve antibody developability &amp; shelf life.</li>
+      <li><b style="color:#e9ecf2">Free first pass:</b> prune obviously-destabilizing options before spending GPU/structure compute.</li>
+    </ul>
+  </div>
+  <div class="card mini">
+    <h3>Where it fits</h3>
+    <ul>
+      <li>A transparent <b style="color:#e9ecf2">CPU baseline</b> — interpretable features, no black box.</li>
+      <li>Sits in the published S669 accuracy band (DDGun-class) vs FoldX / DDGun / ThermoMPNN.</li>
+      <li><b style="color:#e9ecf2">Best-in-class antisymmetry</b> (forward/reverse bias ≈ 0) where FoldX &amp; MAESTRO fail.</li>
+      <li>Open source (MIT). Structure features via <span class="kbd" style="font-size:11px">--pdb</span> push accuracy higher.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="note">
+ΔΔG &lt; 0 = <b style="color:var(--good)">stabilizing</b>, ΔΔG &gt; 0 = <b style="color:var(--bad)">destabilizing</b>
+(|ΔΔG| &lt; 0.5 kcal/mol ≈ neutral). Predictions are computational estimates — confirm by thermal/chemical
+denaturation before drawing conclusions. Data: FireProtDB (Stourac 2021), S669 (Pancotti 2022),
+Ssym (Pucci 2018), splits via ThermoMPNN (Dieckhaus 2024).
+&nbsp;·&nbsp; <a href="https://github.com/gianyrox/stabilitydesigner">github.com/gianyrox/stabilitydesigner</a>
+&nbsp;·&nbsp; <a href="report.html">example report</a>
+</div>
+
 </div>
 <script>
 let API=null, ONLINE=false;
 const T4="MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNTNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL";
 const BARNASE="AQVINTFDGVADYLQTYHKLPDNYITKSEAQALGWVASKGNLADVAPGKSIGGDIFSNREGKLPGKSGRTWREADINYTSGFRNSDRILYSSDWLIYKTTDHYQTFTKIR";
-function goOffline(){document.getElementById('be').textContent='server not active';document.getElementById('be').style.color='#ffce6b';document.getElementById('offlineMsg').style.display='block';}
+const SEQS={T4,BARNASE};
+const $=id=>document.getElementById(id);
+
+document.querySelectorAll('.tag[data-seq]').forEach(t=>t.addEventListener('click',()=>{$('seq').value=SEQS[t.dataset.seq];}));
+$('bPred').addEventListener('click',predict);
+$('bScan').addEventListener('click',scan);
+
+function setBackend(state){
+  const dot=$('dot'), be=$('be');
+  if(state==='live'){dot.className='dot live';be.textContent='backend live';}
+  else if(state==='off'){dot.className='dot off';be.textContent='server not active';$('offlineMsg').style.display='block';}
+  else{dot.className='dot';be.textContent='checking backend…';}
+}
 fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{API=j.url;return fetch(API+"/health");})
   .then(r=>{if(!r.ok)throw 0;return r.json();})
-  .then(()=>{ONLINE=true;document.getElementById('be').textContent='backend live ✓';document.getElementById('be').style.color='#46d39a';})
-  .catch(()=>goOffline());
-function st(m){document.getElementById('status').textContent=m||'';}
-function seq(){return document.getElementById('seq').value.trim();}
+  .then(()=>{ONLINE=true;setBackend('live');})
+  .catch(()=>setBackend('off'));
+
+function busy(on,msg){
+  $('status').innerHTML = on ? '<span class="spin"></span>'+(msg||'working…') : (msg||'');
+  $('bPred').disabled=on;$('bScan').disabled=on;
+}
+function seq(){return $('seq').value.replace(/\s+/g,'').toUpperCase();}
+function classOf(d){return d<-0.5?'stab':(d>0.5?'destab':'neutral');}
+
 async function predict(){
-  if(!ONLINE){document.getElementById('offlineMsg').style.display='block';return;}
-  st('predicting…');document.getElementById('res').style.display='none';
+  if(!ONLINE){$('offlineMsg').style.display='block';return;}
+  busy(true,'predicting ΔΔG…');$('res').style.display='none';
   try{
     const r=await fetch(API+"/stabilitydesigner/predict",{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({sequence:seq(),mutation:document.getElementById('mut').value.trim()})});
+      body:JSON.stringify({sequence:seq(),mutation:$('mut').value.trim().toUpperCase()})});
     const j=await r.json();
-    if(!r.ok){st('✗ '+(j.detail||'error'));return;}
-    st('');
-    const d=j.predicted_ddG_kcal_mol, cls=d>0?'ddg-pos':'ddg-neg';
-    document.getElementById('res').style.display='block';
-    document.getElementById('res').innerHTML=
-      '<div style="color:#8b93a5;font-size:12px">'+j.mutation+'</div>'+
-      '<div class="big '+cls+'">'+(d>0?'+':'')+d.toFixed(2)+' <span style="font-size:14px;color:#8b93a5">kcal/mol</span></div>'+
-      '<div style="margin-top:4px"><b style="color:'+(d>0?'#ff7a7a':'#46d39a')+'">'+j.call+'</b> · ±'+j.confidence_std_kcal_mol.toFixed(2)+' (ensemble)</div>';
-  }catch(e){st('✗ request failed');document.getElementById('offlineMsg').style.display='block';}
+    if(!r.ok){busy(false,'✗ '+(j.detail||'error — check mutation format'));return;}
+    busy(false,'');
+    const d=j.predicted_ddG_kcal_mol, c=classOf(d), std=j.confidence_std_kcal_mol;
+    const callTxt=c==='stab'?'STABILIZING':(c==='destab'?'DESTABILIZING':'NEUTRAL');
+    // confidence: tighter std → fuller bar (cap display at 0.5)
+    const conf=Math.max(6,Math.min(100,(1-Math.min(std,0.5)/0.5)*100));
+    $('res').style.display='block';
+    $('res').innerHTML=
+      '<div class="ddgcard '+c+'">'+
+        '<div class="mut">mutation '+j.mutation+(j.used_structure?' · structure-aware':' · sequence-only')+'</div>'+
+        '<div class="big">'+(d>0?'+':'')+d.toFixed(2)+' <span class="unit">kcal/mol</span></div>'+
+        '<span class="calltag '+c+'">'+callTxt+'</span>'+
+        '<div class="confline">ensemble confidence ±'+std.toFixed(2)+' kcal/mol'+
+          '<div class="confbar"><i style="width:'+conf.toFixed(0)+'%"></i></div></div>'+
+      '</div>';
+  }catch(e){busy(false,'✗ request failed');$('offlineMsg').style.display='block';}
 }
+
 async function scan(){
-  if(!ONLINE){document.getElementById('offlineMsg').style.display='block';return;}
-  st('scanning all 19 substitutions… (~20s)');document.getElementById('res').style.display='none';
+  if(!ONLINE){$('offlineMsg').style.display='block';return;}
+  busy(true,'scanning all 19 substitutions… (~20 s)');$('res').style.display='none';
   try{
     const r=await fetch(API+"/stabilitydesigner/scan",{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({sequence:seq(),position:+document.getElementById('pos').value})});
+      body:JSON.stringify({sequence:seq(),position:+$('pos').value})});
     const j=await r.json();
-    if(!r.ok){st('✗ '+(j.detail||'error'));return;}
-    st('');
-    const rows=j.results, max=Math.max(...rows.map(x=>Math.abs(x.ddG)),0.1);
-    document.getElementById('res').style.display='block';
-    document.getElementById('res').innerHTML='<div style="color:#8b93a5;font-size:12px">saturation scan at '+j.wt+j.position+' — sorted most stabilizing → most destabilizing</div>'+
-      '<div class="barwrap">'+rows.map(x=>{
-        const w=Math.abs(x.ddG)/max*100, col=x.ddG>0?'#ff7a7a':'#46d39a';
-        return '<div class="bar"><span class="nm">'+x.mutation+'</span>'+
-          '<span class="tk" style="width:'+Math.max(2,w)+'%;background:'+col+'"></span>'+
-          '<span class="vv">'+(x.ddG>0?'+':'')+x.ddG.toFixed(2)+'</span></div>';}).join('')+'</div>';
-  }catch(e){st('✗ request failed');document.getElementById('offlineMsg').style.display='block';}
+    if(!r.ok){busy(false,'✗ '+(j.detail||'error — check position'));return;}
+    busy(false,'');
+    const rows=j.results.slice().sort((a,b)=>a.ddG-b.ddG); // most stabilizing first
+    const max=Math.max(...rows.map(x=>Math.abs(x.ddG)),0.1);
+    const nStab=rows.filter(x=>x.ddG<-0.5).length;
+    const bars=rows.map(x=>{
+      const d=x.ddG, c=classOf(d), w=Math.abs(d)/max*50; // 50% = half-track from center
+      const col=c==='stab'?'var(--good)':(c==='destab'?'var(--bad)':'var(--mut)');
+      const side = d<0 ? 'right:50%' : 'left:50%';
+      const vc = c==='stab'?'g':(c==='destab'?'r':'n');
+      return '<div class="bar"><span class="nm">'+x.mutation+'</span>'+
+        '<span class="track"><span class="mid"></span>'+
+          '<i style="'+side+';width:'+Math.max(1,w)+'%;background:'+col+'"></i></span>'+
+        '<span class="vv '+vc+'">'+(d>0?'+':'')+d.toFixed(2)+'</span></div>';
+    }).join('');
+    $('res').style.display='block';
+    $('res').innerHTML=
+      '<div class="scanhead">Saturation scan at '+j.wt+j.position+'</div>'+
+      '<div class="scansub">All 19 substitutions, ranked most stabilizing → most destabilizing · '+
+        '<b style="color:var(--good)">'+nStab+'</b> stabilizing candidate'+(nStab===1?'':'s')+' found</div>'+
+      bars+
+      '<div class="scanlegend">'+
+        '<span><i class="sw" style="background:var(--good)"></i> stabilizing (ΔΔG &lt; 0)</span>'+
+        '<span><i class="sw" style="background:var(--bad)"></i> destabilizing (ΔΔG &gt; 0)</span>'+
+        '<span>bars diverge from center · longer = stronger effect</span>'+
+      '</div>';
+  }catch(e){busy(false,'✗ request failed');$('offlineMsg').style.display='block';}
 }
-</script></body></html>
+</script>
+</body></html>
