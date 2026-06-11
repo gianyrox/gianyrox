@@ -1,96 +1,172 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProteinScout — sp|P02945|BACR_HALSA Bacteriorhodopsin OS=Halobacterium salinarum (strain ATCC 700922 / JCM 11081 / NRC-1) OX=64091 GN=bop PE=1 SV=2</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ProteinScout — live</title>
+<meta name="description" content="Per-residue protein biophysics in your browser: hydropathy/TM, aggregation, disorder, charge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-  body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-         max-width: 1000px; margin: 0 auto; padding: 1.5rem; color: #222; line-height: 1.45; }
-  h1 { font-size: 1.5rem; margin-bottom: 0.1rem; }
-  h2 { border-bottom: 2px solid #eee; padding-bottom: .3rem; margin-top: 2rem; }
-  h3 { margin-bottom: .2rem; margin-top: 1.2rem; }
-  .muted { color: #777; font-size: .85rem; margin-top: .1rem; }
-  .stats { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; }
-  .stat { background: #f7f9fb; border: 1px solid #e3e8ee; border-radius: 8px;
-           padding: .6rem 1rem; min-width: 110px; }
-  .stat .k { font-size: .72rem; color: #888; text-transform: uppercase; }
-  .stat .v { font-size: 1.15rem; font-weight: 600; }
-  table { border-collapse: collapse; width: 100%; font-size: .85rem; margin: .4rem 0 1rem; }
-  th, td { border: 1px solid #e3e8ee; padding: .3rem .5rem; text-align: left; }
-  th { background: #f1f5f9; }
-  td.pos { color: #1e8449; font-weight: 600; }
-  td.neg { color: #c0392b; font-weight: 600; }
-  img { max-width: 100%; border: 1px solid #e3e8ee; border-radius: 8px; }
-  pre.seq { font-family: ui-monospace, Menlo, monospace; font-size: .8rem;
-             background: #f7f9fb; padding: 1rem; border-radius: 8px; overflow-x: auto;
-             white-space: pre-wrap; }
-  .pos { color: #aaa; }
-  .bar { height: 10px; background: #5b9bd5; border-radius: 2px; }
-  .llm { background: #fffdf5; border: 1px solid #f0e6c8; border-radius: 8px; padding: 1rem; }
-  .callout { background: #f4f8fb; border-left: 4px solid #5b9bd5; padding: .6rem 1rem;
-              margin: .5rem 0; border-radius: 4px; font-size: .9rem; }
-  .yes { color: #1e8449; font-weight: 600; }
-  .no { color: #999; }
-  .footer { color: #999; font-size: .8rem; margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem; }
-  .compwrap { max-width: 360px; }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
-</style></head><body>
-<h1>ProteinScout report</h1>
-<p class="muted">sp|P02945|BACR_HALSA Bacteriorhodopsin OS=Halobacterium salinarum (strain ATCC 700922 / JCM 11081 / NRC-1) OX=64091 GN=bop PE=1 SV=2</p>
+:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--good:#46d39a;--bad:#ff7a7a}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:22px}
+a{color:var(--acc)} .crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
+h1{font-size:24px;margin:0 0 2px} h1 span{color:var(--teal)}
+.sub{color:var(--mut);font-size:13px;margin-bottom:16px}
+textarea{width:100%;min-height:78px;background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:10px;padding:11px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+input[type=text]{background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:13px;width:180px}
+.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
+.btn.s{background:#1c2230;color:#e9ecf2;border:1px solid var(--line)}
+label{font-size:12.5px;color:var(--mut)}
+input[type=range]{accent-color:var(--teal);vertical-align:middle}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+@media(max-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
+.kv{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.kv b{display:block;font-size:20px;color:var(--teal)} .kv span{font-size:11.5px;color:var(--mut)}
+.chartbox{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:8px 12px 12px;margin:12px 0}
+.chartbox h3{font-size:13px;margin:6px 4px 2px} .chartbox h3 small{color:var(--mut);font-weight:400}
+.tables{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+@media(max-width:760px){.tables{grid-template-columns:1fr}}
+.tbl{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.tbl h4{margin:0 0 6px;font-size:12.5px} .tbl .reg{color:#cfe;font-family:ui-monospace,monospace} .tbl .mut{color:var(--mut)}
+.tag{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:14px;padding:2px 9px;margin:2px 3px 2px 0;font-size:11.5px;cursor:pointer}
+.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
+#err{color:var(--bad);font-size:12.5px;margin-top:6px;min-height:16px}
+</style>
+</head>
+<body><div class="wrap">
+<div class="crumb"><a href="/research">← research</a></div>
+<h1>Protein<span>Scout</span> · live</h1>
+<div class="sub">Paste a protein sequence (or a UniProt accession) → per-residue biophysics, computed in your browser from published scales.
+Hydropathy/TM (Kyte–Doolittle), aggregation (AGGRESCAN a3v), disorder (TOP-IDP), charge &amp; pI.</div>
 
-<div class="stats">
-  <div class="stat"><div class="k">Length</div><div class="v">262 aa</div></div>
-  <div class="stat"><div class="k">Mol. weight</div><div class="v">28.3 kDa</div></div>
-  <div class="stat"><div class="k">Isoelectric pt</div><div class="v">4.32</div></div>
-  <div class="stat"><div class="k">Net charge @ pH7</div><div class="v">-7.0</div></div>
-  <div class="stat"><div class="k">TM (scale/ML)</div><div class="v">7/6</div></div>
-  <div class="stat"><div class="k">APR (scale/ML)</div><div class="v">12/10</div></div>
-  <div class="stat"><div class="k">IDR (scale/ML)</div><div class="v">0/0</div></div>
-  <div class="stat"><div class="k">Coiled-coil</div><div class="v">0</div></div>
+<textarea id="seq" placeholder="Paste sequence or FASTA…  e.g. amyloid-β42: DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA"></textarea>
+<div class="row">
+  <input type="text" id="acc" placeholder="UniProt acc e.g. P37840">
+  <button class="btn s" onclick="fetchUniprot()">fetch UniProt</button>
+  <button class="btn" onclick="run()">▶ Analyze</button>
+  <label>window <b id="winv" style="color:#2a9d8f">19</b> <input type="range" id="win" min="5" max="25" step="2" value="19" oninput="document.getElementById('winv').textContent=this.value;if(LAST)run()"></label>
+</div>
+<div class="row" style="gap:6px">
+  <span class="tag" onclick="ex('DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA')">Aβ42</span>
+  <span class="tag" onclick="accEx('P37840')">α-synuclein</span>
+  <span class="tag" onclick="accEx('P02945')">bacteriorhodopsin</span>
+  <span class="tag" onclick="accEx('P04637')">p53</span>
+  <span class="tag" onclick="accEx('P01308')">insulin</span>
+</div>
+<div id="err"></div>
+
+<div id="out" style="display:none">
+  <div class="cards" id="kv"></div>
+  <div class="chartbox"><h3>Hydropathy <small>— Kyte–Doolittle, windowed; &gt;1.6 ⇒ transmembrane</small></h3><canvas id="cHydro" height="120"></canvas></div>
+  <div class="chartbox"><h3>Aggregation propensity <small>— AGGRESCAN a3v; peaks ⇒ aggregation-prone regions</small></h3><canvas id="cAgg" height="110"></canvas></div>
+  <div class="chartbox"><h3>Disorder propensity <small>— TOP-IDP; &gt;0 ⇒ disorder-promoting</small></h3><canvas id="cDis" height="110"></canvas></div>
+  <div class="chartbox"><h3>Net charge per residue <small>— +K/R, −D/E, windowed</small></h3><canvas id="cChg" height="100"></canvas></div>
+  <div class="tables">
+    <div class="tbl" id="tTM"><h4>Transmembrane segments</h4></div>
+    <div class="tbl" id="tAPR"><h4>Aggregation-prone regions</h4></div>
+    <div class="tbl" id="tIDR"><h4>Disordered regions</h4></div>
+  </div>
 </div>
 
-<div class='callout'><b>Signal peptide:</b> <span class='no'>not detected</span></div>
-<div class='callout'><b>Charge-hydropathy (Uversky) call:</b> <span class='no'>compact / folded</span> — ⟨H⟩=0.580, ⟨R⟩=0.027, margin -0.438; FCR=0.13, NCPR=-0.03</div>
-
-<section><h2>Per-residue tracks (blue/green = published scale, orange = ML)</h2>
-<img src="tracks.png" alt="biophysical tracks"></section>
-
-<section><h2>ML layer vs single-scale baseline</h2><p class='muted'>Held-out ROC-AUC on real labeled benchmarks (WALTZ-DB amyloid, DisProt disorder, UniProt TRANSMEM). The ML model uses windowed multi-scale + composition features; the baseline is the single published scale the classic method uses. Δ &gt; 0 means the ML layer adds value.</p><table><thead><tr><th>task</th><th>baseline scale</th><th>baseline AUC</th><th>ML AUC</th><th>Δ AUC</th><th>ML AUPRC</th></tr></thead><tbody><tr><td>amyloid</td><td>AGGRESCAN a3v (mean)</td><td>0.811</td><td><b>0.849</b></td><td class='pos'>+0.039</td><td>0.724</td></tr><tr><td>disorder</td><td>TOP-IDP (windowed mean)</td><td>0.775</td><td><b>0.815</b></td><td class='pos'>+0.040</td><td>0.561</td></tr><tr><td>tm</td><td>Kyte-Doolittle (window-19 mean)</td><td>0.951</td><td><b>0.964</b></td><td class='pos'>+0.013</td><td>0.737</td></tr></tbody></table></section>
-
-<section><h2>Validation vs UniProt annotation</h2><p class='muted'>Predicted regions (red, below axis) overlaid on curated UniProt feature annotations (dark, above axis). Per-residue precision / recall / F1:</p><table><thead><tr><th>track</th><th>precision</th><th>recall</th><th>F1</th></tr></thead><tbody><tr><td>TM (scale)</td><td>0.82</td><td>0.65</td><td>0.73</td></tr><tr><td>TM (ML)</td><td>0.83</td><td>0.91</td><td>0.87</td></tr></tbody></table><img src='overlay.png' alt='UniProt overlay'></section>
-
-<section><h2>Whole-protein disorder — charge-hydropathy plot</h2><img src='ch_plot.png' alt='charge-hydropathy plot' style='max-width:520px'></section>
-
-<section><h2>Biophysical interpretation</h2><div class='llm'><p>Bacteriorhodopsin from *Halobacterium salinarum* is a well-folded integral membrane protein with a strongly negative charge-hydropathy margin (-0.438), consistent with its known structure as a seven-transmembrane helix protein. The predicted topology shows 6 TM helices by the hydrophobicity scale (residues 28-41, 60-79, 103-120, 125-138, 154-168, 193-200) with N-terminus facing outward, though the canonical seventh helix may be missed due to threshold settings. Both scale and ML methods identify extensive aggregation-prone regions (23-46, 54-84, 103-115) that overlap significantly with the transmembrane segments, which is expected for membrane proteins where hydrophobic residues necessary for membrane insertion can appear as false-positive aggregation signals. The absence of any predicted disordered regions by both methods aligns with bacteriorhodopsin&#x27;s known compact, helical structure, and the lack of signal peptide is consistent with its insertion via the TAT pathway in halophilic archaea.</p><p class='muted'>Generated by Claude (Anthropic) from the computed profiles above.</p></div></section>
-
-<section><h2>Predicted regions</h2>
-<div class="grid2"><div><h3>Transmembrane helices — published scale</h3><p class='muted'>Kyte-Doolittle window-15 hydropathy peak ≥ 1.0 over ≥7 residues.</p><table><thead><tr><th>start</th><th>end</th><th>len</th><th>peak hydropathy</th><th>mean</th></tr></thead><tbody><tr><td>28</td><td>41</td><td>14</td><td>1.72</td><td>1.35</td></tr><tr><td>60</td><td>79</td><td>20</td><td>1.98</td><td>1.42</td></tr><tr><td>103</td><td>120</td><td>18</td><td>2.18</td><td>1.36</td></tr><tr><td>125</td><td>138</td><td>14</td><td>1.67</td><td>1.43</td></tr><tr><td>154</td><td>168</td><td>15</td><td>2.11</td><td>1.63</td></tr><tr><td>193</td><td>200</td><td>8</td><td>1.91</td><td>1.34</td></tr><tr><td>214</td><td>231</td><td>18</td><td>1.86</td><td>1.50</td></tr></tbody></table></div><div><h3>Transmembrane helices — ML model (UniProt-trained)</h3><p class='muted'>Logistic model on windowed multi-scale features; P(TM) ≥ 0.5 over ≥7 residues.</p><table><thead><tr><th>start</th><th>end</th><th>len</th><th>peak P(TM)</th></tr></thead><tbody><tr><td>24</td><td>42</td><td>19</td><td>0.99</td></tr><tr><td>58</td><td>79</td><td>22</td><td>0.99</td></tr><tr><td>97</td><td>110</td><td>14</td><td>0.98</td></tr><tr><td>127</td><td>169</td><td>43</td><td>1.00</td></tr><tr><td>186</td><td>207</td><td>22</td><td>0.98</td></tr><tr><td>209</td><td>237</td><td>29</td><td>0.99</td></tr></tbody></table></div></div>
-<h3>TM topology — positive-inside rule</h3><p class='muted'>N-terminus predicted <b>out</b> (von Heijne 1992; inside loops K+R density 0.099).</p><table><thead><tr><th>start</th><th>end</th><th>orientation</th></tr></thead><tbody><tr><td>28</td><td>41</td><td>out-&gt;in</td></tr><tr><td>60</td><td>79</td><td>in-&gt;out</td></tr><tr><td>103</td><td>120</td><td>out-&gt;in</td></tr><tr><td>125</td><td>138</td><td>in-&gt;out</td></tr><tr><td>154</td><td>168</td><td>out-&gt;in</td></tr><tr><td>193</td><td>200</td><td>in-&gt;out</td></tr><tr><td>214</td><td>231</td><td>out-&gt;in</td></tr></tbody></table>
-<div class="grid2"><div><h3>Aggregation-prone regions — published scale</h3><p class='muted'>AGGRESCAN a3v hot-spots (≥5 residues above threshold).</p><table><thead><tr><th>start</th><th>end</th><th>len</th><th>peak a3v</th><th>sequence</th></tr></thead><tbody><tr><td>1</td><td>7</td><td>7</td><td>0.73</td><td>MLELLPT</td></tr><tr><td>23</td><td>46</td><td>24</td><td>1.45</td><td>WIWLALGTALMGLGTLYFLVKGMG</td></tr><tr><td>54</td><td>84</td><td>31</td><td>1.01</td><td>KFYAITTLVPAIAFTMYLSMLLGYGLTMVPF</td></tr><tr><td>90</td><td>95</td><td>6</td><td>0.73</td><td>PIYWAR</td></tr><tr><td>98</td><td>114</td><td>17</td><td>1.14</td><td>DWLFTTPLLLLDLALLV</td></tr><tr><td>120</td><td>126</td><td>7</td><td>1.23</td><td>TILALVG</td></tr><tr><td>129</td><td>139</td><td>11</td><td>0.77</td><td>GIMIGTGLVGA</td></tr><tr><td>141</td><td>169</td><td>29</td><td>1.53</td><td>TKVYSYRFVWWAISTAAMLYILYVLFFGF</td></tr><tr><td>182</td><td>186</td><td>5</td><td>0.73</td><td>STFKV</td></tr><tr><td>188</td><td>205</td><td>18</td><td>1.49</td><td>RNVTVVLWSAYPVVWLIG</td></tr><tr><td>210</td><td>226</td><td>17</td><td>1.40</td><td>GIVPLNIETLLFMVLDV</td></tr><tr><td>230</td><td>238</td><td>9</td><td>1.16</td><td>VGFGLILLR</td></tr></tbody></table></div><div><h3>Aggregation-prone regions — ML model (WALTZ-DB-trained)</h3><p class='muted'>Hexapeptide amyloid model scanned across the sequence; P(amyloid) ≥ 0.5.</p><table><thead><tr><th>start</th><th>end</th><th>len</th><th>peak P(amyloid)</th></tr></thead><tbody><tr><td>4</td><td>9</td><td>6</td><td>0.54</td></tr><tr><td>23</td><td>45</td><td>23</td><td>0.95</td></tr><tr><td>54</td><td>84</td><td>31</td><td>0.92</td></tr><tr><td>96</td><td>101</td><td>6</td><td>0.59</td></tr><tr><td>103</td><td>115</td><td>13</td><td>0.75</td></tr><tr><td>119</td><td>145</td><td>27</td><td>0.91</td></tr><tr><td>148</td><td>171</td><td>24</td><td>0.96</td></tr><tr><td>182</td><td>207</td><td>26</td><td>0.95</td></tr><tr><td>211</td><td>228</td><td>18</td><td>0.92</td></tr><tr><td>230</td><td>240</td><td>11</td><td>0.95</td></tr></tbody></table></div></div>
-<div class="grid2"><div><h3>Intrinsically disordered regions — published scale</h3><p class='muted'>None predicted.</p></div><div><h3>Intrinsically disordered regions — ML model (DisProt-trained)</h3><p class='muted'>None predicted.</p></div></div>
-<h3>MoRF / binding-region hints</h3><p class='muted'>None predicted.</p>
-<h3>Coiled-coil regions</h3><p class='muted'>None predicted.</p>
-<h3>Low-complexity regions</h3><p class='muted'>None predicted.</p>
-</section>
-
-<section><h2>Amino-acid composition</h2>
-<div class="compwrap"><table><thead><tr><th>aa</th><th>%</th><th></th></tr></thead>
-<tbody><tr><td>L</td><td>14.9%</td><td><div class='bar' style='width:59px'></div></td></tr><tr><td>A</td><td>11.5%</td><td><div class='bar' style='width:45px'></div></td></tr><tr><td>G</td><td>9.9%</td><td><div class='bar' style='width:39px'></div></td></tr><tr><td>V</td><td>8.8%</td><td><div class='bar' style='width:35px'></div></td></tr><tr><td>T</td><td>7.3%</td><td><div class='bar' style='width:29px'></div></td></tr><tr><td>I</td><td>5.7%</td><td><div class='bar' style='width:22px'></div></td></tr><tr><td>S</td><td>5.3%</td><td><div class='bar' style='width:21px'></div></td></tr><tr><td>F</td><td>5.0%</td><td><div class='bar' style='width:19px'></div></td></tr><tr><td>P</td><td>4.6%</td><td><div class='bar' style='width:18px'></div></td></tr><tr><td>E</td><td>4.2%</td><td><div class='bar' style='width:16px'></div></td></tr><tr><td>Y</td><td>4.2%</td><td><div class='bar' style='width:16px'></div></td></tr><tr><td>D</td><td>3.8%</td><td><div class='bar' style='width:15px'></div></td></tr><tr><td>M</td><td>3.8%</td><td><div class='bar' style='width:15px'></div></td></tr><tr><td>W</td><td>3.1%</td><td><div class='bar' style='width:12px'></div></td></tr><tr><td>K</td><td>2.7%</td><td><div class='bar' style='width:10px'></div></td></tr><tr><td>R</td><td>2.7%</td><td><div class='bar' style='width:10px'></div></td></tr><tr><td>Q</td><td>1.5%</td><td><div class='bar' style='width:6px'></div></td></tr><tr><td>N</td><td>1.1%</td><td><div class='bar' style='width:4px'></div></td></tr></tbody></table></div></section>
-
-<section><h2>Sequence</h2>
-<pre class="seq">&lt;span class=&#x27;pos&#x27;&gt;    1&lt;/span&gt; MLELLPTAVEGVSQAQITGRPEWIWLALGTALMGLGTLYFLVKGMGVSDPDAKKFYAITT
-&lt;span class=&#x27;pos&#x27;&gt;   61&lt;/span&gt; LVPAIAFTMYLSMLLGYGLTMVPFGGEQNPIYWARYADWLFTTPLLLLDLALLVDADQGT
-&lt;span class=&#x27;pos&#x27;&gt;  121&lt;/span&gt; ILALVGADGIMIGTGLVGALTKVYSYRFVWWAISTAAMLYILYVLFFGFTSKAESMRPEV
-&lt;span class=&#x27;pos&#x27;&gt;  181&lt;/span&gt; ASTFKVLRNVTVVLWSAYPVVWLIGSEGAGIVPLNIETLLFMVLDVSAKVGFGLILLRSR
-&lt;span class=&#x27;pos&#x27;&gt;  241&lt;/span&gt; AIFGEAEAPEPSAGDGAAATSD
-</pre></section>
-
-<div class="footer">
-ProteinScout v2 — CPU-only protein biophysics profiler with an ML layer.
-Hydropathy: Kyte &amp; Doolittle 1982. Aggregation: AGGRESCAN (Conchillo-Solé et al. 2007).
-Disorder: FoldIndex (Prilusky et al. 2005), TOP-IDP (Campen et al. 2008), charge-hydropathy (Uversky et al. 2000).
-Coiled-coil: heptad core (Lupas et al. 1991). Signal peptide / TM topology: von Heijne 1983/1992.
-ML benchmarks: WALTZ-DB 2.0 (Louros et al. 2020), DisProt (Quaglia et al. 2022), UniProt/Swiss-Prot TRANSMEM.
-pI/charge: EMBOSS pKa, Henderson-Hasselbalch.
+<div class="note">Runs entirely in your browser from published scales — no server. The full tool adds an <b>ML layer that beats these scales</b>
+(WALTZ-DB/DisProt/UniProt-trained), UniProt-annotation validation, signal-peptide &amp; coiled-coil prediction, and batch FASTA:
+<a href="https://github.com/gianyrox/proteinscout">github.com/gianyrox/proteinscout</a> · <a href="report.html">see the validated example report →</a></div>
 </div>
-</body></html>
+<script>
+const KD={I:4.5,V:4.2,L:3.8,F:2.8,C:2.5,M:1.9,A:1.8,G:-0.4,T:-0.7,S:-0.8,W:-0.9,Y:-1.3,P:-1.6,H:-3.2,E:-3.5,Q:-3.5,D:-3.5,N:-3.5,K:-3.9,R:-4.5};
+const AGG={I:1.822,F:1.754,V:1.594,L:1.380,Y:1.159,W:1.037,M:0.910,C:0.604,A:-0.036,T:-0.159,S:-0.294,P:-0.334,G:-0.535,K:-0.931,H:-1.033,Q:-1.231,R:-1.240,N:-1.302,E:-1.412,D:-1.836};
+const TOP={A:0.06,R:0.180,N:0.007,D:0.192,C:0.02,Q:0.318,E:0.736,G:0.166,H:0.303,I:-0.486,L:-0.326,K:0.586,M:-0.397,F:-0.697,P:0.987,S:0.341,T:0.059,W:-0.884,Y:-0.510,V:-0.121};
+const PKA={Nterm:8.6,Cterm:3.6,K:10.8,R:12.5,H:6.5,D:3.9,E:4.1,C:8.5,Y:10.1};
+const POS=['K','R','H'], NEG=['D','E','C','Y'];
+const STD=new Set(Object.keys(KD));
+let LAST=null, CH={};
+
+function clean(t){
+  t=(t||'').trim();
+  if(t[0]==='>') t=t.split(/\r?\n/).slice(1).join('');
+  return t.replace(/\s/g,'').toUpperCase().replace(/[^A-Z]/g,'');
+}
+function windowed(arr,w){
+  const h=Math.floor(w/2), n=arr.length, out=new Array(n).fill(0);
+  for(let i=0;i<n;i++){let s=0,c=0;for(let j=Math.max(0,i-h);j<=Math.min(n-1,i+h);j++){s+=arr[j];c++;}out[i]=s/c;}
+  return out;
+}
+function chargeAt(aa,ph){
+  let q=0;
+  if(POS.includes(aa)) q+=1/(1+Math.pow(10,ph-PKA[aa]));
+  if(NEG.includes(aa)) q-=1/(1+Math.pow(10,PKA[aa]-ph));
+  return q;
+}
+function netCharge(seq,ph){
+  let q=1/(1+Math.pow(10,ph-PKA.Nterm)) - 1/(1+Math.pow(10,PKA.Cterm-ph));
+  for(const a of seq) q+=chargeAt(a,ph);
+  return q;
+}
+function pI(seq){let lo=0,hi=14;for(let k=0;k<60;k++){const m=(lo+hi)/2; if(netCharge(seq,m)>0) lo=m; else hi=m;} return (lo+hi)/2;}
+function regions(mask,minLen){
+  const out=[];let s=-1;
+  for(let i=0;i<=mask.length;i++){
+    if(i<mask.length&&mask[i]){if(s<0)s=i;}
+    else{if(s>=0&&i-s>=minLen)out.push([s+1,i]);s=-1;}
+  }
+  return out;
+}
+function ex(s){document.getElementById('seq').value=s;run();}
+function accEx(a){document.getElementById('acc').value=a;fetchUniprot();}
+async function fetchUniprot(){
+  const a=document.getElementById('acc').value.trim();if(!a)return;
+  err('fetching '+a+' …');
+  try{
+    const r=await fetch('https://rest.uniprot.org/uniprotkb/'+a+'.fasta');
+    if(!r.ok)throw new Error('not found');
+    const fa=await r.text();
+    document.getElementById('seq').value=fa;err('');run();
+  }catch(e){err('UniProt fetch failed: '+e.message);}
+}
+function err(m){document.getElementById('err').textContent=m||'';}
+function mkChart(id,labels,data,color,fill){
+  if(CH[id])CH[id].destroy();
+  const ctx=document.getElementById(id);
+  CH[id]=new Chart(ctx,{type:'line',data:{labels,datasets:[{data,borderColor:color,borderWidth:1.4,pointRadius:0,
+      fill:fill?{target:'origin'}:false,backgroundColor:fill?color+'22':undefined,tension:.15}]},
+    options:{animation:false,responsive:true,plugins:{legend:{display:false},
+      tooltip:{callbacks:{title:i=>'residue '+labels[i[0].dataIndex]}}},
+      scales:{x:{ticks:{color:'#8b93a5',maxTicksLimit:12},grid:{color:'#1c2230'}},
+              y:{ticks:{color:'#8b93a5'},grid:{color:'#1c2230'}}}}});
+}
+function run(){
+  const seq=clean(document.getElementById('seq').value);
+  if(seq.length<5){err('enter a sequence of ≥5 residues');return;}
+  const bad=[...seq].filter(a=>!STD.has(a));
+  if(bad.length>seq.length*0.2){err('too many non-standard characters — is this a protein sequence?');return;}
+  err(''); LAST=seq;
+  const w=+document.getElementById('win').value;
+  const n=seq.length, labels=[...Array(n)].map((_,i)=>i+1);
+  const kd=windowed([...seq].map(a=>KD[a]??0),w);
+  const ag=windowed([...seq].map(a=>AGG[a]??0),Math.min(w,7));
+  const di=windowed([...seq].map(a=>TOP[a]??0),Math.min(w,15));
+  const cg=windowed([...seq].map(a=>chargeAt(a,7.4)),Math.min(w,7));
+  const tm=regions(kd.map(v=>v>1.6),15);
+  const apr=regions(ag.map(v=>v>0.0),5);
+  const idr=regions(di.map(v=>v>0.05),15);
+  const net=netCharge(seq,7.4), pi=pI(seq);
+  document.getElementById('kv').innerHTML=[
+    ['length',n+''],['pI',pi.toFixed(2)],['net charge @7.4',net.toFixed(1)],
+    ['TM / APR / IDR',tm.length+' / '+apr.length+' / '+idr.length]
+  ].map(([k,v])=>'<div class="kv"><b>'+v+'</b><span>'+k+'</span></div>').join('');
+  document.getElementById('out').style.display='block';
+  mkChart('cHydro',labels,kd,'#2a9d8f',false);
+  mkChart('cAgg',labels,ag,'#ff9d4d',true);
+  mkChart('cDis',labels,di,'#5b8cff',true);
+  mkChart('cChg',labels,cg,'#c792ea',true);
+  const fmt=(regs)=>regs.length? regs.map(([a,b])=>'<div><span class="reg">'+a+'–'+b+'</span> <span class="mut">'+seq.slice(a-1,b).slice(0,22)+(b-a>21?'…':'')+'</span></div>').join(''):'<span class="mut">none detected</span>';
+  document.getElementById('tTM').innerHTML='<h4>Transmembrane segments ('+tm.length+')</h4>'+fmt(tm);
+  document.getElementById('tAPR').innerHTML='<h4>Aggregation-prone regions ('+apr.length+')</h4>'+fmt(apr);
+  document.getElementById('tIDR').innerHTML='<h4>Disordered regions ('+idr.length+')</h4>'+fmt(idr);
+}
+</script></body></html>
