@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>StabilityDesigner report</title>
+<style>
+ body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+   margin:0;background:#0d1117;color:#e6edf3;line-height:1.5}
+ .wrap{max-width:980px;margin:0 auto;padding:28px}
+ h1{font-size:26px;margin:0 0 4px} h2{font-size:18px;margin-top:0}
+ .sub{color:#8b949e;margin-bottom:20px}
+ .card{background:#161b22;border:1px solid #30363d;border-radius:10px;
+   padding:18px 20px;margin:16px 0}
+ .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+ .metric{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px}
+ .metric .v{font-size:24px;font-weight:700;color:#58a6ff}
+ .metric .l{color:#8b949e;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+ table{width:100%;border-collapse:collapse;font-size:14px}
+ th,td{text-align:left;padding:6px 10px;border-bottom:1px solid #21262d}
+ th{color:#8b949e;font-weight:600}
+ .stab{color:#3fb950;font-weight:600} .destab{color:#f85149}
+ img{max-width:100%;border-radius:8px;border:1px solid #30363d;background:#fff}
+ code{background:#21262d;padding:2px 6px;border-radius:4px;font-size:12px;
+   word-break:break-all}
+ .foot{color:#8b949e;font-size:12px;margin-top:24px}
+</style></head><body><div class="wrap">
+<h1>StabilityDesigner &mdash; &Delta;&Delta;G saturation mutagenesis</h1>
+<div class="sub">Predicted protein stability change on point mutations &middot;
+ scan over all 164 positions &middot; 164-residue protein
+ &middot; structural features: yes</div>
+
+<div class="grid">
+ <div class="metric"><div class="v">0.330</div>
+   <div class="l">Held-out Pearson r (FireProtDB test)</div></div>
+ <div class="metric"><div class="v">2.19</div>
+   <div class="l">Held-out RMSE (kcal/mol)</div></div>
+ <div class="metric"><div class="v">0.369</div>
+   <div class="l">S669 Pearson r (full, independent)</div></div>
+ <div class="metric"><div class="v">+0.88</div>
+   <div class="l">Ssym antisymmetry bias (0 = ideal)</div></div>
+</div>
+
+<div class="card"><h2>Saturation-mutagenesis heatmap</h2>
+ <img src="heatmap.png" alt="ddG heatmap">
+ <p class="sub" style="margin-top:10px">Blue = stabilizing (&Delta;&Delta;G&lt;0),
+  red = destabilizing (&Delta;&Delta;G&gt;0). Convention: &Delta;&Delta;G &gt; 0
+  destabilizes the fold.</p></div>
+
+<div class="card"><h2>Top suggested stabilizing mutations</h2>
+ <table><tr><th>Mutation</th><th>Predicted &Delta;&Delta;G (kcal/mol)</th><th>Call</th></tr>
+ <tr><td><b>D10L</b></td><td class='stab'>-1.797</td><td>STABILIZING</td></tr><tr><td><b>A49Y</b></td><td class='stab'>-1.758</td><td>STABILIZING</td></tr><tr><td><b>A82Y</b></td><td class='stab'>-1.752</td><td>STABILIZING</td></tr><tr><td><b>D70L</b></td><td class='stab'>-1.705</td><td>STABILIZING</td></tr><tr><td><b>D10I</b></td><td class='stab'>-1.657</td><td>STABILIZING</td></tr><tr><td><b>A134Y</b></td><td class='stab'>-1.649</td><td>STABILIZING</td></tr><tr><td><b>S36Y</b></td><td class='stab'>-1.645</td><td>STABILIZING</td></tr><tr><td><b>G12Y</b></td><td class='stab'>-1.629</td><td>STABILIZING</td></tr><tr><td><b>G156Y</b></td><td class='stab'>-1.624</td><td>STABILIZING</td></tr><tr><td><b>E11L</b></td><td class='stab'>-1.603</td><td>STABILIZING</td></tr><tr><td><b>A112I</b></td><td class='stab'>-1.592</td><td>STABILIZING</td></tr><tr><td><b>D70I</b></td><td class='stab'>-1.586</td><td>STABILIZING</td></tr><tr><td><b>S117I</b></td><td class='stab'>-1.555</td><td>STABILIZING</td></tr><tr><td><b>A49I</b></td><td class='stab'>-1.550</td><td>STABILIZING</td></tr><tr><td><b>A41Y</b></td><td class='stab'>-1.547</td><td>STABILIZING</td></tr></table></div>
+
+
+
+<div class="card"><h2>Model &amp; data</h2>
+ <p>A RF regressor (chosen by grouped,
+  protein-disjoint cross-validation) over 68 interpretable
+  biophysical features: amino-acid property deltas (hydrophobicity, volume, charge,
+  flexibility, polarity, helix/sheet propensity, side-chain H-bond capacity), BLOSUM62
+  and Grantham distance, substitution-type flags, local-window composition, and &mdash;
+  when a PDB is supplied &mdash; relative solvent accessibility, secondary structure,
+  C&beta;/C&alpha; contact number, burial depth, backbone H-bond count, plus engineered
+  structure&times;chemistry interactions (e.g. cavity creation in the buried core).</p>
+ <p>Trained on <b>FireProtDB</b> curated experimental &Delta;&Delta;G values
+  (protein-disjoint train/val/test splits via the ThermoMPNN benchmark), with light
+  antisymmetric reverse-mutation augmentation. Evaluated on the full independent
+  <b>S669</b> benchmark and on <b>Ssym</b> for forward/reverse antisymmetry.</p>
+ <h2 style="margin-top:16px">Top feature importances (permutation, held-out)</h2>
+ <table><tr><th>Feature</th><th>Importance</th></tr><tr><td>rel_sasa</td><td>0.107</td></tr><tr><td>pos_frac</td><td>0.077</td></tr><tr><td>d_sheet_prop</td><td>0.070</td></tr><tr><td>buried_x_d_volume</td><td>0.066</td></tr><tr><td>win_hydro_mean</td><td>0.063</td></tr><tr><td>win_helix_mean</td><td>0.056</td></tr><tr><td>d_polarity</td><td>0.040</td></tr><tr><td>d_flex</td><td>0.039</td></tr><tr><td>buried_x_abs_d_hydro</td><td>0.036</td></tr><tr><td>d_volume</td><td>0.030</td></tr></table></div>
+
+<div class="card"><h2>Query sequence</h2><code>MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNCNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL</code></div>
+
+<div class="foot">
+ StabilityDesigner &middot; CPU-only &middot; for research/portfolio use.
+ &Delta;&Delta;G predictions are computational estimates; experimental validation
+ (e.g. thermal/chemical denaturation) is required before drawing conclusions.
+ Data: FireProtDB (Stourac et al. 2021, NAR), S669 (Pancotti et al. 2022,
+ Brief. Bioinform.), Ssym (Pucci et al. 2018, Bioinformatics), splits via
+ ThermoMPNN (Dieckhaus et al. 2024, PNAS).
+</div>
+</div></body></html>
