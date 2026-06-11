@@ -3,127 +3,303 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ScreenServer — live</title>
-<meta name="description" content="Molecular drug-likeness in your browser: descriptors, Lipinski/Veber/QED, alerts. RDKit-WASM.">
+<title>ScreenServer — molecular ADMET & drug-likeness screening</title>
+<meta name="description" content="Screen any molecule or small library for ADMET liabilities and drug-likeness: instant in-browser RDKit descriptors plus 13 trained ML endpoints (solubility, hERG, CYPs, Ames, Caco-2, DILI), structural alerts and applicability domain. Free, open, CPU-only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <script src="https://unpkg.com/@rdkit/rdkit@2024.3.5/dist/RDKit_minimal.js"></script>
 <style>
-:root{--bg:#0d0f14;--panel:#161b27;--line:#262c3b;--teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--good:#46d39a;--warn:#ffce6b;--bad:#ff7a7a}
+:root{
+  --bg:#0d0f14;--panel:#161b27;--panel2:#1b2130;--line:#262c3b;
+  --teal:#2a9d8f;--acc:#5b8cff;--mut:#8b93a5;--ink:#e9ecf2;
+  --good:#46d39a;--warn:#ffce6b;--bad:#ff7a7a;--r:12px;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#e9ecf2;font-size:14px;line-height:1.5}
-.wrap{max-width:960px;margin:0 auto;padding:22px}
-a{color:var(--acc)} .crumb{color:var(--mut);font-size:12.5px;margin-bottom:6px}
-h1{font-size:24px;margin:0 0 2px} h1 span{color:var(--teal)}
-.sub{color:var(--mut);font-size:13px;margin-bottom:16px}
-input[type=text]{width:100%;background:#0a0c10;color:#cfe;border:1px solid var(--line);border-radius:10px;padding:11px;font-family:ui-monospace,Menlo,monospace;font-size:13px}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
-.btn{padding:9px 16px;background:var(--teal);color:#06231f;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:13.5px}
-.tag{display:inline-block;background:#1c2230;border:1px solid var(--line);border-radius:14px;padding:2px 9px;margin:2px 3px 2px 0;font-size:11.5px;cursor:pointer}
-.grid{display:grid;grid-template-columns:280px 1fr;gap:16px;margin-top:14px}
-@media(max-width:680px){.grid{grid-template-columns:1fr}}
-.mol{background:#fff;border-radius:12px;padding:8px;display:flex;align-items:center;justify-content:center;min-height:220px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.kv{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
-.kv b{display:block;font-size:17px;color:var(--teal)} .kv span{font-size:11px;color:var(--mut)}
-.verdict{margin:12px 0;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:var(--panel)}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:22px 20px 70px}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* header */
+.crumb{color:var(--mut);font-size:12.5px;margin-bottom:10px}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+h1{font-size:27px;margin:0;letter-spacing:-.4px}
+h1 span{color:var(--teal)}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--mut)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mut)}
+.dot.live{background:var(--good);box-shadow:0 0 8px 1px rgba(70,211,154,.5)}
+.dot.off{background:var(--bad)}
+.dot.wait{background:var(--warn)}
+.vp{font-size:15.5px;color:#cdd5e3;margin:14px 0 4px;max-width:760px}
+.vp b{color:var(--ink)}
+.who{color:var(--mut);font-size:13px;margin:0 0 18px;max-width:760px}
+.who b{color:#b9c2d2}
+
+/* card */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.label{font-size:12px;color:var(--mut);font-weight:600;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
+textarea{width:100%;min-height:96px;resize:vertical;background:#0a0c10;color:#cfe7e3;border:1px solid var(--line);border-radius:10px;padding:12px;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--teal)}
+.chips{margin:10px 0 2px}
+.tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:3px 11px;margin:3px 5px 3px 0;font-size:12px;cursor:pointer;color:#c6cedd;transition:.12s}
+.tag:hover{border-color:var(--teal);color:var(--ink)}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border:none;border-radius:9px;font-weight:700;cursor:pointer;font-size:13.5px;font-family:inherit;transition:.12s;color:#06231f}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+.btn.teal{background:var(--teal)}
+.btn.blue{background:var(--acc);color:#04122e}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn small{font-weight:500;opacity:.85}
+#err{color:var(--bad);font-size:12.5px;margin-top:8px;min-height:16px}
+
+/* instant result */
+.section-h{font-size:13px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:24px 4px 10px;display:flex;align-items:center;gap:9px}
+.section-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:16px}
+@media(max-width:720px){.grid{grid-template-columns:1fr}}
+.mol{background:#fff;border-radius:var(--r);padding:8px;display:flex;align-items:center;justify-content:center;min-height:240px;border:1px solid var(--line)}
+.molname{font-size:12px;color:var(--mut);margin:8px 4px 0;font-family:ui-monospace,monospace;word-break:break-all}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+@media(max-width:420px){.cards{grid-template-columns:repeat(2,1fr)}}
+.kv{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.kv b{display:block;font-size:18px;color:var(--teal);line-height:1.2}
+.kv span{font-size:11px;color:var(--mut)}
+.verdict{margin-top:12px;padding:13px 15px;border-radius:11px;border:1px solid var(--line);background:var(--panel2)}
+.verdict b{color:#c6cedd}
 .pill{display:inline-block;border-radius:14px;padding:2px 10px;margin:3px 4px 3px 0;font-size:12px;font-weight:600}
-.ok{background:#12281f;color:var(--good);border:1px solid #1f5e44} .vio{background:#2c1414;color:var(--bad);border:1px solid #5a2a2a}
+.ok{background:#12281f;color:var(--good);border:1px solid #1f5e44}
+.vio{background:#2c1414;color:var(--bad);border:1px solid #5a2a2a}
 .warnp{background:#2c2510;color:var(--warn);border:1px solid #5a4a1f}
-.note{color:var(--mut);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:10px}
-#err{color:var(--bad);font-size:12.5px;margin-top:6px;min-height:16px}
-h3{font-size:13px;margin:14px 4px 4px;color:#cfe}
+.more{color:var(--mut);font-size:11.5px;margin-top:8px}
+
+/* ML status + frame */
+#mlstatus{color:var(--mut);font-size:13px;margin:6px 4px;min-height:18px;display:flex;align-items:center;gap:8px}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--acc);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#mlframe{width:100%;height:82vh;border:1px solid var(--line);border-radius:var(--r);background:#fff;display:none;margin-top:6px}
+
+/* offline / info */
+.offline{background:var(--panel);border:1px solid #4a3a1f;border-left:3px solid var(--warn);border-radius:10px;padding:13px 15px;margin-top:10px;font-size:13px;color:#d7ceb6;display:none}
+.offline a{color:var(--warn)}
+.offline code{font-family:ui-monospace,monospace;background:#0a0c10;padding:1px 5px;border-radius:4px}
+.endpoints{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.ep{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:11.5px;color:#b9c2d2}
+.usecases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+@media(max-width:720px){.usecases{grid-template-columns:1fr}}
+.uc{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.uc h4{margin:0 0 5px;font-size:13.5px;color:var(--teal)}
+.uc p{margin:0;font-size:12.5px;color:var(--mut)}
+.note{color:var(--mut);font-size:12.5px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px;line-height:1.7}
+.note b{color:#b9c2d2}
+.note code{font-family:ui-monospace,monospace}
 </style>
 </head>
 <body><div class="wrap">
+
 <div class="crumb"><a href="/research">← research</a></div>
-<h1>Screen<span>Server</span> · live</h1>
-<div class="sub">Paste a SMILES → molecule + descriptors + drug-likeness (Lipinski / Veber / Ghose / QED) + flags, computed in your browser with RDKit-WASM. <span id="rdkstat" style="color:#ffce6b">loading RDKit…</span></div>
-
-<input type="text" id="smi" placeholder="SMILES…  e.g. aspirin  CC(=O)Oc1ccccc1C(=O)O" value="CC(=O)Oc1ccccc1C(=O)O">
-<div class="row">
-  <button class="btn" onclick="run()">▶ Analyze (instant)</button>
-  <button class="btn" id="mlbtn" style="background:#5b8cff;color:#04122e" onclick="fullML()">▶ Full ML ADMET <span id="be" style="font-weight:400;opacity:.8">·…</span></button>
-  <span class="tag" onclick="ex('CC(=O)Oc1ccccc1C(=O)O','aspirin')">aspirin</span>
-  <span class="tag" onclick="ex('CN1C=NC2=C1C(=O)N(C(=O)N2C)C','caffeine')">caffeine</span>
-  <span class="tag" onclick="ex('CC(C)Cc1ccc(cc1)C(C)C(=O)O','ibuprofen')">ibuprofen</span>
-  <span class="tag" onclick="ex('COc1ccc2[nH]c(=N)n(CCCN3CCN(CC3)c3ccccn3)c2c1','astemizole?')">astemizole</span>
-  <span class="tag" onclick="ex('CC(=O)Nc1ccc(O)cc1','paracetamol')">paracetamol</span>
+<div class="head">
+  <h1>Screen<span>Server</span></h1>
+  <span class="chip"><span class="dot wait" id="bedot"></span><span id="betxt">checking backend…</span></span>
 </div>
-<div id="err"></div>
 
-<div id="out" style="display:none" class="grid">
-  <div><div class="mol" id="mol"></div></div>
-  <div>
-    <div class="cards" id="kv"></div>
-    <div class="verdict" id="verdict"></div>
+<p class="vp"><b>Screen any molecule or small library for ADMET liabilities and drug-likeness in seconds</b> — instant in-browser descriptors plus 13 trained ML endpoints, with honest scaffold-split metrics, applicability-domain flags, and structural alerts. Free, open, CPU-only.</p>
+<p class="who"><b>Who it's for:</b> medicinal chemists prioritizing analogs, chemical biologists sanity-checking probe compounds, and academic / small-biotech drug-discovery labs that need rigorous triage on a laptop — no GPU, no per-seat license.</p>
+
+<!-- input -->
+<div class="card">
+  <div class="label"><span>SMILES — one per line to screen a small library</span><span id="rdkstat" style="color:var(--warn)">loading RDKit…</span></div>
+  <textarea id="smi" spellcheck="false" placeholder="CC(=O)Oc1ccccc1C(=O)O&#10;CN1C=NC2=C1C(=O)N(C(=O)N2C)C&#10;...one SMILES per line">CC(=O)Oc1ccccc1C(=O)O</textarea>
+  <div class="chips">
+    <span class="tag" onclick="ex('CC(=O)Oc1ccccc1C(=O)O')">aspirin</span>
+    <span class="tag" onclick="ex('CN1C=NC2=C1C(=O)N(C(=O)N2C)C')">caffeine</span>
+    <span class="tag" onclick="ex('CC(C)Cc1ccc(cc1)C(C)C(=O)O')">ibuprofen</span>
+    <span class="tag" onclick="ex('COc1ccc2[nH]c(=N)n(CCCN3CCN(CC3)c3ccccn3)c2c1')">astemizole</span>
+    <span class="tag" onclick="ex('CC(=O)Nc1ccc(O)cc1')">paracetamol</span>
+    <span class="tag" onclick="loadLibrary()" style="border-color:var(--teal);color:var(--teal)">+ load all 5 as a library</span>
+  </div>
+  <div class="actions">
+    <button class="btn teal" id="instbtn" onclick="runInstant()">⚡ Instant preview</button>
+    <button class="btn blue" id="mlbtn" onclick="fullML()">▶ Full ML ADMET <small id="mlhint">· 13 endpoints</small></button>
+  </div>
+  <div id="err"></div>
+</div>
+
+<!-- instant result -->
+<div id="out" style="display:none">
+  <div class="section-h">Instant preview · in-browser RDKit</div>
+  <div class="grid">
+    <div>
+      <div class="mol" id="mol"></div>
+      <div class="molname" id="molname"></div>
+    </div>
+    <div>
+      <div class="cards" id="kv"></div>
+      <div class="verdict" id="verdict"></div>
+      <div class="more" id="more"></div>
+    </div>
   </div>
 </div>
 
-<div id="mlstatus" style="color:#8b93a5;font-size:12.5px;margin-top:10px;min-height:16px"></div>
-<iframe id="mlframe" style="width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;background:#fff;display:none;margin-top:10px"></iframe>
-
-<div class="note"><b>Instant</b> = RDKit descriptors + drug-likeness in your browser. <b>Full ML ADMET</b> runs the real
-<b>13 trained endpoints</b> on the server (solubility, hERG, CYPs, Ames, Caco-2, DILI…) with PAINS/Brenk alerts, applicability
-domain &amp; confidence. Paste several SMILES (one per line) to screen a small library.
-<a href="https://github.com/gianyrox/screenserver">github.com/gianyrox/screenserver</a> · <a href="report.html">example report →</a></div>
-<script>
-let SS_API=null;
-fetch('/research/api.json',{cache:'no-store'}).then(r=>r.json()).then(j=>{SS_API=j.url;return fetch(j.url+'/health');}).then(r=>{if(!r.ok)throw 0;document.getElementById('be').textContent='· server live';}).catch(()=>{document.getElementById('be').textContent='· server off';});
-async function fullML(){
-  const smiles=document.getElementById('smi').value.trim();
-  if(!smiles){document.getElementById('mlstatus').textContent='enter at least one SMILES';return;}
-  if(!SS_API){document.getElementById('mlstatus').textContent='server not active — instant analysis works above; or run the CLI.';return;}
-  document.getElementById('mlstatus').innerHTML='<span style="display:inline-block;width:11px;height:11px;border:2px solid #5b8cff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px"></span>running 13 ADMET models on server…';
-  document.getElementById('mlframe').style.display='none';
-  try{
-    const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),200000);
-    const r=await fetch(SS_API+'/screenserver/screen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({smiles}),signal:ctrl.signal});clearTimeout(to);
-    const j=await r.json(); if(!r.ok){document.getElementById('mlstatus').textContent='✗ '+(j.detail||'error');return;}
-    document.getElementById('mlstatus').textContent='';const fr=document.getElementById('mlframe');fr.srcdoc=j.report_html;fr.style.display='block';
-  }catch(e){document.getElementById('mlstatus').textContent='✗ failed or timed out';}
-}
-const _s=document.createElement('style');_s.textContent='@keyframes spin{to{transform:rotate(360deg)}}';document.head.appendChild(_s);
-</script>
+<!-- ML result -->
+<div id="mlwrap" style="display:none">
+  <div class="section-h">Full ML ADMET report</div>
+  <div id="mlstatus"></div>
+  <div class="offline" id="offline">
+    <b>Server not active.</b> The instant in-browser preview above still works for descriptors and drug-likeness.
+    For the full 13-endpoint ML panel you can view an
+    <a href="report.html">example report →</a>,
+    read the <a href="https://github.com/gianyrox/screenserver">source &amp; docs</a>,
+    or run the CLI locally: <code>python screenserver.py screen library.csv</code>.
+  </div>
+  <iframe id="mlframe" title="ScreenServer ML ADMET report"></iframe>
 </div>
+
+<!-- what it predicts -->
+<div class="section-h">The 13-endpoint ML panel</div>
+<div class="endpoints">
+  <span class="ep">Aqueous solubility (logS)</span>
+  <span class="ep">Lipophilicity (logD)</span>
+  <span class="ep">Caco-2 permeability</span>
+  <span class="ep">Plasma protein binding</span>
+  <span class="ep">Hepatocyte clearance</span>
+  <span class="ep">Acute tox (LD50)</span>
+  <span class="ep">BBB penetration</span>
+  <span class="ep">hERG block</span>
+  <span class="ep">CYP3A4</span>
+  <span class="ep">CYP2D6</span>
+  <span class="ep">CYP2C9</span>
+  <span class="ep">Ames mutagenicity</span>
+  <span class="ep">DILI hepatotoxicity</span>
+</div>
+
+<!-- use cases -->
+<div class="section-h">Example use cases</div>
+<div class="usecases">
+  <div class="uc"><h4>Hit triage</h4><p>Paste a vendor catalog or hit list, rank by developability score, and drop compounds with hERG / Ames / DILI flags or PAINS substructures before ordering.</p></div>
+  <div class="uc"><h4>Analog prioritization</h4><p>Get instant descriptors and Ro5 / QED for a proposed analog, then run the full panel to compare solubility, permeability, CYP and clearance across the series.</p></div>
+  <div class="uc"><h4>Probe-compound check</h4><p>Confirm a chemical-biology tool compound isn't a frequent hitter and has tolerable cytochrome and cardiotoxicity risk before cellular assays.</p></div>
+</div>
+
+<div class="note">
+<b>Instant preview</b> runs RDKit-WASM entirely in your browser — molecule render, descriptors, and Lipinski / Veber / Ghose / QED drug-likeness, with no data leaving the page.
+<b>Full ML ADMET</b> runs the real 13 trained endpoints on the backend with PAINS / Brenk / NIH structural alerts, applicability-domain checks, prediction confidence, and a composite developability score. Honest random- and scaffold-split held-out metrics are shown at the top of every report.<br>
+Open-source &amp; CPU-only · data: MoleculeNet/DeepChem &amp; Therapeutics Data Commons ·
+<a href="https://github.com/gianyrox/screenserver">github.com/gianyrox/screenserver</a> ·
+<a href="report.html">example report →</a><br>
+<span style="color:var(--mut)">Research-grade ML triage tool. Predictions are computational estimates for prioritization, not clinical or regulatory determinations.</span>
+</div>
+
 <script>
-let RD=null;
-window.initRDKitModule().then(m=>{RD=m;document.getElementById('rdkstat').textContent='RDKit ready';document.getElementById('rdkstat').style.color='#46d39a';run();})
-  .catch(e=>{document.getElementById('rdkstat').textContent='RDKit failed to load';});
-function ex(s,n){document.getElementById('smi').value=s;run();}
+/* ---------- backend discovery ---------- */
+let SS_API=null;
+function setBackend(state,txt){
+  document.getElementById('bedot').className='dot '+state;
+  document.getElementById('betxt').textContent=txt;
+}
+fetch('/research/api.json',{cache:'no-store'})
+  .then(r=>r.json())
+  .then(j=>{SS_API=j.url;return fetch(j.url+'/health',{cache:'no-store'});})
+  .then(r=>{if(!r.ok)throw 0;setBackend('live','backend live');})
+  .catch(()=>{SS_API=null;setBackend('off','backend offline');document.getElementById('mlhint').textContent='· server offline';});
+
+/* ---------- helpers ---------- */
 function err(m){document.getElementById('err').textContent=m||'';}
-function run(){
+function allSmiles(){
+  return document.getElementById('smi').value.split('\n').map(s=>s.trim()).filter(Boolean);
+}
+function firstSmiles(){const a=allSmiles();return a.length?a[0]:'';}
+function ex(s){document.getElementById('smi').value=s;runInstant();}
+function loadLibrary(){
+  document.getElementById('smi').value=[
+    'CC(=O)Oc1ccccc1C(=O)O',
+    'CN1C=NC2=C1C(=O)N(C(=O)N2C)C',
+    'CC(C)Cc1ccc(cc1)C(C)C(=O)O',
+    'COc1ccc2[nH]c(=N)n(CCCN3CCN(CC3)c3ccccn3)c2c1',
+    'CC(=O)Nc1ccc(O)cc1'
+  ].join('\n');
+  runInstant();
+}
+
+/* ---------- instant in-browser RDKit ---------- */
+let RD=null;
+window.initRDKitModule().then(m=>{
+  RD=m;
+  document.getElementById('rdkstat').textContent='RDKit ready';
+  document.getElementById('rdkstat').style.color='var(--good)';
+  runInstant();
+}).catch(()=>{document.getElementById('rdkstat').textContent='RDKit failed to load';document.getElementById('rdkstat').style.color='var(--bad)';});
+
+function pill(t,cls){return '<span class="pill '+cls+'">'+t+'</span>';}
+
+function runInstant(){
   if(!RD){err('RDKit still loading…');return;}
-  const smi=document.getElementById('smi').value.trim();
-  if(!smi){err('enter a SMILES');return;}
-  let mol;
-  try{mol=RD.get_mol(smi);}catch(e){mol=null;}
-  if(!mol||!mol.is_valid()){err('invalid SMILES');if(mol)mol.delete();return;}
+  const smi=firstSmiles();
+  if(!smi){err('enter at least one SMILES');return;}
+  let mol;try{mol=RD.get_mol(smi);}catch(e){mol=null;}
+  if(!mol||!mol.is_valid()){err('invalid SMILES: '+smi.slice(0,40));if(mol)mol.delete();return;}
   err('');
-  // draw
-  document.getElementById('mol').innerHTML=mol.get_svg(260,220);
-  // descriptors
+  const n=allSmiles().length;
+  document.getElementById('molname').textContent=smi.length>60?smi.slice(0,60)+'…':smi;
+  document.getElementById('more').textContent=n>1?('showing molecule 1 of '+n+' — run Full ML ADMET to screen the whole library'):'';
+  document.getElementById('mol').innerHTML=mol.get_svg(280,240);
   const d=JSON.parse(mol.get_descriptors());
-  const mw=d.exactMW ?? d.amw, logp=d.CrippenClogP, tpsa=d.tpsa ?? d.TPSA,
-        hbd=d.NumHBD ?? d.lipinskiHBD, hba=d.NumHBA ?? d.lipinskiHBA,
+  const mw=d.exactMW??d.amw, logp=d.CrippenClogP, tpsa=d.tpsa??d.TPSA,
+        hbd=d.NumHBD??d.lipinskiHBD, hba=d.NumHBA??d.lipinskiHBA,
         rot=d.NumRotatableBonds, rings=d.NumRings, ar=d.NumAromaticRings,
-        heavy=d.NumHeavyAtoms, frac=d.FractionCSP3;
-  const qed=d.qed;
-  document.getElementById('out').style.display='grid';
+        heavy=d.NumHeavyAtoms, qed=d.qed;
+  document.getElementById('out').style.display='block';
   const cards=[['MW',(mw||0).toFixed(1)],['cLogP',(logp||0).toFixed(2)],['TPSA',(tpsa||0).toFixed(0)],
     ['HBD',hbd],['HBA',hba],['RotB',rot],['Rings',rings],['Arom',ar],['QED',(qed!=null?qed.toFixed(2):'—')]];
   document.getElementById('kv').innerHTML=cards.map(([k,v])=>'<div class="kv"><b>'+v+'</b><span>'+k+'</span></div>').join('');
-  // rules
-  const lip=[]; if(mw>500)lip.push('MW>500'); if(logp>5)lip.push('cLogP>5'); if(hbd>5)lip.push('HBD>5'); if(hba>10)lip.push('HBA>10');
-  const veber=[]; if(rot>10)veber.push('RotB>10'); if(tpsa>140)veber.push('TPSA>140');
-  const ghose=[]; if(mw<160||mw>480)ghose.push('MW∉[160,480]'); if(logp<-0.4||logp>5.6)ghose.push('logP∉[-0.4,5.6]'); if(heavy<20||heavy>70)ghose.push('atoms∉[20,70]');
-  const pill=(t,cls)=>'<span class="pill '+cls+'">'+t+'</span>';
+  const lip=[];if(mw>500)lip.push('MW>500');if(logp>5)lip.push('cLogP>5');if(hbd>5)lip.push('HBD>5');if(hba>10)lip.push('HBA>10');
+  const veber=[];if(rot>10)veber.push('RotB>10');if(tpsa>140)veber.push('TPSA>140');
+  const ghose=[];if(mw<160||mw>480)ghose.push('MW∉[160,480]');if(logp<-0.4||logp>5.6)ghose.push('logP∉[-0.4,5.6]');if(heavy<20||heavy>70)ghose.push('atoms∉[20,70]');
   let v='';
-  v+='<b>Lipinski Ro5:</b> '+(lip.length? lip.map(x=>pill(x,'vio')).join('') : pill('0 violations — pass','ok'))+'<br>';
-  v+='<b>Veber:</b> '+(veber.length? veber.map(x=>pill(x,'warnp')).join('') : pill('pass','ok'))+'<br>';
-  v+='<b>Ghose:</b> '+(ghose.length? ghose.map(x=>pill(x,'warnp')).join('') : pill('pass','ok'))+'<br>';
-  v+='<b>QED drug-likeness:</b> '+pill((qed!=null?qed.toFixed(2):'—')+(qed>0.67?' (high)':qed>0.5?' (moderate)':' (low)'), qed>0.5?'ok':'warnp');
+  v+='<b>Lipinski Ro5:</b> '+(lip.length?lip.map(x=>pill(x,'vio')).join(''):pill('0 violations — pass','ok'))+'<br>';
+  v+='<b>Veber:</b> '+(veber.length?veber.map(x=>pill(x,'warnp')).join(''):pill('pass','ok'))+'<br>';
+  v+='<b>Ghose:</b> '+(ghose.length?ghose.map(x=>pill(x,'warnp')).join(''):pill('pass','ok'))+'<br>';
+  v+='<b>QED:</b> '+pill((qed!=null?qed.toFixed(2):'—')+(qed>0.67?' (high)':qed>0.5?' (moderate)':' (low)'),qed>0.5?'ok':'warnp');
   document.getElementById('verdict').innerHTML=v;
   mol.delete();
 }
-</script></body></html>
+
+/* ---------- full ML ADMET (server) ---------- */
+async function fullML(){
+  const lines=allSmiles();
+  if(!lines.length){err('enter at least one SMILES');return;}
+  err('');
+  document.getElementById('mlwrap').style.display='block';
+  document.getElementById('offline').style.display='none';
+  const st=document.getElementById('mlstatus');
+  document.getElementById('mlframe').style.display='none';
+  if(!SS_API){
+    st.textContent='';
+    document.getElementById('offline').style.display='block';
+    document.getElementById('mlwrap').scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
+  const btn=document.getElementById('mlbtn');btn.disabled=true;
+  st.innerHTML='<span class="spin"></span>running 13 ADMET models on '+lines.length+' molecule'+(lines.length>1?'s':'')+'…';
+  document.getElementById('mlwrap').scrollIntoView({behavior:'smooth',block:'start'});
+  try{
+    const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),200000);
+    const r=await fetch(SS_API+'/screenserver/screen',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({smiles:lines.join('\n')}),signal:ctrl.signal});
+    clearTimeout(to);
+    const j=await r.json();
+    if(!r.ok){st.textContent='✗ '+(j.detail||'server error');btn.disabled=false;return;}
+    st.textContent='✓ screened '+(j.n??lines.length)+' molecule'+((j.n??lines.length)>1?'s':'');
+    const fr=document.getElementById('mlframe');fr.srcdoc=j.report_html;fr.style.display='block';
+  }catch(e){
+    st.textContent='';
+    document.getElementById('offline').style.display='block';
+  }
+  btn.disabled=false;
+}
+</script>
+</div></body></html>
