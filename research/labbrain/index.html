@@ -48,7 +48,21 @@ h1 .lb{color:var(--teal)}
 label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
   color:var(--mut);margin:0 0 6px}
 .row2{display:flex;gap:12px;flex-wrap:wrap}
-.f-pi{flex:1 1 220px;min-width:0} .f-q{flex:1 1 100%}
+.f-pi{flex:1 1 260px;min-width:0} .f-q{flex:1 1 100%}
+.ac-wrap{position:relative}
+.ac-drop{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:30;background:#0c0f16;
+  border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.5);
+  max-height:300px;overflow-y:auto;display:none}
+.ac-drop.show{display:block}
+.ac-item{display:flex;flex-direction:column;gap:1px;padding:9px 12px;cursor:pointer;border-bottom:1px solid #1a1f2c}
+.ac-item:last-child{border-bottom:none}
+.ac-item:hover,.ac-item.sel{background:#161d2c}
+.ac-item .nm{font-size:13.5px;color:#e9ecf2;font-weight:500}
+.ac-item .nm mark{background:none;color:var(--teal);font-weight:700}
+.ac-item .meta{font-size:11.5px;color:var(--mut)}
+.ac-empty{padding:10px 12px;font-size:12.5px;color:var(--mut)}
+.ac-picked{font-size:11.5px;color:var(--good);margin:5px 2px 0;display:none}
+.ac-picked.show{display:block}
 input[type=text]{width:100%;background:#0a0c10;color:#dfe7f5;border:1px solid var(--line);
   border-radius:9px;padding:11px 13px;font-size:14px;font-family:inherit;outline:none;
   transition:border-color .15s}
@@ -151,9 +165,14 @@ input::placeholder{color:#5a6276}
   <div class="form">
     <div class="row2">
       <div class="f-pi">
-        <label for="author">Researcher (PI)</label>
-        <input type="text" id="author" autocomplete="off" spellcheck="false"
-               placeholder="e.g. Gerhard Hummer" value="Gerhard Hummer">
+        <label for="author">Researcher</label>
+        <div class="ac-wrap">
+          <input type="text" id="author" autocomplete="off" spellcheck="false" role="combobox"
+                 aria-autocomplete="list" aria-expanded="false"
+                 placeholder="Search a researcher by name…" value="Gerhard Hummer">
+          <div class="ac-drop" id="acDrop" role="listbox"></div>
+        </div>
+        <div class="ac-picked" id="acPicked"></div>
       </div>
     </div>
     <div class="f-q">
@@ -237,7 +256,65 @@ fetch('/research/api.json',{cache:'no-store'})
   .then(()=>{ ONLINE=true; setChip('live','backend live'); })
   .catch(goOffline);
 
-function setEx(a,q){ $('author').value=a; $('q').value=q; if(!BUSY) $('q').focus(); }
+// ---------------- researcher autocomplete (OpenAlex) ----------------
+let selectedAuthorId=null;   // OpenAlex short id (A…) when a result is picked
+let acItems=[], acIdx=-1, acTimer=null;
+const acDrop=$('acDrop'), acInput=$('author');
+
+function clearPick(){ selectedAuthorId=null; $('acPicked').classList.remove('show'); $('acPicked').textContent=''; }
+function hideAc(){ acDrop.classList.remove('show'); acDrop.innerHTML=''; acItems=[]; acIdx=-1; acInput.setAttribute('aria-expanded','false'); }
+function escHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function mark(name,q){ const i=name.toLowerCase().indexOf(q.toLowerCase()); if(i<0||!q) return escHtml(name);
+  return escHtml(name.slice(0,i))+'<mark>'+escHtml(name.slice(i,i+q.length))+'</mark>'+escHtml(name.slice(i+q.length)); }
+
+async function acSearch(q){
+  try{
+    const r=await fetch('https://api.openalex.org/autocomplete/authors?q='+encodeURIComponent(q)+'&mailto=gianyrox@gmail.com');
+    if(!r.ok) throw 0;
+    const j=await r.json();
+    if(acInput.value.trim()!==q) return;           // stale
+    acItems=(j.results||[]).slice(0,8);
+    if(!acItems.length){ acDrop.innerHTML='<div class="ac-empty">No researchers found — you can still type a full name.</div>'; acDrop.classList.add('show'); return; }
+    acDrop.innerHTML=acItems.map((a,k)=>{
+      const id=(a.id||'').split('/').pop();
+      const w=a.works_count?(a.works_count+' works'):'';
+      const hint=a.hint?escHtml(a.hint):'';
+      return '<div class="ac-item" role="option" data-k="'+k+'" data-id="'+id+'" data-nm="'+escHtml(a.display_name)+'">'
+           +'<span class="nm">'+mark(a.display_name,q)+'</span>'
+           +'<span class="meta">'+[hint,w].filter(Boolean).join(' · ')+'</span></div>';
+    }).join('');
+    acDrop.classList.add('show'); acInput.setAttribute('aria-expanded','true'); acIdx=-1;
+    [...acDrop.querySelectorAll('.ac-item')].forEach(el=>el.addEventListener('mousedown',ev=>{ev.preventDefault();pick(+el.dataset.k);}));
+  }catch(_){ hideAc(); }
+}
+function pick(k){
+  const a=acItems[k]; if(!a) return;
+  selectedAuthorId=(a.id||'').split('/').pop();
+  acInput.value=a.display_name;
+  $('acPicked').textContent='✓ '+(a.hint||a.display_name);
+  $('acPicked').classList.add('show');
+  hideAc(); if(!BUSY) $('q').focus();
+}
+acInput.addEventListener('input',()=>{
+  clearPick();
+  const q=acInput.value.trim();
+  clearTimeout(acTimer);
+  if(q.length<2){ hideAc(); return; }
+  acTimer=setTimeout(()=>acSearch(q),200);
+});
+acInput.addEventListener('keydown',e=>{
+  if(!acDrop.classList.contains('show')) return;
+  const items=[...acDrop.querySelectorAll('.ac-item')];
+  if(e.key==='ArrowDown'){ e.preventDefault(); acIdx=Math.min(acIdx+1,items.length-1); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); acIdx=Math.max(acIdx-1,0); }
+  else if(e.key==='Enter'){ if(acIdx>=0){ e.preventDefault(); pick(acIdx); } return; }
+  else if(e.key==='Escape'){ hideAc(); return; } else return;
+  items.forEach((el,i)=>el.classList.toggle('sel',i===acIdx));
+  if(items[acIdx]) items[acIdx].scrollIntoView({block:'nearest'});
+});
+document.addEventListener('click',e=>{ if(!e.target.closest('.ac-wrap')) hideAc(); });
+
+function setEx(a,q){ clearPick(); $('author').value=a; $('q').value=q; hideAc(); if(!BUSY) $('q').focus(); }
 
 function st(msg,err){
   const s=$('status'); s.textContent=msg||''; s.className='status'+(err?' err':'');
@@ -290,8 +367,10 @@ async function ask(){
   if(BUSY) return;
   if(!ONLINE){ $('offlineMsg').classList.add('show'); st('Backend not active — see the options below.',true); return; }
   const author=$('author').value.trim(), q=$('q').value.trim();
-  if(!author){ st('Enter a researcher’s name.',true); $('author').focus(); return; }
+  if(!author){ st('Search and pick a researcher.',true); $('author').focus(); return; }
   if(q.length<5){ st('Ask a fuller question.',true); $('q').focus(); return; }
+  // send the precise OpenAlex id when the user picked from the dropdown, else the typed name
+  const lookup = selectedAuthorId || author;
 
   BUSY=true; startLoading(author);
   const ctrl=new AbortController();
@@ -300,7 +379,7 @@ async function ask(){
     const r=await fetch(API+'/labbrain/ask',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({author,question:q}),
+      body:JSON.stringify({author:lookup,question:q}),
       signal:ctrl.signal
     });
     clearTimeout(to); stopLoading();
