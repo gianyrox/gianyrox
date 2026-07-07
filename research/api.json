@@ -1,5 +1,5 @@
 {
-  "url": "https://cab-silk-diabetes-plate.trycloudflare.com",
-  "started": "2026-07-05T17:38:41Z",
+  "url": "https://api.trycloudflare.com",
+  "started": "2026-07-07T12:22:08Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
