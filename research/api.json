@@ -1,5 +1,5 @@
 {
-  "url": "https://api.trycloudflare.com",
-  "started": "2026-07-16T13:47:52Z",
+  "url": "https://reductions-jane-with-shake.trycloudflare.com",
+  "started": "2026-07-16T13:52:13Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
