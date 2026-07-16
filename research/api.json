@@ -1,5 +1,5 @@
 {
-  "url": "https://preston-measuring-dover-incidence.trycloudflare.com",
-  "started": "2026-07-15T17:15:34Z",
+  "url": "https://api.trycloudflare.com",
+  "started": "2026-07-16T13:47:52Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
