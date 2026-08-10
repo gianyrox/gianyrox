@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Work, Gianangelo Dichio</title>
+	<meta name="description" content="Engineering, AI systems, and venture case studies by Gianangelo Dichio.">
+	<link rel="canonical" href="https://www.gianyrox.com/work/">
+	<link rel="icon" type="image/x-icon" href="/public/brand/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/public/brand/apple-touch-icon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+	<link rel="stylesheet" href="/public/css/site.css">
+	<meta name="theme-color" content="#264653">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Work, Gianangelo Dichio">
+	<meta property="og:description" content="Engineering, AI systems, and venture case studies by Gianangelo Dichio.">
+	<meta property="og:url" content="https://www.gianyrox.com/work/">
+	<meta property="og:image" content="https://www.gianyrox.com/public/brand/og-image.png">
+	<meta name="twitter:card" content="summary_large_image">
+	
+</head>
+<body>
+	<div class="container">
+	<nav class="site-nav" aria-label="Primary">
+		<a href="/" >Home</a>
+		<a href="/studies/" >Research</a>
+		<a href="/work/" aria-current="page">Work</a>
+		<a href="/writing/" >Writing</a>
+		<a href="/about/" >About</a>
+	</nav><h1 class="title" style="font-size:clamp(28px,6vw,40px);">Work</h1><p class="tagline">Engineering, AI-systems, and venture case studies.</p><div class="filter-row" role="group" aria-label="Filter by type">
+		<button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+		<button class="filter-chip" data-filter="Production system" aria-pressed="false">Production system</button>
+	</div><div class="card-list" id="card-list"><a class="pcard" href="/work/nucleusbrain/" data-type="Production system">
+			<div class="pcard-top"><span class="pcard-title">Nucleus Brain</span><span class="badge">Production system</span></div>
+			<div class="pcard-scope">Coordinate a large research or engineering workload across specialist AI sub-agents without losing evaluation or governance.</div>
+			<div class="pcard-meta">2024-Present</div>
+		</a><a class="pcard" href="/work/derbyfish/" data-type="Production system">
+			<div class="pcard-top"><span class="pcard-title">DerbyFish</span><span class="badge">Production system</span></div>
+			<div class="pcard-scope">Build a competitive sport-fishing platform where catch submissions can be trusted at scale.</div>
+			<div class="pcard-meta">01/2024-Present</div>
+		</a><a class="pcard" href="/work/agfarms/" data-type="Production system">
+			<div class="pcard-top"><span class="pcard-title">AGFarms</span><span class="badge">Production system</span></div>
+			<div class="pcard-scope">A consulting and development firm that also builds and owns products, using research-informed product development rather than formal scientific research.</div>
+			<div class="pcard-meta">01/2024-Present</div>
+		</a><a class="pcard" href="/work/promptmaxxers/" data-type="Production system">
+			<div class="pcard-top"><span class="pcard-title">PromptMaxxers</span><span class="badge">Production system</span></div>
+			<div class="pcard-scope">One-to-one coaching, group sessions, and discussion seminars on prompting and AI-native workflows for a 50-member learning community.</div>
+			<div class="pcard-meta">2026-Present</div>
+		</a></div><script>
+	(function(){
+		var chips = document.querySelectorAll('.filter-chip');
+		var cards = document.querySelectorAll('#card-list .pcard');
+		chips.forEach(function(chip){
+			chip.addEventListener('click', function(){
+				chips.forEach(function(c){ c.setAttribute('aria-pressed','false'); });
+				chip.setAttribute('aria-pressed','true');
+				var f = chip.getAttribute('data-filter');
+				cards.forEach(function(card){
+					card.style.display = (f === 'all' || card.getAttribute('data-type') === f) ? '' : 'none';
+				});
+			});
+		});
+	})();
+	</script>
+	</div>
+</body>
+</html>

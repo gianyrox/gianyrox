@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Giany Rox, author of "Your Money Is Broken", stablecoins, digital dollar, payments</title>
-	<meta name="description" content="Author Giany Rox: 'Your Money Is Broken — How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money.' A field report from inside the digital dollar economy. Paperback on Amazon · PDF on Gumroad · free online edition.">
+	<meta name="description" content="Author Giany Rox: 'Your Money Is Broken — How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money.' A case-based synthesis of documented real-world stablecoin use. Paperback on Amazon · PDF on Gumroad · free online edition.">
 	<meta name="keywords" content="stablecoins, digital dollar, USDC, USDT, cross-border payments, remittances, GENIUS Act, fintech, future of money, cryptocurrency for beginners, Giany Rox, Your Money Is Broken">
 	<meta name="author" content="Giany Rox">
 	<link rel="canonical" href="https://www.gianyrox.com/">
@@ -23,7 +23,7 @@
 	<!-- OpenGraph (Facebook, LinkedIn, Slack) -->
 	<meta property="og:type" content="book">
 	<meta property="og:title" content="Your Money Is Broken — by Giany Rox">
-	<meta property="og:description" content="Four cities. Four people. The same invisible infrastructure. A field report from inside the digital dollar economy.">
+	<meta property="og:description" content="Four cities. Four people. The same invisible infrastructure. A case-based synthesis of documented real-world stablecoin use.">
 	<meta property="og:url" content="https://www.gianyrox.com/">
 	<meta property="og:image" content="https://www.gianyrox.com/public/brand/og-image.png">
 	<meta property="og:image:alt" content="Gianyrox — blade-G brand mark">
@@ -35,7 +35,7 @@
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Your Money Is Broken — by Giany Rox">
-	<meta name="twitter:description" content="A field report from inside the digital dollar economy. Bogotá. Harare. Lagos. A rooftop in Buenos Aires.">
+	<meta name="twitter:description" content="A case-based synthesis of documented real-world stablecoin use. Bogotá. Harare. Lagos. A rooftop in Buenos Aires.">
 	<meta name="twitter:image" content="https://www.gianyrox.com/public/brand/og-image.png">
 
 	<!-- Schema.org Book JSON-LD, gets the book into Google Books index -->
@@ -57,7 +57,7 @@
 		"datePublished": "2026-05-12",
 		"inLanguage": "en",
 		"publisher": {"@type": "Organization", "name": "AGFarms"},
-		"description": "Four cities. Four people. The same invisible infrastructure — from Bogotá to Harare to Lagos to a rooftop in Buenos Aires. A field report from inside the digital dollar economy, explaining how stablecoins quietly become the bridge from slow money to fast money.",
+		"description": "Four cities. Four people. The same invisible infrastructure — from Bogotá to Harare to Lagos to a rooftop in Buenos Aires. A case-based synthesis of documented real-world stablecoin use, explaining how stablecoins quietly become the bridge from slow money to fast money.",
 		"image": "https://www.gianyrox.com/public/cover/front-hd.png",
 		"genre": ["Business & Economics", "Money & Monetary Policy", "Banks & Banking"],
 		"keywords": "stablecoins, digital dollar, USDC, USDT, cross-border payments, remittances, GENIUS Act, fintech",
@@ -83,12 +83,12 @@
 		"name": "Giany Rox",
 		"url": "https://www.gianyrox.com/",
 		"image": "https://www.gianyrox.com/public/cover/front-hd.png",
-		"jobTitle": "Mathematician, data scientist, founder, author",
+		"jobTitle": "Mathematician, data scientist, AI-systems builder, educator",
 		"worksFor": {"@type": "Organization", "name": "AGFarms"},
 		"alumniOf": {"@type": "CollegeOrUniversity", "name": "Stevens Institute of Technology"},
 		"nationality": ["American", "Italian"],
-		"description": "Mathematician and data scientist who builds production AI systems, and author of 'Your Money Is Broken'. Writes on stablecoins, the digital dollar, and the rebuild of global payment rails from below.",
-		"sameAs": ["https://github.com/gianyrox"]
+		"description": "Mathematician, data scientist, AI-systems builder, and educator studying how computational systems can help more people move from consuming knowledge to producing it. Builds research tools, production software, and AI-assisted knowledge systems; author of 'Your Money Is Broken'.",
+		"sameAs": ["https://github.com/gianyrox", "https://www.gianyrox.com/studies/", "https://www.gianyrox.com/work/"]
 	}
 	</script>
 	<style>
@@ -640,6 +640,46 @@
 			.icon-link { border-color: var(--muted); box-shadow: none; }
 			a::after { content: " (" attr(href) ")"; font-size: 11px; color: var(--muted); }
 		}
+
+		/* ---- Portfolio nav + curated homepage additions ---- */
+		.site-nav {
+			display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
+			margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line); width: 100%;
+		}
+		.site-nav a {
+			color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 700;
+			text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 2px;
+			border-bottom: 2px solid transparent; transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+		}
+		.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--teal-deep); border-color: var(--coral); }
+		.focus-line {
+			width: 100%; max-width: 560px; margin: 4px auto 8px; padding: 10px 16px; text-align: center;
+			font-size: 13.5px; font-weight: 600; color: var(--teal-deep); background: var(--surface);
+			border: 1px solid var(--line); border-radius: var(--radius-sm);
+		}
+		.focus-line .label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 10.5px; color: var(--coral); margin-right: 6px; }
+		.badge {
+			display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+			padding: 3px 9px; border-radius: var(--radius-pill); background: rgba(38, 70, 83, 0.07);
+			color: var(--teal-deep); border: 1px solid var(--line-strong); white-space: nowrap;
+		}
+		.badge.ai { background: rgba(231, 111, 81, 0.09); color: #b5502f; border-color: rgba(231, 111, 81, 0.3); }
+		.disclosure {
+			width: 100%; font-size: 12.5px; line-height: 1.55; color: var(--muted); background: var(--surface);
+			border-left: 3px solid var(--coral); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+			padding: 10px 14px; margin: 6px 0 18px;
+		}
+		.link-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 4px 0 6px; }
+		.link-row a {
+			font-size: 12.5px; font-weight: 600; color: var(--teal-deep); text-decoration: none;
+			padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--surface);
+		}
+		.link-row a:hover { background: var(--teal-deep); color: #fff; }
+		.interest-row { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; margin: 4px 0 10px; }
+		.interest-card { flex: 1 1 260px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 14px 16px; }
+		.interest-card .code { font-size: 11px; font-weight: 800; color: var(--coral); letter-spacing: 0.08em; }
+		.interest-card h3 { font-size: 14.5px; margin: 4px 0 6px; color: var(--teal-deep); }
+		.interest-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.55; }
 	</style>
 </head>
 
@@ -647,12 +687,22 @@
 	<div class="container">
 		<button class="print-btn" onclick="window.print()" aria-label="Download this page as PDF">⬇ Download PDF</button>
 
+		<!-- Nav -->
+		<nav class="site-nav" aria-label="Primary">
+			<a href="/" aria-current="page">Home</a>
+			<a href="/studies/">Research</a>
+			<a href="/work/">Work</a>
+			<a href="/writing/">Writing</a>
+			<a href="/about/">About</a>
+		</nav>
+
 		<!-- Hero -->
 		<img src="/public/brand/logo.png" alt="Gianyrox" class="hero-mark" width="110" height="110">
 		<div class="title">Gianyrox</div>
 		<a href="https://github.com/Gianyrox" target="_blank" rel="noopener" class="handle" style="display:inline-block;color:#2a9d8f;font-weight:600;letter-spacing:0.06em;font-size:17px;margin-top:6px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e76f51'" onmouseout="this.style.color='#2a9d8f'">@gianyrox</a>
 		<div class="subtitle" style="margin-top:8px;">Gianyrox Everywhere.</div>
-		<p class="tagline">Mathematician, data scientist and production engineer exploring quantum computing through AI-assisted, reproducible technical studies.</p>
+		<p class="tagline">Mathematician, data scientist, AI-systems builder, and educator. I build research tools, production software, and AI-assisted knowledge systems &mdash; from a 12.2M-row map of the research economy to current studies at the intersection of AI and quantum computing.</p>
+		<p class="focus-line"><span class="label">Current focus</span>AI-guided quantum algorithm discovery and heterogeneous CPU-GPU-QPU orchestration.</p>
 
 		<!-- Profiles: icon row -->
 		<div class="icon-row" aria-label="Profiles">
@@ -670,64 +720,58 @@
 			</a>
 		</div>
 
-		<!-- Projects: chips -->
-		<h2 class="section-header">Projects</h2>
-		<div class="chip-row">
-			<a href="https://bucket.foundation" class="chip" target="_blank" rel="noopener"><span class="dot"></span>Bucket Foundation</a>
-			<a href="https://agfarms.dev" class="chip" target="_blank" rel="noopener"><span class="dot"></span>AGFarms Developers</a>
-		</div>
-
-		<!-- Research and Technical Studies -->
-		<h2 class="section-header">Research and Technical Studies</h2>
-		<p class="tagline" style="margin:-12px auto 14px;font-size:14px;color:var(--faint);">Working toward a quantum-computing PhD. The two quantum items below are AI-assisted technical studies, currently under active reproduction and audit: see each repository's <code>AI_USE.md</code>.</p>
+		<!-- Curated homepage: highest-signal items only, full list at /studies/ and /work/ -->
+		<h2 class="section-header">Featured</h2>
 		<div class="work-grid">
-			<a href="https://github.com/gianyrox/qec-neural-decoder" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><div class="thumb-fallback">QEC Decoder</div></div>
-				<div class="tile-body"><span class="tile-name">Neural Decoders for Quantum Error Correction</span><span class="tile-benefit">AI-assisted study, under audit &middot; ML vs. MWPM decoders, FLOP-based latency accounting</span><span class="tile-cta">Read the repository →</span></div>
+			<a href="/studies/knowledge-access-gradient/" class="tile">
+				<div class="thumb-wrap"><div class="thumb-fallback">Knowledge-Access Gradient</div></div>
+				<div class="tile-body"><span class="tile-name">The Knowledge-Access Gradient</span><span class="tile-benefit">Every prior technology widened access to consume knowledge. None widened access to produce it &mdash; 78K observations, 219 countries</span><span class="tile-cta">Read the working paper →</span></div>
 			</a>
-			<a href="https://github.com/gianyrox/quantum-similarity" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><div class="thumb-fallback">Quantum Similarity</div></div>
-				<div class="tile-body"><span class="tile-name">Quantum Similarity and Kernel Estimation</span><span class="tile-benefit">AI-assisted study, under audit &middot; swap/Hadamard test cosine estimation, validated on real IBM hardware</span><span class="tile-cta">Read the repository →</span></div>
+			<a href="/studies/research-atlas/" class="tile">
+				<div class="thumb-wrap"><div class="thumb-fallback">Research Atlas</div></div>
+				<div class="tile-body"><span class="tile-name">Research Atlas</span><span class="tile-benefit">A 12.2M-row, provenance-tracked graph of the global research-funding economy, open and reproducible</span><span class="tile-cta">See the infrastructure →</span></div>
 			</a>
-			<a href="https://github.com/gianyrox/Academic-Paper-Ranking-and-Recommendation-System" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><div class="thumb-fallback">1.7M-Paper Ranker</div></div>
-				<div class="tile-body"><span class="tile-name">Academic Paper Ranking</span><span class="tile-benefit">Graduate course project &middot; sparse PageRank over a 1.7M-paper citation graph</span><span class="tile-cta">See the project →</span></div>
+			<a href="/studies/" class="tile">
+				<div class="thumb-wrap"><div class="thumb-fallback">R1 + R2</div></div>
+				<div class="tile-body"><span class="tile-name">Current Quantum-AI Direction</span><span class="tile-benefit">Active research interests: AI-guided quantum algorithm discovery, and CPU-GPU-QPU orchestration</span><span class="tile-cta">Read the questions →</span></div>
 			</a>
-		</div>
-
-		<!-- Selected Work: thumbnail grid -->
-		<h2 class="section-header">Selected Work</h2>
-		<p class="tagline" style="margin:-12px auto 22px;font-size:14px;color:var(--faint);">Things I've built that you can use.</p>
-		<div class="work-grid">
 			<a href="https://nucleusbrain.com" class="tile" target="_blank" rel="noopener">
 				<div class="thumb-wrap"><div class="thumb-fallback">Nucleus</div></div>
-				<div class="tile-body"><span class="tile-name">Nucleus</span><span class="tile-benefit">Run your company on AI agents</span><span class="tile-cta">See the platform →</span></div>
-			</a>
-			<a href="https://promptmaxxers.com" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/promptmaxxers.svg" alt="PromptMaxxers" loading="lazy" width="800" height="450"></div>
-				<div class="tile-body"><span class="tile-name">PromptMaxxers</span><span class="tile-benefit">Pass the Claude Architect cert</span><span class="tile-cta">Book a session →</span></div>
+				<div class="tile-body"><span class="tile-name">Nucleus Brain</span><span class="tile-benefit">AI orchestration and research-workflow capability, human-in-the-loop evaluation and governance</span><span class="tile-cta">See the platform →</span></div>
 			</a>
 			<a href="https://derby.fish" class="tile" target="_blank" rel="noopener">
 				<div class="thumb-wrap"><img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">DerbyFish</span><span class="tile-benefit">Compete in real fishing derbies</span><span class="tile-cta">Join a derby →</span></div>
+				<div class="tile-body"><span class="tile-name">DerbyFish</span><span class="tile-benefit">Full-time production engineering &middot; real-time catch verification for competitive fishing</span><span class="tile-cta">Join a derby →</span></div>
 			</a>
-			<a href="https://openscriva.com" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/openscriva.png" alt="OpenScriva" loading="lazy" width="800" height="533"></div>
-				<div class="tile-body"><span class="tile-name">OpenScriva</span><span class="tile-benefit">Write your book with AI</span><span class="tile-cta">Start free →</span></div>
-			</a>
-			<a href="https://bucket.foundation" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/bucket.png" alt="Bucket Foundation" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">Bucket Foundation</span><span class="tile-benefit">Free to read, paid to cite</span><span class="tile-cta">Explore the canon →</span></div>
-			</a>
-			<a href="https://gauss.news" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/gauss.png" alt="gauss.news" loading="lazy" width="400" height="400"></div>
-				<div class="tile-body"><span class="tile-name">gauss.news</span><span class="tile-benefit">Your daily AI intelligence brief</span><span class="tile-cta">Read today's →</span></div>
-			</a>
-			<a href="https://github.com/gianyrox/feed402" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><div class="thumb-fallback">feed402</div></div>
-				<div class="tile-body"><span class="tile-name">feed402</span><span class="tile-benefit">Open protocol for paid AI-agent data</span><span class="tile-cta">Read the spec →</span></div>
+			<a href="/book/" class="tile">
+				<div class="thumb-wrap"><img class="thumb" src="/public/cover/front-hd.png" alt="Your Money Is Broken" loading="lazy" width="800" height="420"></div>
+				<div class="tile-body"><span class="tile-name">Your Money Is Broken</span><span class="tile-benefit">Published nonfiction &middot; AI-assisted long-form research and writing on stablecoins</span><span class="tile-cta">Read more →</span></div>
 			</a>
 		</div>
+
+		<div class="link-row" style="margin-top:16px;">
+			<a href="/studies/funding-landscape/">Funding concentration (paper)</a>
+			<a href="/studies/paper-ranking/">Paper-ranking (paper)</a>
+			<a href="/studies/funder-specialization/">Funder specialization (paper)</a>
+			<a href="/studies/funding-careers/">Funding &amp; careers (paper)</a>
+			<a href="/studies/quantum-atlas/">The Quantum Atlas</a>
+			<a href="/studies/longevity-manual/">Longevity &amp; Fitness Manual</a>
+			<a href="/studies/pagerank/">Academic paper ranking</a>
+			<a href="/studies/obesity-analysis/">US obesity analysis</a>
+			<a href="/writing/">Selected essays</a>
+		</div>
+
+		<!-- Projects: chips -->
+		<h2 class="section-header">Also Building</h2>
+		<div class="chip-row">
+			<a href="https://bucket.foundation" class="chip" target="_blank" rel="noopener"><span class="dot"></span>Bucket Foundation</a>
+			<a href="https://agfarms.dev" class="chip" target="_blank" rel="noopener"><span class="dot"></span>AGFarms Developers</a>
+			<a href="https://openscriva.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>OpenScriva</a>
+			<a href="https://gauss.news" class="chip" target="_blank" rel="noopener"><span class="dot"></span>gauss.news</a>
+			<a href="https://promptmaxxers.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>PromptMaxxers</a>
+			<a href="https://github.com/gianyrox/feed402" class="chip" target="_blank" rel="noopener"><span class="dot"></span>feed402</a>
+		</div>
+		<p style="text-align:center;margin:6px 0 0;"><a href="/work/" style="color:var(--teal);font-size:13px;font-weight:600;text-decoration:none;">See all engineering &amp; research-systems work &rarr;</a></p>
 
 		<!-- Books Section -->
 		<h2 class="section-header">Books</h2>
@@ -740,8 +784,8 @@
 					Pablo in Bogotá sends his mother medicine money in ninety seconds for under two dollars. Mercy in Harare
 					protects a women's savings club from fifty-six percent inflation in a digital dollar. Femi in Lagos closes
 					a hundred-thousand-dollar supplier deal from the back of a parked car. None of them care about price charts.
-					They are using stablecoins because the alternatives have already failed them. <em>A field report from inside
-					the digital dollar economy.</em>
+					They are using stablecoins because the alternatives have already failed them. <em>A case-based synthesis
+					of documented real-world stablecoin use.</em>
 				</div>
 				<div class="book-actions">
 					<a class="btn primary" href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener" data-cta="amazon">📕 Paperback on Amazon ($13.99)</a>
@@ -787,11 +831,10 @@
 		<!-- Writing (compact) -->
 		<h2 class="section-header">Writing</h2>
 		<nav class="writing-list" aria-label="Highlighted articles">
-			<a href="https://medium.com/@gianyrox/the-biblical-flood-that-began-history-meltwater-pulse-1a-f70633c8f2c2" target="_blank" rel="noopener">The Biblical Flood That Began History: Meltwater Pulse 1A</a>
-			<a href="https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9" target="_blank" rel="noopener">Math: The Path to Polymath</a>
-			<a href="https://medium.com/@gianyrox/the-magical-one-shot-app-builders-guide-to-bringing-ideas-to-life-a96e1b93bc2a" target="_blank" rel="noopener">The Magical One-Shot App Builder's Guide</a>
+			<a href="/writing/">Books, essays &amp; science communication &rarr;</a>
 			<a href="https://medium.com/@gianyrox/how-chatgpt-will-ruin-the-world-57ea88b203fe" target="_blank" rel="noopener">How ChatGPT Will Ruin the World</a>
-			<a href="https://github.com/gianyrox/US-States-Obesity-Analysis/blob/main/US_State_Analysis.ipynb" target="_blank" rel="noopener">US States Obesity Analysis</a>
+			<a href="https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9" target="_blank" rel="noopener">Math: The Path to Polymath</a>
+			<a href="/studies/obesity-analysis/">US States Obesity Analysis</a>
 		</nav>
 	</div>
 </body>

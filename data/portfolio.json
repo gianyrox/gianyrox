@@ -1,0 +1,365 @@
+{
+  "aiDisclosure": "I use AI as a research and engineering instrument. I define the questions, scope, and evaluation criteria; orchestrate the workflows; review intermediate and final outputs; and make the final technical and editorial decisions. Each artifact states its verification level and the division of human and AI work.",
+
+  "focusLine": "AI-guided quantum algorithm discovery and heterogeneous CPU-GPU-QPU orchestration.",
+
+  "heroCopy": "Mathematician, data scientist, AI-systems builder, and educator. I build research tools, production software, and AI-assisted knowledge systems, from a 12.2M-row map of the research economy to current studies at the intersection of AI and quantum computing.",
+
+  "researchInterests": [
+    {
+      "code": "R1",
+      "lead": true,
+      "title": "AI-guided quantum algorithm discovery",
+      "body": "Using generative and learning-based methods to propose, refine, and evaluate quantum-optimization circuits with QPU feedback."
+    },
+    {
+      "code": "R2",
+      "lead": false,
+      "title": "Heterogeneous CPU-GPU-QPU orchestration",
+      "body": "Learning how to partition optimization and AI workflows among classical control, GPU training and simulation, and QPU sampling or quantum subroutines."
+    }
+  ],
+  "researchInterestsNote": "Two-way interest: AI methods for quantum algorithm discovery, and quantum resources as a component inside AI/optimization pipelines. These are active study questions rather than completed results.",
+
+  "studies": [
+    {
+      "slug": "research-atlas",
+      "title": "Research Atlas",
+      "shortTitle": "Research Atlas",
+      "type": "Reproducible research infrastructure",
+      "typeSecondary": "Original empirical analysis",
+      "featured": true,
+      "date": "2026",
+      "role": "Creator and human research lead. AI-assisted.",
+      "question": "Can the global research-funding economy, grants, funders, organizations, people, and the outputs they produce, be reconstructed as one normalized, provenance-tracked graph, open enough for anyone to audit or extend?",
+      "method": "A connector-based pipeline maps eight funder sources (NIH, NSF, UKRI/GtR, CORDIS, Gates Foundation, Wellcome Trust, Sloan Foundation, DFG) and OpenAlex research-output records into one canonical schema. Entity reconciliation runs on ROR (organizations), ORCID (people), DOI (works), and Crossref Funder IDs. Ingestion is idempotent and resumable, with cached raw pages, partitioned parquet shards, provenance on every row, and edge-level validation tests across a six-entity graph model (Funder to Grant to Organization, with Person and Work linkages).",
+      "scale": "~1.67M grants · ~192.7K organizations · ~1.44M people · 75 funders · ~$1.04T normalized funding · ~12.2M graph rows",
+      "humanContribution": "Defined the schema, chose the reconciliation strategy and identifier systems, directed the connector architecture, and reviewed validation results.",
+      "aiContribution": "AI-assisted implementation of individual connectors, transformers, and test scaffolding under that direction.",
+      "verification": "Edge-level validation tests run in CI against the reconciled graph. Full independent replication of every connector has not been separately audited by a third party.",
+      "limitations": "Funding amounts are normalized across currencies and years with standard assumptions that can shift totals at the margin. Coverage is limited to the eight funders and OpenAlex; it is not a census of global research funding.",
+      "links": {
+        "code": "https://github.com/bucket-foundation/research-atlas",
+        "paper": "https://www.bucket.foundation/research/papers/funding-landscape"
+      },
+      "related": ["funding-landscape", "paper-ranking", "funder-specialization", "funding-careers", "knowledge-access-gradient"]
+    },
+    {
+      "slug": "funding-landscape",
+      "title": "The structure of public research funding",
+      "shortTitle": "Funding Concentration & Structure",
+      "type": "Preprint / working paper",
+      "featured": true,
+      "date": "2026-06-19",
+      "fullTitle": "The structure of public research funding, 2015-2025: concentration, cross-funder co-funding, and the funding-to-output relationship in a reconciled NIH/NSF/EC/UKRI grant graph",
+      "author": "Gianangelo Dichio, with the research-atlas working group, Bucket Foundation",
+      "role": "Lead author.",
+      "question": "How concentrated is public research funding across institutions, what fraction of funded work is co-funded across multiple funders, and how does funding translate into measurable output across agencies?",
+      "method": "Built on 887,016 reconciled grants from NIH, NSF, EC, and UKRI (2015-2025). Computes institutional concentration (Gini coefficient), cross-funder co-funding rates, and funding-to-output ratios by agency.",
+      "scale": "887,016 grants · Gini coefficient 0.929 institutional concentration · ~25% of funded works co-funded across multiple funders",
+      "humanContribution": "Framed the research questions, directed the analysis, and wrote the paper.",
+      "aiContribution": "AI-assisted drafting and computation under direct review.",
+      "verification": "Preprint, version 1.0. Peer review has not yet occurred.",
+      "limitations": "Funding-to-output rate differences reflect agency research missions as much as efficiency; the paper does not claim a causal ranking of funder effectiveness.",
+      "links": {
+        "doi": "https://doi.org/10.5281/zenodo.20774322",
+        "paper": "https://www.bucket.foundation/research/papers/funding-landscape"
+      },
+      "related": ["research-atlas", "funder-specialization"]
+    },
+    {
+      "slug": "paper-ranking",
+      "title": "The transformer paper-recommendation advantage",
+      "shortTitle": "Transformer vs. TF-IDF",
+      "type": "Preprint / working paper",
+      "featured": false,
+      "date": "2026",
+      "fullTitle": "The transformer paper-recommendation advantage is real at the head of the impact distribution and decays to null across the broad literature: a 4-checkpoint, all-26-field convergence study of SPECTER vs. TF-IDF",
+      "author": "Bucket Foundation research-atlas working group",
+      "role": "Directed the study as part of the research-atlas working group; did not take sole authorship credit for this paper.",
+      "question": "Does a transformer-based recommender (SPECTER) beat a classical TF-IDF baseline at recommending related papers, and does that advantage hold across the whole literature or only at the top?",
+      "method": "Compares SPECTER and TF-IDF paper recommendation across all 26 OpenAlex fields at four training checkpoints.",
+      "humanContribution": "Research direction and review within the working group.",
+      "aiContribution": "AI-assisted implementation and analysis under working-group direction.",
+      "verification": "Preprint. Peer review has not yet occurred.",
+      "links": {
+        "doi": "https://doi.org/10.5281/zenodo.20808201",
+        "paper": "https://www.bucket.foundation/research/papers/paper-ranking"
+      },
+      "related": ["research-atlas", "funding-landscape"]
+    },
+    {
+      "slug": "funder-specialization",
+      "title": "What each funder funds",
+      "shortTitle": "Funder specialization",
+      "type": "Preprint / working paper",
+      "featured": false,
+      "date": "2026",
+      "fullTitle": "What each funder funds: specialization, complementarity, and the surprising temporal stability of funder field-portfolios in a reconciled NIH/NSF/EC grant-to-output graph",
+      "author": "Bucket Foundation research-atlas working group",
+      "role": "Directed the study as part of the research-atlas working group.",
+      "question": "How specialized is each funder's field portfolio, how much do funders complement rather than duplicate each other, and how stable are those portfolios over time?",
+      "humanContribution": "Research direction and review within the working group.",
+      "aiContribution": "AI-assisted implementation and analysis under working-group direction.",
+      "verification": "Preprint. Peer review has not yet occurred.",
+      "links": {
+        "doi": "https://doi.org/10.5281/zenodo.20836205",
+        "paper": "https://www.bucket.foundation/research/papers/funder-specialization"
+      },
+      "related": ["research-atlas", "funding-landscape"]
+    },
+    {
+      "slug": "funding-careers",
+      "title": "Public funding and researcher careers",
+      "shortTitle": "Funding and careers",
+      "type": "Preprint / working paper",
+      "featured": false,
+      "date": "2026",
+      "fullTitle": "Public funding and researcher careers: funder portfolios, career-stage composition, and why the funded-vs-unfunded productivity gap is mostly selection, not effect",
+      "author": "Bucket Foundation research-atlas working group",
+      "role": "Directed the study as part of the research-atlas working group.",
+      "question": "Is the productivity gap between funded and unfunded researchers a causal effect of funding, or mostly selection of already-productive researchers into funding?",
+      "humanContribution": "Research direction and review within the working group.",
+      "aiContribution": "AI-assisted implementation and analysis under working-group direction.",
+      "verification": "Preprint. Peer review has not yet occurred.",
+      "links": {
+        "doi": "https://doi.org/10.5281/zenodo.20836727",
+        "paper": "https://www.bucket.foundation/research/papers/funding-careers"
+      },
+      "related": ["research-atlas", "funding-landscape"]
+    },
+    {
+      "slug": "knowledge-access-gradient",
+      "title": "The Knowledge-Access Gradient",
+      "shortTitle": "Knowledge-Access Gradient",
+      "type": "Preprint / working paper",
+      "typeSecondary": "Original quantitative synthesis",
+      "featured": true,
+      "date": "2026-06-25",
+      "role": "Author. AI-assisted, human-directed.",
+      "question": "Every prior technology widened access to consuming knowledge, to read, learn, and reach what others discovered. None widened access to producing it. Can AI become the first scalable channel that helps people cross that boundary?",
+      "method": "Maps knowledge access across a six-level depth ladder (L0 basic literacy through L5 producing new knowledge) using a corpus of 78,326 observations across 219 countries and 30 indicators, benchmarked against UN SDG 4.",
+      "scale": "78,326 observations · 219 countries · 30 indicators",
+      "keyFindings": "World-average access falls from 82.5% at basic literacy to 0.14% at the research frontier, roughly a 270x decline. The rich-poor gap is under 2x at literacy and roughly 75x at the frontier. About 99.86% of humanity only consumes knowledge; roughly 0.14% ever reaches where it is produced.",
+      "humanContribution": "Framed the question, defined the depth ladder and indicator set, directed the synthesis, and wrote the paper.",
+      "aiContribution": "AI-assisted data synthesis and drafting under direct review.",
+      "verification": "Working paper, version 1.1. Not yet peer reviewed.",
+      "limitations": "Indicator coverage varies by country, and the depth ladder is a constructed framework rather than a standardized international metric.",
+      "personalNote": "This is the clearest statement of why I do this work: Bucket Foundation, early research-methods writing, education reform, and the current interest in AI-assisted scientific discovery are all downstream of this question.",
+      "links": {
+        "download": "https://www.bucket.foundation/education/THE-KNOWLEDGE-ACCESS-GRADIENT.pdf",
+        "paper": "https://www.bucket.foundation/research/education/knowledge-access-gradient"
+      },
+      "related": ["research-atlas", "quantum-atlas"]
+    },
+    {
+      "slug": "qec-neural-decoder",
+      "title": "Neural Decoders for Quantum Error Correction",
+      "shortTitle": "Neural QEC Decoder",
+      "type": "AI-assisted computational study",
+      "featured": true,
+      "date": "2026",
+      "role": "I chose the questions and experiments, reviewed the code and outputs, and am studying the repository in parallel with PhD applications.",
+      "question": "Can learned decoders match minimum-weight perfect matching (MWPM) on quantum error correction codes while staying inside a real-time decoding budget?",
+      "method": "Benchmarks a ladder of neural decoder families (MLP, CNN, GRU, ConvGRU, 3D-lattice convolution, GNN) against MWPM on the repetition and rotated surface codes, using Stim for circuit simulation, PyMatching for the MWPM baseline, and PyTorch for the learned decoders. Includes a comparison against reported results on public Google Sycamore syndrome data.",
+      "humanContribution": "Chose the research questions and experiment design, directed the benchmarking methodology, and reviewed the code and results.",
+      "aiContribution": "AI generated substantial implementation work: the decoder architectures, training loops, and much of the benchmarking code.",
+      "verification": "Independent reproduction of the repository's headline claims is in progress. The repository's own hardening pass found that an initially favorable real-time surface-code claim did not survive testing under circuit-level noise and single-shot timing, and the repository documents that correction rather than hiding it.",
+      "limitations": "This is not peer-reviewed research and is not evidence of quantum advantage. It is a benchmarking study comparing classical and learned decoding strategies.",
+      "links": {
+        "code": "https://github.com/gianyrox/qec-neural-decoder"
+      },
+      "related": ["quantum-similarity"]
+    },
+    {
+      "slug": "quantum-similarity",
+      "title": "Quantum Similarity and Kernel Estimation",
+      "shortTitle": "Quantum Similarity",
+      "type": "AI-assisted computational study",
+      "featured": true,
+      "date": "2026",
+      "role": "I chose the questions and experiments, reviewed the code and outputs, and am studying the repository in parallel with PhD applications.",
+      "question": "Can swap-test and Hadamard-test overlap estimation reproduce classical cosine similarity and kernel computations on real quantum hardware, and where does the classical cost of state preparation eliminate any advantage?",
+      "method": "Implements swap-test and Hadamard-test overlap estimation for cosine similarity and quantum kernels over amplitude-encoded states, checked against classical ground truth on a noiseless simulator, with a small six-pair demonstration on IBM Quantum's ibm_fez processor.",
+      "humanContribution": "Chose the research questions and experiment design, directed the benchmarking methodology, and reviewed the code and results.",
+      "aiContribution": "AI generated substantial implementation work: the estimator circuits, kernel assembly, and mitigation code.",
+      "verification": "Hardware observations (the ibm_fez demonstration) are kept explicitly separate from modeled-noise mitigation experiments in the repository. Independent reproduction is in progress.",
+      "limitations": "Not peer-reviewed research and not evidence of quantum advantage. The repository states directly that arbitrary amplitude-state preparation costs up to O(2^n) gates, which removes any demonstrated end-to-end speedup for similarity search.",
+      "links": {
+        "code": "https://github.com/gianyrox/quantum-similarity"
+      },
+      "related": ["qec-neural-decoder"]
+    },
+    {
+      "slug": "quantum-atlas",
+      "title": "The Quantum Atlas",
+      "shortTitle": "The Quantum Atlas",
+      "type": "AI-assisted literature synthesis",
+      "featured": false,
+      "date": "2026",
+      "role": "I orchestrated the process and am actively reading and checking it.",
+      "question": "A deep-research literature review built for my own understanding of the quantum-computing field: what does the literature establish, where does it disagree, and what is still open?",
+      "method": "8 chapters synthesizing graded source material across the field, with documented points of conflict between sources left visible rather than resolved by assertion.",
+      "scale": "8 chapters · 184 graded source nodes · 15 documented conflicts",
+      "humanContribution": "Directed the scope and structure, and am actively reading and checking the content against primary sources.",
+      "aiContribution": "AI-assisted literature synthesis across the graded source set.",
+      "verification": "Not fully claim-verified end to end. This is a personal literature review rather than a paper.",
+      "limitations": "Built as a study aid rather than a publication. Treat every claim as provisional until checked against its primary source.",
+      "links": {
+        "demo": "https://drive.google.com/file/d/1I6otasJ9NPuth2biA66BqUCUB95uNIUx/view"
+      },
+      "accessNote": "This link currently requires a Google sign-in. Public sharing is pending; contact me if you need access before that is resolved.",
+      "related": ["qec-neural-decoder", "quantum-similarity"]
+    },
+    {
+      "slug": "longevity-manual",
+      "title": "The Longevity & Fitness Operating Manual",
+      "shortTitle": "Longevity & Fitness Manual",
+      "type": "AI-assisted literature synthesis",
+      "typeSecondary": "Reference work",
+      "featured": false,
+      "date": "2026",
+      "role": "I orchestrated the process and directed the scope.",
+      "question": "A structured, graded reference synthesizing longevity and fitness literature for personal and educational use.",
+      "method": "49 chapters covering graded claims across the longevity and fitness literature, with documented conflicts between sources left visible.",
+      "scale": "49 chapters · 1,007 graded claims · 37 documented conflicts",
+      "humanContribution": "Directed the scope, structure, and grading approach.",
+      "aiContribution": "AI-assisted literature synthesis across the graded claim set.",
+      "verification": "Educational reference. Independent claim verification end to end has not been done.",
+      "limitations": "This is an educational reference. It is not medical advice and not original clinical research.",
+      "links": {
+        "demo": "https://drive.google.com/file/d/1Y6CF9Xr1CR5WAA6ZKqA9omGUijHNKQg5/view"
+      },
+      "accessNote": "This link currently requires a Google sign-in. Public sharing is pending; contact me if you need access before that is resolved.",
+      "related": ["quantum-atlas"]
+    },
+    {
+      "slug": "pagerank",
+      "title": "Academic Paper Ranking and Recommendation System",
+      "shortTitle": "Paper Ranking (PageRank)",
+      "type": "Academic project",
+      "featured": false,
+      "date": "2022",
+      "role": "Contributed the ranking component to a group system as part of an MA 544 (Numerical Linear Algebra for Big Data) group project.",
+      "question": "Rank academic papers by citation-graph influence and combine that ranking with content-based recommendation.",
+      "method": "Sparse PageRank via power iteration over a 1.7-million-node academic citation graph, combined with TF-IDF and word-vector similarity for content-based recommendation.",
+      "humanContribution": "Implemented the sparse PageRank component using CSR matrices and power iteration.",
+      "aiContribution": "None disclosed; this is a course project.",
+      "verification": "Course deliverable; independent review beyond the course has not occurred.",
+      "links": {
+        "code": "https://github.com/gianyrox/Academic-Paper-Ranking-and-Recommendation-System"
+      },
+      "related": ["obesity-analysis"]
+    },
+    {
+      "slug": "obesity-analysis",
+      "title": "US States Obesity Analysis",
+      "shortTitle": "US Obesity Analysis",
+      "type": "Academic project",
+      "featured": false,
+      "date": "2023",
+      "role": "Independent statistics course project, MA 541 Statistical Methods.",
+      "question": "How do state-level obesity rates relate to poverty, income, and other socioeconomic variables, and how strong is that relationship?",
+      "method": "Two-sample testing, ANOVA, categorical analysis, resampling, and linear and nonlinear regression on state-level data, with reproducible code and interpretation.",
+      "humanContribution": "Full analysis, code, and interpretation.",
+      "aiContribution": "None disclosed; this is a course project.",
+      "verification": "Course deliverable; independent review beyond the course has not occurred.",
+      "links": {
+        "code": "https://github.com/gianyrox/US-States-Obesity-Analysis"
+      },
+      "related": ["pagerank"]
+    }
+  ],
+
+  "work": [
+    {
+      "slug": "nucleusbrain",
+      "title": "Nucleus Brain",
+      "shortTitle": "Nucleus Brain",
+      "type": "Production system",
+      "featured": true,
+      "date": "2024-Present",
+      "role": "Architect.",
+      "question": "Coordinate a large research or engineering workload across specialist AI sub-agents without losing evaluation or governance.",
+      "method": "AI orchestrator routing work across specialist sub-agents over MCP (Model Context Protocol): tool-calling workflows, a rubric-based evaluation loop scoring agent output on defined criteria, and human-in-the-loop review at each stage.",
+      "humanContribution": "System architecture, evaluation-rubric design, and governance model.",
+      "aiContribution": "Sub-agents perform the delegated work under orchestration and evaluation.",
+      "verification": "Production system in active use across AGFarms ventures. Orchestration and evaluation infrastructure does not by itself guarantee the scientific or factual correctness of any downstream output; that still requires human review, applied per artifact.",
+      "links": { "demo": "https://nucleusbrain.com" },
+      "related": ["derbyfish", "research-atlas"]
+    },
+    {
+      "slug": "derbyfish",
+      "title": "DerbyFish",
+      "shortTitle": "DerbyFish",
+      "type": "Production system",
+      "featured": true,
+      "date": "01/2024-Present",
+      "role": "Founding Product Engineer, full-time production work.",
+      "question": "Build a competitive sport-fishing platform where catch submissions can be trusted at scale.",
+      "method": "Multi-repository system: Rust API, React Native and web clients, data pipelines, an automated highlight clipper, and a real-time catch-validation and anti-cheat pipeline (geolocation, timestamp, and duplicate-detection signals) as the core end-to-end feature, processing roughly 300 verified catches per derby.",
+      "humanContribution": "Founding engineering role; not every repository or feature in the system was built solely by me, this is a multi-repository product with a small team.",
+      "aiContribution": "Used as an engineering tool across the codebase. Contribution is not broken out feature by feature.",
+      "verification": "Production system, live with paying users and real derbies.",
+      "links": { "demo": "https://derby.fish" },
+      "related": ["nucleusbrain", "agfarms"]
+    },
+    {
+      "slug": "agfarms",
+      "title": "AGFarms",
+      "shortTitle": "AGFarms",
+      "type": "Production system",
+      "featured": true,
+      "date": "01/2024-Present",
+      "role": "Co-Founder / Software and AI Engineer.",
+      "question": "A consulting and development firm that also builds and owns products, using research-informed product development rather than formal scientific research.",
+      "method": "Competitor and adjacent-field case studies, user segmentation and feedback, feature duplication and differentiation decisions, build/no-build prioritization, and iteration against observed behavior. Delivered two paid client SaaS engagements proposal-to-production on React/React Native/Next.js, Rust backends, PostgreSQL/Supabase, and Docker/Kubernetes self-hosted on Hetzner.",
+      "humanContribution": "Co-founded and co-lead the engineering team; own product decisions end to end.",
+      "aiContribution": "Used as an engineering and research tool across the studio's workflow.",
+      "verification": "This is research-informed product development: competitive analysis and user feedback, rather than controlled experiments.",
+      "links": { "demo": "https://agfarms.dev" },
+      "related": ["derbyfish", "nucleusbrain"]
+    },
+    {
+      "slug": "promptmaxxers",
+      "title": "PromptMaxxers",
+      "shortTitle": "PromptMaxxers",
+      "type": "Production system",
+      "typeSecondary": "Teaching",
+      "featured": false,
+      "date": "2026-Present",
+      "role": "Founder and Lead Instructor.",
+      "method": "One-to-one coaching, group sessions, and discussion seminars on prompting and AI-native workflows for a 50-member learning community.",
+      "humanContribution": "Runs the coaching and seminars directly.",
+      "aiContribution": "Course materials are AI-assisted coursework and lessons; this is not a fully authored formal curriculum.",
+      "verification": "Active program, in progress.",
+      "links": { "demo": "https://promptmaxxers.com" },
+      "related": ["nucleusbrain"]
+    }
+  ],
+
+  "writing": [
+    {
+      "slug": "your-money-is-broken",
+      "title": "Your Money Is Broken",
+      "type": "Published nonfiction",
+      "featured": true,
+      "date": "2026",
+      "role": "I directed the research and writing process and made the final editorial decisions.",
+      "description": "A case-based synthesis of documented real-world stablecoin use across four cities: Bogota, Harare, Lagos, and a rooftop in Buenos Aires. 168 pages, ISBN 979-8-1966798-3-4.",
+      "aiContribution": "AI-assisted deep research and writing under editorial direction.",
+      "verification": "The case narratives are based on documented real people and cases; I did not personally interview them.",
+      "links": { "paper": "https://www.gianyrox.com/book/" }
+    }
+  ],
+
+  "essays": [
+    { "title": "Stop Reading Top to Bottom! This Is How To Read an Academic Paper", "url": "https://medium.com/@gianyrox" },
+    { "title": "Why the Three-Pass Method for Reading Research Papers Does Not Work", "url": "https://medium.com/@gianyrox" },
+    { "title": "Why the Research Industry Needs a Major Reform", "url": "https://medium.com/@gianyrox" },
+    { "title": "How ChatGPT Will Ruin the World", "url": "https://medium.com/@gianyrox/how-chatgpt-will-ruin-the-world-57ea88b203fe" },
+    { "title": "The Biblical Flood That 'Began' History! - Meltwater Pulse 1A", "url": "https://medium.com/@gianyrox/the-biblical-flood-that-began-history-meltwater-pulse-1a-f70633c8f2c2" },
+    { "title": "Math, the Path to Polymath", "url": "https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9" }
+  ],
+  "essaysNote": "Medium essays are personal science communication and opinion writing; they are not peer-reviewed research. The early research-methods posts and the first Bucket prototype mark a long-running interest in research access, cost, difficulty, and learning from primary literature."
+}

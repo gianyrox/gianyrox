@@ -37,6 +37,30 @@
     {
       "source": "/brand",
       "destination": "/brand/index.html"
+    },
+    {
+      "source": "/studies",
+      "destination": "/studies/index.html"
+    },
+    {
+      "source": "/studies/:slug",
+      "destination": "/studies/:slug/index.html"
+    },
+    {
+      "source": "/work",
+      "destination": "/work/index.html"
+    },
+    {
+      "source": "/work/:slug",
+      "destination": "/work/:slug/index.html"
+    },
+    {
+      "source": "/writing",
+      "destination": "/writing/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
     }
   ],
   "redirects": [

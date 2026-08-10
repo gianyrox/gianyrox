@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Research Atlas, Gianangelo Dichio</title>
+	<meta name="description" content="Can the global research-funding economy, grants, funders, organizations, people, and the outputs they produce, be reconstructed as one normalized, provenan">
+	<link rel="canonical" href="https://www.gianyrox.com/studies/research-atlas/">
+	<link rel="icon" type="image/x-icon" href="/public/brand/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/public/brand/apple-touch-icon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+	<link rel="stylesheet" href="/public/css/site.css">
+	<meta name="theme-color" content="#264653">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Research Atlas, Gianangelo Dichio">
+	<meta property="og:description" content="Can the global research-funding economy, grants, funders, organizations, people, and the outputs they produce, be reconstructed as one normalized, provenan">
+	<meta property="og:url" content="https://www.gianyrox.com/studies/research-atlas/">
+	<meta property="og:image" content="https://www.gianyrox.com/public/brand/og-image.png">
+	<meta name="twitter:card" content="summary_large_image">
+	
+</head>
+<body>
+	<div class="container">
+	<nav class="site-nav" aria-label="Primary">
+		<a href="/" >Home</a>
+		<a href="/studies/" aria-current="page">Research</a>
+		<a href="/work/" >Work</a>
+		<a href="/writing/" >Writing</a>
+		<a href="/about/" >About</a>
+	</nav><a class="cs-back" href="/studies/">&larr; Back to Research</a><div class="cs-header"><div><span class="badge">Reproducible research infrastructure</span> <span class="badge">Original empirical analysis</span></div><h1 class="cs-title">Research Atlas</h1><p class="cs-scope"><strong>~1.67M grants · ~192.7K organizations · ~1.44M people · 75 funders · ~$1.04T normalized funding · ~12.2M graph rows</strong></p><div class="cs-links"><a class="btn" href="https://github.com/bucket-foundation/research-atlas" target="_blank" rel="noopener">Code</a><a class="btn" href="https://www.bucket.foundation/research/papers/funding-landscape" target="_blank" rel="noopener">Paper</a></div></div><div class="cs-section"><h2>Question</h2><p>Can the global research-funding economy, grants, funders, organizations, people, and the outputs they produce, be reconstructed as one normalized, provenance-tracked graph, open enough for anyone to audit or extend?</p></div><div class="cs-section"><h2>Role</h2><p>Creator and human research lead. AI-assisted.</p></div><div class="cs-section"><h2>Method</h2><p>A connector-based pipeline maps eight funder sources (NIH, NSF, UKRI/GtR, CORDIS, Gates Foundation, Wellcome Trust, Sloan Foundation, DFG) and OpenAlex research-output records into one canonical schema. Entity reconciliation runs on ROR (organizations), ORCID (people), DOI (works), and Crossref Funder IDs. Ingestion is idempotent and resumable, with cached raw pages, partitioned parquet shards, provenance on every row, and edge-level validation tests across a six-entity graph model (Funder to Grant to Organization, with Person and Work linkages).</p></div><div class="cs-section"><h2>Division of work</h2><div class="cs-grid"><div><strong>Human</strong><p>Defined the schema, chose the reconciliation strategy and identifier systems, directed the connector architecture, and reviewed validation results.</p></div><div><strong>AI</strong><p>AI-assisted implementation of individual connectors, transformers, and test scaffolding under that direction.</p></div></div></div><div class="cs-section"><h2>Verification and limitations</h2><p>Edge-level validation tests run in CI against the reconciled graph. Full independent replication of every connector has not been separately audited by a third party.</p><p>Funding amounts are normalized across currencies and years with standard assumptions that can shift totals at the margin. Coverage is limited to the eight funders and OpenAlex; it is not a census of global research funding.</p></div><div class="cs-section"><h2>Related</h2><div class="link-row"><a href="/studies/funding-landscape/">Funding Concentration &amp; Structure</a><a href="/studies/paper-ranking/">Transformer vs. TF-IDF</a><a href="/studies/funder-specialization/">Funder specialization</a><a href="/studies/funding-careers/">Funding and careers</a><a href="/studies/knowledge-access-gradient/">Knowledge-Access Gradient</a></div></div>
+	</div>
+</body>
+</html>
