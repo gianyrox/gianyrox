@@ -61,7 +61,8 @@ function esc(s = "") {
 }
 
 function badge(type, ai) {
-	return `<span class="badge${ai ? " ai" : ""}">${esc(type)}</span>`;
+	if (ai) return "";
+	return `<span class="badge">${esc(type)}</span>`;
 }
 
 function isAI(type = "") {
@@ -100,7 +101,8 @@ function relatedList(allItems, related = []) {
 // ---- tag section for lookups ----
 const allStudies = data.studies.map((s) => ({ ...s, _section: "studies" }));
 const allWork = data.work.map((s) => ({ ...s, _section: "work" }));
-const allItems = [...allStudies, ...allWork];
+const allManuals = (data.manuals || []).map((s) => ({ ...s, _section: "writing" }));
+const allItems = [...allStudies, ...allWork, ...allManuals];
 
 // ============ CASE STUDY DETAIL PAGE ============
 function detailPage(item, sectionSlug, navKey) {
@@ -126,7 +128,8 @@ function detailPage(item, sectionSlug, navKey) {
 
 	let body = HEAD({ title, description, canonical, jsonLd });
 	body += `${NAV(navKey)}`;
-	body += `<a class="cs-back" href="/${sectionSlug}/">&larr; Back to ${sectionSlug === "studies" ? "Research" : "Work"}</a>`;
+	const backLabel = sectionSlug === "studies" ? "Research" : sectionSlug === "work" ? "Work" : "Writing";
+	body += `<a class="cs-back" href="/${sectionSlug}/">&larr; Back to ${backLabel}</a>`;
 	body += `<div class="cs-header">`;
 	body += `<div>${badge(item.type, isAI(item.type))}${item.typeSecondary ? " " + badge(item.typeSecondary, false) : ""}</div>`;
 	body += `<h1 class="cs-title">${esc(item.title)}</h1>`;
@@ -217,13 +220,24 @@ function writingPage() {
 	for (const w of data.writing) {
 		body += `<div class="book-card">
 			<div class="book-body">
-				<div class="book-title">${esc(w.title)} <span class="badge${isAI(w.type) ? " ai" : ""}">${esc(w.type)}</span></div>
+				<div class="book-title">${esc(w.title)} <span class="badge">${esc(w.type)}</span></div>
 				<div class="book-blurb">${esc(w.description)}</div>
 				<p class="disclosure">${esc(w.aiContribution)} ${esc(w.verification)}</p>
 				<div class="book-actions"><a class="btn primary" href="${w.links.paper}">Read more</a></div>
 			</div>
 		</div>`;
 	}
+
+	body += `<h2 class="section-header">Manuals &amp; Syntheses</h2>`;
+	body += `<div class="card-list">`;
+	for (const m of allManuals) {
+		body += `<a class="pcard" href="/writing/${m.slug}/">
+			<div class="pcard-top"><span class="pcard-title">${esc(m.title)}</span>${badge(m.type, false)}</div>
+			<div class="pcard-scope">${esc(m.question || "")}</div>
+			<div class="pcard-meta">${esc(m.scale || "")}</div>
+		</a>`;
+	}
+	body += `</div>`;
 
 	body += `<h2 class="section-header">Selected Essays</h2>`;
 	body += `<nav class="writing-list" aria-label="Selected essays">`;
@@ -267,6 +281,7 @@ function aboutPage() {
 // ---- build ----
 for (const item of allStudies) detailPage(item, "studies", "studies");
 for (const item of allWork) detailPage(item, "work", "work");
+for (const item of allManuals) detailPage(item, "writing", "writing");
 
 indexPage({
 	sectionSlug: "studies",

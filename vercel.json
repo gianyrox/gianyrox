@@ -59,6 +59,10 @@
       "destination": "/writing/index.html"
     },
     {
+      "source": "/writing/:slug",
+      "destination": "/writing/:slug/index.html"
+    },
+    {
       "source": "/about",
       "destination": "/about/index.html"
     }

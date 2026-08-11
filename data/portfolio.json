@@ -191,49 +191,6 @@
       "related": ["qec-neural-decoder"]
     },
     {
-      "slug": "quantum-atlas",
-      "title": "The Quantum Atlas",
-      "shortTitle": "The Quantum Atlas",
-      "type": "AI-assisted literature synthesis",
-      "featured": false,
-      "date": "2026",
-      "role": "I orchestrated the process and am actively reading and checking it.",
-      "question": "A deep-research literature review built for my own understanding of the quantum-computing field: what does the literature establish, where does it disagree, and what is still open?",
-      "method": "8 chapters synthesizing graded source material across the field, with documented points of conflict between sources left visible rather than resolved by assertion.",
-      "scale": "8 chapters · 184 graded source nodes · 15 documented conflicts",
-      "humanContribution": "Directed the scope and structure, and am actively reading and checking the content against primary sources.",
-      "aiContribution": "AI-assisted literature synthesis across the graded source set.",
-      "verification": "Not fully claim-verified end to end. This is a personal literature review rather than a paper.",
-      "limitations": "Built as a study aid rather than a publication. Treat every claim as provisional until checked against its primary source.",
-      "links": {
-        "demo": "https://drive.google.com/file/d/1I6otasJ9NPuth2biA66BqUCUB95uNIUx/view"
-      },
-      "accessNote": "This link currently requires a Google sign-in. Public sharing is pending; contact me if you need access before that is resolved.",
-      "related": ["qec-neural-decoder", "quantum-similarity"]
-    },
-    {
-      "slug": "longevity-manual",
-      "title": "The Longevity & Fitness Operating Manual",
-      "shortTitle": "Longevity & Fitness Manual",
-      "type": "AI-assisted literature synthesis",
-      "typeSecondary": "Reference work",
-      "featured": false,
-      "date": "2026",
-      "role": "I orchestrated the process and directed the scope.",
-      "question": "A structured, graded reference synthesizing longevity and fitness literature for personal and educational use.",
-      "method": "49 chapters covering graded claims across the longevity and fitness literature, with documented conflicts between sources left visible.",
-      "scale": "49 chapters · 1,007 graded claims · 37 documented conflicts",
-      "humanContribution": "Directed the scope, structure, and grading approach.",
-      "aiContribution": "AI-assisted literature synthesis across the graded claim set.",
-      "verification": "Educational reference. Independent claim verification end to end has not been done.",
-      "limitations": "This is an educational reference. It is not medical advice and not original clinical research.",
-      "links": {
-        "demo": "https://drive.google.com/file/d/1Y6CF9Xr1CR5WAA6ZKqA9omGUijHNKQg5/view"
-      },
-      "accessNote": "This link currently requires a Google sign-in. Public sharing is pending; contact me if you need access before that is resolved.",
-      "related": ["quantum-atlas"]
-    },
-    {
       "slug": "pagerank",
       "title": "Academic Paper Ranking and Recommendation System",
       "shortTitle": "Paper Ranking (PageRank)",
@@ -350,6 +307,52 @@
       "aiContribution": "AI-assisted deep research and writing under editorial direction.",
       "verification": "The case narratives are based on documented real people and cases; I did not personally interview them.",
       "links": { "paper": "https://www.gianyrox.com/book/" }
+    }
+  ],
+
+  "manuals": [
+    {
+      "slug": "quantum-atlas",
+      "title": "The Quantum Atlas",
+      "shortTitle": "The Quantum Atlas",
+      "type": "AI-assisted literature synthesis",
+      "featured": true,
+      "date": "2026",
+      "role": "I orchestrated the process and am actively reading and checking it.",
+      "question": "A deep-research literature review built for my own understanding of the quantum-computing field: what does the literature establish, where does it disagree, and what is still open?",
+      "method": "8 chapters synthesizing graded source material across the field, with documented points of conflict between sources left visible rather than resolved by assertion.",
+      "scale": "8 chapters · 184 graded source nodes · 15 documented conflicts",
+      "humanContribution": "Directed the scope and structure, and am actively reading and checking the content against primary sources.",
+      "aiContribution": "AI-assisted literature synthesis across the graded source set.",
+      "verification": "Not fully claim-verified end to end. This is a personal literature review rather than a paper.",
+      "limitations": "Built as a study aid rather than a publication. Treat every claim as provisional until checked against its primary source.",
+      "links": {
+        "demo": "https://drive.google.com/file/d/1I6otasJ9NPuth2biA66BqUCUB95uNIUx/view"
+      },
+      "accessNote": "This link currently requires a Google sign-in. Public sharing is pending; contact me if you need access before that is resolved.",
+      "related": ["qec-neural-decoder", "quantum-similarity", "longevity-manual"]
+    },
+    {
+      "slug": "longevity-manual",
+      "title": "The Longevity & Fitness Operating Manual",
+      "shortTitle": "Longevity & Fitness Manual",
+      "type": "AI-assisted literature synthesis",
+      "typeSecondary": "Reference work",
+      "featured": true,
+      "date": "2026",
+      "role": "I orchestrated the process and directed the scope.",
+      "question": "A structured, graded reference synthesizing longevity and fitness literature for personal and educational use.",
+      "method": "49 chapters covering graded claims across the longevity and fitness literature, with documented conflicts between sources left visible.",
+      "scale": "49 chapters · 1,007 graded claims · 37 documented conflicts",
+      "humanContribution": "Directed the scope, structure, and grading approach.",
+      "aiContribution": "AI-assisted literature synthesis across the graded claim set.",
+      "verification": "Educational reference. Independent claim verification end to end has not been done.",
+      "limitations": "This is an educational reference. It is not medical advice and not original clinical research.",
+      "links": {
+        "demo": "https://drive.google.com/file/d/1Y6CF9Xr1CR5WAA6ZKqA9omGUijHNKQg5/view"
+      },
+      "accessNote": "This link currently requires a Google sign-in. Public sharing is pending; contact me if you need access before that is resolved.",
+      "related": ["quantum-atlas"]
     }
   ],
 
