@@ -678,3 +678,43 @@
 	padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--surface);
 }
 .link-row a:hover { background: var(--teal-deep); color: #fff; }
+
+/* ---- Research directions ---- */
+.rdir-list {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin: 6px 0 10px;
+}
+.rdir {
+	background: var(--paper);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 16px 18px;
+	box-shadow: var(--shadow-sm);
+}
+.rdir.lead { border-color: rgba(42, 157, 143, 0.35); }
+.rdir-code {
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	color: var(--teal);
+}
+.rdir-title {
+	display: block;
+	font-size: 15.5px;
+	font-weight: 800;
+	color: var(--teal-deep);
+	letter-spacing: -0.01em;
+	margin: 2px 0 6px;
+}
+.rdir-body {
+	font-size: 13.5px;
+	line-height: 1.6;
+	color: var(--muted);
+	margin: 0;
+}
+@media (max-width: 680px) {
+	.rdir-list { grid-template-columns: 1fr; }
+}

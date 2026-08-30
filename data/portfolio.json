@@ -1,25 +1,39 @@
 {
   "aiDisclosure": "I use AI as a research and engineering instrument. I define the questions, scope, and evaluation criteria; orchestrate the workflows; review intermediate and final outputs; and make the final technical and editorial decisions. Each artifact states its verification level and the division of human and AI work.",
 
-  "focusLine": "AI-guided quantum algorithm discovery and heterogeneous CPU-GPU-QPU orchestration.",
+  "focusLine": "Applying to PhD programs in artificial intelligence. Machine learning for scientific discovery, AI systems for research knowledge, evaluation of AI-assisted work, and learning methods for quantum computing.",
 
-  "heroCopy": "Mathematician, data scientist, AI-systems builder, and educator. I build research tools, production software, and AI-assisted knowledge systems, from a 12.2M-row map of the research economy to current studies at the intersection of AI and quantum computing.",
+  "heroCopy": "Mathematician, data scientist, AI-systems builder, and educator, applying to PhD programs in artificial intelligence. I build research tools, production software, and AI-assisted knowledge systems, from a 12.2M-row map of the research economy to open machine-learning tools that a lab can run on a laptop.",
+
+  "phdStatement": "I am applying to PhD programs in artificial intelligence. The work on this site is the case for it: research infrastructure at 12.2M rows, working papers, open machine-learning tools benchmarked against published baselines, and production AI systems that keep a human in the loop. Quantum computing and biophysics show up here as application areas where the machine-learning question is sharp; the doctoral work I want sits in AI itself.",
 
   "researchInterests": [
     {
       "code": "R1",
       "lead": true,
-      "title": "AI-guided quantum algorithm discovery",
-      "body": "Using generative and learning-based methods to propose, refine, and evaluate quantum-optimization circuits with QPU feedback."
+      "title": "Machine learning for scientific discovery",
+      "body": "Models that make a scientific measurement cheaper or a hypothesis testable: protein stability prediction, Markov state models of molecular dynamics, ADMET property prediction, and quality control for cryo-EM and electrophysiology. Benchmarked against published baselines, CPU-only, open source."
     },
     {
       "code": "R2",
+      "lead": true,
+      "title": "AI systems for research knowledge",
+      "body": "Retrieval and generation grounded in primary sources: hybrid BM25 and dense retrieval over full-text papers, answers that carry their citations, and a 12.2M-row provenance-tracked graph of the research-funding economy underneath."
+    },
+    {
+      "code": "R3",
       "lead": false,
-      "title": "Heterogeneous CPU-GPU-QPU orchestration",
-      "body": "Learning how to partition optimization and AI workflows among classical control, GPU training and simulation, and QPU sampling or quantum subroutines."
+      "title": "Evaluation and human-AI workflows",
+      "body": "How to measure the output of AI-assisted research: verification levels, disclosure of the human and AI division of work, agent orchestration with review gates, and what degrades once a person stops checking."
+    },
+    {
+      "code": "R4",
+      "lead": false,
+      "title": "Learning methods for quantum computing",
+      "body": "Neural decoders for quantum error correction inside a real-time budget, learned search over quantum-optimization circuits, and how to partition a workload across CPU, GPU, and QPU."
     }
   ],
-  "researchInterestsNote": "Two-way interest: AI methods for quantum algorithm discovery, and quantum resources as a component inside AI/optimization pipelines. These are active study questions rather than completed results.",
+  "researchInterestsNote": "These are active study questions rather than completed results. Each one links to code, a benchmark, or a working paper where one exists.",
 
   "studies": [
     {
