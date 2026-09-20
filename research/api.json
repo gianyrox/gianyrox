@@ -1,5 +1,5 @@
 {
-  "url": "https://supports-publish-decent-affiliates.trycloudflare.com",
-  "started": "2026-09-18T23:38:13Z",
+  "url": "https://api.trycloudflare.com",
+  "started": "2026-09-20T01:45:38Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
