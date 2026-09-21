@@ -1,18 +1,18 @@
 {
   "aiDisclosure": "I use AI as a research and engineering instrument. I define the questions, scope, and evaluation criteria; orchestrate the workflows; review intermediate and final outputs; and make the final technical and editorial decisions. Each artifact states its verification level and the division of human and AI work.",
 
-  "focusLine": "Applying to PhD programs in artificial intelligence. Machine learning for scientific discovery, AI systems for research knowledge, evaluation of AI-assisted work, and learning methods for quantum computing.",
+  "focusLine": "Looking for a research role in human-centered AI for learning, scientific reasoning, and discovery, in a PhD program or on a research team at a company. I work on it now at Bucket Foundation, where Research OS for K‑12 is the sandbox.",
 
-  "heroCopy": "Mathematician, data scientist, AI-systems builder, and educator, applying to PhD programs in artificial intelligence. I build research tools, production software, and AI-assisted knowledge systems, from a 12.2M-row map of the research economy to open machine-learning tools that a lab can run on a laptop.",
+  "heroCopy": "Mathematician, data scientist, AI-systems builder, and educator. I build research tools, production software, and AI-assisted knowledge systems, from a 12.2M-row map of the research economy to open machine-learning tools that a lab can run on a laptop.",
 
-  "phdStatement": "I am applying to PhD programs in artificial intelligence. The work on this site is the case for it: research infrastructure at 12.2M rows, working papers, open machine-learning tools benchmarked against published baselines, and production AI systems that keep a human in the loop. Quantum computing and biophysics show up here as application areas where the machine-learning question is sharp; the doctoral work I want sits in AI itself.",
+  "researchStatement": "I am looking for a research role, in a PhD program or on a research team at a company, working on one question: how should AI be designed and built into human learning, knowledge work, and scientific reasoning so that gains in machine capability produce gains in human capability? I work on it now at Bucket Foundation. Research OS for K‑12 is an educational knowledge graph and research environment built for education reform: it routes learners from questions through prerequisites and evidence toward producing new knowledge. It is the sandbox for this research, where I test how AI assistance changes what learners understand and can do on their own. The work on this site is the foundation: research infrastructure at 12.2M rows, working papers, open machine-learning tools benchmarked against published baselines, and production AI systems that keep a human in the loop.",
 
   "researchInterests": [
     {
       "code": "R1",
       "lead": true,
-      "title": "Machine learning for scientific discovery",
-      "body": "Models that make a scientific measurement cheaper or a hypothesis testable: protein stability prediction, Markov state models of molecular dynamics, ADMET property prediction, and quality control for cryo-EM and electrophysiology. Benchmarked against published baselines, CPU-only, open source."
+      "title": "Human-centered AI for learning and scientific discovery",
+      "body": "How AI should be designed and built into learning, knowledge work, and scientific reasoning so that machine capability grows human capability: adaptive assistance that models a person's goals and knowledge state, controlled human-AI experiments that measure delayed transfer, independent problem solving, calibration, and reliance, verification of AI-assisted work, and what degrades once a person stops checking. Research OS for K‑12 at Bucket Foundation is the sandbox."
     },
     {
       "code": "R2",
@@ -23,8 +23,8 @@
     {
       "code": "R3",
       "lead": false,
-      "title": "Evaluation and human-AI workflows",
-      "body": "How to measure the output of AI-assisted research: verification levels, disclosure of the human and AI division of work, agent orchestration with review gates, and what degrades once a person stops checking."
+      "title": "Machine learning for scientific discovery",
+      "body": "Models that make a scientific measurement cheaper or a hypothesis testable: protein stability prediction, Markov state models of molecular dynamics, ADMET property prediction, and quality control for cryo-EM and electrophysiology. Benchmarked against published baselines, CPU-only, open source."
     },
     {
       "code": "R4",
@@ -173,7 +173,7 @@
       "type": "AI-assisted computational study",
       "featured": true,
       "date": "2026",
-      "role": "I chose the questions and experiments, reviewed the code and outputs, and am studying the repository in parallel with PhD applications.",
+      "role": "I chose the questions and experiments, reviewed the code and outputs, and am studying the repository.",
       "question": "Can learned decoders match minimum-weight perfect matching (MWPM) on quantum error correction codes while staying inside a real-time decoding budget?",
       "method": "Benchmarks a ladder of neural decoder families (MLP, CNN, GRU, ConvGRU, 3D-lattice convolution, GNN) against MWPM on the repetition and rotated surface codes, using Stim for circuit simulation, PyMatching for the MWPM baseline, and PyTorch for the learned decoders. Includes a comparison against reported results on public Google Sycamore syndrome data.",
       "humanContribution": "Chose the research questions and experiment design, directed the benchmarking methodology, and reviewed the code and results.",
@@ -192,7 +192,7 @@
       "type": "AI-assisted computational study",
       "featured": true,
       "date": "2026",
-      "role": "I chose the questions and experiments, reviewed the code and outputs, and am studying the repository in parallel with PhD applications.",
+      "role": "I chose the questions and experiments, reviewed the code and outputs, and am studying the repository.",
       "question": "Can swap-test and Hadamard-test overlap estimation reproduce classical cosine similarity and kernel computations on real quantum hardware, and where does the classical cost of state preparation eliminate any advantage?",
       "method": "Implements swap-test and Hadamard-test overlap estimation for cosine similarity and quantum kernels over amplitude-encoded states, checked against classical ground truth on a noiseless simulator, with a small six-pair demonstration on IBM Quantum's ibm_fez processor.",
       "humanContribution": "Chose the research questions and experiment design, directed the benchmarking methodology, and reviewed the code and results.",

@@ -92,7 +92,7 @@ function researchDirections() {
 	const items = data.researchInterests || [];
 	if (!items.length) return "";
 	let out = `<h2 class="section-header">Research Directions</h2>`;
-	out += `<p class="tagline" style="margin-top:0;">${esc(data.phdStatement || "")}</p>`;
+	out += `<p class="tagline" style="margin-top:0;">${esc(data.researchStatement || "")}</p>`;
 	out += `<div class="rdir-list">`;
 	for (const r of items) {
 		out += `<div class="rdir${r.lead ? " lead" : ""}">
@@ -103,7 +103,6 @@ function researchDirections() {
 	}
 	out += `</div>`;
 	out += `<p class="disclosure">${esc(data.researchInterestsNote || "")}</p>`;
-	out += `<div class="link-row"><a href="/research/">Open ML tools for labs, seven benchmarked and open-source</a><a href="/public/Master_Portfolio_2026.pdf">Master portfolio (PDF)</a></div>`;
 	return out;
 }
 
@@ -189,6 +188,7 @@ function indexPage({ sectionSlug, navKey, title, description, items, intro }) {
 	body += `<h1 class="title" style="font-size:clamp(28px,6vw,40px);">${esc(title)}</h1>`;
 	body += `<p class="tagline">${esc(intro)}</p>`;
 	if (sectionSlug === "studies") {
+		body += `<div class="link-row"><a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS for K‑12</a><a href="/research/">Open ML tools for labs, seven benchmarked and open-source</a><a href="/public/Master_Portfolio_2026.pdf">Master portfolio (PDF)</a></div>`;
 		body += researchDirections();
 		body += `<h2 class="section-header">Portfolio</h2>`;
 		body += `<p class="disclosure">${esc(data.aiDisclosure)}</p>`;
@@ -277,15 +277,15 @@ function writingPage() {
 function aboutPage() {
 	let body = HEAD({
 		title: "About, Gianangelo Dichio",
-		description: "Gianangelo Dichio, applying to PhD programs in artificial intelligence. Education, research directions, teaching, and awards.",
+		description: "Gianangelo Dichio, looking for a research role in human-centered AI for learning and scientific discovery. Education, research directions, teaching, and awards.",
 		canonical: `${SITE}/about/`,
 	});
 	body += NAV("about");
 	body += `<h1 class="title" style="font-size:clamp(28px,6vw,40px);">About</h1>`;
 	body += `<p class="tagline">${esc(data.heroCopy)}</p>`;
 
-	body += `<h2 class="section-header">Doctoral Study</h2>
-	<p style="text-align:center;max-width:560px;">${esc(data.phdStatement || "")}</p>
+	body += `<h2 class="section-header">Research Focus</h2>
+	<p style="text-align:center;max-width:560px;">${esc(data.researchStatement || "")}</p>
 	<div style="text-align:center;"><a class="btn" href="/studies/">See the research directions</a></div>`;
 
 	body += `<h2 class="section-header">Education</h2>
@@ -314,9 +314,9 @@ indexPage({
 	sectionSlug: "studies",
 	navKey: "studies",
 	title: "Research",
-	description: "Research directions, infrastructure, working papers, and AI-assisted computational studies by Gianangelo Dichio, applying to PhD programs in artificial intelligence.",
+	description: "Research directions, infrastructure, working papers, and AI-assisted computational studies by Gianangelo Dichio, looking for a research role in human-centered AI for learning and scientific discovery.",
 	items: data.studies,
-	intro: "The research case for a PhD in artificial intelligence: directions I want to work on, and the infrastructure, papers, and computational studies behind them. Each entry states its type and how AI was used.",
+	intro: "The research directions I want to work on, and the infrastructure, papers, and computational studies behind them. Each entry states its type and how AI was used.",
 });
 
 indexPage({
