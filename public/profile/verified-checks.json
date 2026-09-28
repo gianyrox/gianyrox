@@ -1,0 +1,54 @@
+{
+  "version": "bucket-profile-card/0.1",
+  "issued": "2026-09-28T05:17:44+00:00",
+  "card_id": "bkt:58d3033e855efa7f18ce11b5",
+  "subject": {
+    "name": "Gianangelo Dichio",
+    "github": "gianyrox"
+  },
+  "checks": [
+    {
+      "check": "github_account_control",
+      "pass": true
+    },
+    {
+      "check": "github_public_repos",
+      "pass": true
+    },
+    {
+      "check": "email_control",
+      "pass": true
+    },
+    {
+      "check": "domain_bucket",
+      "pass": true
+    },
+    {
+      "check": "domain_personal",
+      "pass": true
+    },
+    {
+      "check": "zenodo_doi",
+      "pass": true
+    },
+    {
+      "check": "signing_key",
+      "pass": true
+    },
+    {
+      "check": "orcid",
+      "pass": false
+    },
+    {
+      "check": "wallet",
+      "pass": false
+    },
+    {
+      "check": "mastery_assessed",
+      "pass": false
+    }
+  ],
+  "commitments": {
+    "profile_data_sha256": "797dd72f974186e083c3471c670c132f406a4419a5d3e12eb58b1d9fd06e0fe1"
+  }
+}

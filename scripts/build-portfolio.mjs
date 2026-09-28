@@ -21,6 +21,7 @@ const NAV = (current) => `
 		<a href="/studies/" ${current === "studies" ? 'aria-current="page"' : ""}>Research</a>
 		<a href="/work/" ${current === "work" ? 'aria-current="page"' : ""}>Work</a>
 		<a href="/writing/" ${current === "writing" ? 'aria-current="page"' : ""}>Writing</a>
+		<a href="/profile/" ${current === "profile" ? 'aria-current="page"' : ""}>Profile</a>
 		<a href="/about/" ${current === "about" ? 'aria-current="page"' : ""}>About</a>
 	</nav>`;
 
@@ -305,6 +306,27 @@ function aboutPage() {
 	writeFile("about/index.html", body);
 }
 
+function profilePage() {
+	let body = HEAD({
+		title: "Bucket Profile, Gianangelo Dichio",
+		description: "Gianangelo Dichio's Bucket profile card: canon branch weights from 147 public sources and signed, timestamped identity checks.",
+		canonical: `${SITE}/profile/`,
+	});
+	body += NAV("profile");
+	body += `<h1 class="title" style="font-size:clamp(28px,6vw,40px);">Bucket Profile</h1>
+	<p class="tagline">Card id bkt:58d3033e855efa7f18ce11b5, issued 2026-09-28</p>
+	<p style="text-align:center;max-width:620px;">The Bucket Foundation profile builder made this card from 147 public sources: GitHub, bucket.foundation, gianyrox.com and project documentation. Branch weights measure what my work writes about; the mastery sphere fills in after Research OS assessments.</p>
+	<img src="/public/profile/profile-card.png" alt="Bucket profile card for Gianangelo Dichio: a radar of canon branch weights, information 23 percent, physics 19, mind 17, biophysics 17, cosmology 7, mathematics 6, earth 5, chemistry 5, and a list of verified identity checks" style="width:100%;max-width:960px;display:block;margin:24px auto;border-radius:8px;">
+	<h2 class="section-header">Verify It</h2>
+	<p style="text-align:center;max-width:620px;">The checks file holds results and a hash of the profile data, never the data itself. It carries an ed25519 signature and a Bitcoin timestamp through OpenTimestamps.</p>
+	<div style="text-align:center;"><a class="btn" href="/public/profile/verified-checks.json">Checks</a> <a class="btn" href="/public/profile/verified-checks.json.sig">Signature</a> <a class="btn" href="/public/profile/verified-checks.json.sig.ots">Timestamp</a> <a class="btn" href="/public/profile/allowed_signers">Signer key</a></div>
+	<pre style="max-width:620px;margin:16px auto;white-space:pre-wrap;font-size:13px;">ssh-keygen -Y verify -f allowed_signers -I gianyrox@gmail.com \\
+  -n bucket-profile-card -s verified-checks.json.sig &lt; verified-checks.json
+ots verify verified-checks.json.sig.ots</pre>`;
+	body += FOOT;
+	writeFile("profile/index.html", body);
+}
+
 // ---- build ----
 for (const item of allStudies) detailPage(item, "studies", "studies");
 for (const item of allWork) detailPage(item, "work", "work");
@@ -330,5 +352,6 @@ indexPage({
 
 writingPage();
 aboutPage();
+profilePage();
 
 console.log("Portfolio build complete.");
