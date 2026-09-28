@@ -5,7 +5,8 @@
 	--basalt: #1F1C16;
 	--basalt-2: #2A261E;
 	--ochre: #B8861E;
-	--ochre-deep: #8A641A;
+	--ochre-deep: #7C5916;
+	--ochre-ui: #8A641A;
 	--ochre-bright: #D9A43A;
 	--teal: #0E8C8C;
 	--ink: #1F1C16;
@@ -28,6 +29,7 @@
 		--rule: rgba(239, 232, 212, 0.16);
 		--ochre: #D9A43A;
 		--ochre-deep: #E8C06A;
+		--ochre-ui: #D9A43A;
 		--teal: #3FB6B6;
 	}
 }
@@ -45,7 +47,7 @@ body.home {
 
 .home a { color: inherit; text-decoration-color: var(--ochre); text-underline-offset: 3px; }
 .home a:hover { color: var(--ochre-deep); }
-.home :focus-visible { outline: 2px solid var(--ochre); outline-offset: 3px; }
+.home :focus-visible { outline: 2px solid var(--ochre-ui); outline-offset: 3px; }
 
 .top {
 	display: flex;
@@ -85,8 +87,8 @@ main { padding: 0 var(--gutter) 64px; max-width: 1080px; margin: 0 auto; }
 .orbit-core { fill: var(--ochre); }
 .orbit-node.kind-research .orbit-dot { stroke: var(--ochre-deep); }
 .orbit-node.kind-build .orbit-dot { stroke: var(--teal); }
-.orbit-node:hover .orbit-spoke, .orbit-node:focus-visible .orbit-spoke, .orbit-node.is-on .orbit-spoke { opacity: 1; stroke-width: 1.6; stroke: var(--ochre); }
-.orbit-node.is-on .orbit-dot { fill: var(--ochre); stroke: var(--ochre); }
+.orbit-node:hover .orbit-spoke, .orbit-node:focus-visible .orbit-spoke, .orbit-node.is-on .orbit-spoke { opacity: 1; stroke-width: 1.6; stroke: var(--ochre-ui); }
+.orbit-node.is-on .orbit-dot { fill: var(--ochre-ui); stroke: var(--ochre-ui); }
 .orbit-node.is-on .orbit-label, .orbit-node:focus-visible .orbit-label { fill: var(--ink); font-weight: 700; }
 
 .orbit-list { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 24px; }

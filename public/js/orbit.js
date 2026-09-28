@@ -85,20 +85,30 @@ export function mountOrbit(figure) {
 			m.style.opacity = 0.25 + 0.55 * Math.abs(Math.sin(lon));
 		});
 	}
+	let running = false;
 	function tick() {
-		if (!dragging && !still.matches && !document.hidden) spin = (spin + velocity) % 360;
+		if (still.matches || document.hidden) { running = false; return; }
+		if (!dragging) spin = (spin + velocity) % 360;
 		draw();
 		requestAnimationFrame(tick);
 	}
+	function start() {
+		if (running || still.matches || document.hidden) return;
+		running = true;
+		requestAnimationFrame(tick);
+	}
+	still.addEventListener("change", start);
+	document.addEventListener("visibilitychange", start);
 	svg.addEventListener("pointerdown", (e) => { dragging = true; lastX = e.clientX; });
 	window.addEventListener("pointermove", (e) => {
 		if (!dragging) return;
 		spin = (spin + (e.clientX - lastX) * 0.5) % 360;
 		lastX = e.clientX;
+		if (!running) draw();
 	});
 	window.addEventListener("pointerup", () => { dragging = false; });
 	draw();
-	requestAnimationFrame(tick);
+	start();
 	return { select, get current() { return current; } };
 }
 
