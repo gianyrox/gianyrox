@@ -14,11 +14,10 @@
 	<link rel="icon" type="image/png" sizes="192x192" href="/public/brand/favicon-192.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="/public/brand/apple-touch-icon.png">
 
-	<!-- One web font: Inter (preconnect + display=swap) -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-	<meta name="theme-color" content="#264653">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+	<meta name="theme-color" content="#EFE8D4">
 
 	<!-- OpenGraph (Facebook, LinkedIn, Slack) -->
 	<meta property="og:type" content="website">
@@ -91,758 +90,90 @@
 		"sameAs": ["https://github.com/gianyrox", "https://www.gianyrox.com/studies/", "https://www.gianyrox.com/research/", "https://www.gianyrox.com/work/"]
 	}
 	</script>
-	<style>
-		/* ---- Design tokens (brand-true) ---- */
-		:root {
-			--teal-deep: #264653;
-			--teal: #2a9d8f;
-			--coral: #e76f51;
-			--ink: #233139;
-			--muted: #5f7079;
-			--faint: #8a99a0;
-			--paper: #ffffff;
-			--canvas: #f3f1ec;
-			--surface: #fbfaf7;
-			--line: rgba(38, 70, 83, 0.10);
-			--line-strong: rgba(38, 70, 83, 0.16);
-			--radius: 14px;
-			--radius-sm: 10px;
-			--radius-pill: 999px;
-			--shadow-sm: 0 1px 2px rgba(38, 70, 83, 0.06), 0 2px 6px rgba(38, 70, 83, 0.05);
-			--shadow-md: 0 6px 18px rgba(38, 70, 83, 0.10), 0 2px 6px rgba(38, 70, 83, 0.06);
-			--shadow-lg: 0 18px 40px rgba(38, 70, 83, 0.16), 0 6px 14px rgba(38, 70, 83, 0.08);
-			--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-			--maxw: 820px;
-		}
-
-		* { box-sizing: border-box; }
-
-		html { -webkit-text-size-adjust: 100%; }
-
-		body {
-			font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-			margin: 0;
-			padding: 28px 20px 56px;
-			min-height: 100vh;
-			color: var(--ink);
-			line-height: 1.6;
-			letter-spacing: -0.003em;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-			background:
-				radial-gradient(1100px 540px at 50% -160px, rgba(42, 157, 143, 0.10), transparent 60%),
-				radial-gradient(820px 420px at 88% 8%, rgba(231, 111, 81, 0.06), transparent 55%),
-				var(--canvas);
-		}
-
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 56px 52px 48px;
-			background: var(--paper);
-			border: 1px solid var(--line);
-			border-radius: 22px;
-			box-shadow: var(--shadow-md);
-			width: 100%;
-			max-width: var(--maxw);
-			margin: 0 auto;
-			position: relative;
-		}
-
-		.print-btn {
-			position: absolute;
-			top: 18px;
-			right: 18px;
-			padding: 7px 14px;
-			background: rgba(42, 157, 143, 0.06);
-			color: var(--teal);
-			border: 1px solid rgba(42, 157, 143, 0.35);
-			border-radius: var(--radius-pill);
-			font-size: 12px;
-			font-weight: 600;
-			font-family: inherit;
-			letter-spacing: 0.01em;
-			cursor: pointer;
-			text-decoration: none;
-			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
-		}
-
-		.print-btn:hover {
-			background: var(--teal);
-			border-color: var(--teal);
-			color: #fff;
-		}
-
-		/* ---- Section headers: small-caps + accent rule ---- */
-		.section-header {
-			color: var(--teal-deep);
-			font-size: 13px;
-			font-weight: 700;
-			text-transform: uppercase;
-			letter-spacing: 0.14em;
-			margin: 52px 0 22px;
-			width: 100%;
-			text-align: center;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 14px;
-		}
-
-		.section-header::before,
-		.section-header::after {
-			content: "";
-			height: 1px;
-			flex: 1 1 auto;
-			max-width: 96px;
-			background: linear-gradient(90deg, transparent, var(--line-strong));
-		}
-
-		.section-header::after {
-			background: linear-gradient(90deg, var(--line-strong), transparent);
-		}
-
-		/* ---- Hero ---- */
-		.hero-mark {
-			width: 128px;
-			height: 128px;
-			display: block;
-			margin: 8px auto 22px;
-			border-radius: 26px;
-			box-shadow: var(--shadow-lg);
-		}
-
-		.title {
-			font-size: clamp(36px, 7vw, 52px);
-			font-weight: 800;
-			letter-spacing: -0.035em;
-			line-height: 1.02;
-			color: var(--teal-deep);
-			text-align: center;
-			margin: 0;
-		}
-
-		.subtitle {
-			font-size: 16px;
-			font-weight: 600;
-			letter-spacing: 0.02em;
-			color: var(--teal);
-			margin: 12px 0 0;
-			text-align: center;
-		}
-
-		.tagline {
-			font-size: 17px;
-			color: var(--muted);
-			margin: 16px auto 6px;
-			text-align: center;
-			line-height: 1.6;
-			max-width: 460px;
-		}
-
-		.description {
-			font-size: 16px;
-			color: var(--muted);
-			margin-top: 20px;
-			text-align: center;
-			line-height: 1.6;
-		}
-
-		.coming-soon {
-			color: var(--muted);
-			font-style: italic;
-			margin: 10px 0;
-		}
-
-		/* ---- Profiles: icon row ---- */
-		.icon-row {
-			display: flex;
-			justify-content: center;
-			gap: 12px;
-			flex-wrap: wrap;
-			margin: 24px 0 4px;
-		}
-
-		.icon-link {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			width: 44px;
-			height: 44px;
-			border-radius: var(--radius-pill);
-			border: 1px solid var(--line-strong);
-			color: var(--teal-deep);
-			background: var(--surface);
-			box-shadow: var(--shadow-sm);
-			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-		}
-
-		.icon-link svg { width: 20px; height: 20px; fill: currentColor; }
-
-		.icon-link:hover {
-			background: var(--teal);
-			border-color: var(--teal);
-			color: #fff;
-			transform: translateY(-3px);
-			box-shadow: var(--shadow-md);
-		}
-
-		/* ---- Companies / Work-with-me: chips ---- */
-		.chip-row {
-			display: flex;
-			justify-content: center;
-			gap: 10px;
-			flex-wrap: wrap;
-			margin: 4px 0;
-		}
-
-		.chip {
-			display: inline-flex;
-			align-items: center;
-			gap: 9px;
-			padding: 9px 16px;
-			border-radius: var(--radius-pill);
-			border: 1px solid var(--line-strong);
-			background: var(--surface);
-			color: var(--teal-deep);
-			text-decoration: none;
-			font-size: 14px;
-			font-weight: 600;
-			box-shadow: var(--shadow-sm);
-			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-		}
-
-		.chip:hover {
-			background: var(--teal);
-			border-color: var(--teal);
-			color: #fff;
-			transform: translateY(-2px);
-			box-shadow: var(--shadow-md);
-		}
-
-		.chip:hover .dot { background: #fff; }
-
-		.chip .dot {
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: var(--coral);
-			flex: 0 0 auto;
-			transition: background 0.2s var(--ease);
-		}
-
-		/* ---- Selected Work: card grid (the centerpiece) ---- */
-		.work-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-			gap: 12px;
-			width: 100%;
-			margin-top: 4px;
-		}
-
-		.tile {
-			display: flex;
-			flex-direction: column;
-			border-radius: var(--radius);
-			overflow: hidden;
-			border: 1px solid rgba(38, 70, 83, 0.07);
-			background: var(--paper);
-			text-decoration: none;
-			box-shadow: 0 1px 2px rgba(38, 70, 83, 0.04);
-			transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
-		}
-
-		.tile .thumb-wrap {
-			position: relative;
-			width: 100%;
-			aspect-ratio: 16 / 10;
-			overflow: hidden;
-			background: var(--surface);
-		}
-
-		.tile .thumb {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			display: block;
-			transition: transform 0.5s var(--ease);
-		}
-
-		.tile:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 4px 14px rgba(38, 70, 83, 0.08);
-			border-color: var(--line);
-		}
-
-		.tile:hover .thumb { transform: scale(1.02); }
-
-		/* Branded fallback tile (no image) */
-		.tile .thumb-fallback {
-			width: 100%;
-			height: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			padding: 12px;
-			background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
-			color: #fff;
-			font-size: 14px;
-			font-weight: 700;
-			letter-spacing: 0.01em;
-			transition: transform 0.5s var(--ease);
-		}
-
-		.tile:hover .thumb-fallback { transform: scale(1.02); }
-
-		.tile .tile-body {
-			padding: 9px 11px 11px;
-			border-top: 1px solid rgba(38, 70, 83, 0.06);
-		}
-
-		.tile .tile-name {
-			display: block;
-			color: var(--muted);
-			font-size: 10px;
-			font-weight: 600;
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
-			transition: color 0.2s var(--ease);
-		}
-
-		/* Benefit line, the hook */
-		.tile .tile-benefit {
-			display: block;
-			color: var(--teal-deep);
-			font-size: 12.5px;
-			font-weight: 500;
-			letter-spacing: -0.01em;
-			line-height: 1.35;
-			margin-top: 3px;
-		}
-
-		/* CTA, the advertising element */
-		.tile .tile-cta {
-			display: inline-block;
-			margin-top: 6px;
-			color: var(--teal);
-			font-size: 11.5px;
-			font-weight: 600;
-			letter-spacing: 0.005em;
-			transition: color 0.2s var(--ease), transform 0.2s var(--ease);
-		}
-
-		.tile:hover .tile-cta {
-			color: var(--coral);
-			transform: translateX(2px);
-		}
-
-		/* ---- Book card ---- */
-		.book-card {
-			width: 100%;
-			margin: 4px 0;
-			padding: 24px;
-			border: 1px solid var(--line);
-			border-radius: var(--radius);
-			background: var(--surface);
-			box-shadow: var(--shadow-sm);
-			text-align: left;
-			display: flex;
-			gap: 24px;
-			align-items: flex-start;
-		}
-
-		.book-card .book-cover {
-			flex: 0 0 140px;
-			width: 140px;
-			height: auto;
-			border-radius: var(--radius-sm);
-			box-shadow: var(--shadow-md);
-			align-self: flex-start;
-		}
-
-		.book-card .book-body {
-			flex: 1;
-			min-width: 0;
-		}
-
-		.book-card .book-title {
-			font-size: 22px;
-			font-weight: 800;
-			letter-spacing: -0.02em;
-			color: var(--teal-deep);
-		}
-
-		.book-card .book-subtitle {
-			margin-top: 6px;
-			font-size: 14px;
-			color: var(--muted);
-			font-style: italic;
-			line-height: 1.5;
-		}
-
-		.book-card .book-blurb {
-			margin-top: 14px;
-			font-size: 15px;
-			line-height: 1.65;
-			color: var(--ink);
-		}
-
-		.book-actions {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-			margin-top: 18px;
-		}
-
-		/* ---- Buttons ---- */
-		.btn {
-			display: inline-block;
-			padding: 9px 16px;
-			border-radius: var(--radius-pill);
-			text-decoration: none;
-			font-size: 14px;
-			font-weight: 600;
-			border: 1px solid rgba(42, 157, 143, 0.45);
-			color: var(--teal);
-			background: var(--paper);
-			cursor: pointer;
-			transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-		}
-
-		.btn:hover {
-			background: var(--teal);
-			border-color: var(--teal);
-			color: #fff;
-			transform: translateY(-2px);
-			box-shadow: var(--shadow-md);
-		}
-
-		.btn.primary {
-			background: var(--teal-deep);
-			border-color: var(--teal-deep);
-			color: #fff;
-		}
-
-		.btn.primary:hover {
-			background: var(--teal);
-			border-color: var(--teal);
-		}
-
-		/* ---- Shop links ---- */
-		.shop-link {
-			text-decoration: none;
-			color: var(--teal-deep);
-			font-size: 16px;
-			font-weight: 600;
-			margin: 0 0 12px;
-			padding: 16px 20px;
-			width: 100%;
-			display: block;
-			text-align: center;
-			border: 1px solid var(--line);
-			border-radius: var(--radius);
-			background: var(--surface);
-			box-shadow: var(--shadow-sm);
-			transition: color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-		}
-
-		.shop-link:hover {
-			color: var(--coral);
-			border-color: var(--line-strong);
-			transform: translateY(-2px);
-			box-shadow: var(--shadow-md);
-		}
-
-		.shop-link .sub {
-			display: block;
-			font-size: 13px;
-			font-weight: 400;
-			color: var(--muted);
-			margin-top: 4px;
-		}
-
-		.note {
-			font-size: 12.5px;
-			color: var(--faint);
-		}
-
-		.note a { color: var(--teal); text-decoration: none; }
-		.note a:hover { color: var(--coral); }
-
-		/* ---- Writing list ---- */
-		.writing-list {
-			width: 100%;
-			max-width: 560px;
-		}
-
-		.writing-list a {
-			display: block;
-			color: var(--ink);
-			text-decoration: none;
-			font-size: 15px;
-			font-weight: 500;
-			padding: 12px 16px;
-			border-radius: var(--radius-sm);
-			transition: color 0.2s var(--ease), background 0.2s var(--ease);
-		}
-
-		.writing-list a:hover {
-			color: var(--coral);
-			background: var(--surface);
-		}
-
-		/* ---- Responsive ---- */
-		@media (max-width: 680px) {
-			body { padding: 16px 12px 40px; }
-
-			.container {
-				padding: 36px 22px 36px;
-				border-radius: 18px;
-			}
-
-			.work-grid {
-				grid-template-columns: repeat(2, 1fr);
-				gap: 10px;
-			}
-
-			.hero-mark { width: 104px; height: 104px; border-radius: 22px; }
-
-			.section-header { margin: 42px 0 18px; }
-
-			.book-card {
-				flex-direction: column;
-				align-items: center;
-				gap: 18px;
-				padding: 22px 18px;
-			}
-
-			.book-card .book-cover { width: 168px; flex: none; }
-			.book-card .book-body { text-align: center; width: 100%; }
-			.book-card .book-actions { justify-content: center; }
-
-			.print-btn { font-size: 11px; padding: 6px 11px; top: 14px; right: 14px; }
-		}
-
-		@media (prefers-reduced-motion: reduce) {
-			* { transition: none !important; }
-			.tile:hover { transform: none; }
-			.tile:hover .thumb, .tile:hover .thumb-fallback { transform: none; }
-		}
-
-		@media print {
-			body { background: #fff; padding: 0; }
-			.container { box-shadow: none; border: none; max-width: 100%; width: 100%; }
-			.print-btn { display: none; }
-			.book-card, .shop-link, .tile { break-inside: avoid; box-shadow: none; }
-			.work-grid { gap: 10px; }
-			.icon-link { border-color: var(--muted); box-shadow: none; }
-			a::after { content: " (" attr(href) ")"; font-size: 11px; color: var(--muted); }
-		}
-
-		/* ---- Portfolio nav + curated homepage additions ---- */
-		.site-nav {
-			display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
-			margin: 0 0 28px; padding-bottom: 16px; border-bottom: 1px solid var(--line); width: 100%;
-		}
-		.site-nav a {
-			color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 700;
-			text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 2px;
-			border-bottom: 2px solid transparent; transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
-		}
-		.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--teal-deep); border-color: var(--coral); }
-		.focus-line {
-			width: 100%; max-width: 560px; margin: 4px auto 8px; padding: 10px 16px; text-align: center;
-			font-size: 13.5px; font-weight: 600; color: var(--teal-deep); background: var(--surface);
-			border: 1px solid var(--line); border-radius: var(--radius-sm);
-		}
-		.focus-line .label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 10.5px; color: var(--coral); margin-right: 6px; }
-		.focus-line a { color: var(--teal); text-decoration: underline; text-underline-offset: 2px; }
-		.focus-line a:hover { color: var(--coral); }
-		.badge {
-			display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-			padding: 3px 9px; border-radius: var(--radius-pill); background: rgba(38, 70, 83, 0.07);
-			color: var(--teal-deep); border: 1px solid var(--line-strong); white-space: nowrap;
-		}
-		.badge.ai { background: rgba(231, 111, 81, 0.09); color: #b5502f; border-color: rgba(231, 111, 81, 0.3); }
-		.disclosure {
-			width: 100%; font-size: 12.5px; line-height: 1.55; color: var(--muted); background: var(--surface);
-			border-left: 3px solid var(--coral); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-			padding: 10px 14px; margin: 6px 0 18px;
-		}
-		.link-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 4px 0 6px; }
-		.link-row a {
-			font-size: 12.5px; font-weight: 600; color: var(--teal-deep); text-decoration: none;
-			padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--surface);
-		}
-		.link-row a:hover { background: var(--teal-deep); color: #fff; }
-		.interest-row { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; margin: 4px 0 10px; }
-		.interest-card { flex: 1 1 260px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 14px 16px; }
-		.interest-card .code { font-size: 11px; font-weight: 800; color: var(--coral); letter-spacing: 0.08em; }
-		.interest-card h3 { font-size: 14.5px; margin: 4px 0 6px; color: var(--teal-deep); }
-		.interest-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.55; }
-	</style>
+	<link rel="stylesheet" href="/public/css/home.css">
+	<script type="module" src="/public/js/orbit.js"></script>
 </head>
 
-<body>
-	<div class="container">
-		<button class="print-btn" onclick="window.print()" aria-label="Download this page as PDF">⬇ Download PDF</button>
-
-		<!-- Nav -->
+<body class="home">
+	<header class="top">
+		<a class="mark" href="/" aria-label="Home"><img src="/public/brand/logo.png" alt="" width="32" height="32"></a>
 		<nav class="site-nav" aria-label="Primary">
 			<a href="/" aria-current="page">Home</a>
 			<a href="/studies/">Research</a>
 			<a href="/work/">Work</a>
 			<a href="/writing/">Writing</a>
-			<a href="/profile/" >Profile</a>
-		<a href="/about/">About</a>
+			<a href="/profile/">Profile</a>
+			<a href="/about/">About</a>
 		</nav>
+	</header>
 
-		<!-- Hero -->
-		<img src="/public/brand/logo.png" alt="Gianyrox" class="hero-mark" width="110" height="110">
-		<div class="title">Gianyrox</div>
-		<a href="https://github.com/Gianyrox" target="_blank" rel="noopener" class="handle" style="display:inline-block;color:#2a9d8f;font-weight:600;letter-spacing:0.06em;font-size:17px;margin-top:6px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e76f51'" onmouseout="this.style.color='#2a9d8f'">@gianyrox</a>
-		<div class="subtitle" style="margin-top:8px;">Gianyrox Everywhere.</div>
-		<p class="tagline">Mathematician, data scientist, AI-systems builder, and educator.</p>
-		<p class="focus-line"><span class="label">Current focus</span>Returning to education in a PhD program, or a research team at a company, to master my own knowledge interactions with the data I meet in research. I work on it at <a href="https://www.bucket.foundation" target="_blank" rel="noopener">Bucket Foundation</a>, where <a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS</a> is a tool for exploration and mastery.</p>
+	<main>
+		<section class="intro">
+			<p class="kicker">Gianangelo Dichio · @gianyrox</p>
+			<h1>Mathematician and data scientist. I build tools for research and learning.</h1>
+			<p class="focus">Next: a PhD program or a research team. I build <a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS</a> at <a href="https://www.bucket.foundation" target="_blank" rel="noopener">Bucket Foundation</a>.</p>
+		</section>
 
-		<!-- Profiles: icon row -->
-		<div class="icon-row" aria-label="Profiles">
-			<a href="https://github.com/Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="GitHub, @Gianyrox" title="GitHub">
+		<figure class="orbit" data-orbit>
+			<ol class="orbit-list" data-orbit-items>
+				<li><a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener" data-title="Research OS" data-kind="build" data-line="A research and learning workspace on the Bucket knowledge graph.">Research OS</a></li>
+				<li><a href="/studies/knowledge-access-gradient/" data-title="Knowledge access" data-kind="research" data-line="Technology widened access to knowledge faster than its production. 78K observations, 219 countries.">Knowledge access</a></li>
+				<li><a href="/studies/research-atlas/" data-title="Research Atlas" data-kind="research" data-line="A 12.2M-row open graph of research funding.">Research Atlas</a></li>
+				<li><a href="/research/" data-title="Lab ML tools" data-kind="research" data-line="Seven open ML tools for labs, benchmarked on CPU.">Lab ML tools</a></li>
+				<li><a href="https://derby.fish" target="_blank" rel="noopener" data-title="DerbyFish" data-kind="build" data-line="Catch verification for competitive fishing.">DerbyFish</a></li>
+				<li><a href="https://nucleusbrain.com" target="_blank" rel="noopener" data-title="Nucleus Brain" data-kind="build" data-line="AI orchestration with human review.">Nucleus Brain</a></li>
+				<li><a href="/book/" data-title="The book" data-kind="write" data-line="Your Money Is Broken: stablecoins and cross-border payments.">The book</a></li>
+				<li><a href="/writing/" data-title="Writing" data-kind="write" data-line="Essays and science writing.">Writing</a></li>
+			</ol>
+			<figcaption class="orbit-caption" data-orbit-caption aria-live="polite"></figcaption>
+		</figure>
+
+		<h2 class="section-title">Built and published</h2>
+		<section class="pair">
+			<article class="object">
+				<a href="https://derby.fish" target="_blank" rel="noopener"><img class="app-card" src="/public/work/derbyfish.png" alt="DerbyFish app icon and name" width="800" height="420" loading="lazy"></a>
+				<h3>DerbyFish</h3>
+				<p>Real-time catch verification for competitive fishing, about 300 verified catches a derby.</p>
+				<div class="links"><a href="https://derby.fish" target="_blank" rel="noopener">derby.fish</a><a href="/work/derbyfish/">Case study</a></div>
+			</article>
+			<article class="object" itemscope itemtype="https://schema.org/Book">
+				<a href="/book/your-money-is-broken/"><img class="book-cover" src="/public/cover/front-hd.png" alt="Your Money Is Broken, cover" width="1024" height="1536" loading="lazy" itemprop="image"></a>
+				<h3 itemprop="name">Your Money Is Broken</h3>
+				<p itemprop="description">Pablo in Bogotá sends his mother medicine money in ninety seconds for under two dollars. By <span itemprop="author">Giany Rox</span>, ISBN <span itemprop="isbn">979-8-1966798-3-4</span>.</p>
+				<div class="links"><a href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener" data-cta="amazon">Paperback $13.99</a><a href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank" rel="noopener" data-cta="gumroad">PDF</a><a href="/book/" data-cta="read-free">Read free</a></div>
+			</article>
+		</section>
+
+		<h2 class="section-title">Papers and tools</h2>
+		<ul class="index">
+			<li><a href="/studies/funding-landscape/"><span>Funding concentration</span><span>paper</span></a></li>
+			<li><a href="/studies/paper-ranking/"><span>Paper ranking</span><span>paper</span></a></li>
+			<li><a href="/studies/funder-specialization/"><span>Funder specialization</span><span>paper</span></a></li>
+			<li><a href="/studies/funding-careers/"><span>Funding and careers</span><span>paper</span></a></li>
+			<li><a href="/studies/pagerank/"><span>Academic paper ranking</span><span>study</span></a></li>
+			<li><a href="/studies/obesity-analysis/"><span>US obesity analysis</span><span>study</span></a></li>
+			<li><a href="/writing/quantum-atlas/"><span>The Quantum Atlas</span><span>essay</span></a></li>
+			<li><a href="/writing/longevity-manual/"><span>Longevity and Fitness Manual</span><span>manual</span></a></li>
+		</ul>
+
+		<footer class="foot">
+			<div class="icons" aria-label="Profiles">
+				<a href="https://github.com/Gianyrox" target="_blank" rel="noopener" aria-label="GitHub, @Gianyrox" title="GitHub">
 				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
 			</a>
-			<a href="https://x.com/Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="X, @Gianyrox" title="X">
+			<a href="https://x.com/Gianyrox" target="_blank" rel="noopener" aria-label="X, @Gianyrox" title="X">
 				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
 			</a>
-			<a href="https://medium.com/@Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="Medium, @Gianyrox" title="Medium">
+			<a href="https://medium.com/@Gianyrox" target="_blank" rel="noopener" aria-label="Medium, @Gianyrox" title="Medium">
 				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42S20.96 8.46 20.96 12zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
 			</a>
-			<a href="https://linkedin.com/in/gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="LinkedIn, @gianyrox" title="LinkedIn">
+			<a href="https://linkedin.com/in/gianyrox" target="_blank" rel="noopener" aria-label="LinkedIn, @gianyrox" title="LinkedIn">
 				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 0 1-2.07-2.07c0-1.14.93-2.07 2.07-2.07 1.14 0 2.07.93 2.07 2.07 0 1.14-.93 2.07-2.07 2.07zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
 			</a>
-		</div>
-
-		<!-- Quick links: papers and tools, placed high so they show without scrolling -->
-		<div class="link-row" style="margin-top:16px;">
-			<a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS for K‑12</a>
-			<a href="/studies/funding-landscape/">Funding concentration (paper)</a>
-			<a href="/studies/paper-ranking/">Paper-ranking (paper)</a>
-			<a href="/studies/funder-specialization/">Funder specialization (paper)</a>
-			<a href="/studies/funding-careers/">Funding &amp; careers (paper)</a>
-			<a href="/research/">Open ML tools for labs</a>
-			<a href="/writing/quantum-atlas/">The Quantum Atlas</a>
-			<a href="/writing/longevity-manual/">Longevity &amp; Fitness Manual</a>
-			<a href="/studies/pagerank/">Academic paper ranking</a>
-			<a href="/studies/obesity-analysis/">US obesity analysis</a>
-			<a href="/writing/">Selected essays</a>
-		</div>
-
-		<!-- Curated homepage: highest-signal items only, full list at /studies/ and /work/ -->
-		<h2 class="section-header">Featured</h2>
-		<div class="work-grid">
-			<a href="/studies/knowledge-access-gradient/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">Knowledge-Access Gradient</div></div>
-				<div class="tile-body"><span class="tile-name">The Knowledge-Access Gradient</span><span class="tile-benefit">Technology widened access to consume knowledge; production lagged. 78K observations, 219 countries</span><span class="tile-cta">Read the working paper →</span></div>
-			</a>
-			<a href="/studies/research-atlas/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">Research Atlas</div></div>
-				<div class="tile-body"><span class="tile-name">Research Atlas</span><span class="tile-benefit">12.2M-row open graph of the research-funding economy</span><span class="tile-cta">See the infrastructure →</span></div>
-			</a>
-			<a href="/studies/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">R1 to R4</div></div>
-				<div class="tile-body"><span class="tile-name">Research Directions</span><span class="tile-benefit">Human-centered AI for learning and scientific discovery, AI systems for research knowledge, ML for scientific discovery, and learning methods for quantum computing</span><span class="tile-cta">Read the questions →</span></div>
-			</a>
-			<a href="/research/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">Open ML Tools</div></div>
-				<div class="tile-body"><span class="tile-name">Open ML Tools for Labs</span><span class="tile-benefit">Seven open-source ML tools for labs, benchmarked, CPU-only</span><span class="tile-cta">Run one in the browser →</span></div>
-			</a>
-			<a href="https://nucleusbrain.com" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><div class="thumb-fallback">Nucleus</div></div>
-				<div class="tile-body"><span class="tile-name">Nucleus Brain</span><span class="tile-benefit">AI orchestration with human-in-the-loop evaluation</span><span class="tile-cta">See the platform →</span></div>
-			</a>
-			<a href="https://derby.fish" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">DerbyFish</span><span class="tile-benefit">Real-time catch verification for competitive fishing</span><span class="tile-cta">Join a derby →</span></div>
-			</a>
-			<a href="/book/" class="tile">
-				<div class="thumb-wrap"><img class="thumb" src="/public/cover/front-hd.png" alt="Your Money Is Broken" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">Your Money Is Broken</span><span class="tile-benefit">Nonfiction on stablecoins and cross-border payments</span><span class="tile-cta">Read more →</span></div>
-			</a>
-		</div>
-
-
-		<!-- Projects: chips -->
-		<h2 class="section-header">Also Building</h2>
-		<div class="chip-row">
-			<a href="https://bucket.foundation" class="chip" target="_blank" rel="noopener"><span class="dot"></span>Bucket Foundation</a>
-			<a href="https://agfarms.dev" class="chip" target="_blank" rel="noopener"><span class="dot"></span>AGFarms Developers</a>
-			<a href="https://openscriva.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>OpenScriva</a>
-			<a href="https://gauss.news" class="chip" target="_blank" rel="noopener"><span class="dot"></span>gauss.news</a>
-			<a href="https://promptmaxxers.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>PromptMaxxers</a>
-			<a href="https://github.com/gianyrox/feed402" class="chip" target="_blank" rel="noopener"><span class="dot"></span>feed402</a>
-		</div>
-		<p style="text-align:center;margin:6px 0 0;"><a href="/work/" style="color:var(--teal);font-size:13px;font-weight:600;text-decoration:none;">See all engineering &amp; research-systems work &rarr;</a></p>
-
-		<!-- Books Section -->
-		<h2 class="section-header">Books</h2>
-		<div class="book-card" itemscope itemtype="https://schema.org/Book">
-			<a href="book/your-money-is-broken/"><img class="book-cover" src="public/cover/front-hd.png" alt="Your Money Is Broken, cover by Giany Rox" loading="lazy" itemprop="image"></a>
-			<div class="book-body">
-				<div class="book-title" itemprop="name">Your Money Is Broken</div>
-				<div class="book-subtitle">How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money, by <span itemprop="author">Giany Rox</span></div>
-				<div class="book-blurb" itemprop="description">Pablo in Bogotá sends his mother medicine money in ninety seconds for under two dollars.
-				</div>
-				<div class="book-actions">
-					<a class="btn primary" href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener" data-cta="amazon">📕 Paperback on Amazon ($13.99)</a>
-					<a class="btn" href="https://agfarms.gumroad.com/l/your-money-is-broken" target="_blank" rel="noopener" data-cta="gumroad">⬇ PDF on Gumroad</a>
-					<a class="btn" href="book/" data-cta="read-free">Read free online</a>
-				</div>
-				<div class="note" style="margin-top: 14px;">
-					ISBN <span itemprop="isbn">979-8-1966798-3-4</span> · 168 pp · Paperback · English · Independently published
-				</div>
 			</div>
-		</div>
-
-		<!-- Shop Section (single unified destination) -->
-		<h2 class="section-header">Shop</h2>
-		<a href="/shop/" class="shop-link">
-			Shop everything
-			<span class="sub">Books, posters, printables, World Cup 2026 collection. All in one place.</span>
-		</a>
-		<a href="/shop/wc2026/" class="shop-link">
-			World Cup 2026 Collection
-			<span class="sub">Brackets, fan journals, watch party kits, host city prints. June 11, July 19.</span>
-		</a>
-		<div class="note" style="margin-top: 6px; padding: 0 10px; text-align: center;">
-			Also available on
-			<a href="https://www.etsy.com/shop/agfarms" target="_blank" rel="noopener">Etsy</a> ·
-			<a href="https://agfarms.gumroad.com/" target="_blank" rel="noopener">Gumroad</a> ·
-			<a href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener">Amazon</a>
-		</div>
-
-		<!-- Work With Me (compact) -->
-		<h2 class="section-header">Work With Me</h2>
-		<p class="tagline" style="margin-top:0;">Available now, remote contracts, 1:1 tutoring, and AI consulting.</p>
-		<div class="chip-row" style="margin-bottom:6px;">
-			<a href="mailto:gianyrox@gmail.com?subject=1:1%20Tutoring" class="chip"><span class="dot"></span>Tutoring</a>
-			<a href="mailto:gianyrox@gmail.com?subject=AI%20%2F%20Dev%20Contract" class="chip"><span class="dot"></span>AI &amp; Dev</a>
-			<a href="mailto:gianyrox@gmail.com?subject=AI%20Consulting" class="chip"><span class="dot"></span>Consulting</a>
-			<a href="https://promptmaxxers.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>PromptMaxxers</a>
-		</div>
-		<div style="text-align:center;">
-			<a class="btn primary" href="mailto:gianyrox@gmail.com?subject=Let%27s%20work%20together" data-cta="hire">✉ Get in touch</a>
-		</div>
-
-		<!-- Writing (compact) -->
-		<h2 class="section-header">Writing</h2>
-		<nav class="writing-list" aria-label="Highlighted articles">
-			<a href="/writing/">Books, essays &amp; science communication &rarr;</a>
-			<a href="https://medium.com/@gianyrox/how-chatgpt-will-ruin-the-world-57ea88b203fe" target="_blank" rel="noopener">How ChatGPT Will Ruin the World</a>
-			<a href="https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9" target="_blank" rel="noopener">Math: The Path to Polymath</a>
-			<a href="/studies/obesity-analysis/">US States Obesity Analysis</a>
-		</nav>
-	</div>
+			<p>Open to tutoring and AI contracts: <a href="mailto:gianyrox@gmail.com?subject=Let%27s%20work%20together" data-cta="hire">gianyrox@gmail.com</a>. Also building <a href="https://bucket.foundation" target="_blank" rel="noopener">Bucket Foundation</a> and <a href="https://github.com/gianyrox/feed402" target="_blank" rel="noopener">feed402</a>. <a href="/shop/">Shop</a>.</p>
+		</footer>
+	</main>
 </body>
 
 </html>
