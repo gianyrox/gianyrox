@@ -23,7 +23,7 @@
 	<!-- OpenGraph (Facebook, LinkedIn, Slack) -->
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Gianangelo Dichio, AI research and machine-learning systems">
-	<meta property="og:description" content="Looking for a research role in human-centered AI for learning and scientific discovery, in a PhD program or at a company. Working on it now at Bucket Foundation with Research OS for K-12.">
+	<meta property="og:description" content="Returning to education in a PhD program to master my knowledge interactions with research data. Human-centered AI for learning and scientific discovery, built at Bucket Foundation with Research OS, a tool for exploration and mastery.">
 	<meta property="og:url" content="https://www.gianyrox.com/">
 	<meta property="og:image" content="https://www.gianyrox.com/public/brand/og-image.png">
 	<meta property="og:image:alt" content="Gianyrox, blade-G brand mark">
@@ -32,7 +32,7 @@
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Gianangelo Dichio, AI research and machine-learning systems">
-	<meta name="twitter:description" content="Looking for a research role in human-centered AI for learning and scientific discovery, in a PhD program or at a company. Working on it now at Bucket Foundation with Research OS for K-12.">
+	<meta name="twitter:description" content="Returning to education in a PhD program to master my knowledge interactions with research data. Human-centered AI for learning and scientific discovery, built at Bucket Foundation with Research OS, a tool for exploration and mastery.">
 	<meta name="twitter:image" content="https://www.gianyrox.com/public/brand/og-image.png">
 
 	<!-- Schema.org Book JSON-LD, gets the book into Google Books index -->
@@ -682,6 +682,65 @@
 		.interest-card .code { font-size: 11px; font-weight: 800; color: var(--coral); letter-spacing: 0.08em; }
 		.interest-card h3 { font-size: 14.5px; margin: 4px 0 6px; color: var(--teal-deep); }
 		.interest-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.55; }
+
+		/* ---- Research identity hero ---- */
+		.name-line { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); margin: 4px 0 12px; text-align: center; }
+		.identity { font-size: clamp(22px, 3.4vw, 30px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--teal-deep); text-align: center; margin: 0 auto; max-width: 680px; }
+		.helix { width: 100%; margin: 26px 0 6px; }
+		.helix-svg { width: 100%; height: auto; display: block; }
+		.helix-ring { fill: none; stroke: var(--line-strong); stroke-width: 1; transition: opacity 0.3s var(--ease); }
+		.helix-month { font-size: 11px; fill: var(--faint); transition: opacity 0.3s var(--ease); }
+		.helix-arrow line, .helix-arrow polyline { stroke: var(--teal-deep); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+		.helix-time { font-size: 14px; font-weight: 700; fill: var(--teal-deep); }
+		.helix-fill { fill: rgba(231, 111, 81, 0.16); stroke: rgba(231, 111, 81, 0.5); stroke-width: 1; }
+		.helix-line { fill: none; stroke-width: 1.8; opacity: 0.72; stroke-linecap: round; transition: opacity 0.2s var(--ease), stroke-width 0.2s var(--ease); }
+		.helix-hit { fill: none; stroke: transparent; stroke-width: 16; }
+		.helix-coil { cursor: pointer; outline: none; }
+		.helix-svg.has-selection .helix-coil:not(.is-on) .helix-line, .helix-svg.is-resting:not(.has-selection) .helix-coil:not(.is-active) .helix-line { opacity: 0.18; }
+		.helix-svg.is-resting .helix-coil.is-active .helix-line { opacity: 1; stroke-width: 3.2; }
+		.helix-coil.is-on .helix-line, .helix-coil:focus-visible .helix-line, .helix-coil:hover .helix-line { stroke-width: 3.6; opacity: 1; }
+		.helix-caption { font-size: 13.5px; color: var(--muted); text-align: center; margin: 6px auto 0; max-width: 560px; min-height: 42px; }
+		.helix:not(.is-live) .helix-caption::before { content: ""; }
+		.helix.is-failed .helix-fallback, .helix .helix-fallback { display: block; }
+		.helix-fallback img { width: 100%; height: auto; border-radius: var(--radius-sm); }
+
+		/* ---- Findings ---- */
+		.findings { display: grid; gap: 12px; width: 100%; }
+		.finding { display: grid; grid-template-columns: 170px 1fr; gap: 16px; align-items: center; padding: 14px 16px; border: 1px solid rgba(38, 70, 83, 0.07); border-radius: var(--radius); background: var(--paper); text-decoration: none; box-shadow: 0 1px 2px rgba(38, 70, 83, 0.04); transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+		.finding:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(38, 70, 83, 0.08); }
+		.finding svg { width: 100%; height: auto; display: block; background: var(--surface); border-radius: var(--radius-sm); }
+		.finding .f-title { display: block; font-size: 15px; font-weight: 700; color: var(--teal-deep); letter-spacing: -0.01em; }
+		.finding .f-text { display: block; font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+		.finding .tile-cta { display: inline-block; margin-top: 6px; color: var(--teal); font-size: 12px; font-weight: 600; }
+		.finding:hover .tile-cta { color: var(--coral); }
+		.fig-axis { stroke: var(--line-strong); stroke-width: 1; fill: none; }
+		.fig-label { font-size: 10px; fill: var(--muted); }
+		.fig-strong { fill: var(--teal-deep); font-weight: 700; }
+		.fig-teal { fill: var(--teal); }
+		.fig-coral { fill: var(--coral); }
+		.fig-line-teal { stroke: var(--teal); stroke-width: 2; fill: none; }
+		.thumb-fig { width: 100%; height: 100%; display: block; background: var(--surface); }
+		.fig-net line, .fig-grid line { stroke: var(--line-strong); stroke-width: 1.2; }
+		.fig-line-coral { stroke: var(--coral); stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; }
+
+		/* ---- Footer ---- */
+		.site-foot { width: 100%; margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); text-align: center; }
+		.site-foot p { font-size: 13px; color: var(--muted); margin: 8px 0; line-height: 1.6; }
+		.site-foot a { color: var(--teal); text-decoration: none; font-weight: 600; }
+		.site-foot a:hover { color: var(--coral); }
+
+		@media (max-width: 680px) {
+			.site-nav { gap: 6px 14px; margin-bottom: 22px; }
+			.site-nav a { font-size: 11.5px; letter-spacing: 0.06em; }
+			.print-btn { position: static; align-self: flex-end; margin: -12px 0 12px; }
+			.finding { grid-template-columns: 1fr; }
+			.finding svg { max-width: 260px; }
+			.helix { margin-left: 4px; margin-right: 4px; width: calc(100% - 8px); }
+			.work-grid.built { grid-template-columns: 1fr 1fr; }
+		}
+		@media (max-width: 360px) {
+			.work-grid.built { grid-template-columns: 1fr; }
+		}
 	</style>
 </head>
 
@@ -689,24 +748,24 @@
 	<div class="container">
 		<button class="print-btn" onclick="window.print()" aria-label="Download this page as PDF">⬇ Download PDF</button>
 
-		<!-- Nav -->
 		<nav class="site-nav" aria-label="Primary">
 			<a href="/" aria-current="page">Home</a>
 			<a href="/studies/">Research</a>
 			<a href="/work/">Work</a>
 			<a href="/writing/">Writing</a>
+			<a href="/profile/">Profile</a>
 			<a href="/about/">About</a>
 		</nav>
 
-		<!-- Hero -->
-		<img src="/public/brand/logo.png" alt="Gianyrox" class="hero-mark" width="110" height="110">
-		<div class="title">Gianyrox</div>
-		<a href="https://github.com/Gianyrox" target="_blank" rel="noopener" class="handle" style="display:inline-block;color:#2a9d8f;font-weight:600;letter-spacing:0.06em;font-size:17px;margin-top:6px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e76f51'" onmouseout="this.style.color='#2a9d8f'">@gianyrox</a>
-		<div class="subtitle" style="margin-top:8px;">Gianyrox Everywhere.</div>
-		<p class="tagline">Mathematician, data scientist, AI-systems builder, and educator. I build research tools, production software, and AI-assisted knowledge systems, from a 12.2M-row map of the research economy to open machine-learning tools that a lab can run on a laptop.</p>
-		<p class="focus-line"><span class="label">Current focus</span>Looking for a research role in human-centered AI for learning, scientific reasoning, and discovery, in a PhD program or on a research team at a company. I work on it now at <a href="https://www.bucket.foundation" target="_blank" rel="noopener">Bucket Foundation</a>, where <a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS for K‑12</a> is the sandbox.</p>
+		<p class="name-line">Gianangelo Dichio · @gianyrox</p>
+		<h1 class="identity">How AI systems for scientific discovery change the people who work with them.</h1>
 
-		<!-- Profiles: icon row -->
+		<figure class="helix" data-helix="/public/data/work-primes.json">
+			<div class="helix-fallback" data-helix-fallback><img src="/public/work/work-helix.png" alt="All my work on a helix: eight work primes month by month along an arrow of time" width="1280" height="560" loading="eager"></div>
+			<figcaption class="helix-caption" data-helix-caption aria-live="polite">Eight orthogonal work primes from commits, beads, pull requests and notes, month by month.</figcaption>
+		</figure>
+
+		<p class="focus-line"><span class="label">Next</span>A PhD program or a research team. I build <a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS</a> at <a href="https://www.bucket.foundation" target="_blank" rel="noopener">Bucket Foundation</a>.</p>
 		<div class="icon-row" aria-label="Profiles">
 			<a href="https://github.com/Gianyrox" class="icon-link" target="_blank" rel="noopener" aria-label="GitHub, @Gianyrox" title="GitHub">
 				<svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.8-.01 3.18 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
@@ -722,80 +781,81 @@
 			</a>
 		</div>
 
-		<!-- Quick links: papers and tools, placed high so they show without scrolling -->
-		<div class="link-row" style="margin-top:16px;">
-			<a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS for K‑12</a>
-			<a href="/studies/funding-landscape/">Funding concentration (paper)</a>
-			<a href="/studies/paper-ranking/">Paper-ranking (paper)</a>
-			<a href="/studies/funder-specialization/">Funder specialization (paper)</a>
-			<a href="/studies/funding-careers/">Funding &amp; careers (paper)</a>
-			<a href="/research/">Open ML tools for labs</a>
-			<a href="/writing/quantum-atlas/">The Quantum Atlas</a>
-			<a href="/writing/longevity-manual/">Longevity &amp; Fitness Manual</a>
-			<a href="/studies/pagerank/">Academic paper ranking</a>
-			<a href="/studies/obesity-analysis/">US obesity analysis</a>
-			<a href="/writing/">Selected essays</a>
+		<h2 class="section-header">Findings</h2>
+		<div class="findings">
+			<a class="finding" href="/studies/paper-ranking/">
+				<svg viewBox="0 0 170 110" role="img" aria-label="Citation-prediction gain of SPECTER over TF-IDF: 15.4 percent in high-energy physics, about zero across 26 fields">
+						<line class="fig-axis" x1="20" y1="86" x2="160" y2="86"/>
+						<rect x="36" y="30" width="36" height="56" class="fig-teal"/>
+						<rect x="104" y="85" width="36" height="1.5" class="fig-coral"/>
+						<text x="54" y="24" text-anchor="middle" class="fig-label fig-strong">+15.4%</text>
+						<text x="122" y="78" text-anchor="middle" class="fig-label fig-strong">≈ 0</text>
+						<text x="54" y="100" text-anchor="middle" class="fig-label">HEP</text>
+						<text x="122" y="100" text-anchor="middle" class="fig-label">26 fields</text>
+					</svg>
+				<span><span class="f-title">Benchmarks flatter where they are measured</span><span class="f-text">SPECTER beat TF-IDF at citation prediction in high-energy physics by 15.4%. Across 26 fields and 361,800 papers the edge fell to no significant difference.</span><span class="tile-cta">Read the study →</span></span>
+			</a>
+			<a class="finding" href="/studies/qec-neural-decoder/">
+				<svg viewBox="0 0 170 110" role="img" aria-label="Decoder latency against logical error rate: exact matching at 1.77 microseconds and 0.014, the hybrid at 0.88 microseconds and 0.019, budget line at 1 microsecond">
+						<line class="fig-axis" x1="24" y1="90" x2="160" y2="90"/>
+						<line class="fig-axis" x1="24" y1="12" x2="24" y2="90"/>
+						<line class="fig-line-coral" x1="93" y1="12" x2="93" y2="90"/>
+						<text x="96" y="20" class="fig-label">1 µs budget</text>
+						<circle cx="146" cy="64" r="5" class="fig-coral"/>
+						<text x="146" y="54" text-anchor="end" class="fig-label">matching</text>
+						<circle cx="85" cy="44" r="5" class="fig-teal"/>
+						<text x="80" y="36" text-anchor="end" class="fig-label fig-strong">hybrid</text>
+						<text x="92" y="104" text-anchor="middle" class="fig-label">latency</text>
+						<text x="10" y="54" transform="rotate(-90 10 54)" text-anchor="middle" class="fig-label">error</text>
+					</svg>
+				<span><span class="f-title">Deferral wins under a time budget</span><span class="f-text">A confidence-gated hybrid decoded 79% of syndromes with a small network and sent the rest to exact matching: 0.88 µs against 1.77 µs, inside the 1 µs budget.</span><span class="tile-cta">Read the study →</span></span>
+			</a>
+			<a class="finding" href="/studies/funding-landscape/">
+				<svg viewBox="0 0 170 110" role="img" aria-label="Lorenz curve with a Gini coefficient of 0.932: a few institutions hold most grants">
+						<line class="fig-axis" x1="20" y1="90" x2="150" y2="90"/>
+						<line class="fig-axis" x1="150" y1="14" x2="150" y2="90"/>
+						<line class="fig-line-coral" x1="20" y1="90" x2="150" y2="14"/>
+						<polyline class="fig-line-teal" points="20.0,90.0 23.2,90.0 26.5,90.0 29.8,90.0 33.0,90.0 36.2,90.0 39.5,90.0 42.8,90.0 46.0,90.0 49.2,90.0 52.5,90.0 55.8,90.0 59.0,90.0 62.2,90.0 65.5,90.0 68.8,90.0 72.0,90.0 75.2,90.0 78.5,90.0 81.8,90.0 85.0,90.0 88.2,90.0 91.5,90.0 94.8,90.0 98.0,90.0 101.2,90.0 104.5,90.0 107.8,90.0 111.0,90.0 114.2,90.0 117.5,90.0 120.8,89.9 124.0,89.9 127.2,89.7 130.5,89.2 133.8,88.3 137.0,86.2 140.2,81.7 143.5,72.3 146.8,53.0 150.0,14.0"/>
+						<text x="30" y="30" class="fig-label fig-strong">Gini 0.932</text>
+						<text x="85" y="104" text-anchor="middle" class="fig-label">institutions, ranked</text>
+					</svg>
+				<span><span class="f-title">Access to the frontier is concentrated</span><span class="f-text">Grants across 5,049 research institutions have a Gini coefficient of 0.932. Who reaches the frontier is a design question as much as a talent question.</span><span class="tile-cta">Read the study →</span></span>
+			</a>
 		</div>
 
-		<!-- Curated homepage: highest-signal items only, full list at /studies/ and /work/ -->
-		<h2 class="section-header">Featured</h2>
-		<div class="work-grid">
-			<a href="/studies/knowledge-access-gradient/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">Knowledge-Access Gradient</div></div>
-				<div class="tile-body"><span class="tile-name">The Knowledge-Access Gradient</span><span class="tile-benefit">Every prior technology widened access to consume knowledge. None widened access to produce it &mdash; 78K observations, 219 countries</span><span class="tile-cta">Read the working paper →</span></div>
+		<h2 class="section-header">Built</h2>
+		<div class="work-grid built">
+			<a href="https://www.bucket.foundation/research-os" class="tile" target="_blank" rel="noopener">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/bucket.png" alt="Bucket Foundation" loading="lazy" width="800" height="420"></div>
+				<div class="tile-body"><span class="tile-name">Research OS</span><span class="tile-benefit">A knowledge graph that routes learners from questions to research-level work</span><span class="tile-cta">Open it →</span></div>
+			</a>
+			<a href="https://kala.fish" class="tile" target="_blank" rel="noopener">
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/kala.jpg" alt="Kala mark over a verified rainbow trout catch" loading="lazy" width="800" height="500"></div>
+				<div class="tile-body"><span class="tile-name">Kala, verified fishing</span><span class="tile-benefit">Scripted mobile captures become signed, verifiable data sessions</span><span class="tile-cta">See Kala →</span></div>
 			</a>
 			<a href="/studies/research-atlas/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">Research Atlas</div></div>
-				<div class="tile-body"><span class="tile-name">Research Atlas</span><span class="tile-benefit">A 12.2M-row, provenance-tracked graph of the global research-funding economy, open and reproducible</span><span class="tile-cta">See the infrastructure →</span></div>
+				<div class="thumb-wrap"><svg class="thumb-fig" viewBox="0 0 160 100" role="img" aria-label="Research Atlas: grants linked to people and institutions">
+					<g class="fig-net"><line x1="30" y1="30" x2="80" y2="50"/><line x1="80" y1="50" x2="130" y2="28"/><line x1="80" y1="50" x2="118" y2="80"/><line x1="30" y1="30" x2="44" y2="78"/><line x1="44" y1="78" x2="80" y2="50"/><line x1="130" y1="28" x2="118" y2="80"/></g>
+					<circle cx="80" cy="50" r="9" class="fig-teal"/><circle cx="30" cy="30" r="5" class="fig-coral"/><circle cx="130" cy="28" r="6" class="fig-teal"/><circle cx="118" cy="80" r="4" class="fig-coral"/><circle cx="44" cy="78" r="4" class="fig-teal"/>
+				</svg></div>
+				<div class="tile-body"><span class="tile-name">Research Atlas</span><span class="tile-benefit">1.67M grants, 1.44M people, $1.04T in normalized funding, with four studies</span><span class="tile-cta">See the atlas →</span></div>
 			</a>
-			<a href="/studies/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">R1 to R4</div></div>
-				<div class="tile-body"><span class="tile-name">Research Directions</span><span class="tile-benefit">Human-centered AI for learning and scientific discovery, AI systems for research knowledge, ML for scientific discovery, and learning methods for quantum computing</span><span class="tile-cta">Read the questions →</span></div>
-			</a>
-			<a href="/research/" class="tile">
-				<div class="thumb-wrap"><div class="thumb-fallback">Open ML Tools</div></div>
-				<div class="tile-body"><span class="tile-name">Open ML Tools for Labs</span><span class="tile-benefit">Seven open-source tools that put modern ML behind a usable interface: protein stability, MD kinetics, ADMET, cryo-EM and ephys QC, and grounded literature search. Benchmarked, CPU-only</span><span class="tile-cta">Run one in the browser →</span></div>
-			</a>
-			<a href="https://nucleusbrain.com" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><div class="thumb-fallback">Nucleus</div></div>
-				<div class="tile-body"><span class="tile-name">Nucleus Brain</span><span class="tile-benefit">AI orchestration and research-workflow capability, human-in-the-loop evaluation and governance</span><span class="tile-cta">See the platform →</span></div>
-			</a>
-			<a href="https://derby.fish" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">DerbyFish</span><span class="tile-benefit">Full-time production engineering &middot; real-time catch verification for competitive fishing</span><span class="tile-cta">Join a derby →</span></div>
-			</a>
-			<a href="/book/" class="tile">
-				<div class="thumb-wrap"><img class="thumb" src="/public/cover/front-hd.png" alt="Your Money Is Broken" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">Your Money Is Broken</span><span class="tile-benefit">Published nonfiction &middot; AI-assisted long-form research and writing on stablecoins</span><span class="tile-cta">Read more →</span></div>
+			<a href="/studies/qec-neural-decoder/" class="tile">
+				<div class="thumb-wrap"><svg class="thumb-fig" viewBox="0 0 160 100" role="img" aria-label="Surface-code lattice with data and check qubits">
+					<g class="fig-grid"><line x1="30" y1="15" x2="30" y2="85"/><line x1="55" y1="15" x2="55" y2="85"/><line x1="80" y1="15" x2="80" y2="85"/><line x1="105" y1="15" x2="105" y2="85"/><line x1="130" y1="15" x2="130" y2="85"/><line x1="30" y1="15.0" x2="130" y2="15.0"/><line x1="30" y1="32.5" x2="130" y2="32.5"/><line x1="30" y1="50.0" x2="130" y2="50.0"/><line x1="30" y1="67.5" x2="130" y2="67.5"/><line x1="30" y1="85.0" x2="130" y2="85.0"/></g>
+					<circle cx="30" cy="15.0" r="3.5" class="fig-teal"/><circle cx="30" cy="32.5" r="3.5" class="fig-coral"/><circle cx="30" cy="50.0" r="3.5" class="fig-teal"/><circle cx="30" cy="67.5" r="3.5" class="fig-coral"/><circle cx="30" cy="85.0" r="3.5" class="fig-teal"/><circle cx="55" cy="15.0" r="3.5" class="fig-coral"/><circle cx="55" cy="32.5" r="3.5" class="fig-teal"/><circle cx="55" cy="50.0" r="3.5" class="fig-coral"/><circle cx="55" cy="67.5" r="3.5" class="fig-teal"/><circle cx="55" cy="85.0" r="3.5" class="fig-coral"/><circle cx="80" cy="15.0" r="3.5" class="fig-teal"/><circle cx="80" cy="32.5" r="3.5" class="fig-coral"/><circle cx="80" cy="50.0" r="3.5" class="fig-teal"/><circle cx="80" cy="67.5" r="3.5" class="fig-coral"/><circle cx="80" cy="85.0" r="3.5" class="fig-teal"/><circle cx="105" cy="15.0" r="3.5" class="fig-coral"/><circle cx="105" cy="32.5" r="3.5" class="fig-teal"/><circle cx="105" cy="50.0" r="3.5" class="fig-coral"/><circle cx="105" cy="67.5" r="3.5" class="fig-teal"/><circle cx="105" cy="85.0" r="3.5" class="fig-coral"/><circle cx="130" cy="15.0" r="3.5" class="fig-teal"/><circle cx="130" cy="32.5" r="3.5" class="fig-coral"/><circle cx="130" cy="50.0" r="3.5" class="fig-teal"/><circle cx="130" cy="67.5" r="3.5" class="fig-coral"/><circle cx="130" cy="85.0" r="3.5" class="fig-teal"/>
+				</svg></div>
+				<div class="tile-body"><span class="tile-name">QEC decoder</span><span class="tile-benefit">Neural and exact decoders for quantum error correction, hardened across seeds</span><span class="tile-cta">Read the study →</span></div>
 			</a>
 		</div>
 
-
-		<!-- Projects: chips -->
-		<h2 class="section-header">Also Building</h2>
-		<div class="chip-row">
-			<a href="https://bucket.foundation" class="chip" target="_blank" rel="noopener"><span class="dot"></span>Bucket Foundation</a>
-			<a href="https://agfarms.dev" class="chip" target="_blank" rel="noopener"><span class="dot"></span>AGFarms Developers</a>
-			<a href="https://openscriva.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>OpenScriva</a>
-			<a href="https://gauss.news" class="chip" target="_blank" rel="noopener"><span class="dot"></span>gauss.news</a>
-			<a href="https://promptmaxxers.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>PromptMaxxers</a>
-			<a href="https://github.com/gianyrox/feed402" class="chip" target="_blank" rel="noopener"><span class="dot"></span>feed402</a>
-		</div>
-		<p style="text-align:center;margin:6px 0 0;"><a href="/work/" style="color:var(--teal);font-size:13px;font-weight:600;text-decoration:none;">See all engineering &amp; research-systems work &rarr;</a></p>
-
-		<!-- Books Section -->
-		<h2 class="section-header">Books</h2>
+		<h2 class="section-header">Writing</h2>
 		<div class="book-card" itemscope itemtype="https://schema.org/Book">
 			<a href="book/your-money-is-broken/"><img class="book-cover" src="public/cover/front-hd.png" alt="Your Money Is Broken, cover by Giany Rox" loading="lazy" itemprop="image"></a>
 			<div class="book-body">
 				<div class="book-title" itemprop="name">Your Money Is Broken</div>
 				<div class="book-subtitle">How Stablecoins, the Digital Dollar, and Cross-Border Payments Are Replacing Slow Money, by <span itemprop="author">Giany Rox</span></div>
-				<div class="book-blurb" itemprop="description">
-					Pablo in Bogotá sends his mother medicine money in ninety seconds for under two dollars. Mercy in Harare
-					protects a women's savings club from fifty-six percent inflation in a digital dollar. Femi in Lagos closes
-					a hundred-thousand-dollar supplier deal from the back of a parked car. None of them care about price charts.
-					They are using stablecoins because the alternatives have already failed them. <em>A case-based synthesis
-					of documented real-world stablecoin use.</em>
+				<div class="book-blurb" itemprop="description">Pablo in Bogotá sends his mother medicine money in ninety seconds for under two dollars.
 				</div>
 				<div class="book-actions">
 					<a class="btn primary" href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener" data-cta="amazon">📕 Paperback on Amazon ($13.99)</a>
@@ -807,46 +867,19 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- Shop Section (single unified destination) -->
-		<h2 class="section-header">Shop</h2>
-		<a href="/shop/" class="shop-link">
-			Shop everything
-			<span class="sub">Books, posters, printables, World Cup 2026 collection. All in one place.</span>
-		</a>
-		<a href="/shop/wc2026/" class="shop-link">
-			World Cup 2026 Collection
-			<span class="sub">Brackets, fan journals, watch party kits, host city prints. June 11, July 19.</span>
-		</a>
-		<div class="note" style="margin-top: 6px; padding: 0 10px; text-align: center;">
-			Also available on
-			<a href="https://www.etsy.com/shop/agfarms" target="_blank" rel="noopener">Etsy</a> ·
-			<a href="https://agfarms.gumroad.com/" target="_blank" rel="noopener">Gumroad</a> ·
-			<a href="https://www.amazon.com/dp/B0H1T2DDG3" target="_blank" rel="noopener">Amazon</a>
-		</div>
-
-		<!-- Work With Me (compact) -->
-		<h2 class="section-header">Work With Me</h2>
-		<p class="tagline" style="margin-top:0;">Available now, remote contracts, 1:1 tutoring, and AI consulting.</p>
-		<div class="chip-row" style="margin-bottom:6px;">
-			<a href="mailto:gianyrox@gmail.com?subject=1:1%20Tutoring" class="chip"><span class="dot"></span>Tutoring</a>
-			<a href="mailto:gianyrox@gmail.com?subject=AI%20%2F%20Dev%20Contract" class="chip"><span class="dot"></span>AI &amp; Dev</a>
-			<a href="mailto:gianyrox@gmail.com?subject=AI%20Consulting" class="chip"><span class="dot"></span>Consulting</a>
-			<a href="https://promptmaxxers.com" class="chip" target="_blank" rel="noopener"><span class="dot"></span>PromptMaxxers</a>
-		</div>
-		<div style="text-align:center;">
-			<a class="btn primary" href="mailto:gianyrox@gmail.com?subject=Let%27s%20work%20together" data-cta="hire">✉ Get in touch</a>
-		</div>
-
-		<!-- Writing (compact) -->
-		<h2 class="section-header">Writing</h2>
-		<nav class="writing-list" aria-label="Highlighted articles">
-			<a href="/writing/">Books, essays &amp; science communication &rarr;</a>
-			<a href="https://medium.com/@gianyrox/how-chatgpt-will-ruin-the-world-57ea88b203fe" target="_blank" rel="noopener">How ChatGPT Will Ruin the World</a>
+		<nav class="writing-list" aria-label="Highlighted writing">
+			<a href="/writing/">Books, essays and science communication →</a>
+			<a href="/writing/quantum-atlas/">The Quantum Atlas</a>
+			<a href="/writing/longevity-manual/">Longevity and Fitness Manual</a>
 			<a href="https://medium.com/@gianyrox/math-the-path-to-polymath-7fcabe9d81f9" target="_blank" rel="noopener">Math: The Path to Polymath</a>
-			<a href="/studies/obesity-analysis/">US States Obesity Analysis</a>
 		</nav>
+
+		<footer class="site-foot">
+			<p><a href="mailto:gianyrox@gmail.com?subject=Research">gianyrox@gmail.com</a> · <a href="https://github.com/gianyrox" target="_blank" rel="noopener">GitHub</a> · <a href="/about/">About</a></p>
+			<p>Also available for 1:1 math tutoring and AI contracts: <a href="mailto:gianyrox@gmail.com?subject=1:1%20Tutoring">tutoring</a>, <a href="mailto:gianyrox@gmail.com?subject=AI%20%2F%20Dev%20Contract">AI and dev</a>. <a href="/shop/">Shop</a>: books, posters and printables.</p>
+		</footer>
 	</div>
+	<script type="module" src="/public/js/helix.js"></script>
 </body>
 
 </html>

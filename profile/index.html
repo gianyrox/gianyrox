@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bucket Profile, Gianangelo Dichio</title>
+	<meta name="description" content="Gianangelo Dichio's Bucket profile card: canon branch weights from 147 public sources and signed, timestamped identity checks.">
+	<link rel="canonical" href="https://www.gianyrox.com/profile/">
+	<link rel="icon" type="image/x-icon" href="/public/brand/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/public/brand/apple-touch-icon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+	<link rel="stylesheet" href="/public/css/site.css">
+	<meta name="theme-color" content="#264653">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Bucket Profile, Gianangelo Dichio">
+	<meta property="og:description" content="Gianangelo Dichio's Bucket profile card: canon branch weights from 147 public sources and signed, timestamped identity checks.">
+	<meta property="og:url" content="https://www.gianyrox.com/profile/">
+	<meta property="og:image" content="https://www.gianyrox.com/public/brand/og-image.png">
+	<meta name="twitter:card" content="summary_large_image">
+	
+</head>
+<body>
+	<div class="container">
+	<nav class="site-nav" aria-label="Primary">
+		<a href="/" >Home</a>
+		<a href="/studies/" >Research</a>
+		<a href="/work/" >Work</a>
+		<a href="/writing/" >Writing</a>
+		<a href="/profile/" aria-current="page">Profile</a>
+		<a href="/about/" >About</a>
+	</nav><h1 class="title" style="font-size:clamp(28px,6vw,40px);">Bucket Profile</h1>
+	<p class="tagline">Card id bkt:58d3033e855efa7f18ce11b5, issued 2026-09-28</p>
+	<p style="text-align:center;max-width:620px;">The Bucket Foundation profile builder made this card from 147 public sources: GitHub, bucket.foundation, gianyrox.com and project documentation. Branch weights measure what my work writes about; the mastery sphere fills in after Research OS assessments.</p>
+	<img src="/public/profile/profile-card.png" alt="Bucket profile card for Gianangelo Dichio: a radar of canon branch weights, information 23 percent, physics 19, mind 17, biophysics 17, cosmology 7, mathematics 6, earth 5, chemistry 5, and a list of verified identity checks" style="width:100%;max-width:960px;display:block;margin:24px auto;border-radius:8px;">
+	<h2 class="section-header">Verify It</h2>
+	<p style="text-align:center;max-width:620px;">The checks file holds results and a hash of the profile data, never the data itself. It carries an ed25519 signature and a Bitcoin timestamp through OpenTimestamps.</p>
+	<div style="text-align:center;"><a class="btn" href="/public/profile/verified-checks.json">Checks</a> <a class="btn" href="/public/profile/verified-checks.json.sig">Signature</a> <a class="btn" href="/public/profile/verified-checks.json.sig.ots">Timestamp</a> <a class="btn" href="/public/profile/allowed_signers">Signer key</a></div>
+	<pre style="max-width:620px;margin:16px auto;white-space:pre-wrap;font-size:13px;">ssh-keygen -Y verify -f allowed_signers -I gianyrox@gmail.com \
+  -n bucket-profile-card -s verified-checks.json.sig &lt; verified-checks.json
+ots verify verified-checks.json.sig.ots</pre>
+	</div>
+</body>
+</html>

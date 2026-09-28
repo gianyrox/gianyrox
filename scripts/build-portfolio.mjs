@@ -21,6 +21,7 @@ const NAV = (current) => `
 		<a href="/studies/" ${current === "studies" ? 'aria-current="page"' : ""}>Research</a>
 		<a href="/work/" ${current === "work" ? 'aria-current="page"' : ""}>Work</a>
 		<a href="/writing/" ${current === "writing" ? 'aria-current="page"' : ""}>Writing</a>
+		<a href="/profile/" ${current === "profile" ? 'aria-current="page"' : ""}>Profile</a>
 		<a href="/about/" ${current === "about" ? 'aria-current="page"' : ""}>About</a>
 	</nav>`;
 
@@ -88,21 +89,28 @@ function linkButtons(links = {}, accessNote) {
 	return out;
 }
 
+function firstSentence(text, max = 110) {
+	const t = String(text || "").trim();
+	const m = t.match(/^[^.?!:]*[.?!]/);
+	let out = m ? m[0] : t;
+	if (out.length > max) out = out.slice(0, out.lastIndexOf(" ", max)) + "…";
+	return out;
+}
+
 function researchDirections() {
 	const items = data.researchInterests || [];
 	if (!items.length) return "";
 	let out = `<h2 class="section-header">Research Directions</h2>`;
-	out += `<p class="tagline" style="margin-top:0;">${esc(data.researchStatement || "")}</p>`;
+	out += `<p class="tagline" style="margin-top:0;">${esc(firstSentence(data.researchStatement, 200))}</p>`;
 	out += `<div class="rdir-list">`;
 	for (const r of items) {
 		out += `<div class="rdir${r.lead ? " lead" : ""}">
 			<span class="rdir-code">${esc(r.code)}</span>
 			<span class="rdir-title">${esc(r.title)}</span>
-			<p class="rdir-body">${esc(r.body)}</p>
+			<p class="rdir-body">${esc(firstSentence(r.body, 120))}</p>
 		</div>`;
 	}
 	out += `</div>`;
-	out += `<p class="disclosure">${esc(data.researchInterestsNote || "")}</p>`;
 	return out;
 }
 
@@ -188,10 +196,9 @@ function indexPage({ sectionSlug, navKey, title, description, items, intro }) {
 	body += `<h1 class="title" style="font-size:clamp(28px,6vw,40px);">${esc(title)}</h1>`;
 	body += `<p class="tagline">${esc(intro)}</p>`;
 	if (sectionSlug === "studies") {
-		body += `<div class="link-row"><a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS for K‑12</a><a href="/research/">Open ML tools for labs, seven benchmarked and open-source</a><a href="/public/Master_Portfolio_2026.pdf">Master portfolio (PDF)</a></div>`;
+		body += `<div class="link-row"><a href="https://www.bucket.foundation/research-os" target="_blank" rel="noopener">Research OS for K‑12</a><a href="/research/">Open ML tools for labs</a><a href="/public/Master_Portfolio_2026.pdf">Master portfolio (PDF)</a></div>`;
 		body += researchDirections();
 		body += `<h2 class="section-header">Portfolio</h2>`;
-		body += `<p class="disclosure">${esc(data.aiDisclosure)}</p>`;
 	}
 
 	body += `<div class="filter-row" role="group" aria-label="Filter by type">
@@ -203,7 +210,7 @@ function indexPage({ sectionSlug, navKey, title, description, items, intro }) {
 	for (const item of items) {
 		body += `<a class="pcard" href="/${sectionSlug}/${item.slug}/" data-type="${esc(item.type)}">
 			<div class="pcard-top"><span class="pcard-title">${esc(item.title)}</span>${badge(item.type, isAI(item.type))}</div>
-			<div class="pcard-scope">${esc(item.question || item.description || item.method || "")}</div>
+			<div class="pcard-scope">${esc(firstSentence(item.question || item.description || item.method || ""))}</div>
 			<div class="pcard-meta">${esc(item.scale || item.date || "")}</div>
 		</a>`;
 	}
@@ -244,8 +251,7 @@ function writingPage() {
 		body += `<div class="book-card">
 			<div class="book-body">
 				<div class="book-title">${esc(w.title)} <span class="badge">${esc(w.type)}</span></div>
-				<div class="book-blurb">${esc(w.description)}</div>
-				<p class="disclosure">${esc(w.aiContribution)} ${esc(w.verification)}</p>
+				<div class="book-blurb">${esc(firstSentence(w.description, 160))}</div>
 				<div class="book-actions"><a class="btn primary" href="${w.links.paper}">Read more</a></div>
 			</div>
 		</div>`;
@@ -256,7 +262,7 @@ function writingPage() {
 	for (const m of allManuals) {
 		body += `<a class="pcard" href="/writing/${m.slug}/">
 			<div class="pcard-top"><span class="pcard-title">${esc(m.title)}</span>${badge(m.type, false)}</div>
-			<div class="pcard-scope">${esc(m.question || "")}</div>
+			<div class="pcard-scope">${esc(firstSentence(m.question || ""))}</div>
 			<div class="pcard-meta">${esc(m.scale || "")}</div>
 		</a>`;
 	}
@@ -268,7 +274,6 @@ function writingPage() {
 		body += `<a href="${e.url}" target="_blank" rel="noopener">${esc(e.title)}</a>`;
 	}
 	body += `</nav>`;
-	body += `<p class="disclosure">${esc(data.essaysNote)}</p>`;
 	body += FOOT;
 	writeFile("writing/index.html", body);
 }
@@ -282,27 +287,47 @@ function aboutPage() {
 	});
 	body += NAV("about");
 	body += `<h1 class="title" style="font-size:clamp(28px,6vw,40px);">About</h1>`;
-	body += `<p class="tagline">${esc(data.heroCopy)}</p>`;
+	body += `<p class="tagline">${esc(firstSentence(data.heroCopy, 160))}</p>`;
 
 	body += `<h2 class="section-header">Research Focus</h2>
-	<p style="text-align:center;max-width:560px;">${esc(data.researchStatement || "")}</p>
+	<p style="text-align:center;max-width:560px;">${esc(firstSentence(data.researchStatement, 200))}</p>
 	<div style="text-align:center;"><a class="btn" href="/studies/">See the research directions</a></div>`;
 
 	body += `<h2 class="section-header">Education</h2>
-	<p style="text-align:center;max-width:560px;">M.S. Data Science and B.S. Pure and Applied Mathematics, Stevens Institute of Technology, completed in four years. Quantum Computing, WorldStrides Summer Institute, Oriel College, University of Oxford (non-degree, Summer 2023), with Dr. Kobi Kremnitzer. Quantum Optics Lab, Professor Xiaofeng Qian's group, Stevens, approximately one academic year: mathematical work, literature and paper analysis, and analysis of experimental results and data.</p>`;
+	<p style="text-align:center;max-width:560px;">M.S. Data Science and B.S. Pure and Applied Mathematics, Stevens Institute of Technology, in four years. Quantum Computing, University of Oxford, Summer 2023. Quantum Optics Lab, Professor Xiaofeng Qian, Stevens.</p>`;
 
 	body += `<h2 class="section-header">Academic Appointment</h2>
-	<p style="text-align:center;max-width:560px;">Adjunct Professor of Mathematics, County College of Morris, appointed for Fall 2026. Scheduled to teach MAT 124 Statistics (3 credits) and MAT 130 Probability and Statistics in both 3-credit and 4-credit formats, with a coding component in the 4-credit section.</p>`;
+	<p style="text-align:center;max-width:560px;">Adjunct Professor of Mathematics, County College of Morris, Fall 2026: Statistics and Probability and Statistics.</p>`;
 
 	body += `<h2 class="section-header">Citizenship and Languages</h2>
 	<p style="text-align:center;">Citizenship: Italy (EU), United States. Languages: English (native), Italian (fluent), Spanish (functional).</p>`;
 
 	body += `<h2 class="section-header">Full Portfolio</h2>
-	<p style="text-align:center;max-width:560px;">Full employment history, complete coursework, teaching record, and awards are in the downloadable master portfolio.</p>
 	<div style="text-align:center;"><a class="btn primary" href="/public/Master_Portfolio_2026.pdf" target="_blank" rel="noopener">Download master portfolio (PDF)</a></div>`;
 
 	body += FOOT;
 	writeFile("about/index.html", body);
+}
+
+function profilePage() {
+	let body = HEAD({
+		title: "Bucket Profile, Gianangelo Dichio",
+		description: "Gianangelo Dichio's Bucket profile card: canon branch weights from 147 public sources and signed, timestamped identity checks.",
+		canonical: `${SITE}/profile/`,
+	});
+	body += NAV("profile");
+	body += `<h1 class="title" style="font-size:clamp(28px,6vw,40px);">Bucket Profile</h1>
+	<p class="tagline">Card id bkt:58d3033e855efa7f18ce11b5, issued 2026-09-28</p>
+	<p style="text-align:center;max-width:620px;">The Bucket Foundation profile builder made this card from 147 public sources: GitHub, bucket.foundation, gianyrox.com and project documentation. Branch weights measure what my work writes about; the mastery sphere fills in after Research OS assessments.</p>
+	<img src="/public/profile/profile-card.png" alt="Bucket profile card for Gianangelo Dichio: a radar of canon branch weights, information 23 percent, physics 19, mind 17, biophysics 17, cosmology 7, mathematics 6, earth 5, chemistry 5, and a list of verified identity checks" style="width:100%;max-width:960px;display:block;margin:24px auto;border-radius:8px;">
+	<h2 class="section-header">Verify It</h2>
+	<p style="text-align:center;max-width:620px;">The checks file holds results and a hash of the profile data, never the data itself. It carries an ed25519 signature and a Bitcoin timestamp through OpenTimestamps.</p>
+	<div style="text-align:center;"><a class="btn" href="/public/profile/verified-checks.json">Checks</a> <a class="btn" href="/public/profile/verified-checks.json.sig">Signature</a> <a class="btn" href="/public/profile/verified-checks.json.sig.ots">Timestamp</a> <a class="btn" href="/public/profile/allowed_signers">Signer key</a></div>
+	<pre style="max-width:620px;margin:16px auto;white-space:pre-wrap;font-size:13px;">ssh-keygen -Y verify -f allowed_signers -I gianyrox@gmail.com \\
+  -n bucket-profile-card -s verified-checks.json.sig &lt; verified-checks.json
+ots verify verified-checks.json.sig.ots</pre>`;
+	body += FOOT;
+	writeFile("profile/index.html", body);
 }
 
 // ---- build ----
@@ -330,5 +355,6 @@ indexPage({
 
 writingPage();
 aboutPage();
+profilePage();
 
 console.log("Portfolio build complete.");
