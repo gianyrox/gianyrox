@@ -696,7 +696,8 @@
 		.helix-line { fill: none; stroke-width: 1.8; opacity: 0.72; stroke-linecap: round; transition: opacity 0.2s var(--ease), stroke-width 0.2s var(--ease); }
 		.helix-hit { fill: none; stroke: transparent; stroke-width: 16; }
 		.helix-coil { cursor: pointer; outline: none; }
-		.helix-svg.has-selection .helix-coil:not(.is-on) .helix-line { opacity: 0.2; }
+		.helix-svg.has-selection .helix-coil:not(.is-on) .helix-line, .helix-svg.is-resting:not(.has-selection) .helix-coil:not(.is-active) .helix-line { opacity: 0.18; }
+		.helix-svg.is-resting .helix-coil.is-active .helix-line { opacity: 1; stroke-width: 3.2; }
 		.helix-coil.is-on .helix-line, .helix-coil:focus-visible .helix-line, .helix-coil:hover .helix-line { stroke-width: 3.6; opacity: 1; }
 		.helix-caption { font-size: 13.5px; color: var(--muted); text-align: center; margin: 6px auto 0; max-width: 560px; min-height: 42px; }
 		.helix:not(.is-live) .helix-caption::before { content: ""; }
@@ -757,7 +758,7 @@
 		</nav>
 
 		<p class="name-line">Gianangelo Dichio · @gianyrox</p>
-		<h1 class="identity">I build AI systems for scientific discovery and study how their design changes both scientific performance and the capabilities of the humans who work with them.</h1>
+		<h1 class="identity">How AI systems for scientific discovery change the people who work with them.</h1>
 
 		<figure class="helix" data-helix="/public/data/work-primes.json">
 			<div class="helix-fallback" data-helix-fallback><img src="/public/work/work-helix.png" alt="All my work on a helix: eight work primes month by month along an arrow of time" width="1280" height="560" loading="eager"></div>
@@ -829,8 +830,8 @@
 				<div class="tile-body"><span class="tile-name">Research OS</span><span class="tile-benefit">A knowledge graph that routes learners from questions to research-level work</span><span class="tile-cta">Open it →</span></div>
 			</a>
 			<a href="https://kala.fish" class="tile" target="_blank" rel="noopener">
-				<div class="thumb-wrap"><img class="thumb" src="/public/work/derbyfish.png" alt="DerbyFish, the platform behind Kala verified fishing" loading="lazy" width="800" height="420"></div>
-				<div class="tile-body"><span class="tile-name">Kala verified fishing, DerbyFish</span><span class="tile-benefit">Scripted mobile captures become signed, verifiable data sessions</span><span class="tile-cta">See Kala →</span></div>
+				<div class="thumb-wrap"><img class="thumb" src="/public/work/kala.jpg" alt="Kala mark over a verified rainbow trout catch" loading="lazy" width="800" height="500"></div>
+				<div class="tile-body"><span class="tile-name">Kala, verified fishing</span><span class="tile-benefit">Scripted mobile captures become signed, verifiable data sessions</span><span class="tile-cta">See Kala →</span></div>
 			</a>
 			<a href="/studies/research-atlas/" class="tile">
 				<div class="thumb-wrap"><svg class="thumb-fig" viewBox="0 0 160 100" role="img" aria-label="Research Atlas: grants linked to people and institutions">
