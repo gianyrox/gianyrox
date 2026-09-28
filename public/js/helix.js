@@ -109,8 +109,14 @@ export function mountHelix(figure, data) {
 	function select(j) {
 		current = j;
 		coilNodes.forEach((c, i) => c.group.classList.toggle("is-on", i === j));
+		if (j >= 0) coilNodes.forEach((c) => c.group.classList.remove("is-active"));
 		svg.classList.toggle("has-selection", j >= 0);
 		if (!caption) return;
+		if (j < 0 && svg.classList.contains("is-resting")) {
+			coilNodes[strongest].group.classList.add("is-active");
+			caption.textContent = `Prime ${strongest + 1}, ${names[strongest]}, carries the most variance. Choose any coil.`;
+			return;
+		}
 		if (j < 0) {
 			caption.textContent = `${names.length} orthogonal work primes from ${Object.values(data.counts).reduce((a, b) => a + b, 0).toLocaleString("en-US")} commits, beads, pull requests and notes. Choose a coil.`;
 			return;
@@ -133,9 +139,18 @@ export function mountHelix(figure, data) {
 	figure.classList.add("is-live");
 	select(-1);
 
+	const strongest = data.variance.reduce((best, v, j) => (v > data.variance[best] ? j : best), 0);
+	function rest() {
+		coilNodes[strongest].group.classList.add("is-active");
+		svg.classList.add("is-resting");
+		if (current < 0 && caption) {
+			caption.textContent = `Prime ${strongest + 1}, ${names[strongest]}, carries the most variance. Choose any coil.`;
+		}
+	}
 	const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	if (still) {
 		draw(g.n - 1);
+		rest();
 		return;
 	}
 	const duration = 2600;
@@ -146,6 +161,7 @@ export function mountHelix(figure, data) {
 		const eased = 1 - Math.pow(1 - f, 3);
 		draw(eased * (g.n - 1));
 		if (f < 1) requestAnimationFrame(frame);
+		else rest();
 	}
 	draw(0);
 	requestAnimationFrame(frame);
