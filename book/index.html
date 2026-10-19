@@ -123,7 +123,43 @@ mark.hl:hover{background:rgba(184,134,11,.3)}
   h2,h3{page-break-after:avoid}
   p,blockquote,ul,ol{orphans:3;widows:3}
   img{max-width:100%}
+  .eoc-cta,.endblock,.sb-cta{display:none!important}
 }
+
+/* --- funnel CTAs (bead agf-ogj8) --- */
+.eoc-cta{font-family:'Source Sans 3',sans-serif;font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:2.5rem;padding-top:1.3rem;border-top:1px dashed var(--border)}
+.eoc-cta a{color:var(--link);font-weight:600;text-decoration:underline;text-decoration-color:rgba(139,105,20,.35);text-underline-offset:2px}
+.eoc-cta a:hover{text-decoration-color:var(--link)}
+
+.sb-cta{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.9rem;padding:.7rem .8rem;background:rgba(184,134,11,.06);border:1px solid var(--border);border-radius:6px}
+.sb-cta .sb-cta-l{font-family:'Source Sans 3',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sb-cta a{font-family:'Source Sans 3',sans-serif;font-size:.72rem;font-weight:600;color:var(--link);text-decoration:none}
+.sb-cta a:hover{text-decoration:underline}
+
+.endblock{max-width:var(--cw);margin:0 auto;padding-top:1rem}
+.eb-top{text-align:center;margin-bottom:2.4rem}
+.eb-kicker{font-family:'Source Sans 3',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+.eb-h{font-family:'Source Sans 3',sans-serif;font-size:1.8rem;font-weight:900;color:var(--heading);letter-spacing:-.02em;margin-bottom:.8rem;line-height:1.2}
+.eb-lead{color:var(--muted);font-size:1rem;line-height:1.7;max-width:34rem;margin:0 auto}
+.eb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.eb-card{background:var(--note-bg);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.2rem;display:flex;flex-direction:column}
+.eb-card h3{font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:800;color:var(--heading);margin-bottom:.5rem}
+.eb-card>p{font-size:.82rem;line-height:1.6;color:var(--muted);margin-bottom:.9rem}
+.eb-card .eb-sub{font-size:.72rem;margin-top:.6rem;margin-bottom:0}
+.eb-btn{display:block;font-family:'Source Sans 3',sans-serif;font-size:.78rem;font-weight:600;text-align:center;text-decoration:none;padding:.6rem .9rem;border-radius:999px;border:1px solid var(--accent);color:var(--accent);background:transparent;cursor:pointer;margin-bottom:.5rem;width:100%;transition:background .15s,color .15s}
+.eb-btn:hover{background:rgba(184,134,11,.08)}
+.eb-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.eb-btn.primary:hover{background:#9a7209}
+.eb-btn:last-child{margin-bottom:0}
+.eb-email{background:var(--sidebar);border:1px solid var(--border);border-radius:10px;padding:1.6rem 1.4rem;text-align:center}
+.eb-email h3{font-family:'Source Sans 3',sans-serif;font-size:1.1rem;font-weight:800;color:var(--heading);margin-bottom:.5rem}
+.eb-email>p{font-size:.85rem;line-height:1.6;color:var(--muted);max-width:32rem;margin:0 auto .9rem}
+.eb-email form{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;max-width:26rem;margin:0 auto}
+.eb-email input{flex:1;min-width:12rem;padding:.6rem .9rem;border:1px solid var(--border);border-radius:999px;font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+.eb-email button{padding:.6rem 1.3rem;border:none;border-radius:999px;background:var(--accent);color:#fff;font-family:'Source Sans 3',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+.eb-email button:hover{background:#9a7209}
+.eb-fine{font-size:.68rem!important;color:#aaa!important;margin:.8rem auto 0!important}
+@media(max-width:720px){.eb-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -167,6 +203,11 @@ mark.hl:hover{background:rgba(184,134,11,.3)}
     <li><a href="#appendices">Appendices</a></li>
   </ul>
   <div class="sb-f">
+    <div class="sb-cta">
+      <span class="sb-cta-l">Reading free</span>
+      <a href="https://www.amazon.com/dp/B0H1T2DDG3?ref=reader-sidebar" target="_blank" rel="noopener">Get the paperback →</a>
+      <a href="https://agfarms.gumroad.com/l/your-money-is-broken?ref=reader-sidebar" target="_blank" rel="noopener">Support on Gumroad →</a>
+    </div>
     <button class="bp" onclick="P()">
       <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Save as PDF
@@ -179,7 +220,44 @@ mark.hl:hover{background:rgba(184,134,11,.3)}
 <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
-<main class="mn" id="mn"><div class="ct" id="bc"></div></main>
+<main class="mn" id="mn"><div class="ct"><div id="bc"></div>
+<div class="endblock" id="endblock">
+  <div class="eb-top">
+    <div class="eb-kicker">The End</div>
+    <h2 class="eb-h">You read the whole thing.</h2>
+    <p class="eb-lead">This edition is free and stays free. If it was worth your time, here are three ways to carry it forward — pick whichever fits.</p>
+  </div>
+  <div class="eb-grid">
+    <div class="eb-card">
+      <h3>Keep it</h3>
+      <p>The paperback for the shelf — underline it, lend it, gift it. Gumroad sends you the DRM-free files direct.</p>
+      <a class="eb-btn primary" href="https://www.amazon.com/dp/B0H1T2DDG3?ref=reader-endblock" target="_blank" rel="noopener">Paperback — $13.99</a>
+      <a class="eb-btn" href="https://agfarms.gumroad.com/l/your-money-is-broken?ref=reader-endblock" target="_blank" rel="noopener">Gumroad — pay what you want</a>
+      <p class="eb-sub">Gumroad is pay-what-you-want. Paying something back keeps this free edition free.</p>
+    </div>
+    <div class="eb-card">
+      <h3>Leave an honest review</h3>
+      <p>The single most useful thing a finisher can do. A few lines on Amazon help the next reader find it.</p>
+      <a class="eb-btn primary" href="https://www.amazon.com/review/create-review?asin=B0H1T2DDG3&ref=reader-endblock" target="_blank" rel="noopener">Review on Amazon</a>
+    </div>
+    <div class="eb-card">
+      <h3>Pass it on</h3>
+      <p>Send it to the person who keeps asking "wait, but what IS this?"</p>
+      <a class="eb-btn" href="https://twitter.com/intent/tweet?text=Your%20Money%20Is%20Broken%20%E2%80%94%20a%20free%20field%20report%20from%20inside%20the%20digital%20dollar%20economy&url=https%3A%2F%2Fwww.gianyrox.com%2Fbook%2Fyour-money-is-broken%2F%3Fref%3Dreader-share" target="_blank" rel="noopener">Share on X</a>
+      <button class="eb-btn" type="button" onclick="copyBookLink()">Copy the link</button>
+    </div>
+  </div>
+  <div class="eb-email">
+    <h3>Stay in the loop</h3>
+    <p>Drop your email for the occasional dispatch from inside the digital dollar economy — the stories that didn't fit in the book, and where this is all going.</p>
+    <form action="https://gianyrox.substack.com/subscribe" method="get" target="_blank">
+      <input type="email" name="email" placeholder="you@email.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="eb-fine">Free to read here. No spam.</p>
+  </div>
+</div>
+</div></main>
 
 <div class="np" id="np">
   <div class="np-head">
@@ -212,9 +290,17 @@ document.querySelectorAll(".toc a").forEach(function(a){a.addEventListener("clic
 
 function R(){
   var c=document.getElementById("bc"),h="";
-  D.forEach(function(d){
+  D.forEach(function(d,i){
     var r=marked.parse(d.md,{breaks:false,gfm:true});
-    h+='<section class="ch" id="'+d.id+'"><div class="cl">'+d.label+'</div>'+r+'</section>';
+    var cta="";
+    if(i>0&&i<D.length-1){
+      if(i%2===1){
+        cta='<p class="eoc-cta">Reading free? The paperback is on Amazon if you want it on your shelf — <a href="https://www.amazon.com/dp/B0H1T2DDG3?ref=reader-eoc" target="_blank" rel="noopener">get the paperback</a>.</p>';
+      }else{
+        cta='<p class="eoc-cta">If this chapter was worth your time, <a href="https://www.amazon.com/review/create-review?asin=B0H1T2DDG3&ref=reader-eoc" target="_blank" rel="noopener">an honest Amazon review</a> helps more readers find it.</p>';
+      }
+    }
+    h+='<section class="ch" id="'+d.id+'"><div class="cl">'+d.label+'</div>'+r+cta+'</section>';
   });
   c.innerHTML=h;
   S();
@@ -513,6 +599,13 @@ function toast(msg){
 function P(){
   toast("In the print dialog, set Destination to 'Save as PDF'");
   setTimeout(function(){window.print()},400);
+}
+
+function copyBookLink(){
+  var url="https://www.gianyrox.com/book/?ref=reader-share";
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){toast("Link copied");}).catch(function(){toast(url);});
+  }else{toast(url);}
 }
 
 R();
