@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gianyrox</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" href="/public/brand/favicon-32.png">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <style>
@@ -25,6 +26,12 @@ h2{font-size:18px;color:#264653;margin:32px 0 8px}
 .item:hover b{color:#e76f51}
 .item span{display:block;color:#6c757d;font-size:14px;line-height:1.4;margin-top:3px}
 .list{width:100%}
+.socs{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:6px}
+.soc{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid #eee;border-radius:10px;text-decoration:none;transition:border-color .3s,transform .3s}
+.soc:hover{border-color:#2a9d8f;transform:translateY(-2px)}
+.soc svg{width:30px;height:30px;flex:none}
+.soc b{display:block;color:#264653;font-size:16px}
+.soc span{display:block;color:#2a9d8f;font-size:14px}
 .brands{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%}
 .brand{border-radius:12px;padding:22px;text-decoration:none;display:flex;flex-direction:column;gap:12px;min-height:200px;transition:transform .3s}
 .brand:hover{transform:translateY(-3px)}
@@ -59,15 +66,17 @@ h2{font-size:18px;color:#264653;margin:32px 0 8px}
 </div>
 
 <h2>Profiles</h2>
-<a href="https://github.com/gianyrox" class="link">GitHub - @gianyrox</a>
-<a href="https://x.com/gianyrox" class="link">X - @gianyrox</a>
-<a href="https://medium.com/@gianyrox" class="link">Medium - @gianyrox</a>
-<a href="https://linkedin.com/in/gianyrox" class="link">LinkedIn - @gianyrox</a>
-<a href="/profile/" class="link">Bucket Profile</a>
+<div class="socs">
+<a class="soc" href="https://github.com/gianyrox"><svg viewBox="0 0 24 24" fill="#181717"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><div><b>GitHub</b><span>@gianyrox</span></div></a>
+<a class="soc" href="https://x.com/gianyrox"><svg viewBox="0 0 24 24" fill="#000000"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><div><b>X</b><span>@gianyrox</span></div></a>
+<a class="soc" href="https://medium.com/@gianyrox"><svg viewBox="0 0 24 24" fill="#000000"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg><div><b>Medium</b><span>@gianyrox</span></div></a>
+<a class="soc" href="https://linkedin.com/in/gianyrox"><svg viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><div><b>LinkedIn</b><span>@gianyrox</span></div></a>
+</div>
+<div class="list"><a class="item" href="/profile/"><img class="contain" src="/public/profile/profile-card.png" alt=""><div><b>Bucket Profile</b><span>Card built from 147 public sources, with signed checks.</span></div></a></div>
 
 <h2>Companies</h2>
 <div class="brands">
-<a class="brand wide" href="https://bucket.foundation" style="background:#efe8d5;color:#24201b"><img src="/public/home/bucket-icon.svg" alt=""><div><b style="font-family:Georgia,serif;letter-spacing:.14em">BUCKET FOUNDATION</b><span>Nonprofit. Learn the foundations of science, from first lesson to the research frontier.</span></div></a>
+<a class="brand wide" href="https://bucket.foundation" style="background:#efe8d5;color:#24201b"><img src="/public/home/bucket-icon.svg" alt=""><div><b style="font-family:Cinzel,Georgia,serif;font-weight:700;letter-spacing:.06em;font-size:30px">BUCKET<span style="display:inline;color:#b8862b;font-size:inherit;opacity:1;margin:0">.</span>FOUNDATION</b><span>Nonprofit. Learn the foundations of science, from first lesson to the research frontier.</span></div></a>
 <a class="brand" href="https://apps.apple.com/us/app/verified-fishing-kala/id6738696393" style="background:#f8f0ed;color:#3d1a4f"><img src="/public/home/kala-icon.jpg" alt="" style="width:130px;border-radius:0"><div><b>Kala</b><span>Verified fishing. Every catch is checked.</span></div><video class="demo" src="/public/home/kala.mp4" poster="/public/home/kala.jpg" muted loop playsinline preload="none"></video></a>
 <a class="brand" href="https://polingual.com" style="background:#f6eedc;color:#5b1a4a"><img src="/public/home/polingual-mark.svg" alt=""><div><b>Polingual</b><span>One word, every language.</span></div><video class="demo" src="/public/home/polingual.mp4" poster="/public/home/polingual.jpg?v=2" muted loop playsinline preload="none"></video></a>
 <a class="brand" href="https://openscriva.com" style="background:#faf8f3;color:#2b2620"><img src="/public/home/scriva-mark.svg" alt="" style="padding:18px"><div><b style="font-family:Georgia,serif;font-style:italic;font-weight:normal">scriva</b><span>Open-source writing studio.</span></div></a>
