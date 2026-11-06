@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LabBrain — ask any researcher's papers</title>
+<title>LabBrain, ask any researcher's papers</title>
 <meta name="description" content="Name any researcher and LabBrain reads their actual papers (full text where open-access) and answers your question, grounded with DOI citations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,8 +146,10 @@ input::placeholder{color:#5a6276}
   .crumb{gap:8px}
 }
 </style>
+<link rel="stylesheet" href="/public/css/frame.css">
 </head>
-<body><div class="wrap">
+<body>
+<nav class="gx-bar"><a class="home" href="/">Gianyrox</a><a href="/research">Research</a><a href="/studies">Studies</a><a href="/writing">Writing</a><a href="/book/your-money-is-broken/">Book</a></nav><div class="wrap">
 
   <div class="crumb">
     <a href="/research">← research</a>
@@ -158,9 +160,9 @@ input::placeholder{color:#5a6276}
     <span class="chip" id="chip"><span class="led"></span><span id="chipTxt">checking backend…</span></span>
   </div>
 
-  <h1>Ask any researcher's papers — <span class="lb">LabBrain</span></h1>
-  <p class="vp">Name a researcher. LabBrain reads their actual papers — full text where open-access — and answers your question, grounded with DOI citations.</p>
-  <p class="who"><b>Who it's for:</b> PhD applicants vetting an advisor, grant writers and collaboration scouts, researchers onboarding into a new field, or anyone doing a literature review <i>on a specific person</i> — where the unit is one author's corpus, not the whole field.</p>
+  <h1>Ask any researcher's papers, <span class="lb">LabBrain</span></h1>
+  <p class="vp">Name a researcher. LabBrain reads their actual papers, full text where open-access, and answers your question, grounded with DOI citations.</p>
+  <p class="who"><b>Who it's for:</b> PhD applicants vetting an advisor, grant writers and collaboration scouts, researchers onboarding into a new field, or anyone doing a literature review <i>on a specific person</i>, where the unit is one author's corpus rather than the whole field.</p>
 
   <div class="form">
     <div class="row2">
@@ -194,7 +196,7 @@ input::placeholder{color:#5a6276}
     </div>
     <div class="cnote">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
-      <span>The first question about a researcher <b style="color:#c3cad8">builds their corpus</b> — it resolves them on OpenAlex, ingests open-access full text, and indexes it (~30–60&nbsp;s). After that it's cached and answers are fast.</span>
+      <span>The first question about a researcher <b style="color:#c3cad8">builds their corpus</b>, it resolves them on OpenAlex, ingests open-access full text, and indexes it (~30-60&nbsp;s). After that it's cached and answers are fast.</span>
     </div>
   </div>
 
@@ -224,12 +226,12 @@ input::placeholder{color:#5a6276}
     The web demo runs on an on-demand backend that may be offline. You can still:
     <ul>
       <li>See a full worked example: <a href="demo.html">example Q&amp;A output for Gerhard Hummer</a> (summarize · ask · compare).</li>
-      <li>Run it yourself: <code>python labbrain.py build "&lt;researcher&gt;"</code> then <code>ask "&lt;question&gt;"</code> — <a href="https://github.com/gianyrox/labbrain">github.com/gianyrox/labbrain</a>.</li>
+      <li>Run it yourself: <code>python labbrain.py build "&lt;researcher&gt;"</code> then <code>ask "&lt;question&gt;"</code> - <a href="https://github.com/gianyrox/labbrain">github.com/gianyrox/labbrain</a>.</li>
     </ul>
   </div>
 
   <div class="foot">
-    <b>What makes it different:</b> other tools search <i>all</i> of the literature; LabBrain reads <b>one researcher's library</b> — assembled automatically from just a name — and answers from it, cited back to DOIs. The full tool also does <span class="cmds">summarize</span> (a lab's research program) and <span class="cmds">compare</span> (co-advisor / collaborator finder).<br>
+    <b>What makes it different:</b> other tools search <i>all</i> of the literature; LabBrain reads <b>one researcher's library</b>, assembled automatically from just a name, and answers from it, cited back to DOIs. The full tool also does <span class="cmds">summarize</span> (a lab's research program) and <span class="cmds">compare</span> (co-advisor / collaborator finder).<br>
     <a href="https://github.com/gianyrox/labbrain">github.com/gianyrox/labbrain</a> · <a href="demo.html">example output</a> · <a href="/research">more research tools</a>
   </div>
 
@@ -274,7 +276,7 @@ async function acSearch(q){
     const j=await r.json();
     if(acInput.value.trim()!==q) return;           // stale
     acItems=(j.results||[]).slice(0,8);
-    if(!acItems.length){ acDrop.innerHTML='<div class="ac-empty">No researchers found — you can still type a full name.</div>'; acDrop.classList.add('show'); return; }
+    if(!acItems.length){ acDrop.innerHTML='<div class="ac-empty">No researchers found, you can still type a full name.</div>'; acDrop.classList.add('show'); return; }
     acDrop.innerHTML=acItems.map((a,k)=>{
       const id=(a.id||'').split('/').pop();
       const w=a.works_count?(a.works_count+' works'):'';

@@ -1,0 +1,5 @@
+body{font-family:Arial,sans-serif !important;background:#f4f4f4 !important}
+.gx-bar{max-width:760px;margin:0 auto;padding:16px 16px 0;font:14px Arial,sans-serif;display:flex;gap:18px;flex-wrap:wrap}
+.gx-bar a{color:#2a9d8f;text-decoration:none}
+.gx-bar a:hover{color:#e76f51}
+.gx-bar a.home{font-weight:bold;color:#264653;margin-right:auto}

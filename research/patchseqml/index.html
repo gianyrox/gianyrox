@@ -17,8 +17,10 @@
  .muted{color:#999} .llm{background:#f7f9ff;border-left:3px solid #4060c0;
    padding:10px 14px;border-radius:4px;white-space:pre-wrap}
  .badge{font-size:13px}
-</style></head><body>
-<h1>PatchSeqML — intrinsic ephys report</h1>
+</style><link rel="stylesheet" href="/public/css/frame.css">
+</head><body>
+<nav class="gx-bar"><a class="home" href="/">Gianyrox</a><a href="/research">Research</a><a href="/studies">Studies</a><a href="/writing">Writing</a><a href="/book/your-money-is-broken/">Book</a></nav>
+<h1>PatchSeqML: intrinsic ephys report</h1>
 <p class="src">Source: ABF: data/171116sh_0018.abf &nbsp;·&nbsp; protocol: step · 0113 steps dual -100 to 300 step 25
  &nbsp;·&nbsp; 17 sweeps @ 20 kHz</p>
 
@@ -44,7 +46,7 @@
 <p class='muted'>No QC flags raised.</p>
 <table class="feat"><tr><td>mean_resting_mV</td><td class='v'>-62.12</td><td class='u'></td></tr><tr><td>resting_drift_mV</td><td class='v'>2.04</td><td class='u'></td></tr><tr><td>baseline_rms_noise_mV</td><td class='v'>0.123</td><td class='u'></td></tr><tr><td>clipping</td><td class='v'>False</td><td class='u'></td></tr><tr><td>n_sweeps</td><td class='v'>17</td><td class='u'></td></tr><tr><td>max_voltage_span_mV</td><td class='v'>137.33</td><td class='u'></td></tr></table>
 
-<h2>Claude interpretation</h2><div class='llm'>This neuron displays a regular-spiking (RS) phenotype consistent with a cortical excitatory pyramidal cell, with a low rheobase (50 pA) and a modest F-I gain (~0.065 Hz/pA) yielding a relatively low maximum rate (18 Hz) plus clear spike-frequency adaptation (adaptation index 0.23), all typical of RS pyramidal output. Excitability metrics are within normal limits: input resistance of ~119 MΩ and a membrane tau of ~33 ms are on the higher/slower end but physiologically plausible for a pyramidal neuron, and the resting potential of −62 mV is healthy. AP kinetics are normal—threshold near −38 mV, a robust amplitude of ~98 mV, a half-width of 1.3 ms, and a brisk upstroke of ~344 mV/ms with an up/down-stroke ratio of ~5.9 (the fast rise relative to a slower repolarization is characteristic of RS cells, in contrast to the more symmetric, narrow spikes of fast-spiking interneurons). The prominent voltage sag (sag ratio 0.26) indicates a substantial Ih (HCN) current,</div>
+<h2>Claude interpretation</h2><div class='llm'>This neuron displays a regular-spiking (RS) phenotype consistent with a cortical excitatory pyramidal cell, with a low rheobase (50 pA) and a modest F-I gain (~0.065 Hz/pA) yielding a relatively low maximum rate (18 Hz) plus clear spike-frequency adaptation (adaptation index 0.23), all typical of RS pyramidal output. Excitability metrics are within normal limits: input resistance of ~119 MΩ and a membrane tau of ~33 ms are on the higher/slower end but physiologically plausible for a pyramidal neuron, and the resting potential of −62 mV is healthy. AP kinetics are normal, threshold near −38 mV, a large amplitude of ~98 mV, a half-width of 1.3 ms, and a brisk upstroke of ~344 mV/ms with an up/down-stroke ratio of ~5.9 (the fast rise relative to a slower repolarization is characteristic of RS cells, in contrast to the more symmetric, narrow spikes of fast-spiking interneurons). The prominent voltage sag (sag ratio 0.26) indicates a substantial Ih (HCN) current,</div>
 
 <h2>Per-sweep table</h2>
 <table class="sw"><tr><th>sweep</th><th>I (pA)</th><th>spikes</th>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CryoTriage — automated cryo-EM micrograph QC</title>
+<title>CryoTriage, automated cryo-EM micrograph QC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
@@ -83,14 +83,14 @@ iframe{width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;ba
     <h1>Cryo<span>Triage</span></h1>
     <div class="vp">Automated cryo-EM micrograph quality control. 2D astigmatic CTF fit
       (defocus, astigmatism, resolution), ice &amp; drift detection, and a
-      <b>PASS / FLAG / REJECT</b> verdict — first-principles, CPU-only, no RELION or cryoSPARC required.</div>
+      <b>PASS / FLAG / REJECT</b> verdict, first-principles, CPU-only, no RELION or cryoSPARC required.</div>
   </div>
   <div class="chip"><span class="dot" id="dot"></span><span id="be">checking backend…</span></div>
 </div>
 
 <div class="who">
   <div class="c"><h3>Who it's for</h3><p>Cryo-EM facility staff, microscope operators screening grids live, and labs curating micrographs before reconstruction.</p></div>
-  <div class="c"><h3>Why it helps</h3><p>Catch bad micrographs — thick ice, drift, off-target defocus, contamination — before they waste GPU hours on a reconstruction.</p></div>
+  <div class="c"><h3>Why it helps</h3><p>Catch bad micrographs, thick ice, drift, off-target defocus, contamination, before they waste GPU hours on a reconstruction.</p></div>
   <div class="c"><h3>How it's different</h3><p>Transparent, first-principles CTF fit (CTFFIND4-comparable). No GPU, no model weights, every threshold inspectable. Validated to <b>5.1 Å</b> mean defocus error on EMPIAR data.</p></div>
 </div>
 
@@ -98,7 +98,7 @@ iframe{width:100%;height:80vh;border:1px solid var(--line);border-radius:12px;ba
   <div class="drop" id="drop">
     <div class="ic">◎</div>
     <div class="big">Drop a micrograph here, or click to choose</div>
-    <div class="sm">.mrc &middot; .tif/.tiff &middot; .png/.jpg &nbsp;—&nbsp; a motion-corrected micrograph or single frame</div>
+    <div class="sm">.mrc &middot; .tif/.tiff &middot; .png/.jpg &nbsp; &nbsp; a motion-corrected micrograph or single frame</div>
     <input type="file" id="file" accept=".mrc,.tif,.tiff,.png,.jpg" hidden>
   </div>
   <div class="filechip" id="filechip"><span>📄 <b id="fname"></b></span><span class="x" id="clearf" title="remove">✕</span></div>

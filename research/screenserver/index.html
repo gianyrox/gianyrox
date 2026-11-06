@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ScreenServer — molecular ADMET & drug-likeness screening</title>
+<title>ScreenServer, molecular ADMET & drug-likeness screening</title>
 <meta name="description" content="Screen any molecule or small library for ADMET liabilities and drug-likeness: instant in-browser RDKit descriptors plus 13 trained ML endpoints (solubility, hERG, CYPs, Ames, Caco-2, DILI), structural alerts and applicability domain. Free, open, CPU-only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -97,8 +97,10 @@ textarea:focus{outline:none;border-color:var(--teal)}
 .note b{color:#b9c2d2}
 .note code{font-family:ui-monospace,monospace}
 </style>
+<link rel="stylesheet" href="/public/css/frame.css">
 </head>
-<body><div class="wrap">
+<body>
+<nav class="gx-bar"><a class="home" href="/">Gianyrox</a><a href="/research">Research</a><a href="/studies">Studies</a><a href="/writing">Writing</a><a href="/book/your-money-is-broken/">Book</a></nav><div class="wrap">
 
 <div class="crumb"><a href="/research">← research</a></div>
 <div class="head">
@@ -106,12 +108,12 @@ textarea:focus{outline:none;border-color:var(--teal)}
   <span class="chip"><span class="dot wait" id="bedot"></span><span id="betxt">checking backend…</span></span>
 </div>
 
-<p class="vp"><b>Screen any molecule or small library for ADMET liabilities and drug-likeness in seconds</b> — instant in-browser descriptors plus 13 trained ML endpoints, with honest scaffold-split metrics, applicability-domain flags, and structural alerts. Free, open, CPU-only.</p>
-<p class="who"><b>Who it's for:</b> medicinal chemists prioritizing analogs, chemical biologists sanity-checking probe compounds, and academic / small-biotech drug-discovery labs that need rigorous triage on a laptop — no GPU, no per-seat license.</p>
+<p class="vp"><b>Screen any molecule or small library for ADMET liabilities and drug-likeness in seconds</b>, instant in-browser descriptors plus 13 trained ML endpoints, with scaffold-split metrics, applicability-domain flags, and structural alerts. Free, open, CPU-only.</p>
+<p class="who"><b>Who it's for:</b> medicinal chemists prioritizing analogs, chemical biologists sanity-checking probe compounds, and academic / small-biotech drug-discovery labs that need rigorous triage on a laptop, no GPU, no per-seat license.</p>
 
 <!-- input -->
 <div class="card">
-  <div class="label"><span>SMILES — one per line to screen a small library</span><span id="rdkstat" style="color:var(--warn)">loading RDKit…</span></div>
+  <div class="label"><span>SMILES, one per line to screen a small library</span><span id="rdkstat" style="color:var(--warn)">loading RDKit…</span></div>
   <textarea id="smi" spellcheck="false" placeholder="CC(=O)Oc1ccccc1C(=O)O&#10;CN1C=NC2=C1C(=O)N(C(=O)N2C)C&#10;...one SMILES per line">CC(=O)Oc1ccccc1C(=O)O</textarea>
   <div class="chips">
     <span class="tag" onclick="ex('CC(=O)Oc1ccccc1C(=O)O')">aspirin</span>
@@ -186,11 +188,11 @@ textarea:focus{outline:none;border-color:var(--teal)}
 
 <div class="note">
 <b>Instant preview</b> runs RDKit-WASM entirely in your browser — molecule render, descriptors, and Lipinski / Veber / Ghose / QED drug-likeness, with no data leaving the page.
-<b>Full ML ADMET</b> runs the real 13 trained endpoints on the backend with PAINS / Brenk / NIH structural alerts, applicability-domain checks, prediction confidence, and a composite developability score. Honest random- and scaffold-split held-out metrics are shown at the top of every report.<br>
+<b>Full ML ADMET</b> runs the real 13 trained endpoints on the backend with PAINS / Brenk / NIH structural alerts, applicability-domain checks, prediction confidence, and a composite developability score. Random- and scaffold-split held-out metrics are shown at the top of every report.<br>
 Open-source &amp; CPU-only · data: MoleculeNet/DeepChem &amp; Therapeutics Data Commons ·
 <a href="https://github.com/gianyrox/screenserver">github.com/gianyrox/screenserver</a> ·
 <a href="report.html">example report →</a><br>
-<span style="color:var(--mut)">Research-grade ML triage tool. Predictions are computational estimates for prioritization, not clinical or regulatory determinations.</span>
+<span style="color:var(--mut)">Research-grade ML triage tool. Predictions are computational estimates for prioritization only. They are not clinical or regulatory determinations.</span>
 </div>
 
 <script>
@@ -259,7 +261,7 @@ function runInstant(){
   const veber=[];if(rot>10)veber.push('RotB>10');if(tpsa>140)veber.push('TPSA>140');
   const ghose=[];if(mw<160||mw>480)ghose.push('MW∉[160,480]');if(logp<-0.4||logp>5.6)ghose.push('logP∉[-0.4,5.6]');if(heavy<20||heavy>70)ghose.push('atoms∉[20,70]');
   let v='';
-  v+='<b>Lipinski Ro5:</b> '+(lip.length?lip.map(x=>pill(x,'vio')).join(''):pill('0 violations — pass','ok'))+'<br>';
+  v+='<b>Lipinski Ro5:</b> '+(lip.length?lip.map(x=>pill(x,'vio')).join(''):pill('0 violations, pass','ok'))+'<br>';
   v+='<b>Veber:</b> '+(veber.length?veber.map(x=>pill(x,'warnp')).join(''):pill('pass','ok'))+'<br>';
   v+='<b>Ghose:</b> '+(ghose.length?ghose.map(x=>pill(x,'warnp')).join(''):pill('pass','ok'))+'<br>';
   v+='<b>QED:</b> '+pill((qed!=null?qed.toFixed(2):'—')+(qed>0.67?' (high)':qed>0.5?' (moderate)':' (low)'),qed>0.5?'ok':'warnp');

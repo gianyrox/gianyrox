@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ProteinScout — per-residue protein biophysics</title>
+<title>ProteinScout, per-residue protein biophysics</title>
 <meta name="description" content="Paste a protein sequence or UniProt accession and get every per-residue biophysical track in one run — transmembrane, aggregation, disorder, charge/pI, signal peptide, coiled-coil — with an ML layer that beats the raw scales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
@@ -68,15 +68,17 @@ input[type=range]{accent-color:var(--teal);vertical-align:middle}
 .offline code{background:#1a160a;padding:1px 6px;border-radius:4px;color:#ffe199;font-family:ui-monospace,monospace}
 .note{color:var(--mut);font-size:12px;margin-top:22px;border-top:1px solid var(--line);padding-top:12px;line-height:1.7}
 </style>
+<link rel="stylesheet" href="/public/css/frame.css">
 </head>
-<body><div class="wrap">
+<body>
+<nav class="gx-bar"><a class="home" href="/">Gianyrox</a><a href="/research">Research</a><a href="/studies">Studies</a><a href="/writing">Writing</a><a href="/book/your-money-is-broken/">Book</a></nav><div class="wrap">
 
 <div class="crumb"><a href="/research">← research</a></div>
 
 <div class="head">
   <div>
     <h1>Protein<span>Scout</span></h1>
-    <p class="vp">Every per-residue biophysical track in one run — and an ML layer that beats the raw scales.</p>
+    <p class="vp">Every per-residue biophysical track in one run, and an ML layer that beats the raw scales.</p>
     <p class="sub">Paste a protein sequence or a UniProt accession to map transmembrane helices, aggregation-prone regions,
     disorder, charge / pI, signal peptide and coiled-coils on a single axis. Published scales run instantly in your browser;
     the full server pipeline adds WALTZ-DB / DisProt / UniProt-trained ML models with honest held-out benchmarks.</p>
@@ -92,7 +94,7 @@ input[type=range]{accent-color:var(--teal);vertical-align:middle}
       <li><b>Aggregation</b>-prone regions (AGGRESCAN scale + WALTZ-DB amyloid ML)</li>
       <li><b>Disorder</b>, charge-hydropathy (Uversky), NCPR / FCR, MoRF hints</li>
       <li><b>Signal peptide</b>, <b>coiled-coil</b>, low-complexity, pI &amp; net charge</li>
-      <li>Self-contained HTML report + an honest <b>ML-vs-scale benchmark</b> table</li>
+      <li>Self-contained HTML report + an <b>ML-vs-scale benchmark</b> table</li>
     </ul>
   </div>
   <div class="card who-for">
@@ -131,10 +133,10 @@ input[type=range]{accent-color:var(--teal);vertical-align:middle}
 
 <div id="out" style="display:none">
   <div class="cards" id="kv"></div>
-  <div class="chartbox"><h3>Hydropathy <small>— Kyte–Doolittle, windowed; &gt;1.6 ⇒ transmembrane</small></h3><canvas id="cHydro" height="120"></canvas></div>
-  <div class="chartbox"><h3>Aggregation propensity <small>— AGGRESCAN a3v; peaks ⇒ aggregation-prone regions</small></h3><canvas id="cAgg" height="110"></canvas></div>
-  <div class="chartbox"><h3>Disorder propensity <small>— TOP-IDP; &gt;0 ⇒ disorder-promoting</small></h3><canvas id="cDis" height="110"></canvas></div>
-  <div class="chartbox"><h3>Net charge per residue <small>— +K/R, −D/E, windowed</small></h3><canvas id="cChg" height="100"></canvas></div>
+  <div class="chartbox"><h3>Hydropathy <small>Kyte and Doolittle windowed &gt;1.6 ⇒ transmembrane</small></h3><canvas id="cHydro" height="120"></canvas></div>
+  <div class="chartbox"><h3>Aggregation propensity <small>AGGRESCAN a3v peaks ⇒ aggregation-prone regions</small></h3><canvas id="cAgg" height="110"></canvas></div>
+  <div class="chartbox"><h3>Disorder propensity <small>TOP-IDP &gt;0 ⇒ disorder-promoting</small></h3><canvas id="cDis" height="110"></canvas></div>
+  <div class="chartbox"><h3>Net charge per residue <small>+K/R, −D/E, windowed</small></h3><canvas id="cChg" height="100"></canvas></div>
   <div class="tables">
     <div class="tbl" id="tTM"><h4>Transmembrane segments</h4></div>
     <div class="tbl" id="tAPR"><h4>Aggregation-prone regions</h4></div>
@@ -151,7 +153,7 @@ grab the <a href="https://github.com/gianyrox/proteinscout">code on GitHub</a>, 
 <br><code>python proteinscout.py analyze "DAEFRHDSGYEVHHQKLVFFAEDVGSNKGAIIGLMVGGVVIA"</code></div>
 
 <div class="note"><b>Instant</b> = published scales computed in your browser for fast feedback.
-<b>Full ML analysis</b> runs the real CPU-only pipeline on the server — the ML layer that <b>beats</b> the single-scale
+<b>Full ML analysis</b> runs the real CPU-only pipeline on the server, the ML layer that <b>beats</b> the single-scale
 baselines (WALTZ-DB / DisProt / UniProt-trained, with held-out ROC-AUC), UniProt-annotation overlay, signal-peptide &amp;
 coiled-coil prediction. No GPU, no model download, no alignment database.
 <a href="https://github.com/gianyrox/proteinscout">github.com/gianyrox/proteinscout</a> · <a href="report.html">example report →</a></div>
@@ -271,10 +273,10 @@ function run(){
   mkChart('cAgg',labels,ag,'#ff9d4d',true);
   mkChart('cDis',labels,di,'#5b8cff',true);
   mkChart('cChg',labels,cg,'#c792ea',true);
-  const fmt=(regs)=>regs.length? regs.map(([a,b])=>'<div><span class="reg">'+a+'–'+b+'</span> <span class="mut">'+seq.slice(a-1,b).slice(0,22)+(b-a>21?'…':'')+'</span></div>').join(''):'<span class="mut">none detected</span>';
-  document.getElementById('tTM').innerHTML='<h4>Transmembrane segments ('+tm.length+')</h4>'+fmt(tm);
-  document.getElementById('tAPR').innerHTML='<h4>Aggregation-prone regions ('+apr.length+')</h4>'+fmt(apr);
-  document.getElementById('tIDR').innerHTML='<h4>Disordered regions ('+idr.length+')</h4>'+fmt(idr);
+  const fmt=(regs)=>regs.length? regs.map(([a,b])=>'<div><span class="reg">'+a+', '+b+'</span> <span class="mut">'+seq.slice(a-1,b).slice(0,22)+(b-a>21?'…':'')+'</span></div>').join(''):'<span class="mut">none detected</span>';
+  document.getElementById('tTM').innerHTML='<h4>Transmembrane segments</h4>'+fmt(tm);
+  document.getElementById('tAPR').innerHTML='<h4>Aggregation-prone regions</h4>'+fmt(apr);
+  document.getElementById('tIDR').innerHTML='<h4>Disordered regions</h4>'+fmt(idr);
 }
 </script>
 </div></body></html>

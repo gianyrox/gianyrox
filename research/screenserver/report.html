@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ScreenServer — ADMET Demo Screen (30 approved/withdrawn drugs + known PAINS)</title>
+<title>ScreenServer, ADMET Demo Screen (30 approved/withdrawn drugs + known PAINS)</title>
 <style>
     :root{--bg:#0f1419;--card:#171c24;--ink:#e7edf3;--muted:#8b97a7;--line:#27303c;
           --ok:#1f6f43;--okink:#7ee2a8;--warn:#7a3320;--warnink:#ffb38a;--hot:#3a1d27;
@@ -42,14 +42,14 @@
     a{color:#8fd0ff;}
     </style></head>
 <body><div class="wrap">
-<h1>ScreenServer — ADMET Demo Screen (30 approved/withdrawn drugs + known PAINS)</h1>
+<h1>ScreenServer: ADMET Demo Screen</h1>
 <p class="sub">ADMET / molecular-property virtual screening &middot; generated 2026-06-10 22:20 UTC &middot;
 RDKit descriptors + 2048-bit Morgan fingerprints + gradient-boosted ensembles
 trained on MoleculeNet &amp; Therapeutics Data Commons.</p>
 
-<div class='triage'><h2>Triage summary <span class='muted'>(Claude)</span></h2><p>Salbutamol (score 87) is the cleanest profile—negligible hERG (4%), CYP (≤15%), DILI (1%), and zero alerts—though its low caco2 (-5.45) flags permeability concerns consistent with poor oral absorption. Ibuprofen (81) and Morphine (79) are well-balanced with low CYP liabilities and good QED (0.82, 0.77), but Ibuprofen carries borderline DILI (45%) and Morphine notable CYP2D6 (34%) plus high BBB penetration. The single biggest liability across the set is concentrated hERG cardiotoxicity in the bottom tier: Ketoconazole (99%) and Loratadine (98%), both compounded by strong multi-CYP inhibition—Ketoconazole especially (CYP3A4 98%, CYP2C9 87%, DILI 99%, Ro5 violation).</p></div>
+<div class='triage'><h2>Triage summary <span class='muted'></span></h2><p>Salbutamol (score 87) is the cleanest profile, negligible hERG (4%), CYP (≤15%), DILI (1%), and zero alerts, though its low caco2 (-5.45) flags permeability concerns consistent with poor oral absorption. Ibuprofen (81) and Morphine (79) are well-balanced with low CYP liabilities and good QED (0.82, 0.77), but Ibuprofen carries borderline DILI (45%) and Morphine notable CYP2D6 (34%) plus high BBB penetration. The single biggest liability across the set is concentrated hERG cardiotoxicity in the bottom tier: Ketoconazole (99%) and Loratadine (98%), both compounded by strong multi-CYP inhibition, Ketoconazole (CYP3A4 98%, CYP2C9 87%, DILI 99%, Ro5 violation).</p></div>
 
-<h2>Model held-out performance (both split protocols)</h2>
+<h2>Model held-out performance</h2>
 <table><thead><tr><th>Endpoint</th><th>Task</th><th>Source</th>
 <th>Random split</th><th>Scaffold split</th><th>Notes</th></tr></thead>
 <tbody><tr><td>Aqueous Solubility (logS)</td><td>reg</td><td class='src'>MoleculeNet</td><td>R&sup2;=0.900<br><span class='muted'>RMSE 0.628</span></td><td>R&sup2;=0.854<br><span class='muted'>RMSE 0.884</span></td><td class='muted'>ESOL/Delaney. Higher = more soluble.</td></tr>
@@ -63,14 +63,14 @@ trained on MoleculeNet &amp; Therapeutics Data Commons.</p>
 <tr><td>Ames Mutagenicity</td><td>cla</td><td class='src'>TDC</td><td>AUC=0.895<br><span class='muted'>F1 0.84</span></td><td>AUC=0.768<br><span class='muted'>F1 0.60</span></td><td class='muted'>1 = mutagenic in the Ames test. Lower is safer.</td></tr>
 <tr><td>DILI (Hepatotoxicity)</td><td>cla</td><td class='src'>TDC</td><td>AUC=0.871<br><span class='muted'>F1 0.81</span></td><td>AUC=0.582<br><span class='muted'>F1 0.33</span></td><td class='muted'>1 = drug-induced liver injury. Lower is safer.</td></tr>
 <tr><td>Hepatocyte Clearance</td><td>reg</td><td class='src'>TDC</td><td>R&sup2;=0.240<br><span class='muted'>RMSE 0.492</span></td><td>R&sup2;=0.077<br><span class='muted'>RMSE 0.540</span></td><td class='muted'>Intrinsic hepatocyte clearance (log10-trained). Lower = more stable.</td></tr>
-<tr><td>Plasma Protein Binding</td><td>reg</td><td class='src'>TDC</td><td>R&sup2;=0.490<br><span class='muted'>RMSE 13.230</span></td><td>R&sup2;=0.456<br><span class='muted'>RMSE 12.539</span></td><td class='muted'>Fraction bound to plasma protein (%). Very high (&gt;99%) limits free drug.</td></tr>
+<tr><td>Plasma Protein Binding</td><td>reg</td><td class='src'>TDC</td><td>R&sup2;=0.490<br><span class='muted'>RMSE 13.230</span></td><td>R&sup2;=0.456<br><span class='muted'>RMSE 12.539</span></td><td class='muted'>Fraction bound to plasma protein (%). High (&gt;99%) limits free drug.</td></tr>
 <tr><td>Acute Toxicity (LD50)</td><td>reg</td><td class='src'>TDC</td><td>R&sup2;=0.604<br><span class='muted'>RMSE 0.581</span></td><td>R&sup2;=0.318<br><span class='muted'>RMSE 0.888</span></td><td class='muted'>Rat oral LD50 as -log(mol/kg). Higher = more toxic.</td></tr></tbody></table>
 <p class="legend"><b>Random split</b> = deterministic 80/20 (MoleculeNet baseline).
 <b>Scaffold split</b> = Bemis-Murcko scaffolds held out entirely &mdash; the harder,
 more realistic generalization estimate, and the number you should trust.
 Regression metrics for log-transformed PK endpoints are reported in log space.</p>
 
-<h2>Screened library &mdash; 30 molecules (from 30 input rows), ranked by developability score</h2>
+<h2>Screened library &mdash; 30 molecules ranked by developability score</h2>
 <table><thead><tr><th>Molecule</th><th>Score</th><th>Aqueous Solubility (logS)<br><span class='muted'>log(mol/L)</span></th><th>Lipophilicity (logD 7.4)<br><span class='muted'>logD</span></th><th>BBB Penetration<br><span class='muted'>P(penetrant)</span></th><th>hERG Cardiotox (blocker)<br><span class='muted'>P(blocker)</span></th><th>Caco-2 Permeability<br><span class='muted'>log(Papp cm/s)</span></th><th>CYP3A4 Inhibition<br><span class='muted'>P(inhibitor)</span></th><th>CYP2D6 Inhibition<br><span class='muted'>P(inhibitor)</span></th><th>CYP2C9 Inhibition<br><span class='muted'>P(inhibitor)</span></th><th>Ames Mutagenicity<br><span class='muted'>P(mutagen)</span></th><th>DILI (Hepatotoxicity)<br><span class='muted'>P(hepatotox)</span></th><th>Hepatocyte Clearance<br><span class='muted'>uL/min/1e6</span></th><th>Plasma Protein Binding<br><span class='muted'>% bound</span></th><th>Acute Toxicity (LD50)<br><span class='muted'>-log(mol/kg)</span></th><th>Drug-likeness &amp; alerts</th></tr></thead>
 <tbody><tr><td class='molcell'><div class='molname'>Salbutamol</div><div class='svg'><svg version='1.1' baseProfile='full'
               xmlns='http://www.w3.org/2000/svg'

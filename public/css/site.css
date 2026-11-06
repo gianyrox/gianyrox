@@ -718,3 +718,11 @@
 @media (max-width: 680px) {
 	.rdir-list { grid-template-columns: 1fr; }
 }
+
+body{font-family:Arial,sans-serif;background:#f4f4f4;letter-spacing:0;padding:40px 16px}
+.container{border:0;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);max-width:760px;padding:32px 40px}
+.title,.section-header,h1,h2,h3{font-family:Arial,sans-serif;color:#264653;letter-spacing:0}
+a{color:#2a9d8f}
+a:hover{color:#e76f51}
+.site-nav,.site-nav a{font-family:Arial,sans-serif}
+@media (max-width:680px){body{padding:16px}.container{padding:20px 16px}}

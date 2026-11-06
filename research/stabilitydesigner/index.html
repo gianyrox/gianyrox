@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>StabilityDesigner — predict & design protein stabilizing mutations (ΔΔG)</title>
+<title>StabilityDesigner, predict & design protein stabilizing mutations (ΔΔG)</title>
 <meta name="description" content="Predict how a point mutation changes protein folding stability (ΔΔG) and design stabilizing mutations by saturation scan. Sequence-only, CPU, open source. Benchmarked on S669 with SOTA antisymmetry.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,15 +116,17 @@ input[type=text]{width:96px}input[type=number]{width:84px}
 .note code{background:var(--panel2);border:1px solid var(--line);padding:2px 6px;border-radius:5px;font-size:11.5px}
 .kbd{font-family:ui-monospace,monospace}
 </style>
+<link rel="stylesheet" href="/public/css/frame.css">
 </head>
-<body><div class="wrap">
+<body>
+<nav class="gx-bar"><a class="home" href="/">Gianyrox</a><a href="/research">Research</a><a href="/studies">Studies</a><a href="/writing">Writing</a><a href="/book/your-money-is-broken/">Book</a></nav><div class="wrap">
 
 <div class="crumb"><a href="/research">← research</a></div>
 
 <div class="hero">
   <div>
     <h1>Stability<span>Designer</span></h1>
-    <div class="tag-prop">Find the stabilizing mutations worth testing — in seconds, from sequence alone.</div>
+    <div class="tag-prop">Find the stabilizing mutations worth testing, in seconds, from sequence alone.</div>
     <div class="sub">Predict how a point mutation changes protein folding stability (ΔΔG), or scan a position
     for stabilizing substitutions. Sequence-only model — no crystal structure required. Trained on FireProtDB,
     benchmarked on S669 with state-of-the-art antisymmetry.</div>
@@ -156,7 +158,7 @@ input[type=text]{width:96px}input[type=number]{width:84px}
           <input type="text" id="mut" placeholder="L15A" value="L15A"></div>
         <button class="btn" id="bPred">▶ Predict ΔΔG</button>
       </div>
-      <div class="fieldnote">Format: wild-type, position, new residue — e.g. <span class="kbd">L15A</span>.</div>
+      <div class="fieldnote">Format: wild-type, position, new residue, e.g. <span class="kbd">L15A</span>.</div>
     </div>
     <div class="act">
       <label>Scan a position (all 19)</label>
@@ -190,13 +192,13 @@ input[type=text]{width:96px}input[type=number]{width:84px}
     <ul>
       <li><b style="color:#e9ecf2">Triage thermostability:</b> shortlist stabilizing mutations for a biocatalyst before wet-lab testing.</li>
       <li><b style="color:#e9ecf2">Harden a biologic:</b> find stabilizing substitutions to improve antibody developability &amp; shelf life.</li>
-      <li><b style="color:#e9ecf2">Free first pass:</b> prune obviously-destabilizing options before spending GPU/structure compute.</li>
+      <li><b style="color:#e9ecf2">Free first pass:</b> prune-destabilizing options before spending GPU/structure compute.</li>
     </ul>
   </div>
   <div class="card mini">
     <h3>Where it fits</h3>
     <ul>
-      <li>A transparent <b style="color:#e9ecf2">CPU baseline</b> — interpretable features, no black box.</li>
+      <li>A transparent <b style="color:#e9ecf2">CPU baseline</b>, interpretable features, no black box.</li>
       <li>Sits in the published S669 accuracy band (DDGun-class) vs FoldX / DDGun / ThermoMPNN.</li>
       <li><b style="color:#e9ecf2">Best-in-class antisymmetry</b> (forward/reverse bias ≈ 0) where FoldX &amp; MAESTRO fail.</li>
       <li>Open source (MIT). Structure features via <span class="kbd" style="font-size:11px">--pdb</span> push accuracy higher.</li>

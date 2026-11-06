@@ -35,8 +35,10 @@
  .llm h3 { margin:0 0 8px; }
  code { background:#161b22; padding:1px 5px; border-radius:4px; }
  .modes li { margin:3px 0; }
-</style></head>
+</style><link rel="stylesheet" href="/public/css/frame.css">
+</head>
 <body>
+<nav class="gx-bar"><a class="home" href="/">Gianyrox</a><a href="/research">Research</a><a href="/studies">Studies</a><a href="/writing">Writing</a><a href="/book/your-money-is-broken/">Book</a></nav>
 <header>
   <h1>CryoTriage &mdash; cryo-EM micrograph QC report</h1>
   <div class="sub">Automated quality-control triage &middot; source: EMPIAR-10025 (T20S) + EMPIAR-10061 (beta-gal) + synthetic failure modes
@@ -55,7 +57,7 @@
   <div class="card" style="margin-bottom:18px">
     <b>Common failure modes</b><ul class="modes"><li>ice / contamination &mdash; 4 micrograph(s)</li><li>weak CTF / astigmatism &mdash; 3 micrograph(s)</li><li>drift / blur &mdash; 2 micrograph(s)</li></ul>
   </div>
-  <div class="llm"><h3>Triage summary (Claude)</h3><p>From 8 micrographs collected, 4 passed QC (50% pass rate), 3 were flagged, and 1 was rejected. The dominant failure mode is ice/contamination (4 instances), followed by weak CTF/astigmatism (3 instances) and drift/blur (2 instances). The defocus range spans 0.79-2.10 μm (median 1.5 μm), with resolution averaging 3.55 Å where measurable. CTF fit quality is highly variable (fit_cc: 0.049-0.851, median 0.704). One micrograph shows severe drift with undetectable CTF signal, while another has significant astigmatism (0.61 μm). **Recommendation: Improve specimen preparation to reduce ice contamination and check column alignment to minimize astigmatism.**</p></div>
+  <div class="llm"><h3>Triage summary</h3><p>From 8 micrographs collected, 4 passed QC (50% pass rate), 3 were flagged, and 1 was rejected. The dominant failure mode is ice/contamination (4 instances), followed by weak CTF/astigmatism (3 instances) and drift/blur (2 instances). The defocus range spans 0.79-2.10 μm (median 1.5 μm), with resolution averaging 3.55 Å where measurable. CTF fit quality is variable (fit_cc: 0.049-0.851, median 0.704). One micrograph shows severe drift with undetectable CTF signal, while another has significant astigmatism (0.61 μm). **Recommendation: Improve specimen preparation to reduce ice contamination and check column alignment to minimize astigmatism.**</p></div>
   <div class="controls">sort by:
     <button onclick="sortBy('score',-1)">score</button>
     <button onclick="sortBy('defocus',1)">defocus</button>
