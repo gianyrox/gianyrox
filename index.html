@@ -25,7 +25,16 @@ h2{font-size:18px;color:#264653;margin:32px 0 8px}
 .item:hover b{color:#e76f51}
 .item span{display:block;color:#6c757d;font-size:14px;line-height:1.4;margin-top:3px}
 .list{width:100%}
-.item.pre{opacity:0;transform:translateY(18px)}
+.brands{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%}
+.brand{border-radius:12px;padding:22px;text-decoration:none;display:flex;flex-direction:column;gap:12px;min-height:200px;transition:transform .3s}
+.brand:hover{transform:translateY(-3px)}
+.brand img,.brand .po{width:84px;height:84px;object-fit:contain;border-radius:18px}
+.brand .po{background:#d23a22;color:#fff;font:bold 40px Arial;display:flex;align-items:center;justify-content:center}
+.brand b{font-size:22px;display:block}
+.brand span{font-size:14px;opacity:.75;display:block;margin-top:4px;line-height:1.4}
+.brand.wide{grid-column:span 3;flex-direction:row;align-items:center;gap:24px;min-height:0}
+.brand.wide img{width:150px;height:140px}
+@media (max-width:600px){.brands{grid-template-columns:1fr}.brand.wide{grid-column:span 1;flex-direction:column;align-items:flex-start}}
 .item{transition:opacity .6s ease,transform .6s ease}
 .item video{flex:none;border-radius:8px;background:#000;box-shadow:0 1px 6px rgba(0,0,0,.18);object-fit:cover;object-position:top}
 .item video.web{width:220px;height:138px}
@@ -45,7 +54,7 @@ h2{font-size:18px;color:#264653;margin:32px 0 8px}
 <div class="description">
 <p><strong>Euler's Formula:</strong><br>$$ e^{ix} = \cos x + i \sin x $$</p>
 <canvas id="photon" width="1700" height="700" aria-label="A photon: electron and positron on a double helix around a cylinder"></canvas>
-<div id="layers"><button data-k="sphere">sphere</button><button data-k="helix">helix</button><button data-k="helicoid">helicoid</button><button data-k="cylinder">cylinder</button><button data-k="slices">slices</button></div>
+<div id="layers"><button data-k="sphere">sphere</button><button data-k="helix">helix</button><button data-k="helicoid" class="off">helicoid</button><button data-k="cylinder">cylinder</button><button data-k="slices">slices</button></div>
 </div>
 
 <h2>Profiles</h2>
@@ -56,18 +65,15 @@ h2{font-size:18px;color:#264653;margin:32px 0 8px}
 <a href="/profile/" class="link">Bucket Profile</a>
 
 <h2>Companies</h2>
-<div class="list">
-<a class="item" href="https://bucket.foundation"><video class="web" src="/public/home/bucket.mp4" poster="/public/home/bucket.jpg" muted loop playsinline preload="none"></video><div><b>Bucket Foundation</b><span>Nonprofit. Learn the foundations of science, from first lesson to the research frontier.</span></div></a>
-<a class="item" href="https://www.bucket.foundation/research-os"><img src="/public/home/researchos.jpg" alt=""><div><b>Research OS</b><span>A research workspace for students, built inside Bucket.</span></div></a>
-<a class="item" href="https://apps.apple.com/us/app/verified-fishing-kala/id6738696393"><video class="phone" src="/public/home/kala.mp4" poster="/public/home/kala.jpg" muted loop playsinline preload="none"></video><div><b>Kala Verified Fishing</b><span>iOS and Android app for fishing tournaments. Every catch is verified.</span></div></a>
-<a class="item" href="https://polingual.com"><video class="phone" src="/public/home/polingual.mp4" poster="/public/home/polingual.jpg?v=2" muted loop playsinline preload="none"></video><div><b>Polingual</b><span>Language learning app for iPhone. Short lessons, many languages.</span></div></a>
-<a class="item" href="https://openscriva.com"><img src="/public/home/scriva.jpg" alt=""><div><b>Scriva</b><span>Open-source writing studio where the AI knows your whole book.</span></div></a>
-<a class="item" href="https://gauss.news"><img src="/public/home/gauss.jpg" alt=""><div><b>Gauss News</b><span>AI news curation.</span></div></a>
+<div class="brands">
+<a class="brand wide" href="https://bucket.foundation" style="background:#efe8d5;color:#24201b"><img src="/public/home/bucket-mark.jpg" alt="" style="mix-blend-mode:multiply"><div><b style="font-family:Georgia,serif;letter-spacing:.14em">BUCKET FOUNDATION</b><span>Nonprofit. Learn the foundations of science, from first lesson to the research frontier.</span></div></a>
+<a class="brand" href="https://apps.apple.com/us/app/verified-fishing-kala/id6738696393" style="background:#f8f0ed;color:#3d1a4f"><img src="/public/home/kala-icon.jpg" alt="" style="mix-blend-mode:multiply;width:130px;border-radius:0"><div><b>Kala</b><span>Verified fishing. Every catch is checked.</span></div></a>
+<a class="brand" href="https://polingual.com" style="background:#f3ead7;color:#2b2620"><div class="po">Po</div><div><b>Polingual</b><span>One word, every language.</span></div></a>
+<a class="brand" href="https://openscriva.com" style="background:#faf8f3;color:#2b2620"><img src="/public/home/scriva-mark.svg" alt="" style="padding:18px"><div><b style="font-family:Georgia,serif;font-style:italic;font-weight:normal">scriva</b><span>Open-source writing studio.</span></div></a>
 </div>
-
 <h2>Research</h2>
 <div class="list">
-<a class="item" href="/research"><video class="web" src="/public/home/research.mp4" poster="/public/home/research.jpg" muted loop playsinline preload="none"></video><div><b>Open ML Tools for Labs</b><span>Seven open-source biophysics tools. Run them in the browser, no GPU.</span></div></a>
+<a class="item" href="/research"><img src="/public/home/research.jpg" alt=""><div><b>Open ML Tools for Labs</b><span>Seven open-source biophysics tools. Run them in the browser, no GPU.</span></div></a>
 <a class="item" href="/research/proteinscout/"><img class="contain" src="/public/home/proteinscout.jpg" alt=""><div><b>ProteinScout</b><span>Paste a protein sequence, get every per-residue track: disorder, aggregation, charge.</span></div></a>
 <a class="item" href="/studies/research-atlas"><img class="contain" src="/public/home/atlas.jpg" alt=""><div><b>Research Atlas</b><span>12.2M rows of research funding: grants, funders and what they produced.</span></div></a>
 <a class="item" href="/studies/funding-landscape/"><img class="contain" src="/public/home/fund1.jpg" alt=""><div><b>The Structure of Public Research Funding</b><span>How concentrated funding is across institutions, and how much is co-funded.</span></div></a>
@@ -98,7 +104,7 @@ h2{font-size:18px;color:#264653;margin:32px 0 8px}
 </div>
 <script>
 (()=>{const c=document.getElementById('photon'),g=c.getContext('2d'),W=1700,H=700;
-const on={sphere:1,helix:1,helicoid:1,cylinder:1,slices:1,wave:0};
+const on={sphere:1,helix:1,helicoid:0,cylinder:1,slices:1,wave:0};
 document.querySelectorAll('#layers button').forEach(b=>b.onclick=()=>{on[b.dataset.k]^=1;b.classList.toggle('off',!on[b.dataset.k])});
 const R=2.6,Lam=7,X0=-11,X1=11,ink='#111',teal='#2a9d8f',red='#e76f51';let t=0,yaw=0.45;
 function P(x,y,z){const cy=Math.cos(yaw),sy=Math.sin(yaw);
@@ -127,14 +133,9 @@ const e=P(0,R*Math.cos(a),R*Math.sin(a)),q=P(0,-R*Math.cos(a),-R*Math.sin(a));li
 const b0=P(-Lam/2,-R,0),b1=P(Lam/2,-R,0),yb=H-58;g.strokeStyle=ink;g.lineWidth=1.5;line([[b0[0],b0[1]+8],[b0[0],yb+6]],ink,1.5);line([[b1[0],b1[1]+8],[b1[0],yb+6]],ink,1.5);line([[b0[0],yb],[b1[0],yb]],ink,1.5);
 lab('SPIN DIAMETER CREATES WAVELENGTH\nONE ROTATION IS ONE WAVELENGTH',(b0[0]+b1[0])/2,H-30);
 lab("PARTICLE #1 = ELECTRON",W*.2,40);lab("PHOTON SPHERE",W*.5,40);lab("HELIX ON A CYLINDER",W*.8,40);lab('LINEAR VELOCITY\nAT THE SPEED OF LIGHT',W-140,110);lab("PARTICLE #2 = POSITRON",W*.15,H-110);
-t+=.012;yaw=.45+.0*Math.sin(t*.35);if(!rm)requestAnimationFrame(f)}
+t+=.006;yaw=.45+.0*Math.sin(t*.35);if(!rm)requestAnimationFrame(f)}
 const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;f()})();
 </script>
-<script>
-(()=>{const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.preload='auto';v.play().catch(()=>{})}else v.pause()}),{threshold:.5});
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video').forEach(v=>io.observe(v));
-const fo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');fo.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('.item').forEach(i=>{if(i.getBoundingClientRect().top>innerHeight){i.classList.add('pre');fo.observe(i)}})})();
-</script>
+
 </body>
 </html>
