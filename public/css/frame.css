@@ -3,3 +3,7 @@ body{font-family:Arial,sans-serif !important;background:#f4f4f4 !important}
 .gx-bar a{color:#2a9d8f;text-decoration:none}
 .gx-bar a:hover{color:#e76f51}
 .gx-bar a.home{font-weight:bold;color:#264653;margin-right:auto}
+
+.gx-nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;max-width:760px;margin:0 auto 28px;padding:16px 16px 16px;border-bottom:1px solid #e5e1d8;box-sizing:border-box;width:100%}
+.gx-nav a{color:#6b7280;text-decoration:none;font:700 13px Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;padding:4px 2px;border-bottom:2px solid transparent}
+.gx-nav a:hover,.gx-nav a[aria-current="page"]{color:#264653;border-color:#e76f51}
