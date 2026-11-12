@@ -1,5 +1,5 @@
 {
-  "url": "https://cognitive-satisfaction-groups-reporting.trycloudflare.com",
-  "started": "2026-11-11T16:04:56Z",
+  "url": "https://api.trycloudflare.com",
+  "started": "2026-11-12T15:07:50Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
