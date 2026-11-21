@@ -1,5 +1,5 @@
 {
-  "url": "https://gale-arise-kai-optical.trycloudflare.com",
-  "started": "2026-11-20T02:58:31Z",
+  "url": "https://api.trycloudflare.com",
+  "started": "2026-11-21T14:43:20Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
