@@ -47,10 +47,6 @@
       "destination": "/studies/:slug/index.html"
     },
     {
-      "source": "/work",
-      "destination": "/work/index.html"
-    },
-    {
       "source": "/work/:slug",
       "destination": "/work/:slug/index.html"
     },
@@ -65,6 +61,10 @@
     {
       "source": "/about",
       "destination": "/about/index.html"
+    },
+    {
+      "source": "/resume",
+      "destination": "/resume/index.html"
     }
   ],
   "redirects": [
@@ -82,6 +82,26 @@
       "source": "/store/(.*)",
       "destination": "/shop/$1",
       "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/#projects",
+      "permanent": false
+    },
+    {
+      "source": "/work/",
+      "destination": "/#projects",
+      "permanent": false
+    },
+    {
+      "source": "/profile",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/profile/(.*)",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [
