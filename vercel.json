@@ -59,10 +59,6 @@
       "destination": "/writing/:slug/index.html"
     },
     {
-      "source": "/about",
-      "destination": "/about/index.html"
-    },
-    {
       "source": "/resume",
       "destination": "/resume/index.html"
     }
@@ -100,6 +96,16 @@
     },
     {
       "source": "/profile/(.*)",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about/(.*)",
       "destination": "/",
       "permanent": false
     }
