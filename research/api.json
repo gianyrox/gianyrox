@@ -1,5 +1,5 @@
 {
-  "url": "https://api.trycloudflare.com",
-  "started": "2026-11-26T14:14:05Z",
+  "url": "https://entry-kurt-modem-lambda.trycloudflare.com",
+  "started": "2026-11-26T14:14:40Z",
   "tools": ["proteinscout","screenserver","stabilitydesigner","labbrain","trajmine","cryotriage","patchseqml"]
 }
